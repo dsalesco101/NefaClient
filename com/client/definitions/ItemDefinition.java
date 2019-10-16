@@ -189,7 +189,7 @@ public final class ItemDefinition {
 			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
 			 break;
 	    case 2841:
-			 itemDef.name = "@red@Double Exp Scroll";
+			 itemDef.name = "@red@Bonus Exp Scroll";
 				itemDef.inventoryOptions = new String[] { "@yel@Activate", null, null, null, "Drop" };
 				itemDef.description = "You will get double experience using this scroll.";
 		     break;
@@ -323,6 +323,10 @@ public final class ItemDefinition {
 		case 11770:
 		case 11772:
 			itemDef.anInt196 += 45;
+			break;
+		case 12792:
+			itemDef.name = "Graceful Recolor Box";
+			itemDef.inventoryOptions = new String[] { null, "Use", null, null, "Drop" };
 			break;
 		case 2403:
 			itemDef.name = "@yel@$10 Scroll";
