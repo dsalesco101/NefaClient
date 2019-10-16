@@ -140,7 +140,13 @@ public final class ItemDefinition {
             byte[] ph13 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Large_pouch.png");
             itemDef.customSpriteLocation = ph13;
             break;
-
+		case 10724: //full skeleton
+		case 10725:
+		case 10726:
+		case 10727:
+		case 10728:
+			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+           break;
 		case 5514:
 			itemDef.name = "Giant Pouch";
             byte[] ph14 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Giant_pouch.png");
@@ -189,7 +195,7 @@ public final class ItemDefinition {
 			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
 			 break;
 	    case 2841:
-			 itemDef.name = "@red@Double Exp Scroll";
+			 itemDef.name = "@red@Bonus Exp Scroll";
 				itemDef.inventoryOptions = new String[] { "@yel@Activate", null, null, null, "Drop" };
 				itemDef.description = "You will get double experience using this scroll.";
 		     break;
@@ -326,7 +332,10 @@ public final class ItemDefinition {
 			break;
 		case 12792:
 			itemDef.name = "Graceful Recolor Box";
+<<<<<<< HEAD
 			itemDef.inventoryOptions = new String[] { null, "Use", null, null, "Drop" };
+=======
+>>>>>>> 7ca552cd8bcf503e2bf46c23e4b84781044e12a5
 			break;
 		case 2403:
 			itemDef.name = "@yel@$10 Scroll";
