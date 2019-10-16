@@ -6623,6 +6623,7 @@ public class Client extends RSApplet {
 				promptInput = "";
 				friendsListAction = 3;
 				aLong953 = nameAsLong;//friendsListAsLongs[k3];
+				addFriend(nameAsLong);
 				aString1121 = "Enter message to send to " + TextClass.fixName(name.trim());//friendsList[k3];
 		
 	}
