@@ -157,7 +157,7 @@ public final class NpcDefinition {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
-		if (i >= 20665 || i <=20691) {
+		if (i >= 20665 && i <=20691) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
