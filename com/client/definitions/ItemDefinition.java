@@ -140,7 +140,13 @@ public final class ItemDefinition {
             byte[] ph13 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Large_pouch.png");
             itemDef.customSpriteLocation = ph13;
             break;
-
+		case 10724: //full skeleton
+		case 10725:
+		case 10726:
+		case 10727:
+		case 10728:
+			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+           break;
 		case 5514:
 			itemDef.name = "Giant Pouch";
             byte[] ph14 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Giant_pouch.png");
@@ -323,6 +329,9 @@ public final class ItemDefinition {
 		case 11770:
 		case 11772:
 			itemDef.anInt196 += 45;
+			break;
+		case 12792:
+			itemDef.name = "Graceful Recolor Box";
 			break;
 		case 2403:
 			itemDef.name = "@yel@$10 Scroll";
