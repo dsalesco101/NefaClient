@@ -165,7 +165,18 @@ public final class NpcDefinition {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
+		if (i == 6473) { //terror dog
+			entityDef.combatLevel = 0;
+			entityDef.anInt86 = 50; //WIDTH
+			entityDef.anInt91 = 50; // HEIGH
+		}
 		if (i == 7025) { //guard dog
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
+			entityDef.anInt86 = 85; //WIDTH
+			entityDef.anInt91 = 85; // HEIGH
+		}
+		if (i == 7216 || i == 6473) { //guard dog
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
 		}
