@@ -332,10 +332,7 @@ public final class ItemDefinition {
 			break;
 		case 12792:
 			itemDef.name = "Graceful Recolor Box";
-<<<<<<< HEAD
 			itemDef.inventoryOptions = new String[] { null, "Use", null, null, "Drop" };
-=======
->>>>>>> 7ca552cd8bcf503e2bf46c23e4b84781044e12a5
 			break;
 		case 2403:
 			itemDef.name = "@yel@$10 Scroll";

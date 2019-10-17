@@ -157,13 +157,17 @@ public final class NpcDefinition {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
-		if (i >= 20665 && i <=20691) {
+		if (i >= 7354 && i <=7367) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
 		if (i == 5559 || i == 5560) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 7025) { //guard dog
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", null, null };
 		}
 		if (i == 8027) {
 			entityDef.name = "Vorkath";
