@@ -8231,65 +8231,68 @@ public class Client extends RSApplet {
 	}
 
 	private void drawSplitPrivateChat() {
-		if (!splitPrivateChat)
-			return;
-		RSFont font = newRegularFont;
-		;
-		int i = 0;
-		if (anInt1104 != 0)
-			i = 1;
-		int xPosition = 0;
-		int yPosition = 0;
-		for (int j = 0; j < 100; j++) {
-			if (chatMessages[j] != null) {
-				int k = chatTypes[j];
-				String s = chatNames[j];
-				byte byte1 = 0;
-				if (s.startsWith("@cr")) {
-					String s2 = s.substring(3, s.length());
-					int index = s2.indexOf("@");
-					if (index != -1) {
-						s2 = s2.substring(0, index);
-						byte1 = Byte.parseByte(s2);
-						s = s.substring(4 + s2.length());
-					}
-				}
-				if ((k == 3 || k == 7)
-						&& (k == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
-					yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
-					xPosition = 0;
-					font.drawBasicString("From", xPosition, yPosition, 65535, 0);
-					xPosition += font.getTextWidth("From ");
-					if (byte1 > 0) {
-						for (int right = 0; right < modIcons.length; right++) {
-							if (right == (byte1 - 1) && modIcons[right] != null) {
-								modIcons[right].drawAdvancedSprite(xPosition, yPosition - modIcons[right].myHeight);
-								xPosition += modIcons[right].myWidth;
-								break;
-							}
-						}
-					}
-					font.drawBasicString(s + ": " + chatMessages[j], xPosition, yPosition, 65535, 0);
-					if (++i >= 5)
-						return;
-				}
-				if (k == 5 && privateChatMode < 2) {
-					yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
-					xPosition = 0;
-					font.drawBasicString(chatMessages[j], xPosition, yPosition, 65535, 0);
-					if (++i >= 5)
-						return;
-				}
-				if (k == 6 && privateChatMode < 2) {
-					yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
-					xPosition = 0;
-					font.drawBasicString("To " + s + ": " + chatMessages[j], xPosition, yPosition, 65535, 0);
-					if (++i >= 5)
-						return;
-				}
-			}
-		}
-	}
+        if (!splitPrivateChat)
+            return;
+        RSFont font = newRegularFont;
+        ;
+        int i = 0;
+        if (anInt1104 != 0)
+            i = 1;
+        int xPosition = 0;
+        int yPosition = 0;
+        for (int j = 0; j < 100; j++) {
+            if (chatMessages[j] != null) {
+                int k = chatTypes[j];
+                String s = chatNames[j];
+                byte byte1 = 0;
+                if (s.startsWith("@cr")) {
+                    String s2 = s.substring(3, s.length());
+                    int index = s2.indexOf("@");
+                    if (index != -1) {
+                        s2 = s2.substring(0, index);
+                        byte1 = Byte.parseByte(s2);
+                        s = s.substring(4 + s2.length());
+                    }
+                }
+                if ((k == 3 || k == 7)
+                        && (k == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
+                    yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
+                    yPosition -= broadcastActive ? 13 : 0;
+                    xPosition = currentScreenMode == ScreenMode.FIXED ? 5 : 0;
+                    font.drawBasicString("From", xPosition, yPosition, 65535, 0);
+                    xPosition += font.getTextWidth("From ");
+                    if (byte1 > 0) {
+                        for (int right = 0; right < modIcons.length; right++) {
+                            if (right == (byte1 - 1) && modIcons[right] != null) {
+                                modIcons[right].drawAdvancedSprite(xPosition, yPosition - modIcons[right].myHeight);
+                                xPosition += modIcons[right].myWidth;
+                                break;
+                            }
+                        }
+                    }
+                    font.drawBasicString(s + ": " + chatMessages[j], xPosition, yPosition, 65535, 0);
+                    if (++i >= 5)
+                        return;
+                }
+                if (k == 5 && privateChatMode < 2) {
+                    yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
+                    yPosition -= broadcastActive ? 13 : 0;
+                    xPosition = currentScreenMode == ScreenMode.FIXED ? 5 : 0;
+                    font.drawBasicString(chatMessages[j], xPosition, yPosition, 65535, 0);
+                    if (++i >= 5)
+                        return;
+                }
+                if (k == 6 && privateChatMode < 2) {
+                    yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173) - i * 13;
+                    yPosition -= broadcastActive ? 13 : 0;
+                    xPosition = currentScreenMode == ScreenMode.FIXED ? 5 : 0;
+                    font.drawBasicString("To " + s + ": " + chatMessages[j], xPosition, yPosition, 65535, 0);
+                    if (++i >= 5)
+                        return;
+                }
+            }
+        }
+    }
 
 	private void buildSplitPrivateChatMenu() {
 		if (!splitPrivateChat)
@@ -12753,6 +12756,14 @@ public class Client extends RSApplet {
 			multiOverlay.drawSprite(currentScreenMode == ScreenMode.FIXED ? 472 : (currentGameWidth - 45),
 					currentScreenMode == ScreenMode.FIXED ? 296 : 165);
 
+		if (broadcastActive && ((System.currentTimeMillis() - broadcastTimer) < (1000 * 60 * 5))) {
+            int yPosition = (currentScreenMode == ScreenMode.FIXED ? 330 : currentGameHeight - 173);
+            newRegularFont.drawBasicString("@cr2@" + "[Broadcast]: " + broadcastMessage, currentScreenMode == ScreenMode.FIXED ? 5 : 0, yPosition, 0xffff00, 0);
+        } else if (broadcastActive && ((System.currentTimeMillis() - broadcastTimer) >= (1000 * 60 * 5))) {
+            broadcastActive = false;
+            broadcastTimer = 0;
+        }
+		
 		if (!menuOpen) {
 			processRightClick();
 			drawTooltip();
@@ -15874,7 +15885,18 @@ public class Client extends RSApplet {
 					}
 					incomingPacket = -1;
 					return true;
-
+					
+				case 170:
+                    try {
+                        text = inStream.readString();
+                        broadcastActive = true;
+                        broadcastMessage = text;
+                        broadcastTimer = System.currentTimeMillis();
+                    } catch (Exception e) {
+                        e.printStackTrace();
+                    }
+                    incomingPacket = -1;
+                    return true;
 				case 206:
 					publicChatMode = inStream.readUnsignedByte();
 					privateChatMode = inStream.readUnsignedByte();
@@ -17019,6 +17041,9 @@ public class Client extends RSApplet {
 	private int membersInt;
 	private String aString1121;
 	public static Player myPlayer;
+	public boolean broadcastActive;
+    public long broadcastTimer;
+    public String broadcastMessage;
 	private final String[] atPlayerActions;
 	private final boolean[] atPlayerArray;
 	private final int[][][] anIntArrayArrayArray1129;
