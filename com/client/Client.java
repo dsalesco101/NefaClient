@@ -3193,7 +3193,7 @@ public class Client extends RSApplet {
 			String s = TextClass.fixName(TextClass.nameForLong(l));
 			for (int i = 0; i < friendsCount; i++)
 				if (friendsListAsLongs[i] == l) {
-					pushMessage(s + " is already on your friend list", 0, "");
+					
 					return;
 				}
 			for (int j = 0; j < ignoreCount; j++)
