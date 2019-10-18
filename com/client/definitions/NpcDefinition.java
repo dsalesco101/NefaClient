@@ -65,7 +65,7 @@ public final class NpcDefinition {
 		}
 		if(i==3248){
 			entityDef.name = "Sovarks Wizard";
-			entityDef.actions = new String[] { "Teleport", "Previous Location", null, null, null };
+			entityDef.actions = new String[] { "Teleport", null, "Previous Location", null, null };
 		}
 		if(i==1520){
 			entityDef.actions = new String[] { "Small Net", null, "Harpoon", null, null };
@@ -154,6 +154,13 @@ public final class NpcDefinition {
 			entityDef.anInt91 = 100;
 		}
 		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 326 || i == 327) {
+			entityDef.anInt86 = 85;
+			entityDef.anInt91 = 85;
+			entityDef.name = "Vote Pet";
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}

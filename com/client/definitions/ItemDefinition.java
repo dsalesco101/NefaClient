@@ -91,6 +91,10 @@ public final class ItemDefinition {
 			itemDef.name = "Wrath Rune";
 			itemDef.value = 1930;
 			break;
+		case 21262:
+			itemDef.name = "Vote Genie Pet";
+			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+			break;
 		case 732:
 			itemDef.name = "@blu@Imbuedeifer";
 			itemDef.value = 1930;
