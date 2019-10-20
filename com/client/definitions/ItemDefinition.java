@@ -93,7 +93,7 @@ public final class ItemDefinition {
 			break;
 		case 21262:
 			itemDef.name = "Vote Genie Pet";
-			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+			itemDef.inventoryOptions = new String[] { null, null, null, null, "Release" };
 			break;
 		case 732:
 			itemDef.name = "@blu@Imbuedeifer";
