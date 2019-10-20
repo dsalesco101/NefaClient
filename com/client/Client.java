@@ -3767,7 +3767,6 @@ public class Client extends RSApplet {
 			Signlink.storeid = 32;
 			Signlink.startpriv(InetAddress.getLocalHost());
 			instance = new ClientWindow(args);
-			launch.main(args);
 		} catch (Exception exception) {
 		}
 	}
