@@ -265,10 +265,6 @@ public final class ItemDefinition {
 			itemDef.equipActions[2] = "Shantay Pass";
 			itemDef.equipActions[1] = "Clan wars";
 			break;
-
-			case 21307:
-				itemDef.name = "Pursuit crate";
-				break;
 			case 2996:
 				itemDef.name = "PKP Ticket";
 				itemDef.description = "Exchange this for a PK Point.";
@@ -284,6 +280,11 @@ public final class ItemDefinition {
 				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
 				 byte[] ph51 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Mystery_Box.png");
 		            itemDef.customSpriteLocation = ph51;
+				break;
+			case 13438:
+				itemDef.name = "@red@Wildy Box";
+				itemDef.description = ".";
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
 				break;
 			case 6199:
 				itemDef.name = "Mystery Box";
