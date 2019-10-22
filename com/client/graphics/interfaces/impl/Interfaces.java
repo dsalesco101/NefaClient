@@ -1953,7 +1953,7 @@ public class Interfaces extends RSInterface {
 				0xFF981F, false, true, tda, 1, 404);
 		addTextButton(41513, "Learn how to create slayer helmet (imbued)				  (150)", "Learn", 0xFF981F,
 				false, true, tda, 1, 405);
-		addTextButton(41514, "Learn the route into cerberus cave				  (1250)", "Learn", 0xFF981F, false,
+		addTextButton(41514, "", "", 0xFF981F, false,
 				true, tda, 1, 406);
 		addTextButton(41515, "Learn how to encounter Superior Slayer NPCS				  (250)", "Learn", 0xFF981F,
 				false, true, tda, 1, 407);
