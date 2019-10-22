@@ -30,16 +30,6 @@ data/saves/farming/Crimson.txt
 data/saves/Bans.txt
 data/saves/clans/Necrotic.json
 data/saves/starters.txt
-/.gitignore
-/README.md
-/Updates
-/hs_err_pid11876.log
-/hs_err_pid17468.log
-/hs_err_pid18768.log
-/images/
-/lib/
+/com/
 /org/
 /out/
-/com/
-/replay_pid17468.log
-/replay_pid18768.log

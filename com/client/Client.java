@@ -8791,7 +8791,7 @@ public class Client extends RSApplet {
 		Signlink.errorname = s;
 
 		try {
-			if(myUsername.length() < 4) {
+			if(myUsername.length() < 3) {
 				firstLoginMessage = "Your username must be at least 3 characters long";
 				
         		        return;
