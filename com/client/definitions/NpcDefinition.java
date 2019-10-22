@@ -70,6 +70,12 @@ public final class NpcDefinition {
 		if(i==1520){
 			entityDef.actions = new String[] { "Small Net", null, "Harpoon", null, null };
 		}
+		if(i==8920){
+			entityDef.actions = new String[] { null, "Attack", null, null, null };
+		}
+		if(i==8921){
+			entityDef.name = "Crystal Whirlwind";
+		}
 		if(i==9120){
 			entityDef.name = "Donator Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
