@@ -87,6 +87,12 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
+		case 1546:
+			itemDef.name = "@blu@Seren's Key";
+			break;
+		case 1543:
+			itemDef.name = "@red@Sotetseg Key";
+			break;
 		case 21880:
 			itemDef.name = "Wrath Rune";
 			itemDef.value = 1930;
