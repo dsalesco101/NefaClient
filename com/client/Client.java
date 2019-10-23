@@ -7922,7 +7922,7 @@ public class Client extends RSApplet {
 		
 		if (!Skills.SKILL_NAMES[skillLevel].equals("-1")) {
 
-			if (maxStats[getSkillId[skillLevel == 21 ? 22: skillLevel]] >= 99) {
+			if (maxStats[getSkillId[skillLevel]] >= 99) {
 				getToolTipText[0] = Skills.SKILL_NAMES[skillLevel] + " XP: "
 						+ numberFormat.format(currentExp[getSkillId[skillLevel == 21 ? 22: skillLevel]]) + "\\n";
 				setToolTipText = getToolTipText[0];
@@ -16617,7 +16617,7 @@ public class Client extends RSApplet {
 		clanChatMode = 0;
 		channelButtonHoverPosition = -1;
 		channelButtonClickPosition = 0;
-		server1 = Configuration.LIVE_SERVER ? "173.185.70.167" : "0.0.0.0";
+		server1 = Configuration.LIVE_SERVER ? "0.0.0.07" : "0.0.0.0";
 		anIntArrayArray825 = new int[104][104];
 		friendsNodeIDs = new int[200];
 		groundArray = new NodeList[4][104][104];
