@@ -91,7 +91,7 @@ public final class ItemDefinition {
 			itemDef.name = "@blu@Seren's Key";
 			break;
 		case 1543:
-			itemDef.name = "@red@Seren's Key";
+			itemDef.name = "@red@Sotetseg Key";
 			break;
 		case 21880:
 			itemDef.name = "Wrath Rune";
