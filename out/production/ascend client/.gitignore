@@ -30,6 +30,6 @@ data/saves/farming/Crimson.txt
 data/saves/Bans.txt
 data/saves/clans/Necrotic.json
 data/saves/starters.txt
+com/client/OnDemandFetcher.java
 /com/
-/org/
 /out/

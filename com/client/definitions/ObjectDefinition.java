@@ -59,6 +59,10 @@ public final class ObjectDefinition {
 		    objectDef.name = "Animal Cage";
 		    objectDef.actions = new String[] { null, null, null, null, null };
 			break;
+		case 34838:
+			objectDef.name = "@red@Corrupt Chest";
+			objectDef.actions = new String[] { "Open", null, null, null, null };
+			break;
 		case 12202:
 			objectDef.actions = new String[] { "Dig", null, null, null, null };
 			break;
