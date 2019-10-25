@@ -303,17 +303,17 @@ public final class ItemDefinition {
 				break;
 			case 10832:
 				itemDef.name = "Small Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
 				itemDef.description = "I can see some coins inside.";
 				break;
 			case 10833:
 				itemDef.name = "Medium Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
 				itemDef.description = "I can see some coins inside.";
 				break;
 			case 10834:
 				itemDef.name = "Large Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
 				itemDef.description = "I can see some coins inside.";
 				break;
 			case 15098:

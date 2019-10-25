@@ -41,9 +41,37 @@ public final class ObjectDefinition {
 			objectDef.actions = new String[] { "Choose", null, null, null, null };
 		}
 		switch (i) {
+		case 35914:
+			objectDef.name = "Ahrim The Blighted";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
+		case 9362:
+			objectDef.name = "Dharok The Wretched";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
+		case 14766:
+			objectDef.name = "Verac The Defiled";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
+		case 9360:
+			objectDef.name = "Torag The Corrupted";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
+		case 28723:
+			objectDef.name = "Karil The Tainted";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
+		case 31716:
+			objectDef.name = "Guthan The Infested";
+			objectDef.actions = new String[] { "Awaken", null, null, null, null };
+			break;
 		case 31622:
 			objectDef.name = "Outlast Entrance";
 			objectDef.actions = new String[] { "Enter", "Check Players", "Check Active", null, null };
+			break;
+		case 379:
+			objectDef.name = "Item Exchanger";
+			objectDef.actions = new String[] { "Showcase", "Exchange Shop",  "Info", null, null };
 			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };
