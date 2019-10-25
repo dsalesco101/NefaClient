@@ -274,72 +274,6 @@ public final class ItemDefinition {
 			itemDef.equipActions[2] = "Shantay Pass";
 			itemDef.equipActions[1] = "Clan wars";
 			break;
-<<<<<<< HEAD
-			case 2996:
-				itemDef.name = "PKP Ticket";
-				itemDef.description = "Exchange this for a PK Point.";
-				break;
-			case 11739:
-				itemDef.name = "@gre@Vote Mystery Box";
-				itemDef.description = "Probably contains cosmetics, or maybe not...";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-				break;
-			case 6828:
-				itemDef.name = "Super Mystery Box";
-				itemDef.description = "Mystery box that contains goodies.";
-				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-				 byte[] ph51 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Mystery_Box.png");
-		            itemDef.customSpriteLocation = ph51;
-				break;
-			case 13438:
-				itemDef.name = "@red@Wildy Box";
-				itemDef.description = ".";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-				break;
-			case 6199:
-				itemDef.name = "Mystery Box";
-				itemDef.description = "Mystery box that contains goodies.";
-				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-				break;
-			case 13346:
-				itemDef.name = "Ultra Mystery Box";
-				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-				break;
-			case 10832:
-				itemDef.name = "Small Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-				itemDef.description = "I can see some coins inside.";
-				break;
-			case 10833:
-				itemDef.name = "Medium Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-				itemDef.description = "I can see some coins inside.";
-				break;
-			case 10834:
-				itemDef.name = "Large Coin Bag";
-				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-				itemDef.description = "I can see some coins inside.";
-				break;
-			case 15098:
-				itemDef.name = "Dice (up to 100)";
-				itemDef.description = "A 100-sided dice.";
-				itemDef.modelId = 31223;
-				itemDef.modelZoom = 1104;
-				itemDef.modelRotation2 = 215;
-				itemDef.modelRotation1 = 94;
-				itemDef.modelOffset2 = -5;
-				itemDef.modelOffset1 = -18;
-				itemDef.inventoryOptions = new String[5];
-				itemDef.inventoryOptions[1] = "Public-roll";
-				itemDef.inventoryOptions[2] = null;
-				itemDef.name = "Dice (up to 100)";
-				itemDef.anInt196 = 15;
-				itemDef.anInt184 = 25;
-				byte[] ph59 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Dice_Bag.png");
-	            itemDef.customSpriteLocation = ph59;
-				break;
-
-=======
 		case 11739:
 			itemDef.name = "@gre@Vote Mystery Box";
 			itemDef.description = "Probably contains cosmetics, or maybe not...";
@@ -399,7 +333,6 @@ public final class ItemDefinition {
 			byte[] ph59 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Dice_Bag.png");
             itemDef.customSpriteLocation = ph59;
 			break;
->>>>>>> 6d31c75e7e0c2587abad4148718d1ed67cd0ef88
 		case 11773:
 		case 11771:
 		case 11770:
