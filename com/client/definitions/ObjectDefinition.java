@@ -71,9 +71,7 @@ public final class ObjectDefinition {
 			break;
 		case 33320:
 			objectDef.name = "Fire of Exchange";
-			objectDef.actions[0] = "Showcase";
-			objectDef.actions[1] = "Shop";
-			objectDef.actions[2] = "Info";
+			objectDef.actions = new String[] { "Showcase", "Shop", "Info", null, null };
 			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };
@@ -152,7 +150,7 @@ public final class ObjectDefinition {
 			break;
 		case 2996:
 		    objectDef.name = "Vote Chest";
-		    objectDef.actions[0] = "Unlock";
+		    objectDef.actions = new String[] { "Unlock", null, null, null, null };
 			break;
 			
 		case 12309:
