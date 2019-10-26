@@ -69,9 +69,11 @@ public final class ObjectDefinition {
 			objectDef.name = "Outlast Entrance";
 			objectDef.actions = new String[] { "Enter", "Check Players", "Check Active", null, null };
 			break;
-		case 379:
-			objectDef.name = "Item Exchanger";
-			objectDef.actions = new String[] { "Showcase", "Exchange Shop",  "Info", null, null };
+		case 33320:
+			objectDef.name = "Fire of Exchange";
+			objectDef.actions[0] = "Showcase";
+			objectDef.actions[1] = "Shop";
+			objectDef.actions[2] = "Info";
 			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };
@@ -136,29 +138,30 @@ public final class ObjectDefinition {
 			objectDef.actions[1] = "Empty-From";
 			objectDef.name = "Compost Bin";
 			break;
-			case 172:
-				objectDef.name = "Ckey chest";
+		case 172:
+			objectDef.name = "Ckey chest";
+		break;
+		
+		case 10060:
+			objectDef.name = "Trading Post Booth";
+		    objectDef.actions = new String[] { null, null, null, null, null };
+			break;
+		case 31925:
+		    objectDef.name = "Max Island";
+		    objectDef.actions = new String[] { "Tele to", null, null, null, null };
+			break;
+		case 2996:
+		    objectDef.name = "Vote Chest";
+		    objectDef.actions[0] = "Unlock";
 			break;
 			
-			case 10060:
-				objectDef.name = "Trading Post Booth";
-			    objectDef.actions = new String[] { null, null, null, null, null };
-				break;
-			case 31925:
-			    objectDef.name = "Max Island";
-			    objectDef.actions = new String[] { "Tele to", null, null, null, null };
-				break;
-			case 2403:
-			    objectDef.name = "Vote Chest";
-				break;
-				
-			case 12309:
-				objectDef.actions = new String[5];
-				objectDef.actions[0] = "Bank";
-				objectDef.actions[1] = "Buy gloves";
-				objectDef.actions[2] = null;
-				objectDef.name = "Chest";
-				break;
+		case 12309:
+			objectDef.actions = new String[5];
+			objectDef.actions[0] = "Bank";
+			objectDef.actions[1] = "Buy gloves";
+			objectDef.actions[2] = null;
+			objectDef.name = "Chest";
+			break;
 
 		case 1750:
 			objectDef.anIntArray773 = new int[] { 8131, };
