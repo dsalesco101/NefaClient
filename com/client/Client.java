@@ -7924,7 +7924,7 @@ public class Client extends RSApplet {
 
 			if (maxStats[getSkillId[skillLevel]] >= 99) {
 				getToolTipText[0] = Skills.SKILL_NAMES[skillLevel] + " XP: "
-						+ numberFormat.format(currentExp[getSkillId[skillLevel == 21 ? 22: skillLevel]]) + "\\n";
+						+ numberFormat.format(currentExp[getSkillId[skillLevel]]) + "\\n";
 				setToolTipText = getToolTipText[0];
 			} else {
 				getToolTipText[0] = Skills.SKILL_NAMES[skillLevel] + " XP: " + "\\r"
@@ -15502,6 +15502,8 @@ public class Client extends RSApplet {
 
 				case 114:
 					anInt1104 = inStream.method434() * 30;
+					broadcastActive = false;
+		            broadcastTimer = 0;
 					incomingPacket = -1;
 					return true;
 
