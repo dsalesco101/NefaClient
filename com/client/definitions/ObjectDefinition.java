@@ -115,7 +115,8 @@ public final class ObjectDefinition {
 				objectDef.actions = new String[] { "Venerate", null, null, null, null };
 				break;
 			case 6764:
-				objectDef.actions = null;
+				objectDef.name = null;
+				objectDef.actions = new String[] { null, null, null, null, null };
 				break;
 		case 8139:
 		case 8140:
