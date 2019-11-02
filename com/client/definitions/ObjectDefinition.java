@@ -95,7 +95,12 @@ public final class ObjectDefinition {
 			objectDef.actions = new String[] { "Dig", null, null, null, null };
 			break;
 		case 30107:
-		    objectDef.name = "@blu@Raids Storage Unit";
+		    objectDef.name = "Raids Reward Chest";
+		    objectDef.actions = new String[] { "Open", null, null, null, null };
+			break;
+		case 36197:
+		    objectDef.name = "Home Teleport";
+		   
 			break;
 		case 10562:
 			objectDef.actions = new String[] { "Open", null, null, null, null };
