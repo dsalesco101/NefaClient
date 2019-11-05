@@ -268,7 +268,7 @@ public final class ItemDefinition {
 			itemDef.equipActions[4] = "Al-Kharid";
 			break;
 		case 21816:
-			itemDef.inventoryOptions = new String[] { "Wear", null, "Uncharge", null, "Drop" };
+			itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", null, "Drop" };
 			itemDef.equipActions[1] = "Check";
 			itemDef.equipActions[2] = "Toggle-absorption";
 			break;
