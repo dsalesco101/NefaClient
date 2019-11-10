@@ -31,5 +31,16 @@ data/saves/Bans.txt
 data/saves/clans/Necrotic.json
 data/saves/starters.txt
 com/client/OnDemandFetcher.java
+/.gitignore
+/README.md
+/Updates
+/hs_err_pid11876.log
+/hs_err_pid17468.log
+/hs_err_pid18768.log
+/images/
+/lib/
+/org/
 /com/
 /out/
+/replay_pid17468.log
+/replay_pid18768.log
