@@ -16427,7 +16427,7 @@ public class Client extends RSApplet {
 			setCameraPos(
 					cameraZoom + (currentGameWidth >= 1024 ? i + cameraZoom - currentGameHeight / 200 : i)
 							* (WorldController.viewDistance == 9 && currentScreenMode != ScreenMode.FIXED ? 1
-							: WorldController.viewDistance == 10 ? 1 : 3),
+							: WorldController.viewDistance == 10 ? 1 : 7),
 					i, anInt1014, getCenterHeight(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
 		}
 		int j;
