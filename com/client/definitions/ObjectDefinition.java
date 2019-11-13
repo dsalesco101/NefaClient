@@ -72,6 +72,7 @@ public final class ObjectDefinition {
 		case 33320:
 			objectDef.name = "Fire of Exchange";
 			objectDef.actions = new String[] { "Showcase", "Shop", "Info", null, null };
+			
 			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };

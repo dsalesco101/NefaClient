@@ -74,7 +74,7 @@ public final class Player extends Entity {
 		model.aBoolean1659 = true;
 		return model;
 	}
-
+	public int usedItemID;
 	public String title;
 	public String titleColor;
 
