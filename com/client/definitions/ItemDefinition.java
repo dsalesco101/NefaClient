@@ -109,6 +109,11 @@ public final class ItemDefinition {
 		case 22542:
 			itemDef.inventoryOptions = new String[] { null, null, null, null, null, };
 			break;
+		case 22555:
+		case 22550:
+		case 22545:
+			itemDef.inventoryOptions = new String[] { null, "Wield", "Check", "Uncharge", null, };
+			break;
 		case 732:
 			itemDef.name = "@blu@Imbuedeifer";
 			itemDef.value = 1930;
