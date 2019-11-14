@@ -482,7 +482,7 @@ public class Interfaces extends RSInterface {
 		RSInterface widget = addInterface(264);
 		int childId = 265;
 		
-		addText(childId++, "Sovark Tournaments", tda, 2, 0xFFFFFF, true, true);
+		addText(childId++, "Outlast", tda, 2, 0xFFFFFF, true, true);
 		addText(childId++, "Time Left: 5 min", tda, 1, 0xFFFFFF, true, true);
 		addText(childId++, "Current Players", tda, 1, 0xFFFFFF, true, true);
 		
