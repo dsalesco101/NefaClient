@@ -1621,15 +1621,15 @@ public class Interfaces extends RSInterface {
 		 * addTextButton(28030, "Buy", "Buy", 0xFF981F, false, true, tda, 0, 400);
 		 */
 
-		setChildren(201, main);
+		setChildren(1001, main);
 		
-		int childId = 23310;
+		int childId = 57141;
 		int frame = 0;
 		
-		addToItemGroup(childId, 1, 50, 0, 7, true, "Buy 1", "Buy 5", "Buy 10", "Buy All", "Buy X", null);
+		addToItemGroup(childId, 1, 250, 0, 7, true, "Buy 1", "Buy 5", "Buy 10", "Buy All", "Buy X", null);
 		setBounds(childId++, 5, 10, frame++, main); // Item
 		
-		for(int i = 0; i < 50; i++) {
+		for(int i = 0; i < 250; i++) {
 			addText(childId, "", tda, 0, 0xff981f, true, false);
 			setBounds(childId++, 109, 20 + (i * 39), frame++, main); // Name
 			
@@ -1642,6 +1642,7 @@ public class Interfaces extends RSInterface {
 			addText(childId, "", tda, 0, 0xff981f, true, false);
 			setBounds(childId++, 418, 20 + (i * 39), frame++, main); // Buy
 		}
+		//System.out.println("CHILD:  + "  + childId);
 
 //		setBounds(48021, 5, 10, 0, main); // Item
 //
@@ -1677,7 +1678,7 @@ public class Interfaces extends RSInterface {
 
 		main.width = 445;
 		main.height = 227;
-		main.scrollMax = 39 * 50;
+		main.scrollMax = 39 * 250;
 	}
 
 	public static void addListing(int index, boolean search) {

@@ -260,7 +260,7 @@ public class RSInterface {
 		OsDropViewer(textDrawingAreas);
 		dropTable(textDrawingAreas);
 		achievementPopup2(textDrawingAreas);
-		//System.out.println(findOpenInterface(150));
+		//System.out.println(findOpenInterface(2020));
 		// aMRUNodes_238 = null;
 	}
 	
