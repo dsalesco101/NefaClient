@@ -1,6 +1,8 @@
 package com.client;
 
 import java.io.ByteArrayInputStream;
+import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
 import java.io.OutputStream;
@@ -118,7 +120,39 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 		running = true;
 		clientInstance.startRunnable(this, 2);
 	}
-
+	
+	public void dumpMaps() {
+		if (!new File("./temp/index4/").exists())
+			new File("./temp/index4/").mkdirs();
+		for (int i = 0; i < mapIndices2.length; i++) {
+			try {
+				byte abyte[] = clientInstance.decompressors[4].decompress(mapIndices2[i]);
+				if (abyte == null || abyte.length == 0)
+					continue;
+				File map = new File("./temp/index4/"+mapIndices2[i]+".gz");
+				FileOutputStream fos = new FileOutputStream(map);
+				fos.write(abyte);
+				fos.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+		for (int i = 0; i < mapIndices3.length; i++) {
+			try {
+				byte abyte[] = clientInstance.decompressors[4].decompress(mapIndices3[i]);
+				if (abyte == null || abyte.length == 0)
+					continue;
+				File map = new File("./temp/index4/"+mapIndices3[i]+".gz");
+				FileOutputStream fos = new FileOutputStream(map);
+				fos.write(abyte);
+				fos.close();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+		}
+	}
+	
+	
 	// private void dumpMapIndex() throws IOException {
 	// try {
 	// File file = new File("mapIndexDumpTest.txt");
