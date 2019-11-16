@@ -90,6 +90,9 @@ public final class ItemDefinition {
 		case 2996:
 			itemDef.name = "@red@PKP Ticket";
 			break;
+		case 13148:
+			itemDef.name = "@red@Reset Lamp";
+			break;
 		case 6792:
 			itemDef.name = "@red@Seren's Key";
 			break;
@@ -103,6 +106,9 @@ public final class ItemDefinition {
 		case 21262:
 			itemDef.name = "Vote Genie Pet";
 			itemDef.inventoryOptions = new String[] { null, null, null, null, "Release" };
+			break;
+		case 21817:
+			itemDef.inventoryOptions = new String[] { null, "Wear", "Dismantle", null, null, };
 			break;
 		case 22547:
 		case 22552:
@@ -144,7 +150,7 @@ public final class ItemDefinition {
 			itemDef.description = "How does one break a vial, its impossible?";
 			break;
 		case 2528:
-	itemDef.name = "@red@200k Experience Lamp";
+	itemDef.name = "@red@Experience Lamp";
 			itemDef.description = "Should I rub it......";
 				break;
 		case 5509:
