@@ -150,9 +150,9 @@ public final class ItemDefinition {
 			itemDef.description = "How does one break a vial, its impossible?";
 			break;
 		case 2528:
-	itemDef.name = "@red@Experience Lamp";
+			itemDef.name = "@red@Experience Lamp";
 			itemDef.description = "Should I rub it......";
-				break;
+			break;
 		case 5509:
 			itemDef.name = "Small Pouch";
             byte[] ph11 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Small_pouch.png");
