@@ -9181,63 +9181,63 @@ public class Client extends RSApplet {
 				break;
 			}
 			int l4 = anIntArrayArray825[j3][k3] + 1;
-			if (j3 > 0 && anIntArrayArray901[j3 - 1][k3] == 0/* && (ai[j3 - 1][k3] & 0x1280108) == 0*/) {
+			if (j3 > 0 && anIntArrayArray901[j3 - 1][k3] == 0 && (ai[j3 - 1][k3] & 0x1280108) == 0) {
 				bigX[l3] = j3 - 1;
 				bigY[l3] = k3;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3 - 1][k3] = 2;
 				anIntArrayArray825[j3 - 1][k3] = l4;
 			}
-			if (j3 < byte0 - 1 && anIntArrayArray901[j3 + 1][k3] == 0/* && (ai[j3 + 1][k3] & 0x1280180) == 0*/) {
+			if (j3 < byte0 - 1 && anIntArrayArray901[j3 + 1][k3] == 0 && (ai[j3 + 1][k3] & 0x1280180) == 0) {
 				bigX[l3] = j3 + 1;
 				bigY[l3] = k3;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3 + 1][k3] = 8;
 				anIntArrayArray825[j3 + 1][k3] = l4;
 			}
-			if (k3 > 0 && anIntArrayArray901[j3][k3 - 1] == 0/* && (ai[j3][k3 - 1] & 0x1280102) == 0*/) {
+			if (k3 > 0 && anIntArrayArray901[j3][k3 - 1] == 0 && (ai[j3][k3 - 1] & 0x1280102) == 0) {
 				bigX[l3] = j3;
 				bigY[l3] = k3 - 1;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3][k3 - 1] = 1;
 				anIntArrayArray825[j3][k3 - 1] = l4;
 			}
-			if (k3 < byte1 - 1 && anIntArrayArray901[j3][k3 + 1] == 0/* && (ai[j3][k3 + 1] & 0x1280120) == 0*/) {
+			if (k3 < byte1 - 1 && anIntArrayArray901[j3][k3 + 1] == 0 && (ai[j3][k3 + 1] & 0x1280120) == 0) {
 				bigX[l3] = j3;
 				bigY[l3] = k3 + 1;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3][k3 + 1] = 4;
 				anIntArrayArray825[j3][k3 + 1] = l4;
 			}
-			if (j3 > 0 && k3 > 0 && anIntArrayArray901[j3 - 1][k3 - 1] == 0/* && (ai[j3 - 1][k3 - 1] & 0x128010e) == 0
-					&& (ai[j3 - 1][k3] & 0x1280108) == 0 && (ai[j3][k3 - 1] & 0x1280102) == 0*/) {
+			if (j3 > 0 && k3 > 0 && anIntArrayArray901[j3 - 1][k3 - 1] == 0 && (ai[j3 - 1][k3 - 1] & 0x128010e) == 0
+					&& (ai[j3 - 1][k3] & 0x1280108) == 0 && (ai[j3][k3 - 1] & 0x1280102) == 0) {
 				bigX[l3] = j3 - 1;
 				bigY[l3] = k3 - 1;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3 - 1][k3 - 1] = 3;
 				anIntArrayArray825[j3 - 1][k3 - 1] = l4;
 			}
-			if (j3 < byte0 - 1 && k3 > 0 && anIntArrayArray901[j3 + 1][k3 - 1] == 0/*
+			if (j3 < byte0 - 1 && k3 > 0 && anIntArrayArray901[j3 + 1][k3 - 1] == 0
 					&& (ai[j3 + 1][k3 - 1] & 0x1280183) == 0 && (ai[j3 + 1][k3] & 0x1280180) == 0
-					&& (ai[j3][k3 - 1] & 0x1280102) == 0*/) {
+					&& (ai[j3][k3 - 1] & 0x1280102) == 0) {
 				bigX[l3] = j3 + 1;
 				bigY[l3] = k3 - 1;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3 + 1][k3 - 1] = 9;
 				anIntArrayArray825[j3 + 1][k3 - 1] = l4;
 			}
-			if (j3 > 0 && k3 < byte1 - 1 && anIntArrayArray901[j3 - 1][k3 + 1] == 0/*
+			if (j3 > 0 && k3 < byte1 - 1 && anIntArrayArray901[j3 - 1][k3 + 1] == 0
 					&& (ai[j3 - 1][k3 + 1] & 0x1280138) == 0 && (ai[j3 - 1][k3] & 0x1280108) == 0
-					&& (ai[j3][k3 + 1] & 0x1280120) == 0*/) {
+					&& (ai[j3][k3 + 1] & 0x1280120) == 0) {
 				bigX[l3] = j3 - 1;
 				bigY[l3] = k3 + 1;
 				l3 = (l3 + 1) % j4;
 				anIntArrayArray901[j3 - 1][k3 + 1] = 6;
 				anIntArrayArray825[j3 - 1][k3 + 1] = l4;
 			}
-			if (j3 < byte0 - 1 && k3 < byte1 - 1 && anIntArrayArray901[j3 + 1][k3 + 1] == 0/*
+			if (j3 < byte0 - 1 && k3 < byte1 - 1 && anIntArrayArray901[j3 + 1][k3 + 1] == 0
 					&& (ai[j3 + 1][k3 + 1] & 0x12801e0) == 0 && (ai[j3 + 1][k3] & 0x1280180) == 0
-					&& (ai[j3][k3 + 1] & 0x1280120) == 0*/) {
+					&& (ai[j3][k3 + 1] & 0x1280120) == 0) {
 				bigX[l3] = j3 + 1;
 				bigY[l3] = k3 + 1;
 				l3 = (l3 + 1) % j4;
