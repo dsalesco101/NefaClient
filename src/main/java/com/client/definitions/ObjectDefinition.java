@@ -70,6 +70,7 @@ public final class ObjectDefinition {
 			objectDef.actions = new String[] { "Enter", "Check Players", "Check Active", null, null };
 			break;
 		case 33320:
+
 			objectDef.name = "Fire of Exchange";
 			objectDef.actions = new String[] { "Showcase", "Shop", "Info", null, null };
 			

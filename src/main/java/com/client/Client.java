@@ -1264,7 +1264,6 @@ public class Client extends RSApplet {
 			unlinkMRUNodes();
 			worldController.initToNull();
 			System.gc();
-			load_holiday_objects();
 			load_objects();
 			for (int i = 0; i < 4; i++)
 				aClass11Array1230[i].setDefault();
@@ -9654,42 +9653,6 @@ public class Client extends RSApplet {
 		}
 	}
 
-	/**
-	 * Objects that will load while christmas event is live
-	 */
-	public void load_holiday_objects() {
-		if (Configuration.CHRISTMAS && Configuration.CHRISTMAS_EVENT) {
-			addObject(0, 3083, 3500, 0, 10, 0);
-
-			addObject(2279, 2831, 3796, 2, 10, 0); // Benches
-			addObject(2279, 2833, 3797, 1, 10, 0);
-			addObject(2279, 2830, 3797, 3, 10, 0);
-			addObject(2279, 2824, 3808, 2, 10, 2);
-			addObject(2279, 2824, 3811, 0, 10, 2);
-			addObject(19038, 3083, 3499, 0, 10, 0); // Tree
-			addObject(2147, 2957, 3704, 0, 10, 0); // Ladders
-			addObject(2147, 2952, 3821, 0, 10, 0);
-			addObject(3309, 2953, 3821, 0, 10, 0);
-			addObject(-1, 2977, 3634, 0, 10, 0);
-			addObject(-1, 2979, 3642, 0, 10, 0);
-		}
-		if (Configuration.HALLOWEEN) {
-			addObject(298, 3088, 3497, 0, 10, 0);
-			addObject(298, 3085, 3496, 1, 10, 0);
-			addObject(298, 3085, 3493, 1, 10, 0);
-			addObject(2715, 3088, 3494, 1, 10, 0);
-			addObject(0, 3088, 3496, 0, 10, 0);
-			addObject(0, 3089, 3496, 0, 10, 0);
-			addObject(0, 3088, 3495, 0, 10, 0);
-			addObject(0, 3089, 3495, 0, 10, 0);
-			addObject(298, 2610, 4774, 0, 10, 0);
-			addObject(298, 2610, 4771, 0, 10, 0);
-			addObject(298, 2601, 4780, 1, 10, 0);
-			addObject(298, 2601, 4768, 1, 10, 0);
-			addObject(298, 2597, 4778, 1, 10, 0);
-			addObject(298, 2598, 4772, 1, 10, 0);
-		}
-	}
 
 	public void load_objects() {
 		/**
