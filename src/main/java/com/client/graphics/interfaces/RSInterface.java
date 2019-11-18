@@ -1856,7 +1856,7 @@ public class RSInterface {
 		RSInterface subWidget = addInterface(28050);
 		setChildren(2, subWidget);
 		addSprite(28051, 2, "Interfaces/BountyHunter/IMAGE");
-		addText(28052, "Bounties:", tda, 1, 0xFFFF00, false, true);
+		addText(28052, "PKP:", tda, 1, 0xFFFF00, false, true);
 		setBounds(28051, 20, 30, 0, subWidget);
 		setBounds(28052, 48, 30, 1, subWidget);
 	}
@@ -1889,7 +1889,7 @@ public class RSInterface {
 		RSInterface subWidget = addInterface(64017);
 		setChildren(2, subWidget);
 		addSprite(64018, 2, "Interfaces/BountyHunter/IMAGE");
-		addText(64019, "Bounties:", tda, 1, 0xFFFF00, false, true);
+		addText(64019, "PKP", tda, 1, 0xFFFF00, false, true);
 		setBounds(64018, 20, 20, 0, subWidget);
 		setBounds(64019, 48, 20, 1, subWidget);
 	}

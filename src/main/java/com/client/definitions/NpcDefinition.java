@@ -46,6 +46,9 @@ public final class NpcDefinition {
 			entityDef.name = "Gambler Shop";
 			entityDef.description = "A shop specifically for gamblers.";
 		}
+		if (i == 315) {
+			entityDef.name = "PKP Manager";
+		}
 		if (i == 13) {
 			entityDef.name = "Referral Tutor";
 			entityDef.description = "He Manages all the sovark referrals.";
