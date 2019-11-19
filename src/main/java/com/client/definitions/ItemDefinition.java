@@ -110,6 +110,10 @@ public final class ItemDefinition {
 		case 21817:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Dismantle", null, null, };
 			break;
+		case 21259:
+			itemDef.name = "@red@Name Change Scroll";
+			itemDef.inventoryOptions = new String[] { null, null, "Read", null, null, };
+			break;
 		case 22547:
 		case 22552:
 		case 22542:
