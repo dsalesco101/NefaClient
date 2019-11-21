@@ -9671,123 +9671,6 @@ public class Client extends RSApplet {
 		// Abyss
 		addObject(24101, 3039, 4834, 0, 10, 0);
 		addObject(13642, 3039, 4831, 2, 10, 0);
-		// Edgeville
-		addObject(-1, 3101, 3509, 0, 4, 0);
-		addObject(-1, 3101, 3510, 0, 4, 0);
-		addObject(-1, 3101, 3509, 0, 10, 0);
-		addObject(-1, 3101, 3510, 0, 10, 0);
-
-		addObject(-1, 3100, 3512, 0, 10, 0);
-		addObject(-1, 3100, 3513, 0, 10, 0);
-
-		addObject(-1, 3099, 3512, 0, 10, 0);
-		addObject(-1, 3099, 3513, 0, 10, 0);
-
-		addObject(-1, 3098, 3513, 0, 10, 0);
-		addObject(-1, 3097, 3513, 0, 10, 0);
-
-		addObject(-1, 3096, 3513, 0, 10, 0);
-		addObject(-1, 3095, 3513, 0, 10, 0);
-
-		// NewDonorZoneRemovals
-		addObject(-1, 2117, 4923, 0, 10, 0);
-		addObject(-1, 2118, 4923, 0, 10, 0);
-		addObject(-1, 2130, 4925, 0, 10, 0);
-		addObject(-1, 2129, 4921, 0, 10, 0);
-		addObject(-1, 2129, 4925, 0, 10, 0);
-		addObject(-1, 2129, 4926, 0, 10, 0);
-		addObject(-1, 2129, 4927, 0, 10, 0);
-		addObject(-1, 2130, 4927, 0, 10, 0);
-		addObject(-1, 2131, 4927, 0, 10, 0);
-		addObject(-1, 2130, 4925, 0, 10, 0);
-		addObject(-1, 2129, 4920, 0, 10, 0);
-		addObject(-1, 2135, 4920, 0, 10, 0);
-		addObject(-1, 2130, 4920, 0, 10, 0);
-		addObject(-1, 2124, 4918, 0, 10, 0);
-
-		// NewObjects
-		addObject(11803, 2126, 4919, 0, 10, 0);// slayerdung
-		addObject(7413, 2136, 4917, 0, 10, 0);// dummy
-		addObject(13641, 2121, 4914, 0, 10, 0);// teledevice
-		addObject(170, 2127, 4910, 0, 10, 0);// chest
-		// Obelisks donor
-		addObject(2153, 2141, 4897, 0, 10, 0); // fire
-		addObject(2152, 2141, 4901, 0, 10, 0); // air
-		addObject(2151, 2138, 4898, 0, 10, 0); // water
-		addObject(2150, 2133, 4901, 0, 10, 0); // earth
-		// NewDonorZoneMining
-		// runerocks
-		addObject(7494, 2133, 4920, 0, 10, 0);
-		addObject(7494, 2132, 4920, 0, 10, 0);
-		addObject(7494, 2131, 4920, 0, 10, 0);
-		addObject(7494, 2130, 4920, 0, 10, 0);
-		addObject(7494, 2134, 4920, 0, 10, 0);
-		addObject(6150, 2127, 4926, 2, 10, 0); // anvil
-		addObject(6150, 2125, 4926, 2, 10, 0); // anvil
-		addObject(26300, 2123, 4926, 2, 10, 0); // Furn
-		// Gemrocks
-		addObject(9030, 2135, 4925, 0, 10, 0);
-		addObject(9030, 2135, 4924, 0, 10, 0);
-		addObject(9030, 2135, 4923, 0, 10, 0);
-		addObject(9030, 2135, 4921, 0, 10, 0);
-		addObject(9030, 2135, 4920, 0, 10, 0);
-		addObject(9030, 2135, 4922, 0, 10, 0);
-		addObject(9030, 2940, 3290, 0, 10, 0); // Crafting guild
-		addObject(9030, 2941, 3290, 0, 10, 0);
-		addObject(9030, 2942, 3290, 0, 10, 0);
-		// Woodcutting
-		// Magictrees
-		addObject(1761, 2127, 4935, 0, 10, 0);
-		addObject(1761, 2120, 4932, 0, 10, 0);
-		addObject(1761, 2117, 4940, 0, 10, 0);
-		addObject(1761, 2123, 4942, 0, 10, 0);
-		addObject(1761, 2129, 4940, 0, 10, 0);
-
-		// Dzone blocking
-		addObject(22826, 1625, 3721, 1, 10, 0);
-		addObject(22826, 1626, 3721, 1, 10, 0);
-		addObject(22826, 1627, 3721, 1, 10, 0);
-		addObject(22826, 1628, 3721, 1, 10, 0);
-		addObject(22826, 1629, 3721, 1, 10, 0);
-		addObject(22826, 1630, 3721, 1, 10, 0);
-		addObject(22826, 1631, 3721, 1, 10, 0);
-		addObject(22826, 1632, 3721, 1, 10, 0);
-		addObject(22826, 1633, 3721, 1, 10, 0);
-		addObject(22826, 1634, 3721, 1, 10, 0);
-
-		addObject(22826, 1703, 3712, 1, 10, 0);
-		addObject(22826, 1704, 3712, 1, 10, 0);
-
-		addObject(22826, 1715, 3714, 1, 10, 0);
-		addObject(22826, 1715, 3711, 1, 10, 0);
-
-		addObject(22826, 1660, 3815, 1, 10, 0);
-		addObject(22826, 1661, 3815, 1, 10, 0);
-		addObject(22826, 1662, 3815, 1, 10, 0);
-
-		addObject(26782, 1731, 3880, 1, 10, 0);
-
-		addObject(22826, 1725, 3784, 1, 10, 0);
-		addObject(22826, 1725, 3783, 1, 10, 0);
-		addObject(22826, 1725, 3782, 1, 10, 0);
-		addObject(22826, 1725, 3781, 1, 10, 0);
-
-		addObject(22826, 1596, 3778, 1, 10, 0);
-		addObject(22826, 1596, 3777, 1, 10, 0);
-		addObject(22826, 1596, 3776, 1, 10, 0);
-
-		addObject(22826, 1703, 3717, 1, 10, 0);
-		addObject(22826, 1704, 3717, 1, 10, 0);
-		addObject(22826, 1705, 3717, 1, 10, 0);
-		addObject(22826, 1706, 3717, 1, 10, 0);
-		addObject(22826, 1707, 3717, 1, 10, 0);
-		addObject(22826, 1708, 3717, 1, 10, 0);
-		addObject(22826, 1709, 3717, 1, 10, 0);
-		addObject(22826, 1710, 3717, 1, 10, 0);
-		addObject(22826, 1711, 3717, 1, 10, 0);
-		addObject(22826, 1712, 3717, 1, 10, 0);
-		addObject(22826, 1713, 3717, 1, 10, 0);
-		addObject(22826, 1714, 3717, 1, 10, 0);
 
 		// Home objects
 		addObject(172, 3099, 3512, 5, 10, 0);
@@ -9804,17 +9687,6 @@ public class Client extends RSApplet {
 		addObject(1738, 1661, 3529, 1, 10, 0); // Tavelery
 		// addObject(4151, 3089, 3494, 1, 10, 0); //barrows
 		addObject(20877, 1572, 3657, 1, 10, 0); // brimhaven
-		// addObject(29735, 1650, 3662, 2, 10, 0); //Slayer
-		// addObject(29735, 3077, 3484, 2, 10, 0); //Slayer
-		// Edgehome6-24-17
-		// addObject(29345, 3084, 3487, 3, 10, 0); //Training Portal
-		// addObject(29346, 3084, 3490, 3, 10, 0); //Wilderness Portal
-		// addObject(29347, 3084, 3493, 3, 10, 0); //Boss Portal
-		// addObject(29349, 3084, 3496, 3, 10, 0); //Minigame
-		// Altars
-		// addObject(6552, 3091, 3513, 2, 10, 0); //anchients
-		// RFD
-		// addObject(4873, 1629, 3691, 0, 10, 0); //wilderness lever
 		addObject(26709, 1280, 3551, 1, 10, 0); // stronghold slayer
 		addObject(2123, 1257, 3501, 3, 10, 0); // rellekka slayer
 		// addObject(11803, 1650, 3619, 0, 10, 0); //icedung
@@ -9846,155 +9718,8 @@ public class Client extends RSApplet {
 		addObject(9030, 3190, 3929, 1, 10, 0);
 		addObject(9030, 3191, 3930, 1, 10, 0);
 		addObject(9030, 3190, 3931, 1, 10, 0);
+	
 
-		// Corp Borders
-		addObject(848, 1566, 3568, 0, 10, 0);
-		addObject(848, 1565, 3568, 0, 10, 0);
-		addObject(848, 1564, 3568, 0, 10, 0);
-		addObject(848, 1563, 3568, 0, 10, 0);
-		addObject(848, 1562, 3568, 0, 10, 0);
-		addObject(848, 1561, 3568, 0, 10, 0);
-		addObject(848, 1560, 3568, 0, 10, 0);
-		addObject(848, 1559, 3568, 0, 10, 0);
-		addObject(848, 1558, 3568, 0, 10, 0);
-		addObject(848, 1557, 3568, 0, 10, 0);
-		addObject(848, 1556, 3568, 0, 10, 0);
-		addObject(848, 1555, 3568, 0, 10, 0);
-		addObject(848, 1554, 3568, 0, 10, 0);
-		addObject(848, 1553, 3568, 0, 10, 0);
-		addObject(848, 1552, 3568, 0, 10, 0);
-		addObject(848, 1551, 3568, 0, 10, 0);
-		addObject(848, 1550, 3568, 0, 10, 0);
-		addObject(848, 1549, 3568, 0, 10, 0);
-		addObject(848, 1548, 3568, 1, 10, 0);
-		addObject(848, 1547, 3568, 1, 10, 0);
-		addObject(848, 1546, 3567, 1, 10, 0);
-		addObject(848, 1546, 3566, 1, 10, 0);
-		addObject(848, 1546, 3565, 1, 10, 0);
-		addObject(848, 1546, 3564, 1, 10, 0);
-		addObject(848, 1546, 3563, 1, 10, 0);
-		addObject(848, 1546, 3562, 1, 10, 0);
-		addObject(848, 1546, 3561, 1, 10, 0);
-		addObject(848, 1546, 3560, 1, 10, 0);
-		addObject(848, 1546, 3559, 1, 10, 0);
-		addObject(848, 1546, 3558, 1, 10, 0);
-		addObject(848, 1546, 3557, 1, 10, 0);
-		addObject(848, 1546, 3556, 1, 10, 0);
-		addObject(848, 1546, 3555, 1, 10, 0);
-		addObject(848, 1546, 3554, 1, 10, 0);
-		addObject(848, 1546, 3553, 1, 10, 0);
-		addObject(848, 1546, 3552, 1, 10, 0);
-		addObject(848, 1546, 3551, 1, 10, 0);
-		addObject(848, 1547, 3550, 3, 10, 0);
-		addObject(848, 1548, 3551, 3, 10, 0);
-		addObject(848, 1549, 3551, 3, 10, 0);
-		addObject(848, 1550, 3551, 3, 10, 0);
-		addObject(848, 1551, 3551, 3, 10, 0);
-		addObject(848, 1552, 3551, 3, 10, 0);
-		addObject(848, 1553, 3551, 3, 10, 0);
-		addObject(848, 1554, 3551, 3, 10, 0);
-		addObject(848, 1555, 3551, 3, 10, 0);
-		addObject(848, 1556, 3551, 3, 10, 0);
-		addObject(848, 1557, 3551, 3, 10, 0);
-		addObject(848, 1558, 3551, 3, 10, 0);
-		addObject(848, 1559, 3551, 3, 10, 0);
-		addObject(848, 1560, 3551, 3, 10, 0);
-		addObject(848, 1561, 3551, 3, 10, 0);
-		addObject(848, 1562, 3551, 3, 10, 0);
-		addObject(848, 1563, 3551, 3, 10, 0);
-		addObject(848, 1564, 3551, 3, 10, 0);
-		addObject(848, 1565, 3551, 3, 10, 0);
-		addObject(848, 1566, 3551, 3, 10, 0);
-		addObject(848, 1567, 3551, 3, 10, 0);
-		addObject(848, 1567, 3552, 4, 10, 0);
-		addObject(848, 1567, 3553, 4, 10, 0);
-		addObject(848, 1567, 3554, 4, 10, 0);
-		addObject(848, 1567, 3555, 4, 10, 0);
-		addObject(848, 1567, 3556, 4, 10, 0);
-		addObject(848, 1567, 3557, 4, 10, 0);
-		addObject(848, 1567, 3558, 4, 10, 0);
-		addObject(848, 1567, 3559, 4, 10, 0);
-		addObject(848, 1567, 3560, 4, 10, 0);
-		addObject(848, 1567, 3561, 4, 10, 0);
-		addObject(848, 1567, 3562, 4, 10, 0);
-		addObject(848, 1567, 3563, 4, 10, 0);
-		addObject(848, 1567, 3564, 4, 10, 0);
-		addObject(848, 1567, 3565, 4, 10, 0);
-		addObject(848, 1567, 3566, 4, 10, 0);
-		addObject(848, 1567, 3567, 4, 10, 0);
-		// endcor
-
-		// Zeah Wilderness Skillin
-		addObject(19206, 1502, 3839, 1, 10, 0);
-		addObject(6150, 1500, 3860, 2, 10, 0); // anvil
-
-		// Rune Rocks
-		addObject(7494, 1474, 3846, 0, 10, 0);
-		addObject(7494, 1474, 3847, 0, 10, 0);
-		addObject(7494, 1475, 3846, 0, 10, 0); // eric
-		addObject(7494, 1471, 3882, 0, 10, 0);
-		addObject(7494, 1488, 3888, 0, 10, 0);
-
-		// Skilling area
-		objectFill(-1, 2983, 3381, 2987, 3390, 10, 0, 0);
-		// Obelisks
-		addObject(2153, 3014, 3389, 0, 10, 0);
-		addObject(2152, 3013, 3389, 0, 10, 0);
-		addObject(2151, 3011, 3389, 0, 10, 0);
-		addObject(2150, 3008, 3388, 0, 10, 0);
-
-		addObject(-1, 3026, 3376, 0, 10, 0);
-		addObject(-1, 3029, 3376, 1, 10, 0);
-		addObject(-1, 3030, 3377, 1, 10, 0);
-		addObject(-1, 3031, 3377, 1, 10, 0);
-		addObject(-1, 3031, 3376, 1, 10, 0);
-		addObject(-1, 3029, 3382, 1, 10, 0);
-		addObject(-1, 3029, 3383, 1, 10, 0);
-		addObject(-1, 3004, 3383, 1, 10, 0);
-		addObject(-1, 3003, 3372, 0, 10, 0);
-		addObject(-1, 1815, 3510, 0, 10, 0);
-		addObject(-1, 1812, 3509, 0, 10, 0);
-		addObject(-1, 1815, 3509, 0, 10, 0);
-		addObject(18819, 3003, 3372, 0, 10, 0);// farming
-		addObject(2742, 3030, 3376, 2, 22, 0);
-		addObject(2759, 3019, 3380, 2, 22, 0);
-		addObject(2741, 3013, 3369, 2, 22, 0);
-		addObject(24009, 3030, 3375, 2, 10, 0);
-		addObject(24101, 3029, 3379, 1, 10, 0);
-		addObject(7484, 1709, 3475, 1, 10, 0); // Copper
-		addObject(7484, 1710, 3475, 1, 10, 0); // Copper
-		addObject(7485, 1712, 3476, 1, 10, 0); // Tin
-		addObject(7485, 1713, 3476, 1, 10, 0); // Tin
-		addObject(7488, 1714, 3476, 1, 10, 0); // Iron
-		addObject(7488, 1715, 3476, 1, 10, 0); // Iron
-		addObject(7488, 1716, 3476, 1, 10, 0); // Iron
-		addObject(7489, 1717, 3476, 1, 10, 0); // Coal
-		addObject(7489, 1718, 3476, 1, 10, 0); // Coal
-		addObject(7489, 1768, 3717, 1, 10, 0); // Coal
-		addObject(7489, 1768, 3716, 1, 10, 0); // Coal
-		addObject(7491, 1719, 3476, 1, 10, 0); // Gold
-		addObject(7491, 1720, 3476, 1, 10, 0); // Gold
-		addObject(7491, 1721, 3476, 1, 10, 0); // Gold
-		addObject(9030, 1502, 3413, 1, 10, 0); // Gem
-		addObject(9030, 1503, 3413, 1, 10, 0); // Gem
-		addObject(9030, 1502, 3414, 1, 10, 0); // Gem
-		addObject(7492, 1722, 3476, 1, 10, 0); // Mithril
-		addObject(7492, 1723, 3475, 1, 10, 0); // Mithril
-		addObject(7492, 1724, 3474, 1, 10, 0); // Mithril
-		addObject(7492, 2943, 3285, 0, 10, 0); // Mithril Craft
-		addObject(7492, 2943, 3284, 0, 10, 0); // Mithril Craft
-		addObject(7492, 2943, 3286, 0, 10, 0); // Mithril Craft
-		addObject(7493, 1767, 3715, 1, 10, 0); // Adamant
-		addObject(7493, 1764, 3721, 1, 10, 0); // Adamant
-		addObject(7493, 1768, 3719, 1, 10, 0); // Adamant
-		addObject(114, 3030, 3383, 1, 10, 0); // stove
-		addObject(6150, 1829, 3508, 2, 10, 0); // anvil
-		addObject(6150, 1832, 3504, 2, 10, 0); // anvil
-		addObject(14888, 1510, 3414, 1, 10, 0); // 7131 pottery oven
-		addObject(25824, 1501, 3424, 3, 10, 0); // spinnigwheel
-		addObject(25824, 1676, 3744, 3, 10, 0); // spinnigwheel
-		addObject(3840, 3001, 3372, 2, 10, 0); // compost bin
-		addObject(7674, 2999, 3373, 0, 10, 0); // poison ivy bbusy
 		// Barrows
 		addObject(3610, 3550, 9695, 0, 10, 0);
 
@@ -10009,11 +9734,6 @@ public class Client extends RSApplet {
 		addObject(-1, 2937, 3284, 0, 10, 0);
 		addObject(-1, 2942, 3291, 0, 10, 0);
 
-		// what are those
-		addObject(9030, 1684, 3759, 1, 10, 0);
-		addObject(9030, 1685, 3759, 1, 10, 0);
-		addObject(9030, 1686, 3759, 1, 10, 0);
-		addObject(9030, 1687, 3759, 1, 10, 0);
 
 		/**
 		 * Shilo
@@ -10027,44 +9747,6 @@ public class Client extends RSApplet {
 		// Bank room
 		addObject(1113, 2850, 2952, 0, 10, 0); // Chair
 		objectFill(24101, 2851, 2952, 2853, 2952, 10, 0, 0); // Bank
-		// addObject(13641, 1686, 3742, 0, 10, 0); //Teleportation
-		addObject(26185, 1683, 3748, 0, 10, 0); // Fire
-		addObject(26185, 1683, 3747, 0, 10, 0); // Fire
-		addObject(26185, 1683, 3746, 0, 10, 0); // Fire
-		addObject(26185, 1683, 3745, 0, 10, 0); // Fire
-		addObject(26185, 1683, 3746, 0, 10, 0); // Fire
-		addObject(26185, 1684, 3743, 0, 10, 0); // Fire
-		addObject(26185, 1685, 3743, 0, 10, 0); // Fire
-		addObject(26185, 1686, 3743, 0, 10, 0); // Fire
-		addObject(26185, 1687, 3743, 0, 10, 0); // Fire
-		addObject(26185, 1688, 3743, 0, 10, 0); // Fire
-		addObject(26185, 1683, 3744, 0, 10, 0); // fire
-
-		addObject(29730, 1604, 3571, 0, 10, 0); // Fire
-		addObject(29730, 1606, 3571, 0, 10, 0); // Fire
-
-		addObject(26185, 1830, 3589, 0, 10, 0); // Fire Fishing
-
-		addObject(26185, 1689, 3744, 0, 10, 0); // Fire
-		addObject(26185, 1689, 3745, 0, 10, 0); // Fire
-		addObject(26185, 1689, 3746, 0, 10, 0); // Fire
-		addObject(26185, 1689, 3747, 0, 10, 0); // Fire
-		addObject(26185, 1689, 3748, 0, 10, 0); // Fire
-		addObject(26185, 1684, 3749, 0, 10, 0); // Fire
-		addObject(26185, 1688, 3749, 0, 10, 0); // Fire
-		addObject(26185, 1687, 3749, 0, 10, 0); // Fire
-		addObject(26185, 1686, 3749, 0, 10, 0); // Fire
-		addObject(26185, 1685, 3749, 0, 10, 0); // Fire
-		addObject(14880, 1701, 3747, 2, 22, 0); // Trapdoor
-		addObject(170, 1700, 3749, 1, 10, 0); // Chest
-		// addObject(24101, 2854, 2967, 0, 10, 0); // Bank
-		addObject(-1, 3101, 3509, 0, 0, 0); //
-		addObject(-1, 3101, 3510, 0, 0, 0); //
-
-		addObject(24101, 1647, 3675, 1, 10, 0); // Bank
-		addObject(24101, 1647, 3671, 1, 10, 0); // Bank
-
-		addObject(24101, 1580, 3430, 0, 10, 0); // Bank
 
 		// Vet
 		addObject(0, 3189, 3784, 0, 10, 0);
@@ -10080,17 +9762,6 @@ public class Client extends RSApplet {
 		objectFill(14896, 3011, 3371, 3013, 3371, 10, 0, 0);
 		objectFill(14896, 3011, 3375, 3013, 3375, 10, 0, 0);
 
-		addObject(-1, 3095, 3507, 0, 0, 0);
-		addObject(-1, 3095, 3507, 0, 1, 0);
-		addObject(-1, 3095, 3507, 0, 2, 0);
-		addObject(-1, 3095, 3507, 0, 3, 0);
-		addObject(-1, 3095, 3507, 0, 4, 0);
-		addObject(-1, 3095, 3507, 0, 5, 0);
-		addObject(-1, 3095, 3507, 0, 6, 0);
-		addObject(-1, 3095, 3507, 0, 7, 0);
-		addObject(-1, 3095, 3507, 0, 8, 0);
-		addObject(-1, 3095, 3507, 0, 9, 0);
-		addObject(-1, 3095, 3507, 0, 10, 0);
 	}
 
 	public static String fontFilter() {
@@ -10557,7 +10228,6 @@ public class Client extends RSApplet {
 			}
 		}
 	}
-
 	/**
 	 * Get the String residing on the clipboard.
 	 *
