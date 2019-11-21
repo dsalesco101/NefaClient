@@ -132,6 +132,26 @@ public final class NpcDefinition {
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
+		if(i==8688){
+			entityDef.name = "Fat Tony";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==7769){
+			entityDef.name = "Shop Keeper";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==1501){
+			entityDef.name = "Hunter Store";
+			entityDef.actions = new String[] { null, null, null, null, "Trade" };
+		}
+		if(i==2913){
+			entityDef.name = "Fishing Store";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
+		if(i==5809){
+			entityDef.name = "Crafting and Tanner";
+			entityDef.actions = new String[] { "Tan", null, "Trade", null, null };
+		}
 		if(i==555){
 			entityDef.name = "Sell Me Store";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
