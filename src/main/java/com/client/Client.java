@@ -9658,8 +9658,7 @@ public class Client extends RSApplet {
 		/**
 		 * @link addObject objectId, x, y, face, type, height
 		 */
-		addObject(172, 3099, 3512, 0, 10, 0);
-		addObject(33320, 3073, 3504, 0, 10,0);
+		
 		addObject(0, 1544, 3687, 0, 10, 0);
 		// Carts
 		addObject(7029, 1656, 3542, 0, 10, 0); // Hos
@@ -9790,7 +9789,7 @@ public class Client extends RSApplet {
 		addObject(22826, 1714, 3717, 1, 10, 0);
 
 		// Home objects
-		addObject(172, 3099, 3512, 5, 10, 0);
+
 		addObject(2030, 1716, 3469, 1, 10, 0);
 		addObject(2030, 1672, 3745, 3, 10, 0);
 

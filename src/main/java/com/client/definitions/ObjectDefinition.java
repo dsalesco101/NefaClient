@@ -147,7 +147,6 @@ public final class ObjectDefinition {
 		case 172:
 			objectDef.name = "Ckey chest";
 		break;
-		
 		case 10060:
 			objectDef.name = "Trading Post Booth";
 		    objectDef.actions = new String[] { null, null, null, null, null };
@@ -160,7 +159,7 @@ public final class ObjectDefinition {
 		    objectDef.name = "Vote Chest";
 		    objectDef.actions = new String[] { "Unlock", null, null, null, null };
 			break;
-			
+
 		case 12309:
 			objectDef.actions = new String[5];
 			objectDef.actions[0] = "Bank";
