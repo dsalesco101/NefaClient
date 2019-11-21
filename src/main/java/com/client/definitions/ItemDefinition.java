@@ -87,6 +87,12 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
+		case 10556:
+		case 10557:
+		case 10558:
+		case 10559:
+			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
+			break;
 		case 2996:
 			itemDef.name = "@red@PKP Ticket";
 			break;
@@ -102,6 +108,9 @@ public final class ItemDefinition {
 		case 21880:
 			itemDef.name = "Wrath Rune";
 			itemDef.value = 1930;
+			break;
+		case 12007:
+			itemDef.inventoryOptions = new String[] { null, null, "Open", null, "Drop" };
 			break;
 		case 21262:
 			itemDef.name = "Vote Genie Pet";
