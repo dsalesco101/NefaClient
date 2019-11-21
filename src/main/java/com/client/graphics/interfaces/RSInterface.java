@@ -256,6 +256,7 @@ public class RSInterface {
 		aClass44 = streamLoader;
 		defaultTextDrawingAreas = textDrawingAreas;
 		Interfaces.loadInterfaces();
+		cataTele(textDrawingAreas);
 		teleport(textDrawingAreas);
 		OsDropViewer(textDrawingAreas);
 		dropTable(textDrawingAreas);
@@ -2675,7 +2676,108 @@ public class RSInterface {
 	// }
 	//
 	// }
+//	public static void addAntibotWidget(TextDrawingArea[] tda) {
+//		RSInterface widget = addInterface(33300);
+//		addSprite(33301, 0, "Interfaces/AntiBot/IMAGE");
+//		addText(33302, "Click the 'Abyssal Whip'", tda, 2, 0xFF981F, true, true);
+//		addText(33303, "1:00", tda, 0, 0xFF981F, true, true);
+//		addText(33304,
+//				"If you click the wrong item or the time depletes to 0,\\nYou will be teleported to a new location.",
+//				tda, 0, 0xFF981F, true, true);
+//		setChildren(7, widget);
+//		setBounds(33301, 115, 96, 0, widget);
+//		setBounds(33302, 253, 105, 1, widget);
+//		setBounds(33303, 375, 105, 2, widget);
+//		setBounds(33304, 255, 190, 3, widget);
+//		setBounds(33310, 180, 140, 4, widget);
+//		setBounds(33313, 240, 140, 5, widget);
+//		setBounds(33316, 300, 140, 6, widget);
+//
+//		for (int i = 0; i < 9; i += 3) {
+//			RSInterface option = addInterface(33310 + i);
+//			addToItemGroup(33311 + i, 1, 1, 0, 0, false, "", "", "");
+//			interfaceCache[33311 + i].inv = new int[] { 4152 };
+//			interfaceCache[33311 + i].invStackSizes = new int[] { 1 };
+//			addButton(33312 + i, 1, "Interfaces/AntiBot/IMAGE", "Select");
+//			setChildren(2, option);
+//			setBounds(33311 + i, 0, 0, 0, option);
+//			setBounds(33312 + i, 0, 0, 1, option);
+//		}
+//	}
+	public static void cataTele(TextDrawingArea[] tda) {
+		RSInterface inter = addInterface(33900);
 
+		addSprite(33901, 0, "Interfaces/Exp Lock/SPRITE");
+		addText(33902, "Catacombs Teleports", tda, 2, 0xff9933, true, true);
+		addText(33903, "Abyssal Demon", tda, 1, 0xff9933, true, true);
+		addText(33904, "Ankou", tda, 1, 0xff9933, true, true);
+		addText(33905, "Black Demons", tda, 1, 0xff9933, true, true);
+		addText(33906, "Bronze Dragon", tda, 1, 0xff9933, true, true);
+		addText(33907, "Brutal Black Dragon", tda, 1, 0xff9933, true, true);
+		addText(33908, "Brutal Blue Dragon", tda, 1, 0xff9933, true, true);
+		addText(33909, "Brutal Red Dragon", tda, 1, 0xff9933, true, true);
+		addText(33910, "Cyclops", tda, 1, 0xff9933, true, true);
+		addText(33911, "Dagannoth", tda, 1, 0xff9933, true, true);
+		addText(33912, "Dust Devil", tda, 1, 0xff9933, true, true);
+		addText(33913, "Deviant Spectre", tda, 1, 0xff9933, true, true);
+		addText(33914, "Fire Giant", tda, 1, 0xff9933, true, true);
+		addText(33915, "Ghost", tda, 1, 0xff9933, true, true);
+		addText(33916, "Greater Demon", tda, 1, 0xff9933, true, true);
+		addText(33917, "Greater Nechryael", tda, 1, 0xff9933, true, true);
+		addText(33918, "Hellhound", tda, 1, 0xff9933, true, true);
+		addText(33919, "Hill Giant", tda, 1, 0xff9933, true, true);
+		addText(33920, "Iron Dragon", tda, 1, 0xff9933, true, true);
+		addText(33921, "Mutated Bloodveld", tda, 1, 0xff9933, true, true);
+		addText(33922, "King Sand Crab", tda, 1, 0xff9933, true, true);
+		addText(33923, "Magic Axe", tda, 1, 0xff9933, true, true);
+		addText(33924, "Moss Giant", tda, 1, 0xff9933, true, true);
+		addText(33925, "Mutated Bloodveld", tda, 1, 0xff9933, true, true);
+		addText(33926, "Possessed Pickaxe", tda, 1, 0xff9933, true, true);
+		addText(33927, "Steel Dragon", tda, 1, 0xff9933, true, true);
+		addText(33928, "Shade", tda, 1, 0xff9933, true, true);
+		addText(33929, "Skeleton", tda, 1, 0xff9933, true, true);
+		addText(33930, "Twisted Banshee", tda, 1, 0xff9933, true, true);
+		addText(33931, "Warped Jelly", tda, 1, 0xff9933, true, true);
+		
+		inter.totalChildren(31);
+		setBounds(33901, 150, 20, 0, inter);
+		setBounds(33902, 250, 23, 1, inter);
+		setBounds(33903, 250, 50, 2, inter);
+		setBounds(33904, 250, 65, 3, inter);
+		setBounds(33905, 250, 80, 4, inter);
+		setBounds(33906, 250, 95, 5, inter);
+		setBounds(33907, 250, 110, 6, inter);
+		setBounds(33908, 250, 125, 7, inter);
+		setBounds(33909, 250, 140, 8, inter);
+		setBounds(33910, 250, 155, 9, inter);
+		setBounds(33911, 250, 170, 10, inter);
+		setBounds(33912, 250, 185, 11, inter);
+		setBounds(33913, 250, 200, 12, inter);
+		setBounds(33914, 250, 215, 13, inter);
+		setBounds(33915, 250, 230, 14, inter);
+		setBounds(33916, 250, 245, 15, inter);
+		setBounds(33917, 250, 260, 16, inter);
+		setBounds(33918, 250, 275, 17, inter);
+		setBounds(33919, 250, 290, 18, inter);
+		setBounds(33920, 250, 305, 19, inter);
+		setBounds(33921, 250, 320, 20, inter);
+		setBounds(33922, 250, 335, 21, inter);
+		setBounds(33923, 250, 350, 22, inter);
+		setBounds(33924, 250, 365, 23, inter);
+		setBounds(33925, 250, 380, 24, inter);
+		setBounds(33926, 250, 395, 25, inter);
+		setBounds(33927, 250, 410, 26, inter);
+		setBounds(33928, 250, 170, 27, inter);
+		setBounds(33929, 250, 170, 28, inter);
+		setBounds(33930, 250, 170, 29, inter);
+		setBounds(33931, 250, 170, 30, inter);
+
+		
+		
+
+	}
+	
+	
 	public static void teleport(TextDrawingArea[] tda) {
 		RSInterface inter = addInterface(51000);
 		int extraX = 5;
