@@ -14952,10 +14952,10 @@ public class Client extends RSApplet {
 						mapRegionX = inStream.readUnsignedWord();
 						aBoolean1159 = true;
 					}
-					if (mapRegionsX == mapRegionX && mapRegionsY == mapRegionY && loadingStage == 2) {
+					/*if (mapRegionsX == mapRegionX && mapRegionsY == mapRegionY && loadingStage == 2) {
 						incomingPacket = -1;
 						return true;
-					}
+					}*/
 					mapRegionsX = mapRegionX;
 					mapRegionsY = mapRegionY;
 					baseX = (mapRegionsX - 6) * 8;
