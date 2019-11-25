@@ -87,11 +87,21 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
+		case 23933:
+		itemDef.name = "@Voting Crystal";
+		break;
 		case 10556:
 		case 10557:
 		case 10558:
 		case 10559:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
+			break;
+		case 22517:
+			itemDef.name = "Crystal Shards";
+			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+			break;
+		case 23943:
+			itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", "Check", "Drop" };
 			break;
 		case 2996:
 			itemDef.name = "@red@PKP Ticket";

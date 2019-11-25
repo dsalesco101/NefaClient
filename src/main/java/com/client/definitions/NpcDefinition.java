@@ -53,6 +53,9 @@ public final class NpcDefinition {
 			entityDef.name = "Referral Tutor";
 			entityDef.description = "He Manages all the sovark referrals.";
 		}
+		if (i == 5293) {
+			entityDef.name = "Elven Keeper";
+		}
 		if(i==3218 || i ==3217){
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
@@ -88,7 +91,7 @@ public final class NpcDefinition {
 			entityDef.name = "Donator Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
-		if(i == 2713){
+		if(i == 2662){
 			entityDef.name = "Tournament Manager";
 			entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
 		}
@@ -188,6 +191,10 @@ public final class NpcDefinition {
 			entityDef.anInt91 = 100;
 		}
 		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
+		if (i == 8737 || i == 8738) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
