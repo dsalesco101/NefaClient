@@ -338,13 +338,13 @@ public class Client extends RSApplet {
 	}
 
 	public static int gameScreenWidth = 516;
-	public static int gameScreenHeight = 338;
+	public int gameScreenHeight = 338;
 
 	private void updateGameScreen() {
-		antialiasingPixels = new int[this.gameScreenWidth * this.gameScreenHeight << 2];
-		Rasterizer.method365(this.gameScreenWidth << 1, this.gameScreenHeight << 1);
+		antialiasingPixels = new int[Client.gameScreenWidth * gameScreenHeight << 2];
+		Rasterizer.method365(Client.gameScreenWidth << 1, gameScreenHeight << 1);
 		antialiasingOffsets = Rasterizer.anIntArray1472;
-		Rasterizer.method365(this.gameScreenHeight, this.gameScreenHeight);
+		Rasterizer.method365(gameScreenHeight, gameScreenHeight);
 		Rasterizer.method365(gameScreenWidth, gameScreenHeight);
 		this.fullScreenTextureArray = Rasterizer.anIntArray1472;
 		Rasterizer.method365(
@@ -16058,7 +16058,7 @@ public class Client extends RSApplet {
 			setCameraPos(
 					cameraZoom + (currentGameWidth >= 1024 ? i + cameraZoom - currentGameHeight / 200 : i)
 							* (WorldController.viewDistance == 9 && currentScreenMode != ScreenMode.FIXED ? 1
-							: WorldController.viewDistance == 10 ? 1 : 7),
+							: WorldController.viewDistance == 10 ? 1 : 4), //change zoom distance
 					i, anInt1014, getCenterHeight(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
 		}
 		int j;
