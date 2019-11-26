@@ -88,7 +88,7 @@ public final class ItemDefinition {
 
 		switch (itemId) {
 		case 23933:
-		itemDef.name = "@Voting Crystal";
+		itemDef.name = "Vote Crystal";
 		break;
 		case 10556:
 		case 10557:
@@ -96,9 +96,12 @@ public final class ItemDefinition {
 		case 10559:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
 			break;
-		case 22517:
-			itemDef.name = "Crystal Shards";
+
+		case 23877:
+			itemDef.name = "Crystal Shard";
+			itemDef.description = "Looks to be very valuable.";
 			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+			itemDef.stackable = true;
 			break;
 		case 23943:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", "Check", "Drop" };
