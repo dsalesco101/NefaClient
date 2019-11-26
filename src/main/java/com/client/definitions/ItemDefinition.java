@@ -97,7 +97,7 @@ public final class ItemDefinition {
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
 			break;
 		case 22517:
-			itemDef.name = "Crystal Shards";
+			itemDef.name = "Crystal Shard";
 			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
 			break;
 		case 23943:
