@@ -90,6 +90,9 @@ public final class ItemDefinition {
 		case 23933:
 		itemDef.name = "Vote Crystal";
 		break;
+		case 19473:
+			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+			break;
 		case 10556:
 		case 10557:
 		case 10558:
