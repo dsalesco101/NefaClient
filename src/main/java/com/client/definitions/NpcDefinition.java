@@ -190,6 +190,10 @@ public final class NpcDefinition {
 			entityDef.anInt86 = 100;
 			entityDef.anInt91 = 100;
 		}
+		if (i == 8203) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
 		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
