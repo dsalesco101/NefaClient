@@ -544,7 +544,7 @@ public class Interfaces extends RSInterface {
 		int scrollY = 0;
 		
 		for(int i = 0; i < 10; i++) {
-			addConfigButton(scrollChildId, 21553, 0, 1, "Presets/BUTTON", 118, 22, "Select Preset", 1, 1, 903 + i);
+			addConfigButton(scrollChildId, 21553, 0, 1, "Presets/BUTTON", 118, 22, new String[] { "Delete Preset", "Select Preset" }, 1, 903 + i);
 			scroll.child(scrollFrame++, scrollChildId++, scrollX, scrollY);
 			
 			addText(scrollChildId, "Preset Name " + i, tda, 1, 0xFF9300, false, true);
