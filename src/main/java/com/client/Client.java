@@ -10008,6 +10008,7 @@ public class Client extends RSApplet {
 			VarBit.unpackConfig(streamLoader);
 			loadPlayerData();
 
+			NpcDefinition.dump();
 			onDemandFetcher.dumpMaps();
 			// preloadModels();
 			// constructMusic();

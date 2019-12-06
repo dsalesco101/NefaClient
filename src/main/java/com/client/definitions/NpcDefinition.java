@@ -271,6 +271,27 @@ public final class NpcDefinition {
 
 	public static int totalAmount;
 
+	public static void dump() {
+		try (BufferedWriter writer = new BufferedWriter(new FileWriter("./npc_defs.txt"))) {
+			for (int i = 0; i < 70_000; i++) {
+				try {
+					NpcDefinition def = NpcDefinition.forID(i);
+					if (def != null) {
+						writer.write("Npc=" + i);
+						writer.newLine();
+						writer.write("Stand animation=" + def.standAnim);
+						writer.newLine();
+						writer.write("Walk animation=" + def.walkAnim);
+						writer.newLine();
+						writer.newLine();
+					}
+				} catch (Exception e) {}
+			}
+		} catch (Exception e) {
+			e.printStackTrace();
+		}
+	}
+	
 	public static void unpackConfig(StreamLoader streamLoader) {
 		stream = new Stream(streamLoader.getDataForName("npc.dat"));
 		Stream stream = new Stream(streamLoader.getDataForName("npc.idx"));

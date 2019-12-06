@@ -99,6 +99,9 @@ public final class ItemDefinition {
 		case 10559:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
 			break;
+		case 23804:
+			itemDef.name = "Imbue Dust";
+			break;
 		case 22517:
 			itemDef.name = "Crystal Shard";
 			break;
