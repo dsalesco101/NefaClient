@@ -75,6 +75,12 @@ public final class ObjectDefinition {
 			objectDef.actions = new String[] { "Showcase", "Shop", "Info", null, null };
 			
 			break;
+		case 32508:
+
+			objectDef.name = "Hunllef's Chest";
+			objectDef.actions = new String[] { "Unlock", null, null, null, null };
+			
+			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };
 			break;
