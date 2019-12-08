@@ -116,6 +116,9 @@ public final class ItemDefinition {
 		case 2996:
 			itemDef.name = "@red@PKP Ticket";
 			break;
+		case 23776:
+			itemDef.name = "@red@Hunllef's Key";
+			break;
 		case 13148:
 			itemDef.name = "@red@Reset Lamp";
 			break;
