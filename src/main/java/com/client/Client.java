@@ -89,6 +89,8 @@ import com.client.graphics.loaders.SpriteLoader3;
 import com.client.graphics.loaders.SpriteLoader4;
 import com.client.sign.Signlink;
 import com.client.utilities.ObjectKey;
+import com.client.utilities.settings.Settings;
+import com.client.utilities.settings.SettingsManager;
 
 public class Client extends RSApplet {
 
@@ -155,6 +157,16 @@ public class Client extends RSApplet {
 	public static boolean shiftDown;
 
 	private static boolean removeShiftDropOnMenuOpen;
+	
+	public Settings getUserSettings() {
+		return userSettings;
+	}
+	
+	public void setUserSettings(Settings settings) {
+		this.userSettings = settings;
+	}
+	
+	private Settings userSettings = new Settings(false, false, false, false, false, 0xFFFFFF, false, false, false, 0xFF00FF, 0xFF00FF, true, false);
 
 	/*
 	 * @Override public void keyPressed(KeyEvent event) { super.keyPressed(event);
@@ -4703,6 +4715,11 @@ public class Client extends RSApplet {
 			d.dropdown.setSelected(d.dropdown.getOptions()[i1]);
 			d.dropdown.setOpen(false);
 			d.dropdown.getDrop().selectOption(i1, d);
+//			try {
+//				SettingsManager.saveSettings(Client.instance);
+//			} catch (IOException io) {
+//				io.printStackTrace();
+//			}
 			p.dropdownOpen = null;
 		}
 		if (l == 850) {
@@ -6069,7 +6086,7 @@ public class Client extends RSApplet {
 		setConfigButton(23103, informationFile.isRememberRoof() ? true : false);
 		setConfigButton(23105, leftClickAttack);
 		setConfigButton(23111, gameTimers);
-		setConfigButton(23113, showEntityTarget);
+		//setConfigButton(23113, getUserSettings().isShowEntityTarget());
 		setConfigButton(23115, informationFile.isRememberVisibleItemNames() ? true : false);
 		setConfigButton(23118, shiftDrop ? true : false);
 		setConfigButton(23001, true);
@@ -7264,7 +7281,7 @@ public class Client extends RSApplet {
 							stream.writeString(inputString);
 						} else {
 							String s = inputString.toLowerCase();
-							int j2 = Configuration.chatColor;
+							int j2 = getUserSettings().getChatColor();
 							if (s.startsWith("yellow:")) {
 								j2 = 0;
 								inputString = inputString.substring(7);
@@ -9789,6 +9806,7 @@ public class Client extends RSApplet {
     Sprite[] animatedBackgrounds = new Sprite[65];
 	@Override
 	void startUp() {
+		//SettingsManager.loadSettings(this);
 		drawLoadingText(10, "Loading title screen - 0%");
 		if (Signlink.sunjava) {
 			super.minDelay = 5;
@@ -10008,7 +10026,7 @@ public class Client extends RSApplet {
 			VarBit.unpackConfig(streamLoader);
 			loadPlayerData();
 
-			NpcDefinition.dump();
+			//NpcDefinition.dump();
 			onDemandFetcher.dumpMaps();
 			// preloadModels();
 			// constructMusic();
@@ -10921,7 +10939,7 @@ public class Client extends RSApplet {
 				&& anInt1039 != rsInterface.id)
 			return;
 
-		if(rsInterface.parentID == 28000 && !Configuration.bountyHunter){
+		if(rsInterface.parentID == 28000 && !getUserSettings().isBountyHunter()){
 			return;
 		}
 		int clipLeft = DrawingArea.topX;
@@ -12298,11 +12316,11 @@ public class Client extends RSApplet {
 			drawInterface(0, 0, RSInterface.interfaceCache[11877], 0);
 		}
 
-		if (showEntityTarget) {
-			if (entityTarget != null) {
-				entityTarget.draw();
-			}
-		}
+//		if (getUserSettings().isShowEntityTarget()) {
+//			if (entityTarget != null) {
+//				entityTarget.draw();
+//			}
+//		}
 
 		if (gameTimers) {
 			try {
@@ -15206,6 +15224,11 @@ public class Client extends RSApplet {
 						spin();
 						incomingPacket = -1;
 						return true;
+					} else if (s.equals(":resetpost:")) {
+						RSInterface listingWidget = RSInterface.interfaceCache[48020];
+						if (listingWidget != null) {
+							listingWidget.scrollPosition = 0;
+						}
 					}
 					else if (s.equals(":resetBox")) {
 						reset();

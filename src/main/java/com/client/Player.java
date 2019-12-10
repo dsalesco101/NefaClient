@@ -3,6 +3,7 @@ package com.client;
 import com.client.definitions.AnimationDefinition;
 import com.client.definitions.ItemDefinition;
 import com.client.definitions.NpcDefinition;
+import com.client.utilities.settings.Settings;
 import com.client.definitions.GraphicsDefinition;
 
 public final class Player extends Entity {

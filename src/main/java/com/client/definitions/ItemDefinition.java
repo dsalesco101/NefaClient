@@ -105,6 +105,9 @@ public final class ItemDefinition {
 		case 22517:
 			itemDef.name = "Crystal Shard";
 			break;
+		case 23951:
+			itemDef.name = "Crystalline Key";
+			break;
 		case 23877:
 			itemDef.name = "Crystal Shard";
 			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
@@ -115,6 +118,9 @@ public final class ItemDefinition {
 			break;
 		case 2996:
 			itemDef.name = "@red@PKP Ticket";
+			break;
+		case 23776:
+			itemDef.name = "@red@Hunllef's Key";
 			break;
 		case 13148:
 			itemDef.name = "@red@Reset Lamp";

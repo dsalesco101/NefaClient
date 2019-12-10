@@ -261,7 +261,8 @@ public class RSInterface {
 		OsDropViewer(textDrawingAreas);
 		dropTable(textDrawingAreas);
 		achievementPopup2(textDrawingAreas);
-		//System.out.println(findAvailableInterfaceID(1001));
+		//System.out.println(findAvailableInterfaceID(1));
+//		System.out.println(findOpenConfigFrame(11));
 		// aMRUNodes_238 = null;
 	}
 	
@@ -1901,7 +1902,7 @@ public class RSInterface {
 		addText(28004, "Abnant", tda, 1, 0xFFFFFF, true, true);
 		addText(28005, "Lvl 1-4, Cmb 70", tda, 0, 0xCC0000, true, true);
 		addText(28006, "Wealth: V. Low", tda, 0, 0xFFFF00, true, true);
-		setChildren(14, widget);
+		setChildren(15, widget);
 		setBounds(28001, 320, 15, 0, widget);
 		setBounds(28003, 440, 18, 1, widget);
 		setBounds(28004, 458, 31, 2, widget);
@@ -1911,6 +1912,22 @@ public class RSInterface {
 		/** TODO WIldy Skull **/
 		setBounds(196, Client.currentScreenMode != ScreenMode.FIXED ? 600 : 420,
 				Client.currentScreenMode != ScreenMode.FIXED ? 186 : 286, 5, widget);
+		
+		addText(250, "", tda, 1, 0xFFFF00, true, true);
+		RSInterface skullWidget = RSInterface.interfaceCache[196];
+		int[] backupX = skullWidget.childX;
+		int[] backupY = skullWidget.childY;
+
+		skullWidget.children = new int[3];
+		skullWidget.childX = new int[3];
+		skullWidget.childY = new int[3];
+		
+		skullWidget.totalChildren(3);
+		skullWidget.child(0, 194, backupX[0], backupY[0]);
+		skullWidget.child(1, 195, backupX[1], backupY[1]);
+		skullWidget.child(2, 250, 29, 24);
+		
+		skullWidget.width *= 1.5;
 
 		setBounds(28030, 345, 25, 6, widget);
 		setBounds(28032, 345, 25, 7, widget);

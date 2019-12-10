@@ -1,8 +1,11 @@
 package com.client.graphics.interfaces.impl;
 
+import java.io.IOException;
+
 import com.client.Client;
 import com.client.Configuration;
 import com.client.graphics.interfaces.RSInterface;
+import com.client.utilities.settings.SettingsManager;
 //import sun.security.krb5.Config; // = not being able to right click hELppP
 
 public enum Dropdown {
@@ -230,73 +233,19 @@ public enum Dropdown {
 	CHAT_EFFECT() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0: //default
-					Configuration.chatColor=0;
-					return;
-				case 1: //red:
-					Configuration.chatColor=1;
-					return;
-				case 2: //green:
-					Configuration.chatColor=2;
-					return;
-				case 3: //cyan:
-					Configuration.chatColor=3;
-					return;
-				case 4: //purple:
-					Configuration.chatColor=4;
-					return;
-				case 5: //white:
-					Configuration.chatColor=5;
-					return;
-				case 6: //flash1:
-					Configuration.chatColor=6;
-					return;
-				case 7: //flash2:
-					Configuration.chatColor=7;
-					return;
-				case 8: //flash3:
-					Configuration.chatColor=8;
-					return;
-				case 9: //glow1:
-					Configuration.chatColor=9;
-					return;
-				case 10: //glow2:
-					Configuration.chatColor=10;
-					return;
-				case 11: //glow3:
-					Configuration.chatColor=11;
-					return;
-
-			}
+			Client.instance.getUserSettings().setChatColor(selected);
 		}
 	},
 	BOUNTY_HUNTER() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Configuration.bountyHunter = true;
-					return;
-				case 1:
-					Configuration.bountyHunter = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setBountyHunter(selected == 0 ? true : false);
 		}
 	},
 	TARGET_INTERFACE() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Client.instance.showEntityTarget = true;
-					return;
-				case 1:
-					Client.instance.showEntityTarget = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setShowEntityTarget(selected == 0 ? true : false);
 		}
 	},
 
