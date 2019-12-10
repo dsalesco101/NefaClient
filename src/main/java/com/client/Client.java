@@ -10008,7 +10008,7 @@ public class Client extends RSApplet {
 			VarBit.unpackConfig(streamLoader);
 			loadPlayerData();
 
-			NpcDefinition.dump();
+			//NpcDefinition.dump();
 			onDemandFetcher.dumpMaps();
 			// preloadModels();
 			// constructMusic();
@@ -15206,6 +15206,11 @@ public class Client extends RSApplet {
 						spin();
 						incomingPacket = -1;
 						return true;
+					} else if (s.equals(":resetpost:")) {
+						RSInterface listingWidget = RSInterface.interfaceCache[48020];
+						if (listingWidget != null) {
+							listingWidget.scrollPosition = 0;
+						}
 					}
 					else if (s.equals(":resetBox")) {
 						reset();

@@ -529,6 +529,15 @@ public class Interfaces extends RSInterface {
 		
 		addToItemGroup(childId++, 4, 7, 6, 6, true, "Remove", null, null);
 		
+		/*
+		 * Note: Using a modified childId to avoid overridden child members
+		 */
+		int overlayModificationChildId = 569;
+		int overlayModificationConfig = 61;
+		for(int i = 0; i < 11; i++) {
+			addConfigButton(overlayModificationChildId++, 21553, 1, 0, "Presets/OVERLAY", 36, 36, new String[] {}, 1, overlayModificationConfig + i);
+		}
+		
 		for(int i = 0; i < 11; i++) {
 			addToItemGroup(childId++, 1, 1, 0, 0, true, "Remove", null, null);
 		}
@@ -557,9 +566,9 @@ public class Interfaces extends RSInterface {
 		addHoverButton(childId++, "Presets/EDIT", 0, 14, 12, "Edit Preset Name", -1, childId, 1);
 		addHoveredButton(childId++, "Presets/EDIT", 0, 14, 12, childId++);
 		
-		widget.totalChildren(childId - 21554 + 4);
+		widget.totalChildren(childId - 21554 + 4 + (11));
 		
-		
+		overlayModificationChildId = 569;
 		childId = 21554;
 		int frame = 0;
 		
@@ -597,6 +606,19 @@ public class Interfaces extends RSInterface {
 		
 		widget.child(frame++, childId++, 326, 48);
 		
+		//Equipment Overlays
+		widget.child(frame++, overlayModificationChildId++, 211, 68);
+		widget.child(frame++, overlayModificationChildId++, 170, 107);
+		widget.child(frame++, overlayModificationChildId++, 211, 107);
+		widget.child(frame++, overlayModificationChildId++, 252, 107);
+		widget.child(frame++, overlayModificationChildId++, 211, 146);
+		widget.child(frame++, overlayModificationChildId++, 155, 146);
+		widget.child(frame++, overlayModificationChildId++, 267, 146);
+		widget.child(frame++, overlayModificationChildId++, 211, 186);
+		widget.child(frame++, overlayModificationChildId++, 211, 226);
+		widget.child(frame++, overlayModificationChildId++, 155, 226);
+		widget.child(frame++, overlayModificationChildId++, 267, 226);
+				
 		//Equipment
 		widget.child(frame++, childId++, 214, 70);
 		widget.child(frame++, childId++, 172, 109);
@@ -1558,6 +1580,7 @@ public class Interfaces extends RSInterface {
 	}
 
 	public static void listings(TextDrawingArea[] tda) {
+		
 		RSInterface Interface = addTabInterface(48000);
 		RSInterface main = addTabInterface(48020);
 
