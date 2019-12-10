@@ -166,7 +166,7 @@ public class Client extends RSApplet {
 		this.userSettings = settings;
 	}
 	
-	private Settings userSettings;
+	private Settings userSettings = new Settings(false, false, false, false, false, 0xFFFFFF, false, false, false, 0xFF00FF, 0xFF00FF, true, false);
 
 	/*
 	 * @Override public void keyPressed(KeyEvent event) { super.keyPressed(event);

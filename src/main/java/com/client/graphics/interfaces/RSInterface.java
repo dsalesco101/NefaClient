@@ -1913,7 +1913,7 @@ public class RSInterface {
 		setBounds(196, Client.currentScreenMode != ScreenMode.FIXED ? 600 : 420,
 				Client.currentScreenMode != ScreenMode.FIXED ? 186 : 286, 5, widget);
 		
-		addText(250, "Level: 40", tda, 1, 0xFFFF00, true, true);
+		addText(250, "", tda, 1, 0xFFFF00, true, true);
 		RSInterface skullWidget = RSInterface.interfaceCache[196];
 		int[] backupX = skullWidget.childX;
 		int[] backupY = skullWidget.childY;
