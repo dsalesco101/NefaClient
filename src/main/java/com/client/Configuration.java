@@ -31,7 +31,7 @@ public class Configuration {
     public static int fogColor = 0xDCDBDF;
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
-	public static final int CLIENT_VERSION = 93;//updateversion
+	public static final int CLIENT_VERSION = 95;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
 
