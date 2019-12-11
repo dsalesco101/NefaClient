@@ -19,8 +19,8 @@ import com.client.sign.Signlink;
  */
 public class SettingsManager {
 	
-	public static final int DEFAULT_FOG_COLOR = 0xDCDBDF;
-	public static final int DEFAULT_START_MENU_COLOR = 0xFF00FF;
+	public static final int DEFAULT_FOG_COLOR = 0;
+	public static final int DEFAULT_START_MENU_COLOR = 0;
 	public static final int DEFAULT_CHAT_COLOR_OPTION = 0;
 
 	public static void saveSettings(Client client) throws IOException {
@@ -44,7 +44,7 @@ public class SettingsManager {
         	File discover = new File(Signlink.getCacheDirectory() + "settings.ser");
         	if (!discover.exists()) {
         		//TODO: @Noah eventually you'll want to come here to set the default settings on a players first login
-        		client.setUserSettings(new Settings(false, false, false, false, false, DEFAULT_FOG_COLOR, false, false, false, DEFAULT_START_MENU_COLOR, DEFAULT_CHAT_COLOR_OPTION, false, false));
+        		client.setUserSettings(new Settings(false, true, false, false, false, DEFAULT_FOG_COLOR, true, false, false, DEFAULT_START_MENU_COLOR, DEFAULT_CHAT_COLOR_OPTION, true, true));
         		return;
         	}
         	
