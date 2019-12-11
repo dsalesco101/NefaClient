@@ -69,105 +69,59 @@ public enum Dropdown {
 	OLD_GAMEFRAME() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Client.oldGameframe = true;
-					Client.instance.loadTabArea();
-					Client.instance.drawTabArea();
-					return;
-				case 1:
-					Client.oldGameframe = false;
-					Client.instance.loadTabArea();
-					Client.instance.drawTabArea();
-					return;
-
-			}
+			Client.instance.getUserSettings().setOldGameframe(selected == 0 ? true : false);
+			Client.instance.loadTabArea();
+			Client.instance.drawTabArea();
 		}
 	},
 
 	GAME_TIMERS() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Client.gameTimers = true;
-					return;
-				case 1:
-					Client.gameTimers = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setGameTimers(selected == 0 ? true : false);
 		}
 	},
 
 	ANTI_ALIASING() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Configuration.enableAntiAliasing = true;
-					return;
-				case 1:
-					Configuration.enableAntiAliasing = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setEnableAntiAliasing(selected == 0 ? true : false);
 		}
 	},
 
 	GROUND_ITEM_NAMES() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Client.groundItemsOn = true;
-					return;
-				case 1:
-					Client.groundItemsOn = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setGroundItemsOn(selected == 0 ? true : false);
 		}
 	},
 
 	FOG() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
+			if (selected == 0) {
+				Client.instance.getUserSettings().setEnableFogRendering(false);
+			} else {
+				Client.instance.getUserSettings().setEnableFogRendering(true);
+			}
 			switch(selected){
-				case 0://false
-                    Configuration.enableFogRendering = false;
-                    Configuration.enableRainbowFog= false;
-					return;
 				case 1://grey
-                    Configuration.fogColor=0xDCDBDF;
-                    Configuration.enableFogRendering = true;
-                    Configuration.enableRainbowFog= false;
+                    Client.instance.getUserSettings().setFogColor(0xDCDBDF);
 					return;
-
                 case 2: //Sisle
-                    Configuration.fogColor=0xC8C0A8;
-                    Configuration.enableFogRendering = true;
-                    Configuration.enableRainbowFog= false;
+                    Client.instance.getUserSettings().setFogColor(0xC8C0A8);
                     return;
-
                 case 3: //dark
-                    Configuration.fogColor=0x0e0d0b;
-                    Configuration.enableFogRendering = true;
-                    Configuration.enableRainbowFog= false;
-
+                    Client.instance.getUserSettings().setFogColor(0x0e0d0b);
                     return;
                 case 4://marroon
-                    Configuration.fogColor= 0x800000;
-                    Configuration.enableFogRendering = true;
-                    Configuration.enableRainbowFog= false;
+                    Client.instance.getUserSettings().setFogColor(0x800000);
                     return;
                 case 5://rainbow
-                    Configuration.enableFogRendering = true;
-                    Configuration.enableRainbowFog= true;
+                	Client.instance.getUserSettings().setFogColor(0xEEEEEE);
                     Client.instance.pushMessage("Please do ::fogdelay to add a timer to the fog!", 0,"");
 					Client.instance.pushMessage("@red@ Warning this could give you seizures! Use at an extreme caution! Ascend not responsible! LoL", 0,"");
                 return;
-
 			}
 		}
 	},
@@ -175,58 +129,41 @@ public enum Dropdown {
 	SMOOTH_SHADING() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Configuration.enableSmoothShading = true;
-					return;
-				case 1:
-					Configuration.enableSmoothShading = true;
-					return;
-
-			}
+			Client.instance.getUserSettings().setEnableSmoothShading(selected == 0 ? true : false);
 		}
 	},
 
 	TILE_BLENDING() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
-			switch(selected){
-				case 0:
-					Configuration.enableTileBlending = true;
-					return;
-				case 1:
-					Configuration.enableTileBlending = false;
-					return;
-
-			}
+			Client.instance.getUserSettings().setEnableTileBlending(selected == 0 ? true : false);
 		}
 	},
 
 	INVENTORY_CONTEXT_MENU() {
 		@Override
 		public void selectOption(int selected, RSInterface r) {
+			if (selected == 0) {
+				Client.instance.getUserSettings().setInventoryContextMenu(false);
+			} else {
+				Client.instance.getUserSettings().setInventoryContextMenu(true);
+			}
 			switch(selected){
 				case 0: //off
-					Configuration.inventoryContextMenu=false;
-					Configuration.statMenuColor=0xFFFFFF;
+					Client.instance.getUserSettings().setStartMenuColor(0xFFFFFF);
 					return;
 				case 1: //magenta
-					Configuration.inventoryContextMenu=true;
-					Configuration.statMenuColor=0xFF00FF;
+					Client.instance.getUserSettings().setStartMenuColor(0xFF00FF);
 					return;
 				case 2://lime
-					Configuration.inventoryContextMenu=true;
-					Configuration.statMenuColor=0x00FF00;
+					Client.instance.getUserSettings().setStartMenuColor(0x00FF00);
 					return;
 				case 3://cyan
-					Configuration.inventoryContextMenu=true;
-					Configuration.statMenuColor=0x00FFFF;
+					Client.instance.getUserSettings().setStartMenuColor(0x00FFFF);
 					return;
 				case 4://red
-					Configuration.inventoryContextMenu=true;
-					Configuration.statMenuColor=0xFF0000;
+					Client.instance.getUserSettings().setStartMenuColor(0xFF0000);
 					return;
-
 			}
 		}
 	},

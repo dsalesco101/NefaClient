@@ -1212,7 +1212,7 @@ public final class Rasterizer extends DrawingArea {
 
     public static void drawGouraudTriangle(int y1, int y2, int y3, int x1, int x2, int x3, int hsl1, int hsl2, int hsl3,
     		float z1, float z2, float z3) {
-        if (Configuration.enableSmoothShading && aBoolean1464) {
+        if (Client.instance.getUserSettings().isEnableSmoothShading() && aBoolean1464) {
             drawHDGouraudTriangle(y1, y2, y3, x1, x2, x3, hsl1, hsl2, hsl3, z1, z2, z3);
         } else {
             drawLDGouraudTriangle(y1, y2, y3, x1, x2, x3, hsl1, hsl2, hsl3, z1, z2, z3);

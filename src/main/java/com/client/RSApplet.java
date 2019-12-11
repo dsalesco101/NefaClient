@@ -71,7 +71,7 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 			if (zoom && Client.openInterfaceID == -1) {
 				Client.cameraZoom += rotation * 35;
 
-				int max_zoom_1 = (Client.currentScreenMode == ScreenMode.FIXED ? -800 : -300);
+				int max_zoom_1 = (Client.currentScreenMode == ScreenMode.FIXED ? -400 : -300);
 				if (Client.cameraZoom < max_zoom_1) {
 					Client.cameraZoom = max_zoom_1;
 				}
@@ -79,8 +79,8 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 					Client.cameraZoom = 2500;
 				}
 				if (Client.currentScreenMode == ScreenMode.FIXED) {
-					if (Client.cameraZoom < -800) {
-						Client.cameraZoom = -800;
+					if (Client.cameraZoom < -400) {
+						Client.cameraZoom = -400;
 					}
 				} else {
 					if (Client.cameraZoom < 130) {

@@ -2,6 +2,11 @@ package com.client.utilities.settings;
 
 import java.io.Serializable;
 
+/**
+ * 
+ * @author Grant_ | www.rune-server.ee/members/grant_ | 12/10/19
+ *
+ */
 public class Settings implements Serializable {
 
 	/**

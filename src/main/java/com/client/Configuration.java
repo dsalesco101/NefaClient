@@ -20,15 +20,7 @@ public class Configuration {
 	public static int xpColour = 0;
 	public static int xpGroup = 0;
 
-	public static boolean enableSmoothShading = true;
-	public static boolean enableTileBlending = true;
-	public static boolean enableAntiAliasing = false;
-	public static boolean enableFogRendering = false;
-    public static boolean enableRainbowFog = false;
-	public static boolean bountyHunter = true;
 	public static boolean playerNames = false;
-	public static int chatColor = 0;
-    public static int fogColor = 0xDCDBDF;
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
 	public static final int CLIENT_VERSION = 97;//updateversion
@@ -68,8 +60,6 @@ public class Configuration {
 
 	public static int xpPosition;
 	public static boolean escapeCloseInterface = false;
-	public static boolean inventoryContextMenu = false;
-	public static int statMenuColor = 0xFF00FF;
 	public static boolean alwaysLeftClickAttack;
 	public static boolean hideCombatOverlay;
 

@@ -94,8 +94,6 @@ import com.client.utilities.settings.SettingsManager;
 
 public class Client extends RSApplet {
 
-	public static boolean oldGameframe = false;
-
 	public void method456() {
 		int[] ai = new int[9];
 		for (int i8 = 0; i8 < 9; i8++) {
@@ -166,7 +164,7 @@ public class Client extends RSApplet {
 		this.userSettings = settings;
 	}
 	
-	private Settings userSettings = new Settings(false, false, false, false, false, 0xFFFFFF, false, false, false, 0xFF00FF, 0xFF00FF, true, false);
+	private Settings userSettings;
 
 	/*
 	 * @Override public void keyPressed(KeyEvent event) { super.keyPressed(event);
@@ -2811,8 +2809,8 @@ public class Client extends RSApplet {
 		if (menuOpen) {
 			drawMenu(currentScreenMode == ScreenMode.FIXED ? 516 : 0, currentScreenMode == ScreenMode.FIXED ? 168 : 0);
 		}
-		if(Configuration.inventoryContextMenu && hintMenu){
-			drawHintMenu(hintName,hintId,Configuration.statMenuColor);
+		if(getUserSettings().isInventoryContextMenu() && hintMenu){
+			drawHintMenu(hintName,hintId, getUserSettings().getStartMenuColor());
 		}
 		if (currentScreenMode == ScreenMode.FIXED && loginScreenGraphicsBuffer == null && tabAreaGraphicsBuffer != null)
 			tabAreaGraphicsBuffer.drawGraphics(516, 168, super.graphics);
@@ -2834,7 +2832,7 @@ public class Client extends RSApplet {
 					{ 176, 5 }, { 205, 8 }, { 22, 300 }, { 49, 304 }, { 77, 304 }, { 111, 303 }, { 147, 301 },
 					{ 180, 303 }, { 204, 303 } };
 			if (Client.tabInterfaceIDs[Client.tabID] != -1) {
-				if(oldGameframe == false) {
+				if(getUserSettings().isOldGameframe() == false) {
 					if (Client.tabID == 0)
 						redStones[0].drawSprite(5, 0);
 					if (Client.tabID == 1)
@@ -2900,7 +2898,7 @@ public class Client extends RSApplet {
 					if (Client.loopCycle % 20 >= 10)
 						;
 				}
-				if(oldGameframe == false) {
+				if(getUserSettings().isOldGameframe() == false) {
 					sideIcons[index].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1]-8);
 				}else {
 					sideIcons[index].drawSprite(sideIconCoordinates1[index][0], sideIconCoordinates1[index][1]);
@@ -4715,11 +4713,11 @@ public class Client extends RSApplet {
 			d.dropdown.setSelected(d.dropdown.getOptions()[i1]);
 			d.dropdown.setOpen(false);
 			d.dropdown.getDrop().selectOption(i1, d);
-//			try {
-//				SettingsManager.saveSettings(Client.instance);
-//			} catch (IOException io) {
-//				io.printStackTrace();
-//			}
+			try {
+				SettingsManager.saveSettings(Client.instance);
+			} catch (IOException io) {
+				io.printStackTrace();
+			}
 			p.dropdownOpen = null;
 		}
 		if (l == 850) {
@@ -5091,7 +5089,7 @@ public class Client extends RSApplet {
 				x = j - 4;
 				y = k - 4;
 			}
-			if (Configuration.enableAntiAliasing == true) {
+			if (getUserSettings().isEnableAntiAliasing() == true) {
 				x <<= 1;
 				y <<= 1;
 			}
@@ -6076,8 +6074,7 @@ public class Client extends RSApplet {
 
 	}
 
-	public static boolean removeRoofs = true, leftClickAttack = true, chatEffects = true, drawOrbs = true, gameTimers = true,
-			showEntityTarget = true;
+	public static boolean removeRoofs = true, leftClickAttack = true, chatEffects = true, drawOrbs = true;
 
 	private void setConfigButtonsAtStartup() {
 		setConfigButton(23101, drawOrbs);
@@ -6085,12 +6082,53 @@ public class Client extends RSApplet {
 		setConfigButton(23107, chatEffects);
 		setConfigButton(23103, informationFile.isRememberRoof() ? true : false);
 		setConfigButton(23105, leftClickAttack);
-		setConfigButton(23111, gameTimers);
-		//setConfigButton(23113, getUserSettings().isShowEntityTarget());
+		setConfigButton(23111, getUserSettings().isGameTimers());
+		setConfigButton(23113, getUserSettings().isShowEntityTarget());
 		setConfigButton(23115, informationFile.isRememberVisibleItemNames() ? true : false);
 		setConfigButton(23118, shiftDrop ? true : false);
 		setConfigButton(23001, true);
 		setConfigButton(953, true);
+		
+		//Drop down menu
+		setDropDown(39011, getUserSettings().isOldGameframe());
+		setDropDown(39012, getUserSettings().isGameTimers());
+		setDropDown(39013, getUserSettings().isEnableAntiAliasing());
+		setDropDown(39014, getUserSettings().isGroundItemsOn());
+		
+		if (getUserSettings().getFogColor() == 0xDCDBDF) {
+			setDropDown(39015, 1);
+		} else if (getUserSettings().getFogColor() == 0xC8C0A8) {
+			setDropDown(39015, 2);
+		} else if (getUserSettings().getFogColor() == 0x0e0d0b) {
+			setDropDown(39015, 3);
+		} else if (getUserSettings().getFogColor() == 0x800000) {
+			setDropDown(39015, 4);
+		} else if (getUserSettings().getFogColor() == 0xEEEEEE) {
+			setDropDown(39015, 5);
+		}
+		
+		if (!getUserSettings().isEnableFogRendering()) {
+			setDropDown(39015, 0);
+		}
+		
+		setDropDown(39016, getUserSettings().isEnableSmoothShading());
+		setDropDown(39017, getUserSettings().isEnableTileBlending());
+		
+		if (getUserSettings().getStartMenuColor() == 0xFFFFFF) {
+			setDropDown(39018, 0);
+		} else if (getUserSettings().getStartMenuColor() == 0xFF00FF) {
+			setDropDown(39018, 1);
+		} else if (getUserSettings().getStartMenuColor() == 0x00FF00) {
+			setDropDown(39018, 2);
+		} else if (getUserSettings().getStartMenuColor() == 0x00FFFF) {
+			setDropDown(39018, 3);
+		} else if (getUserSettings().getStartMenuColor() == 0xFF0000) {
+			setDropDown(39018, 4);
+		}
+		
+		setDropDown(39025, getUserSettings().isBountyHunter());
+		setDropDown(39026, getUserSettings().isShowEntityTarget());
+		setDropDown(39027, getUserSettings().getChatColor());
 
 		/** Sets the brightness level **/
 		RSInterface class9_2 = RSInterface.interfaceCache[910];
@@ -6194,11 +6232,11 @@ public class Client extends RSApplet {
 				return true;
 
 			case 23111:
-				setConfigButton(i, gameTimers = !gameTimers);
+				//setConfigButton(i, getUserSettings().setGameTimers(!getUserSettings().isGameTimers());
 				return true;
 
 			case 23113:
-				setConfigButton(i, showEntityTarget = !showEntityTarget);
+				//setConfigButton(i, showEntityTarget = !showEntityTarget);
 				return true;
 
 			case 23118:
@@ -6206,7 +6244,7 @@ public class Client extends RSApplet {
 				return true;
 
 			case 23115:
-				setConfigButton(i, groundItemsOn = !groundItemsOn);
+				//setConfigButton(i, groundItemsOn = !groundItemsOn);
 				informationFile.setRememberRoof(informationFile.isRememberVisibleItemNames() ? false : true);
 				try {
 					informationFile.write();
@@ -6220,6 +6258,18 @@ public class Client extends RSApplet {
 		return false;
 	}
 
+	private void setDropDown(int id, Object value) {
+		RSInterface widget = RSInterface.interfaceCache[id];
+		
+		if (value instanceof Boolean) {
+			boolean choice = (Boolean) value;
+			widget.dropdown.setSelected(widget.dropdown.getOptions()[choice ? 0 : 1]);
+		} else if (value instanceof Integer) {
+			int choice = (int) value;
+			widget.dropdown.setSelected(widget.dropdown.getOptions()[choice]);
+		}
+	}
+	
 	private void setConfigButton(int interfaceFrame, boolean configSetting) {
 		int config = configSetting ? 1 : 0;
 		anIntArray1045[interfaceFrame] = config;
@@ -6995,15 +7045,14 @@ public class Client extends RSApplet {
 							try {
 								graphics = inputString.split(" ")[1];
 								if (graphics.equalsIgnoreCase("on")) {
-									Configuration.enableSmoothShading = true;
-									Configuration.enableTileBlending = true;
-									Configuration.enableAntiAliasing = false;
-									Configuration.enableAntiAliasing = true;
+									getUserSettings().setEnableSmoothShading(true);
+									getUserSettings().setEnableTileBlending(true);
+									getUserSettings().setEnableAntiAliasing(true);
 									return;
 								} else if (graphics.equalsIgnoreCase("off")) {
-									Configuration.enableSmoothShading = false;
-									Configuration.enableTileBlending = false;
-									Configuration.enableAntiAliasing = false;
+									getUserSettings().setEnableSmoothShading(false);
+									getUserSettings().setEnableTileBlending(false);
+									getUserSettings().setEnableAntiAliasing(false);
 									return;
 								}
 							} catch (Exception e) {
@@ -7108,12 +7157,12 @@ public class Client extends RSApplet {
 							pushMessage("Test", 5, "");
 						}
 						if (inputString.equals("::317")) {
-							if(oldGameframe == false) {
-								oldGameframe = true;
+							if(getUserSettings().isOldGameframe() == false) {
+								getUserSettings().setOldGameframe(true);
 								loadTabArea();
 								drawTabArea();
 							}else {
-								oldGameframe = false;
+								getUserSettings().setOldGameframe(false);
 								loadTabArea();
 								drawTabArea();
 							}
@@ -9806,7 +9855,7 @@ public class Client extends RSApplet {
     Sprite[] animatedBackgrounds = new Sprite[65];
 	@Override
 	void startUp() {
-		//SettingsManager.loadSettings(this);
+		SettingsManager.loadSettings(this);
 		drawLoadingText(10, "Loading title screen - 0%");
 		if (Signlink.sunjava) {
 			super.minDelay = 5;
@@ -10062,7 +10111,7 @@ public class Client extends RSApplet {
 			RSInterface.unpack(streamLoader_1, allFonts, streamLoader_2, new RSFont[] {newSmallFont, newRegularFont, newBoldFont, newFancyFont});
 			drawLoadingText(100, "Preparing game engine");
 
-			if(oldGameframe == false) {
+			if(getUserSettings().isOldGameframe() == false) {
 				mapBack = new Sprite("Gameframe/fixed/mapBack");
 			}else {
 				mapBack = new Sprite("Gameframe317/fixed/mapBack");
@@ -10123,9 +10172,6 @@ public class Client extends RSApplet {
 			}
 			if (informationFile.isRememberRoof()) {
 				removeRoofs = true;
-			}
-			if (informationFile.isRememberVisibleItemNames()) {
-				groundItemsOn = true;
 			}
 			startRunnable(mouseDetection, 10);
 			Animable_Sub5.clientInstance = this;
@@ -11890,7 +11936,7 @@ public class Client extends RSApplet {
 		DrawingArea.method335(0, yPos, 174, 68, 220, xPos);
 	}
 	public void loadTabArea() {
-		if( oldGameframe== false) {
+		if(getUserSettings().isOldGameframe() == false) {
 			for (int i = 0; i < redStones.length; i++)
 				redStones[i] = new Sprite("Gameframe/redstones/redstone" + i);
 
@@ -12242,7 +12288,6 @@ public class Client extends RSApplet {
 		return false;
 	}
 
-	public static boolean groundItemsOn = false;
 
 	public static boolean goodDistance(int objectX, int objectY, int playerX, int playerY, int distance) {
 		return ((objectX - playerX <= distance && objectX - playerX >= -distance)
@@ -12316,13 +12361,13 @@ public class Client extends RSApplet {
 			drawInterface(0, 0, RSInterface.interfaceCache[11877], 0);
 		}
 
-//		if (getUserSettings().isShowEntityTarget()) {
-//			if (entityTarget != null) {
-//				entityTarget.draw();
-//			}
-//		}
+		if (getUserSettings().isShowEntityTarget()) {
+			if (entityTarget != null) {
+				entityTarget.draw();
+			}
+		}
 
-		if (gameTimers) {
+		if (getUserSettings().isGameTimers()) {
 			try {
 				int startX = 516;
 				int startY = Client.currentScreenMode == ScreenMode.FIXED ? 294 : Client.currentGameHeight - 209;
@@ -13005,7 +13050,7 @@ public class Client extends RSApplet {
 				mapArea[2].drawSprite(currentGameWidth - 183, 0);
 				mapArea[4].drawSprite(currentGameWidth - 160, 8);
 			}
-			if(oldGameframe && currentScreenMode == ScreenMode.FIXED ){
+			if(getUserSettings().isOldGameframe() && currentScreenMode == ScreenMode.FIXED ){
 				compassImage.method352(33, viewRotation, anIntArray1057, 256, anIntArray968,
 						(currentScreenMode == ScreenMode.FIXED ? 28 : 25), 4,
 						(currentScreenMode == ScreenMode.FIXED ? 27 : currentGameWidth - 178), 33, 25);
@@ -14863,7 +14908,6 @@ public class Client extends RSApplet {
 					int currentLevel = inStream.readUnsignedByte();
 					int xp = currentExp[skillId];
 
-					System.out.println("SKILLID: " + skillId + " EXP: " + experience2);
 					currentExp[skillId] = experience2;
 					currentStats[skillId] = currentLevel;
 					maxStats[skillId] = 1;
@@ -16083,7 +16127,7 @@ public class Client extends RSApplet {
 					cameraZoom + (currentGameWidth >= 1024 ? i + cameraZoom - currentGameHeight / 200 : i)
 							* (WorldController.viewDistance == 9 && currentScreenMode != ScreenMode.FIXED ? 1
 							: WorldController.viewDistance == 10 ? 1 : 4), //change zoom distance
-					i, anInt1014, getCenterHeight(plane, myPlayer.y, myPlayer.x) - 50, k, anInt1015);
+					i, anInt1014, getCenterHeight(plane, myPlayer.y, myPlayer.x) - 100, k, anInt1015);
 		}
 		int j;
 		if (!aBoolean1160)
@@ -16123,7 +16167,7 @@ public class Client extends RSApplet {
 		WorldController.focalLength = 519;
 		int[] pixels = null;
 		int[] offsets = null;
-		if (Configuration.enableAntiAliasing == true) {
+		if (getUserSettings().isEnableAntiAliasing() == true) {
 			Model.currentCursorX <<= 1;
 			Model.currentCursorY <<= 1;
 			WorldController.focalLength <<= 1;
@@ -16143,14 +16187,14 @@ public class Client extends RSApplet {
 		}
 		DrawingArea.setAllPixelsToZero();
 		worldController.method313(xCameraPos, yCameraPos, xCameraCurve, zCameraPos, j, yCameraCurve);
-        if (Configuration.enableFogRendering && !Configuration.enableRainbowFog) {
+        if (getUserSettings().isEnableFogRendering() && getUserSettings().getFogColor() != 0xEEEEEE) {
             currentFog=0;
             if (currentScreenMode == ScreenMode.FIXED) {
-                Rasterizer.drawFog(Configuration.fogColor, 2250, 2800);
+                Rasterizer.drawFog(getUserSettings().getFogColor(), 2250, 2800);
             } else {
-                Rasterizer.drawFog(Configuration.fogColor, 1800, 2800);
+                Rasterizer.drawFog(getUserSettings().getFogColor(), 1800, 2800);
             }
-        }else if(Configuration.enableRainbowFog){
+        } else if(getUserSettings().getFogColor() == 0xEEEEEE){
 			if(System.currentTimeMillis() - lastFog > Configuration.fogDelay) {
 				currentFog += 1;
 				lastFog=System.currentTimeMillis();
@@ -16164,7 +16208,7 @@ public class Client extends RSApplet {
                 Rasterizer.drawFog(rainbowFog[currentFog], 1800, 2800);
             }
         }
-		if (Configuration.enableAntiAliasing == true) {
+		if (getUserSettings().isEnableAntiAliasing() == true) {
 			Model.currentCursorX >>= 1;
 			Model.currentCursorY >>= 1;
 			WorldController.focalLength >>= 1;
@@ -16211,7 +16255,7 @@ public class Client extends RSApplet {
 			draw3dScreen();
 
 		}
-		if (groundItemsOn) {
+		if (getUserSettings().isGroundItemsOn()) {
 			displayGroundItems();
 		}
 		draw3dScreen();

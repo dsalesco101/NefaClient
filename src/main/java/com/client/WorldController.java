@@ -904,7 +904,7 @@ final class WorldController {
     }
 
     public void method313(int i, int j, int k, int l, int i1, int j1) {
-        if (Rasterizer.saveDepth = Configuration.enableFogRendering) {
+        if (Rasterizer.saveDepth = Client.instance.getUserSettings().isEnableFogRendering()) {
             if (Rasterizer.depthBuffer == null
                     || Rasterizer.depthBuffer.length != DrawingArea.pixels.length) {
                 Rasterizer.depthBuffer = new float[DrawingArea.pixels.length];

@@ -260,7 +260,7 @@ final class ObjectManager {
 								}
 							}
 							int minimapRgb = 0;
-							boolean check = !Configuration.enableTileBlending || !Configuration.enableSmoothShading;
+							boolean check = !Client.instance.getUserSettings().isEnableTileBlending() || !Client.instance.getUserSettings().isEnableSmoothShading();
 							if (paletteIndexA != -1) {
 								minimapRgb = Rasterizer.hslToRgb[method187(paletteIndexA, 96)];
 							}
