@@ -372,7 +372,7 @@ public final class ObjectDefinition {
 
 	public static void dumpList() {
 		try {
-			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark_.32/object_data.json");
+			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark.32/object_data.json");
 			fw.write("[\n");
 			for (int i = 0; i < totalObjects; i++) {
 				ObjectDefinition def = ObjectDefinition.forID(i);

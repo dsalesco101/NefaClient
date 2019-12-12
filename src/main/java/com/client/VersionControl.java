@@ -197,7 +197,7 @@ public class VersionControl {
     }
 
     private File updateCache() {
-        File ret = new File(Signlink.getCacheDirectory() + "Ascend.zip");
+        File ret = new File(Signlink.getCacheDirectory() + "Sovark.zip");
         try {
             OutputStream out = new FileOutputStream(ret);
             URLConnection conn = new URL(Configuration.CACHE_LINK).openConnection();

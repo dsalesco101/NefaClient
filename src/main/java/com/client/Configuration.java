@@ -23,7 +23,7 @@ public class Configuration {
 	public static boolean playerNames = false;
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
-	public static final int CLIENT_VERSION = 98;//updateversion
+	public static final int CLIENT_VERSION = 99;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
 
@@ -36,7 +36,7 @@ public class Configuration {
 	 * Sounds/Music Index 4 = Maps You can only do up to 300 files at a time
 	 */
 
-	public static final String CACHE_NAME = "Sovark_.32";
+	public static final String CACHE_NAME = "Sovark.32";
 
 	public static boolean repackIndexOne = false, repackIndexTwo = false, repackIndexThree = false,
 			repackIndexFour = false;

@@ -702,7 +702,7 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 	@Override
 	public void windowClosing(WindowEvent windowevent) {
 		String options[] = { "Yes", "No" };
-		int userPrompt = JOptionPane.showOptionDialog(null, "Are you sure you wish to exit?", "Ascend",
+		int userPrompt = JOptionPane.showOptionDialog(null, "Are you sure you wish to exit?", "Sovark",
 				JOptionPane.DEFAULT_OPTION, JOptionPane.WARNING_MESSAGE, null, options, options[1]);
 		if (userPrompt == JOptionPane.YES_OPTION) {
 			destroy();

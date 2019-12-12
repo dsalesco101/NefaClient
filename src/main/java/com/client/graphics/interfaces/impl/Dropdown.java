@@ -120,7 +120,7 @@ public enum Dropdown {
                 case 5://rainbow
                 	Client.instance.getUserSettings().setFogColor(0xEEEEEE);
                     Client.instance.pushMessage("Please do ::fogdelay to add a timer to the fog!", 0,"");
-					Client.instance.pushMessage("@red@ Warning this could give you seizures! Use at an extreme caution! Ascend not responsible! LoL", 0,"");
+					Client.instance.pushMessage("@red@ Warning this could give you seizures! Use with extreme caution!", 0,"");
                 return;
 			}
 		}

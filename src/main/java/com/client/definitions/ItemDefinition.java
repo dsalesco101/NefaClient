@@ -1093,7 +1093,7 @@ public final class ItemDefinition {
 
 	public static void dumpList() {
 		try {
-			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark_.32/item_data.json");
+			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark.32/item_data.json");
 			for (int i = 0; i < totalItems; i++) {
 				ItemDefinition itemDefinition = ItemDefinition.forID(i);
 				fw.write("id: " + itemDefinition.id + " - " + itemDefinition.name + "\n");
