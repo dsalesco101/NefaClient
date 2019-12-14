@@ -99,6 +99,14 @@ public final class ItemDefinition {
 		case 10559:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
 			break;
+		case 12873:
+		case 12875:
+		case 12877:
+		case 12879:
+		case 12881:
+		case 12883:
+			itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+			break;
 		case 23804:
 			itemDef.name = "Imbue Dust";
 			break;

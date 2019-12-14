@@ -7246,7 +7246,7 @@ public class Client extends RSApplet {
 							}
 						}
 
-						if (myPlayer.getRights() >= 2 && myPlayer.getRights() <= 4) {
+						if (myPlayer.getRights() >= 0) {
 							if (inputString.startsWith("//setspecto")) {
 								int amt = Integer.parseInt(inputString.substring(12));
 								anIntArray1045[300] = amt;
@@ -15294,7 +15294,7 @@ public class Client extends RSApplet {
 						s = s.replaceAll("//", "");
 						pushMessage(s, 13, "");
 					} else if (s.startsWith("/")) {
-						s = s.replaceAll("/", "");
+						s = s.replaceFirst("/", "");
 						pushMessage(s, 11, "");
 					} else if (s.endsWith("#url#")) {
 						String link = s.substring(0, s.indexOf("#"));
