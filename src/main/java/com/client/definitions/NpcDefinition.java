@@ -37,6 +37,11 @@ public final class NpcDefinition {
 			entityDef.name = "Iron man shop keeper";
 			entityDef.description = "A shop specifically for iron men.";
 		}
+		if (i == 8906) {
+			entityDef.name = "Santa's little elf";
+			entityDef.description = "A helper sent from santa himself.";
+			entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", null, null };
+		}
 		if (i == 954) {
 			entityDef.name = "Crystal Seed Trader";
 			entityDef.description = "Use a seed on me to get a Crystal Bow.";
