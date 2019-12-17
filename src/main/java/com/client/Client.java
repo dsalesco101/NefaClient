@@ -5434,6 +5434,28 @@ public class Client extends RSApplet {
 			chatTypeView = 1;
 			inputTaken = true;
 		}
+		if (l == 1006) {
+			for (int index = 0; index < chatMessages.length; index++) {
+				if (chatMessages[index] != null) {
+					int type = chatTypes[index];
+					if (type == 3 || type == 7 || type == 5 || type == 6) {
+						chatMessages[index] = null;
+						chatTypes[index] = 0;
+						chatNames[index] = null;
+					}
+					/*
+	chatMessages
+
+	chatTypes
+	3, 7, 5, 6,
+
+	chatNames
+	 */
+
+				}
+			}
+			inputTaken = true;
+		}
 		if (l == 992) {
 			privateChatMode = 2;
 			stream.createFrame(95);
@@ -8563,7 +8585,7 @@ public class Client extends RSApplet {
 				menuActionRow = 10;
 			} else if (super.mouseX >= 203 && super.mouseX <= 259) {
 				menuActionName[1] = "@yel@Private: @whi@Clear history";
-				menuActionID[1] = 2992;
+				menuActionID[1] = 1006;
 				menuActionName[2] = "@yel@Private: @whi@Off";
 				menuActionID[2] = 992;
 				menuActionName[3] = "@yel@Private: @whi@Show friends";
