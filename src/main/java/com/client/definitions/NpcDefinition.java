@@ -51,6 +51,10 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
 		}
+		if (i == 5870) {
+			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
+
+		}
 		if (i == 1013) {
 			entityDef.name = "Gambler Shop";
 			entityDef.description = "A shop specifically for gamblers.";
