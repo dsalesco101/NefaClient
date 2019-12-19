@@ -2256,7 +2256,7 @@ public class Interfaces extends RSInterface {
 			RSInterface.setBounds(interfaceId + 1, 16 + xOffset, 56 + yOffset + yExtra, child, interfaces);
 			child++;
 			interfaceId += 3;
-			RSInterface.addClickableText(interfaceId, buttonNames[index],"Choose", textDrawingAreas, 1, 0xff981f, false,false,60);
+			RSInterface.addClickableText(interfaceId, buttonNames[index],"Choose", textDrawingAreas, 1, 0xff981f, false,false,60, 16);
 			RSInterface.setBounds(interfaceId, 40 + xOffset, 61 + yOffset + yExtra, child, interfaces);
 			interfaceId++;
 			child++;

@@ -58,6 +58,7 @@ import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
 
+import com.client.graphics.interfaces.impl.Interfaces;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.client.definitions.AnimationDefinition;
@@ -3767,6 +3768,15 @@ public class Client extends RSApplet {
 
 	public static void main(String args[]) {
 		try {
+			for (String arg : args) {
+				switch (arg) {
+					case "--developer":
+						OnDemandFetcher.IpAdress = "127.0.0.1";
+						System.out.println("Developer mode enabled, switching to local server.");
+						break;
+				}
+			}
+
 			nodeID = 1;
 			portOff = 0;
 			setHighMem();
@@ -4266,7 +4276,7 @@ public class Client extends RSApplet {
 						} else {
 							class9.swapInventoryItems(anInt1085, mouseInvInterfaceIndex);
 						}
-						System.out.println("J: " + j1);
+						//System.out.println("J: " + j1);
 						stream.createFrame(214);
 						stream.method433(anInt1084);
 						stream.method424(j1);
@@ -4625,10 +4635,10 @@ public class Client extends RSApplet {
 		int l = menuActionID[i];
 		int i1 = (int) menuActionCmd1[i];
 		long keyLong = menuActionCmd1[i];
-		System.out.println("k: " + k);
-		System.out.println("l: " + l);
-		System.out.println("j: " + j);
-		System.out.println("i1: " + i1);
+		//System.out.println("k: " + k);
+		//System.out.println("l: " + l);
+		//System.out.println("j: " + j);
+		//System.out.println("i1: " + i1);
 		switch (k) {
 			case 42522:
 				if (currentScreenMode != ScreenMode.FIXED) {
@@ -7325,6 +7335,8 @@ public class Client extends RSApplet {
 							fpsOn = false;
 						if (inputString.equals("::data"))
 							clientData = !clientData;
+						if (inputString.equals("::inter"))
+							Interfaces.loadInterfaces();
 
 						if (inputString.equals("::hotkeys")) {
 							RSApplet.hotKeyToggle = !RSApplet.hotKeyToggle;
@@ -15663,12 +15675,15 @@ public class Client extends RSApplet {
 					int i7 = inStream.readUnsignedWord();
 					RSInterface class9_1 = RSInterface.interfaceCache[i7];
 					int j19 = inStream.readUnsignedWord();
+
 					for (int j22 = 0; j22 < j19; j22++) {
 						int i25 = inStream.readUnsignedByte();
-						if (i25 == 255)
+						if (i25 == 255) {
 							i25 = inStream.method440();
+						}
 						class9_1.inv[j22] = inStream.method436();
 						class9_1.invStackSizes[j22] = i25;
+
 					}
 					for (int j25 = j19; j25 < class9_1.inv.length; j25++) {
 						class9_1.inv[j25] = 0;
