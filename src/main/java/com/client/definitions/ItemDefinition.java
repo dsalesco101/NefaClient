@@ -99,6 +99,9 @@ public final class ItemDefinition {
 		case 10559:
 			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
 			break;
+		case 21898:
+			itemDef.inventoryOptions = new String[] { null, "Wear", "Teleports", "Features", null };
+			break;
 		case 12873:
 		case 12875:
 		case 12877:
