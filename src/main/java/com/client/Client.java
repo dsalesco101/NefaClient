@@ -45,6 +45,7 @@ import java.util.Arrays;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.EnumSet;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -92,6 +93,7 @@ import com.client.sign.Signlink;
 import com.client.utilities.ObjectKey;
 import com.client.utilities.settings.Settings;
 import com.client.utilities.settings.SettingsManager;
+import org.apache.commons.lang3.tuple.Pair;
 
 public class Client extends RSApplet {
 
@@ -703,13 +705,16 @@ public class Client extends RSApplet {
 						int chatType = chatTypes[k];
 						int yPos = (70 - j77 * 14) + anInt1089 + 5;
 						String s1 = chatNames[k];
-						byte byte0 = 0;
-						if (s1.startsWith("@cr")) {
+						//byte byte0 = 0;
+
+						List<Integer> crowns = new ArrayList<>();
+
+						while (s1.startsWith("@cr")) {
 							String s2 = s1.substring(3, s1.length());
 							int index = s2.indexOf("@");
 							if (index != -1) {
 								s2 = s2.substring(0, index);
-								byte0 = Byte.parseByte(s2);
+								crowns.add(Integer.parseInt(s2));
 								s1 = s1.substring(4 + s2.length());
 							}
 						}
@@ -727,16 +732,16 @@ public class Client extends RSApplet {
 							if (chatTypeView == 1 || chatTypeView == 0) {
 								if (yPos > 0 && yPos < 210) {
 									int xPos = 11;
-									if (byte0 > 0) {
-										for (int right = 0; right < modIcons.length; right++) {
-											if (right == (byte0 - 1) && modIcons[right] != null) {
-												modIcons[right].drawAdvancedSprite(xPos - 1,
-														yPos + yOffset - modIcons[right].myHeight);
-												xPos += modIcons[right].myWidth;
-												if(right == 11){
-													xPos-=2;
+									if (!crowns.isEmpty()) {
+										for (int crown : crowns) {
+											for (int right = 0; right < modIcons.length; right++) {
+												if (right == (crown - 1) && modIcons[right] != null) {
+													modIcons[right].drawAdvancedSprite(xPos - 1,
+															yPos + yOffset - modIcons[right].myHeight);
+													xPos += modIcons[right].myWidth;
+													xPos += 2;
+													break;
 												}
-												break;
 											}
 										}
 									}
@@ -757,13 +762,15 @@ public class Client extends RSApplet {
 									int k1 = 11;
 									newRegularFont.drawBasicString("From", k1, yPos - 1 + yOffset, 0, -1);
 									k1 += textDrawingArea.getTextWidth("From ");
-									if (byte0 > 0) {
-										for (int right = 0; right < modIcons.length; right++) {
-											if (right == (byte0 - 1) && modIcons[right] != null) {
-												modIcons[right].drawAdvancedSprite(k1,
-														yPos + yOffset - modIcons[right].myHeight);
-												k1 += modIcons[right].myWidth;
-												break;
+									if (!crowns.isEmpty()) {
+										for (int crown : crowns) {
+											for (int right = 0; right < modIcons.length; right++) {
+												if (right == (crown - 1) && modIcons[right] != null) {
+													modIcons[right].drawAdvancedSprite(k1,
+															yPos + yOffset - modIcons[right].myHeight);
+													k1 += modIcons[right].myWidth;
+													break;
+												}
 											}
 										}
 									}
@@ -846,8 +853,7 @@ public class Client extends RSApplet {
 								if (chatTypeView == 11 || chatTypeView == 0) {
 									if (yPos > 3 && yPos < 130) {
 										String title = "<col=0000FF>" + clanTitles[k] + "</col>";
-										String username = (chatRights[k] > 0 ? "<img=" + (chatRights[k] - 1) + ">" : "")
-												+ TextClass.fixName(chatNames[k]);
+										String username = TextClass.fixName(chatNames[k]);
 										String message = "<col=800000>" + chatMessages[k] + "</col>";
 										newRegularFont.drawBasicString("[" + title + "] " + username + ": " + message,
 												10, yPos - 1 + yOffset, 0, -1);
@@ -862,33 +868,6 @@ public class Client extends RSApplet {
 							String clanname = clanList[k];
 							int clanNameWidth = textDrawingArea.getTextWidth(clanname);
 							if (chatTypeView == 11 || chatTypeView == 0) {
-								if (yPos > 0 && yPos < 110)
-									switch (chatRights[k]) {
-										case 1:
-											j2 += clanNameWidth;
-											modIcons[0].drawSprite(j2 - 18, yPos + yOffset);
-											j2 += 15;
-											break;
-										case 2:
-											j2 += clanNameWidth;
-											modIcons[2].drawSprite(j2 - 18, yPos + yOffset);
-											j2 += 15;
-											break;
-										case 3:
-											j2 += clanNameWidth;
-											modIcons[1].drawSprite(j2 - 18, yPos + yOffset);
-											j2 += 15;
-											break;
-										case 4:
-											j2 += clanNameWidth;
-											modIcons[3].drawSprite(j2 - 18, yPos + yOffset);
-											j2 += 15;
-											break;
-
-										default:
-											j2 += clanNameWidth;
-											break;
-									}
 								newRegularFont.drawBasicString("[", 19, yPos - 1 + yOffset, 0, -1);
 								newRegularFont.drawBasicString("]", clanNameWidth + 16 + 10, yPos - 1 + yOffset, 0, -1);
 								newRegularFont.drawBasicString("" + capitalize(clanname) + "", 25, yPos - 1 + yOffset,
@@ -924,19 +903,30 @@ public class Client extends RSApplet {
 					s = myPlayer.title + " " + myPlayer.name;
 				else
 					s = TextClass.fixName(capitalize(myUsername));
-				int xOffset = 10;
-				if (myPlayer.getRights() > 0) {
-					modIcons[myPlayer.getRights() - 1].drawSprite(9, 122 + yOffset);
-					newRegularFont.drawBasicString(fixedString + "", 22, 133 + yOffset, 0, -1);
-					xOffset += modIcons[myPlayer.getRights() - 1].myWidth;
+
+				int xOffset = 0;
+				if (myPlayer.hasRightsOtherThan(PlayerRights.PLAYER)) {
+					for (PlayerRights right : myPlayer.getDisplayedRights()) {
+						if (right.hasCrown()) {
+							modIcons[right.spriteId()].drawSprite(9 + xOffset, 134 + yOffset - modIcons[right.spriteId()].myHeight);
+							xOffset += modIcons[right.spriteId()].myWidth;
+							xOffset += 2;
+						}
+					}
+
+					newRegularFont.drawBasicString(fixedString, 10 + xOffset, 133 + yOffset, 0, -1);
 				} else {
-					xOffset += 1;
-					newRegularFont.drawBasicString(fixedString + "", 10, 133 + yOffset, 0, -1);
+					newRegularFont.drawBasicString(fixedString, 10 + xOffset, 133 + yOffset, 0, -1);
 				}
-				textDrawingArea.method385(0, ": ", 133 + yOffset, (xOffset + textDrawingArea.getTextWidth(s)));
-				if (!isFieldInFocus())
-					newRegularFont.drawBasicString(inputString + ((loopCycle % 40 < 20) ? "*" : "*"),
-							xOffset + textDrawingArea.getTextWidth(s + ": "), 133 + yOffset, 255, -1);
+
+				xOffset += newRegularFont.getTextWidth(fixedString) + 10;
+				newRegularFont.drawBasicString(": ", xOffset, 133 + yOffset, 0, -1);
+				xOffset += textDrawingArea.getTextWidth(": ");
+
+				if (!isFieldInFocus()) {
+					newRegularFont.drawBasicString(inputString + "*",xOffset, 133 + yOffset, 255, -1);
+				}
+
 				DrawingArea.method339(120 + yOffset, 0x807660, 506, 7);
 			}
 
@@ -955,7 +945,7 @@ public class Client extends RSApplet {
 	private String clanMessage;
 	private String clanTitle;
 	private final String[] clanTitles;
-	private int channelRights;
+	private EnumSet channelRights;
 
 	@Override
 	public void init() {
@@ -2134,7 +2124,7 @@ public class Client extends RSApplet {
 												continue;
 											}
 										}
-										if (myPlayer.getRights() == 3 || myUsername.equalsIgnoreCase("tyler"))
+										if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler"))
 											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name + " @whi@("
 													+ (itemID) + ")";
 										else
@@ -4295,7 +4285,7 @@ public class Client extends RSApplet {
 			int k = WorldController.anInt470;
 			int k1 = WorldController.anInt471;
 			boolean flag = false;
-			if (myPlayer.getRights() == 3 && controlIsDown) {
+			if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) && controlIsDown) {
 				teleport(baseX + k, baseY + k1);
 			} else {
 				flag = doWalkTo(0, 0, 0, 0, myPlayer.smallY[0], 0, 0, k1, myPlayer.smallX[0], true, k);
@@ -6402,7 +6392,7 @@ public class Client extends RSApplet {
 							}
 
 					}
-					if (myPlayer.getRights() == 3 || myUsername.equalsIgnoreCase("help"))
+					if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("help"))
 						menuActionName[menuActionRow] = "Examine @cya@" + class46.name + " @whi@(" + l1 + ") ("
 								+ (i1 + baseX) + "," + (j1 + baseY) + ")";
 					else
@@ -6694,7 +6684,7 @@ public class Client extends RSApplet {
 			return;
 		}
 
-		for(int crown = 0;crown<50;crown++) {
+		for(int crown = 0; crown<50; crown++) {
 			String crownString = "@cr" + crown + "@";
 			if(name.startsWith(crownString)) {
 				name = name.substring(crownString.length());
@@ -7278,7 +7268,7 @@ public class Client extends RSApplet {
 							}
 						}
 
-						if (myPlayer.getRights() >= 0) {
+						if (myPlayer.hasRightsOtherThan(PlayerRights.PLAYER)) {
 							if (inputString.startsWith("//setspecto")) {
 								int amt = Integer.parseInt(inputString.substring(12));
 								anIntArray1045[300] = amt;
@@ -7435,7 +7425,7 @@ public class Client extends RSApplet {
 							myPlayer.anInt1513 = j2;
 							myPlayer.anInt1531 = i3;
 							myPlayer.textCycle = 150;
-							String crown = myPlayer.getRights() > 0 ? "@cr" + myPlayer.getRights() + "@" : "";
+							String crown = PlayerRights.buildCrownString(myPlayer.getDisplayedRights());
 							if (myPlayer.title.length() > 0) {
 								pushMessage(myPlayer.textSpoken, 2, crown + "<col=" + myPlayer.titleColor + ">"
 										+ myPlayer.title + "</col> " + myPlayer.name);
@@ -7471,55 +7461,20 @@ public class Client extends RSApplet {
 			if (k1 < -23)
 				break;
 			if (s != null) {
-				if (s != null && s.startsWith("@cr1@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr2@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr3@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr4@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr5@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr6@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr7@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr8@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr9@"))
-					s = s.substring(5);
-				if (s != null && s.startsWith("@cr10@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr11@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr12@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr13@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr14@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr15@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr16@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr17@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr22@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr23@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr25@"))
-					s = s.substring(6);
-				if (s != null && s.startsWith("@cr26@"))
-					s = s.substring(6);
+				for (int i = 0; i < 50; i++) {
+					String crown = "@cr" + i + "@";
+					if (s.startsWith(crown)) {
+						s = s.substring(crown.length());
+					}
+				}
+
 				if (s.startsWith("<col=")) {
 					s = s.substring(s.indexOf("</col>") + 6);
 				}
 			}
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
-					if (myPlayer.getRights() >= 1) {
+					if (myPlayer.hasRightsLevel(1)) {
 						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionID[menuActionRow] = 606;
 						menuActionRow++;
@@ -7551,55 +7506,21 @@ public class Client extends RSApplet {
 			int k1 = (70 - l * 14 + 42) + anInt1089 + 4 + 5;
 			if (k1 < -23)
 				break;
-			if (s != null && s.startsWith("@cr1@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr2@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr3@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr4@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr5@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr6@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr7@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr8@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr9@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr10@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr11@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr12@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr13@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr14@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr15@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr16@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr17@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr22@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr23@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr25@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr26@"))
-				s = s.substring(6);
+			if (s != null) {
+				for (int i = 0; i < 50; i++) {
+					String crown = "@cr" + i + "@";
+					if (s.startsWith(crown)) {
+						s = s.substring(crown.length());
+					}
+				}
+			}
 			if ((j1 == 5 || j1 == 6) && (!splitPrivateChat || chatTypeView == 2)
 					&& (j1 == 6 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s)))
 				l++;
 			if ((j1 == 3 || j1 == 7) && (!splitPrivateChat || chatTypeView == 2)
 					&& (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					if (myPlayer.getRights() >= 1) {
+					if (myPlayer.hasRightsLevel(1)) {
 						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionID[menuActionRow] = 606;
 						menuActionRow++;
@@ -7631,48 +7552,14 @@ public class Client extends RSApplet {
 			int k1 = (70 - l * 14 + 42) + anInt1089 + 4 + 5;
 			if (k1 < -23)
 				break;
-			if (s != null && s.startsWith("@cr1@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr2@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr3@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr4@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr5@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr6@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr7@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr8@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr9@"))
-				s = s.substring(5);
-			if (s != null && s.startsWith("@cr10@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr11@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr12@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr13@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr14@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr15@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr16@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr17@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr22@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr23@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr25@"))
-				s = s.substring(6);
-			if (s != null && s.startsWith("@cr26@"))
-				s = s.substring(6);
+			if (s != null) {
+				for (int i = 0; i < 50; i++) {
+					String crown = "@cr" + i + "@";
+					if (s.startsWith(crown)) {
+						s = s.substring(crown.length());
+					}
+				}
+			}
 			if (chatTypeView == 3 && j1 == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
 					menuActionName[menuActionRow] = "Accept trade @whi@" + s;
@@ -7927,7 +7814,7 @@ public class Client extends RSApplet {
 			if (chatTypeView == 5) {
 				break;
 			}
-			if (s.startsWith("@cr")) {
+			while (s.startsWith("@cr")) {
 				String s2 = s.substring(3, s.length());
 				int index = s2.indexOf("@");
 				if (index != -1) {
@@ -7942,7 +7829,7 @@ public class Client extends RSApplet {
 				l++;
 			if ((j1 == 1 || j1 == 2) && (j1 == 1 || publicChatMode == 0 || publicChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1 && !s.equals(myPlayer.name)) {
-					if (myPlayer.getRights() >= 1) {
+					if (myPlayer.hasRightsLevel(1)) {
 						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionID[menuActionRow] = 606;
 						menuActionRow++;
@@ -7962,7 +7849,7 @@ public class Client extends RSApplet {
 			if ((j1 == 3 || j1 == 7) && !splitPrivateChat
 					&& (j1 == 7 || privateChatMode == 0 || privateChatMode == 1 && isFriendOrSelf(s))) {
 				if (j > k1 - 14 && j <= k1) {
-					if (myPlayer.getRights() >= 1) {
+					if (myPlayer.hasRightsLevel(1)) {
 						menuActionName[menuActionRow] = "Report abuse @whi@" + s;
 						menuActionID[menuActionRow] = 606;
 						menuActionRow++;
@@ -8242,7 +8129,7 @@ public class Client extends RSApplet {
 			}
 		}
 		if (j == 613)
-			if (myPlayer.getRights() >= 1) {
+			if (myPlayer.hasRightsLevel(1)) {
 				if (canMute) {
 					class9.textColor = 0xff0000;
 					// class9.message =
@@ -8341,13 +8228,13 @@ public class Client extends RSApplet {
             if (chatMessages[j] != null) {
                 int k = chatTypes[j];
                 String s = chatNames[j];
-                byte byte1 = 0;
-                if (s.startsWith("@cr")) {
+				List<Integer> crowns = new ArrayList<>();
+                while (s.startsWith("@cr")) {
                     String s2 = s.substring(3, s.length());
                     int index = s2.indexOf("@");
                     if (index != -1) {
                         s2 = s2.substring(0, index);
-                        byte1 = Byte.parseByte(s2);
+                        crowns.add(Integer.parseInt(s2));
                         s = s.substring(4 + s2.length());
                     }
                 }
@@ -8358,14 +8245,17 @@ public class Client extends RSApplet {
                     xPosition = currentScreenMode == ScreenMode.FIXED ? 5 : 0;
                     font.drawBasicString("From", xPosition, yPosition, 65535, 0);
                     xPosition += font.getTextWidth("From ");
-                    if (byte1 > 0) {
-                        for (int right = 0; right < modIcons.length; right++) {
-                            if (right == (byte1 - 1) && modIcons[right] != null) {
-                                modIcons[right].drawAdvancedSprite(xPosition, yPosition - modIcons[right].myHeight);
-                                xPosition += modIcons[right].myWidth;
-                                break;
-                            }
-                        }
+                    if (!crowns.isEmpty()) {
+                    	for (int crown : crowns) {
+							for (int right = 0; right < modIcons.length; right++) {
+								if (right == (crown - 1) && modIcons[right] != null) {
+									modIcons[right].drawAdvancedSprite(xPosition, yPosition - modIcons[right].myHeight);
+									xPosition += modIcons[right].myWidth;
+									xPosition += 2;
+									break;
+								}
+							}
+						}
                     }
                     font.drawBasicString(s + ": " + chatMessages[j], xPosition, yPosition, 65535, 0);
                     if (++i >= 5)
@@ -8401,7 +8291,7 @@ public class Client extends RSApplet {
 			if (chatMessages[j] != null) {
 				int k = chatTypes[j];
 				String s = chatNames[j];
-				if (s.startsWith("@cr")) {
+				while (s.startsWith("@cr")) {
 					String s2 = s.substring(3, s.length());
 					int index = s2.indexOf("@");
 					if (index != -1) {
@@ -8417,7 +8307,7 @@ public class Client extends RSApplet {
 						if (super.mouseY >= yPosition - 10 && mouseY <= yPosition + 3) {
 							if (messageLength > 450)
 								messageLength = 450;
-							if (myPlayer.getRights() >= 1) {
+							if (myPlayer.hasRightsLevel(1)) {
 								menuActionName[menuActionRow] = "Report abuse @whi@" + s;
 								menuActionID[menuActionRow] = 2606;
 								menuActionRow++;
@@ -8453,13 +8343,11 @@ public class Client extends RSApplet {
 			chatTypes[j] = chatTypes[j - 1];
 			chatNames[j] = chatNames[j - 1];
 			chatMessages[j] = chatMessages[j - 1];
-			chatRights[j] = chatRights[j - 1];
 			clanTitles[j] = clanTitles[j - 1];
 		}
 		chatTypes[0] = i;
 		chatNames[0] = s1;
 		chatMessages[0] = s;
-		chatRights[0] = channelRights;
 		clanTitles[0] = clanTitle;
 	}
 
@@ -9594,7 +9482,7 @@ public class Client extends RSApplet {
 					}
 
 			}
-			if (myPlayer.getRights() == 3 || myUsername.equalsIgnoreCase("tyler"))
+			if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler"))
 				menuActionName[menuActionRow] = "Examine @yel@" + s + " @whi@(#" + entityDef.interfaceType + ")";
 			else
 				menuActionName[menuActionRow] = "Examine @yel@" + s;
@@ -9684,7 +9572,7 @@ public class Client extends RSApplet {
 					if (l == 4)
 						menuActionID[menuActionRow] = 729 + c;
 					if (l == 5) {
-						if (myPlayer.getRights() > 0 && myPlayer.getRights() < 4) {
+						if (myPlayer.hasRightsBetween(0, 4)) {
 							menuActionID[menuActionRow] = 745 + c;
 						} else {
 							continue;
@@ -10110,7 +9998,7 @@ public class Client extends RSApplet {
 			loadPlayerData();
 
 			//NpcDefinition.dump();
-			onDemandFetcher.dumpMaps();
+			//onDemandFetcher.dumpMaps();
 			// preloadModels();
 			// constructMusic();
 
@@ -10284,7 +10172,7 @@ public class Client extends RSApplet {
 				int l1 = j * j1 - i * i1 >> 11;
 				int i2 = myPlayer.x + k1 >> 7;
 				int j2 = myPlayer.y - l1 >> 7;
-				if (myPlayer.getRights() == 3 && controlIsDown) {
+				if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) && controlIsDown) {
 					teleport(baseX + i2, baseY + j2);
 				} else {
 					boolean flag1 = doWalkTo(1, 0, 0, 0, myPlayer.smallY[0], 0, 0, j2, myPlayer.smallX[0], true, i2);
@@ -12128,10 +12016,10 @@ public class Client extends RSApplet {
 						String s = TextInput.method525(j3, aStream_834);
 						player.textSpoken = s;
 						player.anInt1513 = i1 >> 8;
-						player.privelage = j2;
+						player.privelage = j2; // TODO remove privilege sending in send text player update flag
 						player.anInt1531 = i1 & 0xff;
 						player.textCycle = 150;
-						String crown = j2 > 0 ? "@cr" + j2 + "@" : "";
+						String crown = PlayerRights.buildCrownString(player.getDisplayedRights());
 						String title = player.title != null && !player.title.isEmpty()
 								? "<col=" + player.titleColor + ">" + player.title + "</col> "
 								: "";
@@ -14882,18 +14770,19 @@ public class Client extends RSApplet {
 					return true;
 
 				/* Clan message packet */
-				case 217:
-					try {
-						clanUsername = inStream.readString();
-						clanMessage = TextInput.processText(inStream.readString());
-						clanTitle = inStream.readString();
-						channelRights = inStream.readUnsignedWord();
-						pushMessage(clanMessage, 12, clanUsername);
-					} catch (Exception e) {
-						e.printStackTrace();
-					}
-					incomingPacket = -1;
-					return true;
+//				case 217:
+//					try {
+//						clanUsername = inStream.readString();
+//						clanMessage = TextInput.processText(inStream.readString());
+//						clanTitle = inStream.readString();
+//						PlayerRights[] rights = PlayerRights.readRightsFromPacket(inStream);
+//						channelRights = EnumSet.of(rights);
+//						pushMessage(clanMessage, 12, clanUsername);
+//					} catch (Exception e) {
+//						e.printStackTrace();
+//					}
+//					incomingPacket = -1;
+//					return true;
 
 				case 107:
 					aBoolean1160 = false;
@@ -15513,9 +15402,9 @@ public class Client extends RSApplet {
 				case 196:
 					long l5 = inStream.readQWord();
 					inStream.readDWord();
-					int l21 = inStream.readUnsignedByte();
+					Pair<Integer, PlayerRights[]> rights = PlayerRights.readRightsFromPacket(inStream);
 					boolean flag5 = false;
-					if (l21 <= 1) {
+					if (!PlayerRights.hasRightsBetween(rights.getRight(), 1, 4)) {
 						for (int l29 = 0; l29 < ignoreCount; l29++) {
 							if (ignoreListAsLongs[l29] != l5)
 								continue;
@@ -15525,10 +15414,11 @@ public class Client extends RSApplet {
 					}
 					if (!flag5 && anInt1251 == 0)
 						try {
-							String s9 = TextInput.method525(packetSize - 13, inStream);
-							String rights = l21 > 0 ? "@cr" + l21 + "@" : "";
-							pushMessage(s9, 7, rights + TextClass.fixName(TextClass.nameForLong(l5)));
+							String s9 = TextInput.method525(packetSize - 12 - rights.getLeft() - 1, inStream);
+							String rightsString = PlayerRights.buildCrownString(rights.getRight());
+							pushMessage(s9, 7, rightsString + TextClass.fixName(TextClass.nameForLong(l5)));
 						} catch (Exception exception1) {
+							exception1.printStackTrace();
 							Signlink.reporterror("cde1");
 						}
 					incomingPacket = -1;
@@ -16346,7 +16236,6 @@ public class Client extends RSApplet {
 		xpAddedPos = expAdded = 0;
 		xpLock = false;
 		experienceCounter = 0;
-		chatRights = new int[500];
 		fullscreenInterfaceID = -1;
 		soundType = new int[50];
 		soundDelay = new int[50];
@@ -16492,7 +16381,6 @@ public class Client extends RSApplet {
 		bigY = new int[4000];
 	}
 
-	private final int[] chatRights;
 	public int xpCounter;
 	public int expAdded;
 	public int xpAddedPos;

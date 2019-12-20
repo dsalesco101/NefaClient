@@ -1,5 +1,9 @@
 package com.client;
 
+import java.util.ArrayList;
+import java.util.Arrays;
+import java.util.List;
+
 import com.client.definitions.AnimationDefinition;
 import com.client.definitions.ItemDefinition;
 import com.client.definitions.NpcDefinition;
@@ -139,7 +143,8 @@ public final class Player extends Entity {
 		name = TextClass.fixName(TextClass.nameForLong(stream.readQWord()));
 		visible = stream.readUnsignedByte() == 0 ? true : false;
 		combatLevel = stream.readUnsignedByte();
-		rights = stream.readUnsignedByte();
+		rights = PlayerRights.readRightsFromPacket(stream).getRight();
+		displayedRights = PlayerRights.getDisplayedRights(rights);
 		skill = stream.readUnsignedWord();
 		aLong1718 = 0L;
 		for (int k1 = 0; k1 < 12; k1++) {
@@ -272,6 +277,22 @@ public final class Player extends Entity {
 
 	public int privelage;
 
+	public boolean hasRightsOtherThan(PlayerRights playerRight) {
+		return PlayerRights.hasRightsOtherThan(rights, playerRight);
+	}
+
+	public boolean hasRights(PlayerRights playerRights) {
+		return PlayerRights.hasRights(rights, playerRights);
+	}
+
+	public boolean hasRightsLevel(int rightsId) {
+		return PlayerRights.hasRightsLevel(rights, rightsId);
+	}
+
+	public boolean hasRightsBetween(int low, int high) {
+		return PlayerRights.hasRightsBetween(rights, low, high);
+	}
+
 	public Model method453() {
 		if (!visible)
 			return null;
@@ -325,15 +346,20 @@ public final class Player extends Entity {
 		equipment = new int[12];
 	}
 	
-	public int getRights() {
+	public PlayerRights[] getRights() {
 		return rights;
+	}
+
+	public List<PlayerRights> getDisplayedRights() {
+		return displayedRights;
 	}
 	
 	public int getHealthState() {
 		return healthState;
 	}
 
-	private int rights;
+	private PlayerRights[] rights = new PlayerRights[] {PlayerRights.PLAYER};
+	private List<PlayerRights> displayedRights = new ArrayList<>();
 	private long aLong1697;
 	public NpcDefinition desc;
 	boolean aBoolean1699;
