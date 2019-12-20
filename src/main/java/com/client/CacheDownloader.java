@@ -39,7 +39,6 @@ public class CacheDownloader {
 
 	private void drawLoadingText(String text) {
 		client.drawLoadingText(35, text);
-		System.out.println(text);
 	}
 
 	private void drawLoadingText(int amount, String text, int downloadSpeed, int timeRemaining) {
