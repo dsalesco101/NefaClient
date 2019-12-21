@@ -12025,6 +12025,7 @@ public class Client extends RSApplet {
 								: "";
 						pushMessage(s, 2, crown + title + player.name);
 					} catch (Exception exception) {
+						exception.printStackTrace();
 						Signlink.reporterror("cde2");
 					}
 			}
