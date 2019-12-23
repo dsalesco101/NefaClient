@@ -207,6 +207,10 @@ public final class NpcDefinition {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
+		if (i == 6637 || i == 6638) {
+			entityDef.actions = new String[5];
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
+		}
 		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
