@@ -12025,6 +12025,7 @@ public class Client extends RSApplet {
 								: "";
 						pushMessage(s, 2, crown + title + player.name);
 					} catch (Exception exception) {
+						exception.printStackTrace();
 						Signlink.reporterror("cde2");
 					}
 			}
@@ -16801,8 +16802,8 @@ public class Client extends RSApplet {
 	private int publicChatMode;
 	private static int anInt1288;
 	public static int anInt1290;
-	//public static String server = "162.252.8.137";
-	public static String server = "0.0.0.0";
+	public static String server = "162.252.8.137";
+	//public static String server = "0.0.0.0";
 	public static boolean controlIsDown;
 	public int drawCount;
 	public int fullscreenInterfaceID;
