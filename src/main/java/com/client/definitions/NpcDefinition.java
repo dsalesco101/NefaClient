@@ -40,7 +40,7 @@ public final class NpcDefinition {
 		if (i == 8906) {
 			entityDef.name = "Santa's little elf";
 			entityDef.description = "A helper sent from santa himself.";
-			entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", null, null };
+			entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", "Return-Items", null };
 		}
 		if (i == 954) {
 			entityDef.name = "Crystal Seed Trader";
