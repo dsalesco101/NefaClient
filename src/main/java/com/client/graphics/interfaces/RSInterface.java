@@ -22,6 +22,7 @@ import com.client.features.gameframe.ScreenMode;
 import com.client.graphics.interfaces.impl.Dropdown;
 import com.client.graphics.interfaces.impl.DropdownMenu;
 import com.client.graphics.interfaces.impl.Interfaces;
+import com.client.graphics.interfaces.impl.SlayerRewards;
 import com.client.graphics.interfaces.impl.Slider;
 
 public class RSInterface {
@@ -2522,6 +2523,29 @@ public class RSInterface {
 		setBounds(hoverId3, X, Y, 1, hover);
 	}
 
+	public static void addToItemGroup(int id, int w, int h, int spritePadX, int spritePadY, boolean actions, String...actionStrings) {
+		RSInterface rsi = addInterface(id);
+		rsi.width = w;
+		rsi.height = h;
+		rsi.inv = new int[w * h];
+		rsi.invStackSizes = new int[w * h];
+		rsi.usableItemInterface = false;
+		rsi.isInventoryInterface = false;
+		rsi.isMouseoverTriggered = false;
+		rsi.invSpritePadX = spritePadX;
+		rsi.invSpritePadY = spritePadY;
+		rsi.spritesX = new int[20];
+		rsi.spritesY = new int[20];
+		rsi.sprites = new Sprite[20];
+		rsi.actions = new String[6];
+		if (actions) {
+			for (int index = 0; index < actionStrings.length; index++) {
+				rsi.actions[index] = actionStrings[index];
+			}
+		}
+		rsi.type = 2;
+	}
+
 	public static void addToItemGroup(int id, int w, int h, int x, int y, boolean actions, String action1,
 			String action2, String action3, String action4, String action5, String action6) {
 		RSInterface rsi = addInterface(id);
@@ -4538,6 +4562,30 @@ public class RSInterface {
 	}
 
 	public static void addHoverText(int id, String text, String tooltip, TextDrawingArea tda[], int idx, int color,
+									boolean center, boolean textShadowed, int width, int height) {
+		RSInterface rsinterface = addInterface(id);
+		rsinterface.id = id;
+		rsinterface.parentID = id;
+		rsinterface.type = 4;
+		rsinterface.atActionType = 1;
+		rsinterface.width = width;
+		rsinterface.height = height;
+		rsinterface.contentType = 0;
+		rsinterface.aByte254 = 0;
+		rsinterface.mOverInterToTrigger = -1;
+		rsinterface.centerText = center;
+		rsinterface.textShadow = textShadowed;
+		rsinterface.textDrawingAreas = tda[idx];
+		rsinterface.message = text;
+		rsinterface.aString228 = "";
+		rsinterface.textColor = color;
+		rsinterface.secondaryColor = 0;
+		rsinterface.anInt216 = 0xffffff;
+		rsinterface.anInt239 = 0;
+		rsinterface.tooltip = tooltip;
+	}
+
+	public static void addHoverText(int id, String text, String tooltip, TextDrawingArea tda[], int idx, int color,
 			boolean center, boolean textShadowed, int width) {
 		RSInterface rsinterface = addInterface(id);
 		rsinterface.id = id;
@@ -5183,6 +5231,28 @@ public class RSInterface {
 		Tab.sprite2 = imageLoader(i2, name);
 	}
 
+	public static void addConfigSprite(int id, int spriteId, String spriteName, int spriteId2, String spriteName2, int configFrame, int configId) {
+		RSInterface tab = interfaceCache[id] = new RSInterface();
+		tab.id = id;
+		tab.parentID = id;
+		tab.type = 5;
+		tab.atActionType = 0;
+		tab.contentType = 0;
+		tab.aByte254 = (byte) 0;
+		tab.sprite1 = imageLoader(spriteId, spriteName);
+		tab.sprite2 = imageLoader(spriteId2, spriteName2);
+		tab.width = 512;
+		tab.height = 334;
+		tab.anIntArray245 = new int[1];
+		tab.anIntArray212 = new int[1];
+		tab.anIntArray245[0] = 1;
+		tab.anIntArray212[0] = configId;
+		tab.valueIndexArray = new int[1][3];
+		tab.valueIndexArray[0][0] = 5;
+		tab.valueIndexArray[0][1] = configFrame;
+		tab.valueIndexArray[0][2] = 0;
+	}
+
 	public static void addSprite(int id, int spriteId, String spriteName) {
 		RSInterface tab = interfaceCache[id] = new RSInterface();
 		tab.id = id;
@@ -5213,6 +5283,22 @@ public class RSInterface {
 		tab.width = width;
 		tab.height = height;
 		tab.tooltip = text;
+	}
+
+	public static void addHoveredButton2(int i, String imageName, int j, int w, int h, int IMAGEID) {
+		RSInterface tab = addTabInterface(i);
+		tab.parentID = i;
+		tab.id = i;
+		tab.type = 0;
+		tab.atActionType = 0;
+		tab.width = w;
+		tab.height = h;
+		tab.isMouseoverTriggered = true;
+		tab.hoverType = -1;
+		tab.scrollMax = 0;
+		addHoverImage(IMAGEID, j, j, imageName);
+		tab.totalChildren(1);
+		tab.child(0, IMAGEID, 0, 0);
 	}
 
 	public static void addHoveredButton(int i, String imageName, int j, int w, int h, int IMAGEID) {// hoverable button

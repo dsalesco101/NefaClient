@@ -88,6 +88,7 @@ public class Interfaces extends RSInterface {
 		tournamentInterface(defaultTextDrawingAreas);
 		tourneyJoinInterface(defaultTextDrawingAreas);
 		collectionLog(defaultTextDrawingAreas);
+		SlayerRewards.initializeInterfaces(defaultTextDrawingAreas);
 	}
 	public static void mysteryBox(TextDrawingArea[] tda) {
 		RSInterface iface = addInterface(47000);

@@ -6684,14 +6684,12 @@ public class Client extends RSApplet {
 			return;
 		}
 
-		for(int crown = 0; crown<50; crown++) {
+		for(int crown = 0; crown < 50; crown++) {
 			String crownString = "@cr" + crown + "@";
 			if(name.startsWith(crownString)) {
 				name = name.substring(crownString.length());
-				break;
 			}
 		}
-
 		long nameAsLong = TextClass.longForName(name.trim());
 		/*int k3 = -1;
 		for (int i4 = 0; i4 < friendsCount; i4++) {
@@ -7325,8 +7323,15 @@ public class Client extends RSApplet {
 							fpsOn = false;
 						if (inputString.equals("::data"))
 							clientData = !clientData;
-						if (inputString.equals("::inter"))
-							Interfaces.loadInterfaces();
+						if (inputString.equals("::inter")) {
+							try {
+								Interfaces.loadInterfaces();
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+						if (inputString.equals("::strings"))
+							strings = !strings;
 
 						if (inputString.equals("::hotkeys")) {
 							RSApplet.hotKeyToggle = !RSApplet.hotKeyToggle;
@@ -10900,6 +10905,7 @@ public class Client extends RSApplet {
 
 	private int interfaceDrawY;
 
+	public boolean strings = false;
 	private void drawInterface(int j, int xPosition, RSInterface rsInterface, int yPosition) {
 		if (rsInterface.type != 0 || rsInterface.children == null)
 			return;
@@ -11302,6 +11308,9 @@ public class Client extends RSApplet {
 							if (subId > achievementCutoff) {
 								continue;
 							}
+						}
+						if (strings) {
+							s1 = class9_1.id + "";
 						}
 						if (class9_1.centerText) {
 							font.drawCenteredString(s1, _x + class9_1.width / 2, l6, i4, class9_1.textShadow ? 0 : -1);
