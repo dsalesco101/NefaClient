@@ -87,6 +87,18 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
+		case 13092: //this makes crystal halberds wieldable, weird af.
+		case 13093:
+		case 13094:
+		case 13095:
+		case 13096:
+		case 13097:
+		case 13098:
+		case 13099:
+		case 13100:
+		case 13101:
+			itemDef.inventoryOptions = new String[] { null, "Wield", null, null, null};
+			break;
 		case 23933:
 		itemDef.name = "Vote Crystal";
 		break;
