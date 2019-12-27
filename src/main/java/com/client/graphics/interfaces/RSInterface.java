@@ -29,6 +29,25 @@ public class RSInterface {
 	public static boolean showIds = false;
 	public static RSFont[] newFonts;
 
+	public static void printEmptyInterfaceSections() {
+		int count = 0;
+		int start = 0;
+		for (int index = 0; index < interfaceCache.length; index++) {
+			if (interfaceCache[index] == null) {
+				if (start == 0) {
+					start = index;
+				}
+				count++;
+			} else {
+				if (count >= 100) {
+					System.out.println(String.format("Found empty interface range starting at [%d] length [%d]", start, count));
+				}
+				start = 0;
+				count = 0;
+			}
+		}
+	}
+
 	public static void unpack(StreamLoader streamLoader, TextDrawingArea textDrawingAreas[],
 			StreamLoader streamLoader_1, RSFont[] newFontSystem) {
 		aMRUNodes_238 = new MRUNodes(50000);
@@ -5246,10 +5265,10 @@ public class RSInterface {
 		tab.anIntArray245 = new int[1];
 		tab.anIntArray212 = new int[1];
 		tab.anIntArray245[0] = 1;
-		tab.anIntArray212[0] = configId;
+		tab.anIntArray212[0] = configFrame;
 		tab.valueIndexArray = new int[1][3];
 		tab.valueIndexArray[0][0] = 5;
-		tab.valueIndexArray[0][1] = configFrame;
+		tab.valueIndexArray[0][1] = configId;
 		tab.valueIndexArray[0][2] = 0;
 	}
 

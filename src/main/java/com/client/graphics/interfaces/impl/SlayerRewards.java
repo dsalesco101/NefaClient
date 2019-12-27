@@ -15,14 +15,15 @@ public class SlayerRewards extends RSInterface
     }
 
     public static void infoInterface(TextDrawingArea[] tda) {
+        //44842
         RSInterface rsinterface = addInterface(47900);
         addSprite(47901, 0, "Slayer interface/Info");
 
         addHoverButton(47902, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47903, 3);
         addHoveredButton2(47903, "Slayer interface/CLOSE", 2, 21, 21, 47904);
 
-        addHoverText(47905, "Back", "Back", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(47906, "Confirm", "Confirm", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(47905, "Back", "Back", tda, 0, 0xFF9900, true, true, 83, 18);
+        addHoverText(47906, "Confirm", "Confirm", tda, 0, 0xFF9900, true, true, 83, 18);
 
         rsinterface.totalChildren(15);
 
@@ -39,8 +40,8 @@ public class SlayerRewards extends RSInterface
         rsinterface.child(1, 47902, 472, 27);
         rsinterface.child(2, 47903, 472, 27);
 
-        rsinterface.child(3, 47905, 161, 265);
-        rsinterface.child(4, 47906, 279, 265);
+        rsinterface.child(3, 47905, 161 - 13, 265);
+        rsinterface.child(4, 47906, 279 - 13, 265);
 
     }
 
@@ -48,8 +49,8 @@ public class SlayerRewards extends RSInterface
         RSInterface rsinterface = addInterface(47700);
         addSprite(47701, 0, "Slayer interface/Buy/buy");
 
-        addHoverButton(47702, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47703, 3);
-        addHoveredButton2(47703, "Slayer interface/CLOSE", 2, 21, 21, 47704);
+        //addHoverButton(47702, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47703, 3);
+        //addHoveredButton2(47703, "Slayer interface/CLOSE", 2, 21, 21, 47704);
 
         addHoverText(27405, "Unlock", "Unlock", tda, 0, 0xFF9900, true, true, 82, 16);
         addHoverText(27406, "Extend", "Extend", tda, 0, 0xFF9900, true, true, 82, 16);
@@ -60,8 +61,8 @@ public class SlayerRewards extends RSInterface
 
         rsinterface.totalChildren(9);
         rsinterface.child(0, 47701, 12, 20);
-        rsinterface.child(1, 47702, 472, 27);
-        rsinterface.child(2, 47703, 472, 27);
+        rsinterface.child(1, 47902, 472, 27);
+        rsinterface.child(2, 47903, 472, 27);
         rsinterface.child(3, 48505, 455, 61);
         rsinterface.child(4, 47706, 58, 81);
 
@@ -75,8 +76,8 @@ public class SlayerRewards extends RSInterface
         RSInterface rsinterface = addInterface(47800);
         addSprite(47801, 0, "Slayer interface/Task/task");
 
-        addHoverButton(47802, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47803, 3);
-        addHoveredButton2(47803, "Slayer interface/CLOSE", 2, 21, 21, 47804);
+        //addHoverButton(47802, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47803, 3);
+       // addHoveredButton2(47803, "Slayer interface/CLOSE", 2, 21, 21, 47804);
 
         addText(48809, "Black Demons x230", tda, 1, 0xFFFFFF, true, true);
 
@@ -99,8 +100,8 @@ public class SlayerRewards extends RSInterface
 
         rsinterface.totalChildren(23);
         rsinterface.child(0, 47801, 12, 20);
-        rsinterface.child(1, 47802, 472, 27);
-        rsinterface.child(2, 47803, 472, 27);
+        rsinterface.child(1, 47902, 472, 27);
+        rsinterface.child(2, 47903, 472, 27);
         rsinterface.child(3, 48505, 455, 61);
 
         rsinterface.child(4, 27405, 52-15-12, 61);
@@ -126,247 +127,76 @@ public class SlayerRewards extends RSInterface
     }
 
     public static void unlockInterface(TextDrawingArea[] tda) {
-        RSInterface rsinterface = addInterface(47500);
-        addSprite(47501, 0, "Slayer interface/Unlock/1/unlock");
+        RSInterface rsinterface = addInterface(21_404);
+        addSprite(21_405, 0, "Slayer interface/Unlock/1/unlock");
 
-        addHoverButton(47502, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47503, 3);
-        addHoveredButton2(47503, "Slayer interface/CLOSE", 2, 21, 21, 47504);
+       // addHoverButton(21_406, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47503, 3);
+       // addHoveredButton2(21_407, "Slayer interface/CLOSE", 2, 21, 21, 47504);
 
         rsinterface.totalChildren(9);
-        rsinterface.child(0, 47501, 12, 20);
-        rsinterface.child(1, 47502, 472, 27);
-        rsinterface.child(2, 47503, 472, 27);
+        rsinterface.child(0, 21_405, 12, 20);
+        rsinterface.child(1, 47902, 472, 27);
+        rsinterface.child(2, 47903, 472, 27);
         rsinterface.child(3, 48505, 455, 61);
-        rsinterface.child(4, 47506, 16, 76);
+        rsinterface.child(4, 21_408, 16, 78);
 
         rsinterface.child(5, 27405, 52-15-12, 61);
         rsinterface.child(6, 27406, 134-12-12, 61);
         rsinterface.child(7, 27407, 228-19-12, 61);
         rsinterface.child(8, 27408, 308-14-12, 61);
 
-        RSInterface scrollInterface = addTabInterface(47506);
+        Object[][] unlocks = {
+                {20, false}, // imbue slayer helmet
+                {6, true}, // malevolent masquerade
+                {17, true}, // bigger and badder
+        };
+
+        RSInterface scrollInterface = addTabInterface(21_408);
         scrollInterface.scrollPosition = 0;
         scrollInterface.contentType = 0;
-        scrollInterface.width = 280+182;
-        scrollInterface.height = 216;
-        scrollInterface.scrollMax = 850;
-        int x = 7, y = 11;
-        int amountOfLines = 57;
-        scrollInterface.totalChildren(amountOfLines);
+        scrollInterface.width = 280 + 182;
+        scrollInterface.height = 220;
+        int scrollExtension = unlocks.length >= 6 ? (((int) Math.ceil((unlocks.length - 6) / 2d)) * 64) : 0;
+        scrollInterface.scrollMax = scrollInterface.height + 1 + scrollExtension;
+        int x, y;
+        int childrenCount = 0;
+        for (Object[] unlock : unlocks)
+            childrenCount += ((boolean) unlock[1]) ? 3 : 2;
+        scrollInterface.totalChildren(childrenCount);
 
-        int index = 47507;
+        int child = 0;
+        int interfaceId = 21_409;
 
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 1, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 1, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 880);
+        for (int index = 0; index < unlocks.length; index++) {
+            x = index % 2 * 227;
+            y = index / 2 * 88;
 
-        scrollInterface.child(0, index-4, x, y);
-        scrollInterface.child(1, index-3, x, y);
-        scrollInterface.child(2, index-1, x+42, y+15);
+            scrollInterface.child(child++, interfaceId, x + 6, y);
+            addHoverButton(interfaceId++, "Slayer interface/Unlock/1/unlock", (int)unlocks[index][0], 224, 64, "Unlock", 0, interfaceId, 1);
 
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 2, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 2, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 881);
+            scrollInterface.child(child++, interfaceId, x + 6, y);
+            addHoveredButton2(interfaceId++, "Slayer interface/Unlock/2/unlock", (int)unlocks[index][0], 224, 64, interfaceId++);
 
-        x+=227;
-
-        scrollInterface.child(3, index-4, x, y);
-        scrollInterface.child(4, index-3, x, y);
-        scrollInterface.child(5, index-1, x+42, y+15);
-
-        y+=77;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 3, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 3, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 882);
-
-        scrollInterface.child(6, index-4, x, y);
-        scrollInterface.child(7, index-3, x, y);
-        scrollInterface.child(8, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 4, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 4, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 883);
-
-        x+=227;
-
-        scrollInterface.child(9, index-4, x, y);
-        scrollInterface.child(10, index-3, x, y);
-        scrollInterface.child(11, index-1, x+42, y+15);
-
-        y+=77;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 5, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 5, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 884);
-
-        scrollInterface.child(12, index-4, x, y);
-        scrollInterface.child(13, index-3, x, y);
-        scrollInterface.child(14, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 6, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 6, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 885);
-
-        x+=227;
-
-        scrollInterface.child(15, index-4, x, y);
-        scrollInterface.child(16, index-3, x, y);
-        scrollInterface.child(17, index-1, x+42, y+15);
-
-        y+=87;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 7, 224, 64, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 7, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 886);
-
-        scrollInterface.child(18, index-4, x, y);
-        scrollInterface.child(19, index-3, x, y);
-        scrollInterface.child(20, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 8, 224, 64, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 8, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 887);
-
-        x+=227;
-
-        scrollInterface.child(21, index-4, x, y);
-        scrollInterface.child(22, index-3, x, y);
-        scrollInterface.child(23, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 9, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 9, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 888);
-
-        scrollInterface.child(24, index-4, x, y);
-        scrollInterface.child(25, index-3, x, y);
-        scrollInterface.child(26, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 10, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 10, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 889);
-
-        x+=227;
-
-        scrollInterface.child(27, index-4, x, y);
-        scrollInterface.child(28, index-3, x, y);
-        scrollInterface.child(29, index-1, x+42, y+15);
-
-        y+=77;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 11, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 11, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 890);
-
-        scrollInterface.child(30, index-4, x, y);
-        scrollInterface.child(31, index-3, x, y);
-        scrollInterface.child(32, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 12, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 12, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 891);
-
-        x+=227;
-
-        scrollInterface.child(33, index-4, x, y);
-        scrollInterface.child(34, index-3, x, y);
-        scrollInterface.child(35, index-1, x+42, y+15);
-
-        y+=87;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 13, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 13, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 892);
-
-        scrollInterface.child(36, index-4, x, y);
-        scrollInterface.child(37, index-3, x, y);
-        scrollInterface.child(38, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 14, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 14, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 893);
-
-        x+=227;
-
-        scrollInterface.child(39, index-4, x, y);
-        scrollInterface.child(40, index-3, x, y);
-        scrollInterface.child(41, index-1, x+42, y+15);
-
-        y+=87;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 15, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 15, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 894);
-
-        scrollInterface.child(42, index-4, x, y);
-        scrollInterface.child(43, index-3, x, y);
-        scrollInterface.child(44, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 16, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 16, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 895);
-
-        x+=227;
-
-        scrollInterface.child(45, index-4, x, y);
-        scrollInterface.child(46, index-3, x, y);
-        scrollInterface.child(47, index-1, x+42, y+15);
-
-        y+=77;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 17, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 17, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 896);
-
-        scrollInterface.child(48, index-4, x, y);
-        scrollInterface.child(49, index-3, x, y);
-        scrollInterface.child(50, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 18, 224, 84, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 18, 224, 84, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 897);
-
-        x+=227;
-
-        scrollInterface.child(51, index-4, x, y);
-        scrollInterface.child(52, index-3, x, y);
-        scrollInterface.child(53, index-1, x+42, y+15);
-
-        y+=87;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Unlock/1/unlock", 19, 224, 74, "Unlock", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Unlock/2/unlock", 19, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 898);
-
-        scrollInterface.child(54, index-4, x, y);
-        scrollInterface.child(55, index-3, x, y);
-        scrollInterface.child(56, index-1, x+42, y+15);
+            if ((boolean) unlocks[index][1]) {
+                scrollInterface.child(child++, interfaceId, x + 42 + 6, y + 15);
+                addConfigSprite(interfaceId++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 880 + index);
+            }
+        }
     }
 
     public static void extendInterface(TextDrawingArea[] tda) {
         RSInterface rsinterface = addInterface(47600);
         addSprite(47601, 0, "Slayer interface/Extend/1/extend");
 
-        addHoverButton(47602, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47603, 3);
-        addHoveredButton2(47603, "Slayer interface/CLOSE", 2, 21, 21, 47604);
+        //addHoverButton(47602, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47603, 3);
+        //addHoveredButton2(47603, "Slayer interface/CLOSE", 2, 21, 21, 47604);
 
         addText(48505, "1300", tda, 0, 0xFF9900, false, true);
 
         rsinterface.totalChildren(9);
         rsinterface.child(0, 47601, 12, 20);
-        rsinterface.child(1, 47602, 472, 27);
-        rsinterface.child(2, 47603, 472, 27);
+        rsinterface.child(1, 47902, 472, 27);
+        rsinterface.child(2, 47903, 472, 27);
         rsinterface.child(3, 48505, 455, 61);
         rsinterface.child(4, 47606, 16, 78);
 
@@ -391,7 +221,7 @@ public class SlayerRewards extends RSInterface
         scrollInterface.width = 280 + 182;
         scrollInterface.height = 220;
         scrollInterface.scrollMax = scrollInterface.height + 1 + (((int) Math.ceil((extensions.length - 6) / 2d)) * 64);
-        int x = 7, y = 11;
+        int x, y;
         scrollInterface.totalChildren(extensions.length * 3);
         int interfaceId = 47607;
         int child = 0;
@@ -406,228 +236,6 @@ public class SlayerRewards extends RSInterface
            scrollInterface.child(child++, interfaceId-3, x + 6, y);
            scrollInterface.child(child++, interfaceId-1, x + 42 + 6, y + 15);
        }
-
-
-
-/*
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 1, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 1, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 899);
-
-        scrollInterface.child(0, index-4, x, y);
-        scrollInterface.child(1, index-3, x, y);
-        scrollInterface.child(2, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 2, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 2, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 900);
-
-        x+=227;
-
-        scrollInterface.child(3, index-4, x, y);
-        scrollInterface.child(4, index-3, x, y);
-        scrollInterface.child(5, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 3, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 3, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 901);
-
-        scrollInterface.child(6, index-4, x, y);
-        scrollInterface.child(7, index-3, x, y);
-        scrollInterface.child(8, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 4, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 4, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 902);
-
-        x+=227;
-
-        scrollInterface.child(9, index-4, x, y);
-        scrollInterface.child(10, index-3, x, y);
-        scrollInterface.child(11, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 5, 224, 74, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 5, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 903);
-
-        scrollInterface.child(12, index-4, x, y);
-        scrollInterface.child(13, index-3, x, y);
-        scrollInterface.child(14, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 6, 224, 74, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 6, 224, 74, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 904);
-
-        x+=227;
-
-        scrollInterface.child(15, index-4, x, y);
-        scrollInterface.child(16, index-3, x, y);
-        scrollInterface.child(17, index-1, x+42, y+15);
-
-        y+=77;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 7, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 7, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 905);
-
-        scrollInterface.child(18, index-4, x, y);
-        scrollInterface.child(19, index-3, x, y);
-        scrollInterface.child(20, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 8, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 8, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 906);
-
-        x+=227;
-
-        scrollInterface.child(21, index-4, x, y);
-        scrollInterface.child(22, index-3, x, y);
-        scrollInterface.child(23, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 9, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 9, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 907);
-
-        scrollInterface.child(24, index-4, x, y);
-        scrollInterface.child(25, index-3, x, y);
-        scrollInterface.child(26, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 10, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 10, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 908);
-
-        x+=227;
-
-        scrollInterface.child(27, index-4, x, y);
-        scrollInterface.child(28, index-3, x, y);
-        scrollInterface.child(29, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 11, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 11, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 909);
-
-        scrollInterface.child(30, index-4, x, y);
-        scrollInterface.child(31, index-3, x, y);
-        scrollInterface.child(32, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 12, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 12, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 910);
-
-        x+=227;
-
-        scrollInterface.child(33, index-4, x, y);
-        scrollInterface.child(34, index-3, x, y);
-        scrollInterface.child(35, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 13, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 13, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 911);
-
-        scrollInterface.child(36, index-4, x, y);
-        scrollInterface.child(37, index-3, x, y);
-        scrollInterface.child(38, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 14, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 14, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 912);
-
-        x+=227;
-
-        scrollInterface.child(39, index-4, x, y);
-        scrollInterface.child(40, index-3, x, y);
-        scrollInterface.child(41, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 15, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 15, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 913);
-
-        scrollInterface.child(42, index-4, x, y);
-        scrollInterface.child(43, index-3, x, y);
-        scrollInterface.child(44, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 16, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 16, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 914);
-
-        x+=227;
-
-        scrollInterface.child(45, index-4, x, y);
-        scrollInterface.child(46, index-3, x, y);
-        scrollInterface.child(47, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 17, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 17, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 915);
-
-        scrollInterface.child(48, index-4, x, y);
-        scrollInterface.child(49, index-3, x, y);
-        scrollInterface.child(50, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 18, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 18, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 916);
-
-        x+=227;
-
-        scrollInterface.child(51, index-4, x, y);
-        scrollInterface.child(52, index-3, x, y);
-        scrollInterface.child(53, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 19, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 19, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 917);
-
-        scrollInterface.child(54, index-4, x, y);
-        scrollInterface.child(55, index-3, x, y);
-        scrollInterface.child(56, index-1, x+42, y+15);
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 20, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 20, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 918);
-
-        x+=227;
-
-        scrollInterface.child(57, index-4, x, y);
-        scrollInterface.child(58, index-3, x, y);
-        scrollInterface.child(59, index-1, x+42, y+15);
-
-        y+=67;
-        x=7;
-
-        addHoverButton(index++, "Slayer interface/Extend/1/extend", 21, 224, 64, "Extend", 0, index, 1);
-        addHoveredButton2(index++, "Slayer interface/Extend/2/extend", 21, 224, 64, index++);
-        addConfigSprite(index++, 1, "Slayer interface/check", 2, "Slayer interface/check", 1, 919);
-
-        scrollInterface.child(60, index-4, x, y);
-        scrollInterface.child(61, index-3, x, y);
-        scrollInterface.child(62, index-1, x+42, y+15);
-*/
     }
 
 }

@@ -94,6 +94,7 @@ import com.client.utilities.ObjectKey;
 import com.client.utilities.settings.Settings;
 import com.client.utilities.settings.SettingsManager;
 import org.apache.commons.lang3.tuple.Pair;
+import sun.security.krb5.Config;
 
 public class Client extends RSApplet {
 
@@ -5608,7 +5609,7 @@ public class Client extends RSApplet {
 				aString1121 = "Enter the name of the player you want to lookup";
 				break;
 		}
-		if (l == 646) { /** TODO **/
+		if (l == 646) {
 			stream.createFrame(185);
 			stream.writeWord(k);
 			if (!clickConfigButton(k)) {
@@ -10106,6 +10107,9 @@ public class Client extends RSApplet {
 			NpcDefinition.clientInstance = this;
 			Class36.clientInstance = this;
 			AccountManager.loadAccount();
+			if (Configuration.PRINT_EMPTY_INTERFACE_SECTIONS) {
+				RSInterface.printEmptyInterfaceSections();
+			}
 			return;
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -12860,8 +12864,9 @@ public class Client extends RSApplet {
 						}
 					}
 				}
-				if (j1 == 5)
+				if (j1 == 5) {
 					k1 = variousSettings[ai[l++]];
+				}
 				if (j1 == 6)
 					k1 = anIntArray1019[maxStats[ai[l++]] - 1];
 				if (j1 == 7)

@@ -13,6 +13,7 @@ public class Configuration {
 
 	public static boolean debug = true;
 	public static final boolean DUMP_SPRITES = false;
+	public static final boolean PRINT_EMPTY_INTERFACE_SECTIONS = false;
 
 	public static int xpSize = 0;
 	public static int xpSpeed = 0;
@@ -23,7 +24,7 @@ public class Configuration {
 	public static boolean playerNames = false;
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
-	public static final int CLIENT_VERSION = 105;//updateversion
+	public static final int CLIENT_VERSION = 106;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
 
