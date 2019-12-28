@@ -94,7 +94,6 @@ import com.client.utilities.ObjectKey;
 import com.client.utilities.settings.Settings;
 import com.client.utilities.settings.SettingsManager;
 import org.apache.commons.lang3.tuple.Pair;
-import sun.security.krb5.Config;
 
 public class Client extends RSApplet {
 
