@@ -150,24 +150,32 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 		}
 		/* Main interface scrolling */
 		if (Client.openInterfaceID != -1) {
-			RSInterface rsi = RSInterface.interfaceCache[Client.openInterfaceID];
 			offsetX = Client.currentScreenMode.equals(ScreenMode.FIXED) || Client.centerMainScreenInterface() ? 4
 					: (Client.currentGameWidth / 2) - 256;
 			offsetY = Client.currentScreenMode.equals(ScreenMode.FIXED) || Client.centerMainScreenInterface() ? 4
 					: (Client.currentGameHeight / 2) - 167;
+			handleInterfaceScroll(Client.openInterfaceID, offsetX, offsetY, rotation);
+		}
+	}
+
+	private void handleInterfaceScroll(int interfaceId, int offsetX, int offsetY, int rotation) {
+		RSInterface rsi = RSInterface.interfaceCache[interfaceId];
+		if (rsi.children != null) {
 			for (int index = 0; index < rsi.children.length; index++) {
+				handleInterfaceScroll(rsi.children[index], offsetX + rsi.childX[index], offsetY + rsi.childY[index], rotation);
 				if (RSInterface.interfaceCache[rsi.children[index]].scrollMax <= 0) {
 					continue;
 				}
 				if (mouseX > offsetX + rsi.childX[index] && mouseY > offsetY + rsi.childY[index]
 						&& mouseX < offsetX + rsi.childX[index] + RSInterface.interfaceCache[rsi.children[index]].width
 						&& mouseY < offsetY + rsi.childY[index]
-								+ RSInterface.interfaceCache[rsi.children[index]].height) {
+						+ RSInterface.interfaceCache[rsi.children[index]].height) {
 					RSInterface.interfaceCache[rsi.children[index]].scrollPosition += rotation * 30;
 				}
 			}
 		}
 	}
+
 	void drawLoadingText(int percentage, String s, int downloadSpeed, int secondsRemaining) {
 		while (graphics == null) {
 			graphics = getGameComponent().getGraphics();

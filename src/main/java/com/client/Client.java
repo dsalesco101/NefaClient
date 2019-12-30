@@ -1625,10 +1625,11 @@ public class Client extends RSApplet {
 			j2 += class9_1.anInt265;
 			if ((class9_1.mOverInterToTrigger >= 0 || class9_1.anInt216 != 0) && k >= i2 && i1 >= j2
 					&& k < i2 + class9_1.width && i1 < j2 + class9_1.height) {
-				if (class9_1.mOverInterToTrigger >= 0)
+				if (class9_1.mOverInterToTrigger >= 0) {
 					anInt886 = class9_1.mOverInterToTrigger;
-				else
+				} else {
 					anInt886 = class9_1.id;
+				}
 			}
 			if (class9_1.atActionType == RSInterface.OPTION_DROPDOWN) {
 
@@ -1878,7 +1879,7 @@ public class Client extends RSApplet {
 					for (int l2 = 0; l2 < class9_1.height; l2++) {
 						for (int i3 = 0; i3 < class9_1.width; i3++) {
 							boolean smallSprite = openInterfaceID == 26000
-									&& GrandExchange.isSmallItemSprite(class9_1.id);
+									&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 							int size = smallSprite ? 18 : 32;
 							int j3 = i2 + i3 * (size + class9_1.invSpritePadX);
 							int k3 = j2 + l2 * (size + class9_1.invSpritePadY);
@@ -2119,11 +2120,6 @@ public class Client extends RSApplet {
 										menuActionCmd3[menuActionRow] = class9_1.id;
 										menuActionRow++;
 									} else {
-										if (!RSInterface.interfaceCache[32007].isMouseoverTriggered) {
-											if (class9_1.id > 32016) {
-												continue;
-											}
-										}
 										if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler"))
 											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name + " @whi@("
 													+ (itemID) + ")";
@@ -4004,6 +4000,8 @@ public class Client extends RSApplet {
 			if (class9.children[j] == -1)
 				break;
 			RSInterface class9_1 = RSInterface.interfaceCache[class9.children[j]];
+			if (class9_1 == null)
+				System.err.println("Null child of index " + j + " inside interface " + i);
 			if (class9_1.type == 1)
 				method60(class9_1.id);
 			class9_1.anInt246 = 0;
@@ -11015,6 +11013,32 @@ public class Client extends RSApplet {
 				}
 			} else if (class9_1.type != 1)
 				if (class9_1.type == 2) {
+					if (class9_1.invAutoScrollHeight) {
+						int lastRow = -1;
+						int rowCount = 0;
+						int i3 = 0;
+
+						for (int l3 = 0; l3 < class9_1.height; l3++) {
+							for (int l4 = 0; l4 < class9_1.width; l4++) {
+								if (class9_1.inv[i3] > 1) {
+									if (lastRow != l3) {
+										lastRow = l3;
+										rowCount++;
+									}
+								}
+
+								i3++;
+							}
+						}
+
+						RSInterface scrollable = RSInterface.interfaceCache[class9_1.invAutoScrollInterfaceId];
+						scrollable.scrollMax = scrollable.height + 1;
+						int heightPerRow = class9_1.invSpritePadY + 32;
+						if (heightPerRow * rowCount > scrollable.scrollMax) {
+							scrollable.scrollMax += (heightPerRow * rowCount) - scrollable.scrollMax;
+						}
+					}
+
 					int i3 = 0;
 					for (int l3 = 0; l3 < class9_1.height; l3++) {
 						for (int l4 = 0; l4 < class9_1.width; l4++) {
@@ -11062,7 +11086,7 @@ public class Client extends RSApplet {
 									}
 									
 									boolean smallSprite = openInterfaceID == 26000
-											&& GrandExchange.isSmallItemSprite(class9_1.id);
+											&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 
 									if (smallSprite)
 										itemSprite = ItemDefinition.getSmallSprite(j9);
@@ -11135,7 +11159,7 @@ public class Client extends RSApplet {
 											DrawingArea.method338(j6 + j7, 32, 256, 0x395D84, 32, k5 + k6);
 										}
 
-										if (!smallSprite) {
+										if (!smallSprite && !class9_1.hideInvStackSizes) {
 											if (class9_1.parentID < 58040 || class9_1.parentID > 58048) {
 												if (itemSprite.maxWidth == 33 || class9_1.invStackSizes[i3] != 1) {
 													if (class9_1.id != 23121 || class9_1.id == 23121 && ((class9_1.inv[i3] >> 15) & 0x1) == 0) {
@@ -11327,6 +11351,9 @@ public class Client extends RSApplet {
 						sprite = class9_1.sprite2;
 					else
 						sprite = class9_1.sprite1;
+
+
+
 					if(spellSelected == 1 && class9_1.id == spellID && spellID != 0 && sprite != null) {
 						sprite.drawSprite(_x, l2, 0xffffff);
 					} else {
@@ -14635,6 +14662,11 @@ public class Client extends RSApplet {
 			dealtWithPacket = incomingPacket;
 			dealtWithPacketSize = packetSize;
 			switch (incomingPacket) {
+				case 2:
+					int resetScrollInterfaceId = inStream.readUnsignedWord();
+					RSInterface.interfaceCache[resetScrollInterfaceId].scrollPosition = 0;
+					incomingPacket = -1;
+					return true;
 
 				/**
 				 * Progress Bar Update Packet
@@ -15580,18 +15612,22 @@ public class Client extends RSApplet {
 					RSInterface class9_1 = RSInterface.interfaceCache[i7];
 					int j19 = inStream.readUnsignedWord();
 
-					for (int j22 = 0; j22 < j19; j22++) {
-						int i25 = inStream.readUnsignedByte();
-						if (i25 == 255) {
-							i25 = inStream.method440();
+					try {
+						for (int j22 = 0; j22 < j19; j22++) {
+							int i25 = inStream.readUnsignedByte();
+							if (i25 == 255) {
+								i25 = inStream.method440();
+							}
+							class9_1.inv[j22] = inStream.method436();
+							class9_1.invStackSizes[j22] = i25;
 						}
-						class9_1.inv[j22] = inStream.method436();
-						class9_1.invStackSizes[j22] = i25;
-
-					}
-					for (int j25 = j19; j25 < class9_1.inv.length; j25++) {
-						class9_1.inv[j25] = 0;
-						class9_1.invStackSizes[j25] = 0;
+						for (int j25 = j19; j25 < class9_1.inv.length; j25++) {
+							class9_1.inv[j25] = 0;
+							class9_1.invStackSizes[j25] = 0;
+						}
+					} catch (Exception e) {
+						System.err.println("Error in container " + i7 + ", length " + j19 + ", actual length " + class9_1.inv.length);
+						throw e;
 					}
 					incomingPacket = -1;
 					return true;

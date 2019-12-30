@@ -613,11 +613,11 @@ public class RSInterface {
         scroll.width = 174;
         
         String[] options = {"Collection Log", "Drop Table", "Donator Benefits", "Achievements", "Titles" ,"Community Guides", "Vote Page", "Online Store",
-                "Forums", "Sovark Rules"};
+                "Forums", "Sovark Rules", "Loot Tables"};
         
-        int[] icons = {4, 5, 3, 0, 1, 2, 2, 2, 2, 2};
-        int[] x = {50, 40, 60, 50, 20, 65, 40, 50, 30, 50};
-        int[] y = {7, 7, 7, 7, 10, 7, 7, 7, 7, 7};
+        int[] icons = {4, 5, 3, 0, 1, 2, 2, 2, 2, 2, 4};
+        int[] x = {50, 40, 60, 50, 20, 65, 40, 50, 30, 50, 50};
+        int[] y = {7, 7, 7, 7, 10, 7, 7, 7, 7, 7, 7};
         
         scroll.scrollMax = options.length * 28;
         scroll.totalChildren(options.length * 4);
@@ -1484,6 +1484,63 @@ public class RSInterface {
 			y += Y_DIFF;
 
 		}
+	}
+
+	public static void addItemContainerAutoScrollable(int childId, int width, int height, int invSpritePadX, int invSpritePadY, boolean addPlaceholderItems, int invAutoScrollInterfaceId, String...options) {
+		RSInterface inter = addItemContainer(childId, width, height, invSpritePadX, invSpritePadY, addPlaceholderItems, options);
+		inter.invAutoScrollHeight = true;
+		inter.invAutoScrollInterfaceId = invAutoScrollInterfaceId;
+	}
+
+	public static RSInterface addItemContainer(int childId, int width, int height, int invSpritePadX, int invSpritePadY, boolean addPlaceholderItems, String...options) {
+		RSInterface rsi = addInterface(childId);
+		rsi.smallInvSprites = false;
+		rsi.hideInvStackSizes = false;
+		rsi.actions = new String[10];
+		rsi.spritesX = new int[width * height];
+		rsi.inv = new int[width * height];
+		rsi.invStackSizes = new int[width * height];
+		rsi.spritesY = new int[width * height];
+		rsi.height = height;
+		rsi.width = width;
+		rsi.usableItemInterface = false;
+		rsi.isInventoryInterface = false;
+		rsi.type = 2;
+		rsi.id = childId;
+		rsi.invSpritePadX = invSpritePadX;
+		rsi.invSpritePadY = invSpritePadY;
+
+
+		for (int index = 0; index < options.length; index++) {
+			rsi.actions[index] = options[index];
+		}
+
+		if (addPlaceholderItems) {
+			for (int index = 0; index < rsi.inv.length; index++) {
+				rsi.inv[index] = 4153 + (index * 2);
+				rsi.invStackSizes[index] = index + 1;
+			}
+		}
+		return rsi;
+	}
+
+	public static void addItemView(int childId, int itemId, boolean smallInvSprites, boolean hideInvStackSizes) {
+		RSInterface rsi = addInterface(childId);
+		rsi.smallInvSprites = smallInvSprites;
+		rsi.hideInvStackSizes = hideInvStackSizes;
+		rsi.actions = new String[10];
+		rsi.spritesX = new int[1];
+		rsi.inv = new int[1];
+		rsi.invStackSizes = new int[1];
+		rsi.spritesY = new int[1];
+		rsi.height = 1;
+		rsi.width = 1;
+		rsi.usableItemInterface = false;
+		rsi.isInventoryInterface = false;
+		rsi.inv[0] = itemId;
+		rsi.invStackSizes[0] = 1;
+		rsi.type = 2;
+		rsi.id = childId;
 	}
 
 	public static void addItem(int childId, String[] options) {
@@ -5086,6 +5143,21 @@ public class RSInterface {
 		RSInterface.textColor = k;
 	}
 
+	public static void addSprite(int i, Sprite sprite) {
+		RSInterface rsinterface = interfaceCache[i] = new RSInterface();
+		rsinterface.id = i;
+		rsinterface.parentID = i;
+		rsinterface.type = 5;
+		rsinterface.atActionType = 1;
+		rsinterface.contentType = 0;
+		rsinterface.width = sprite.myWidth;
+		rsinterface.height = sprite.myHeight;
+		rsinterface.aByte254 = 0;
+		rsinterface.mOverInterToTrigger = 52;
+		rsinterface.sprite1 = sprite;
+		rsinterface.sprite2 = sprite;
+	}
+
 	public static void addSprite(int i, int j, int k) {
 		RSInterface rsinterface = interfaceCache[i] = new RSInterface();
 		rsinterface.id = i;
@@ -5280,7 +5352,7 @@ public class RSInterface {
 		tab.atActionType = 0;
 		tab.contentType = 0;
 		tab.aByte254 = (byte) 0;
-		tab.mOverInterToTrigger = 52;
+		tab.mOverInterToTrigger = -1;
 		tab.sprite1 = imageLoader(spriteId, spriteName);
 		tab.sprite2 = imageLoader(spriteId, spriteName);
 		tab.width = 512;
@@ -5559,6 +5631,10 @@ public class RSInterface {
 	public int id;
 	public int invStackSizes[];
 	public int inv[];
+	public boolean smallInvSprites;
+	public boolean hideInvStackSizes;
+	public boolean invAutoScrollHeight;
+	public int invAutoScrollInterfaceId;
 	public byte aByte254;
 	private int anInt255;
 	private int anInt256;
