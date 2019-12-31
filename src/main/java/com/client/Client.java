@@ -11112,9 +11112,6 @@ public class Client extends RSApplet {
 										}
 									}
 
-
-
-
 									if (class9_1.id >= 32212 && class9_1.id <= 32212 + 11) {
 										if (class9_1.inv[i3] > 0) {
 											if (class9_1.sprite2 != null) {
@@ -15630,6 +15627,7 @@ public class Client extends RSApplet {
 					int j19 = inStream.readUnsignedWord();
 
 					try {
+						//System.out.println("Item container size: " + j19);
 						for (int j22 = 0; j22 < j19; j22++) {
 							int i25 = inStream.readUnsignedByte();
 							if (i25 == 255) {
@@ -15637,6 +15635,7 @@ public class Client extends RSApplet {
 							}
 							class9_1.inv[j22] = inStream.method436();
 							class9_1.invStackSizes[j22] = i25;
+							//System.out.println(String.format("Added item [%d, %d] to container %d", class9_1.inv[j22], i25, i7));
 						}
 						for (int j25 = j19; j25 < class9_1.inv.length; j25++) {
 							class9_1.inv[j25] = 0;

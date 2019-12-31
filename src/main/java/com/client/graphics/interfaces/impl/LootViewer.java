@@ -18,6 +18,7 @@ public class LootViewer extends RSInterface {
         VOTE_KEY("Vote key", 22093),
         SOTETSEGS_KEY("Sotetseg's key", 4185),
         HUNNLEFS_KEY("Hunnlef's key", 23776),
+        SERENS_KEY("Seren's key", 6792),
         MYSTERY_BOX("Mystery box", 6199),
         SUPER_MYSTERY_BOX("Super m. box", 6828),
         ULTRA_MYSTERY_BOX("Ultra m. box", 13346),
@@ -120,7 +121,7 @@ public class LootViewer extends RSInterface {
         }
 
         scrollable.child(0, id, 4, 4);
-        addItemContainerAutoScrollable(id++, 7, 24, 22, 4, true, scrollInterface);
+        addItemContainerAutoScrollable(id++, 5, 24, 22, 4, true, scrollInterface);
 
         return id;
     }
