@@ -5611,53 +5611,55 @@ public class Client extends RSApplet {
 			stream.writeWord(k);
 			if (!clickConfigButton(k)) {
 				RSInterface class9_2 = RSInterface.interfaceCache[k];
-				if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
-					int i2 = class9_2.valueIndexArray[0][1];
-					if (variousSettings[i2] != class9_2.anIntArray212[0]) {
-						variousSettings[i2] = class9_2.anIntArray212[0];
-						method33(i2);
-						needDrawTabArea = true;
-					}
+				if (!class9_2.ignoreConfigClicking) {
+					if (class9_2.valueIndexArray != null && class9_2.valueIndexArray[0][0] == 5) {
+						int i2 = class9_2.valueIndexArray[0][1];
+						if (variousSettings[i2] != class9_2.anIntArray212[0]) {
+							variousSettings[i2] = class9_2.anIntArray212[0];
+							method33(i2);
+							needDrawTabArea = true;
+						}
 
-					System.out.println(
-							class9_2.id + ", " + i2 + ", " + variousSettings[i2] + ", " + class9_2.anIntArray212[0]);
-				}
-				switch (k) {
-					// clan chat
-					case 18129:
-						if (RSInterface.interfaceCache[18135].message.toLowerCase().contains("join")) {
+						System.out.println(
+								class9_2.id + ", " + i2 + ", " + variousSettings[i2] + ", " + class9_2.anIntArray212[0]);
+					}
+					switch (k) {
+						// clan chat
+						case 18129:
+							if (RSInterface.interfaceCache[18135].message.toLowerCase().contains("join")) {
+								inputTaken = true;
+								inputDialogState = 0;
+								messagePromptRaised = true;
+								promptInput = "";
+								friendsListAction = 6;
+								aString1121 = "Enter the name of the chat you wish to join";
+							} else {
+								sendString(0, "");
+							}
+							break;
+
+						case 18132:
+							openInterfaceID = 18300;
+							break;
+
+						case 18527:
 							inputTaken = true;
 							inputDialogState = 0;
 							messagePromptRaised = true;
 							promptInput = "";
-							friendsListAction = 6;
-							aString1121 = "Enter the name of the chat you wish to join";
-						} else {
-							sendString(0, "");
-						}
-						break;
+							friendsListAction = 9;
+							aString1121 = "Enter a name to add";
+							break;
 
-					case 18132:
-						openInterfaceID = 18300;
-						break;
-
-					case 18527:
-						inputTaken = true;
-						inputDialogState = 0;
-						messagePromptRaised = true;
-						promptInput = "";
-						friendsListAction = 9;
-						aString1121 = "Enter a name to add";
-						break;
-
-					case 18528:
-						inputTaken = true;
-						inputDialogState = 0;
-						messagePromptRaised = true;
-						promptInput = "";
-						friendsListAction = 10;
-						aString1121 = "Enter a name to add";
-						break;
+						case 18528:
+							inputTaken = true;
+							inputDialogState = 0;
+							messagePromptRaised = true;
+							promptInput = "";
+							friendsListAction = 10;
+							aString1121 = "Enter a name to add";
+							break;
+					}
 				}
 			}
 		}
@@ -6038,11 +6040,13 @@ public class Client extends RSApplet {
 				stream.createFrame(185);
 				stream.writeWord(k);
 				RSInterface class9_3 = RSInterface.interfaceCache[k];
-				if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {
-					int l2 = class9_3.valueIndexArray[0][1];
-					variousSettings[l2] = 1 - variousSettings[l2];
-					method33(l2);
-					needDrawTabArea = true;
+				if (!class9_3.ignoreConfigClicking) {
+					if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {
+						int l2 = class9_3.valueIndexArray[0][1];
+						variousSettings[l2] = 1 - variousSettings[l2];
+						method33(l2);
+						needDrawTabArea = true;
+					}
 				}
 			}
 		}
@@ -6163,6 +6167,8 @@ public class Client extends RSApplet {
 	}
 
 	private boolean clickConfigButton(int i) {
+
+
 		switch (i) {
 
 			case 953:
@@ -11088,16 +11094,27 @@ public class Client extends RSApplet {
 									boolean smallSprite = openInterfaceID == 26000
 											&& GrandExchange.isSmallItemSprite(class9_1.id) || class9_1.smallInvSprites;
 
-									if (smallSprite)
-										itemSprite = ItemDefinition.getSmallSprite(j9);
-									else
-										itemSprite = ItemDefinition.getSprite(j9, class9_1.invStackSizes[i3], l9);
 									ItemDefinition itemDef = ItemDefinition.forID(j9);
+									if (smallSprite) {
+										itemSprite = ItemDefinition.getSmallSprite(j9);
+										if (itemDef.customSmallSpriteLocation != null)
+										{
+											itemSprite = new Sprite(itemDef.customSmallSpriteLocation);
+										} else if (itemDef.customSpriteLocation != null)
+										{
+											itemSprite = new Sprite(itemDef.customSpriteLocation);
+										}
+									} else {
+										itemSprite = ItemDefinition.getSprite(j9, class9_1.invStackSizes[i3], l9);
+										if (itemDef.customSpriteLocation != null)
+										{
+											itemSprite = new Sprite(itemDef.customSpriteLocation);
+										}
+									}
 
-                                    if (itemDef.customSpriteLocation != null)
-                                    {
-                                        itemSprite = new Sprite(itemDef.customSpriteLocation);
-                                    }
+
+
+
 									if (class9_1.id >= 32212 && class9_1.id <= 32212 + 11) {
 										if (class9_1.inv[i3] > 0) {
 											if (class9_1.sprite2 != null) {

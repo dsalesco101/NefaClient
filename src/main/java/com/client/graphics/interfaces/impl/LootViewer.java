@@ -12,24 +12,23 @@ public class LootViewer extends RSInterface {
     private static final int TABLE_ONE = 45_140;
     private static final int TABLE_TWO = 45_180;
 
-    private static final boolean PRINT_IDS = true;
+    private static final boolean PRINT_IDS = false;
 
     private enum Button {
-        VOTE_KEY(22093),
-        SOTETSEGS_KEY(4185),
-        HUNNLEFS_KEY(23776),
-        MYSTERY_BOX(6199),
-        SUPER_MYSTERY_BOX(/*6828*/13346), // Item sprite won't draw small for some reason..
-        ULTRA_MYSTERY_BOX(13346),
-        XERIC_CHESTS(3464),
+        VOTE_KEY("Vote key", 22093),
+        SOTETSEGS_KEY("Sotetseg's key", 4185),
+        HUNNLEFS_KEY("Hunnlef's key", 23776),
+        MYSTERY_BOX("Mystery box", 6199),
+        SUPER_MYSTERY_BOX("Super m. box", 6828),
+        ULTRA_MYSTERY_BOX("Ultra m. box", 13346),
+        XERIC_CHESTS("Xeric chests", 3464),
         ;
 
-        Button(int itemId) {
-            this.itemId = itemId;
-        }
+        private final String name;
 
-        public String getName() {
-            return TextClass.fixName(toString().toLowerCase().replaceAll("_", " "));
+        Button(String name, int itemId) {
+            this.name = name;
+            this.itemId = itemId;
         }
 
         private final int itemId;
@@ -127,12 +126,13 @@ public class LootViewer extends RSInterface {
     }
 
     public int getButtons(TextDrawingArea[] tda, int id) {
+        final int parent = id;
         RSInterface inter = addInterface(id++);
         inter.height = 263;
         inter.width = 176;
         inter.scrollMax = inter.height + 1;
 
-        setChildren(Button.values().length * 4, inter);
+        setChildren(Button.values().length * 3, inter);
         int childIndex = 0;
 
         if (PRINT_IDS) {
@@ -146,13 +146,13 @@ public class LootViewer extends RSInterface {
 
             // Button
             inter.child(childIndex++, id, x, y);
-            inter.child(childIndex++, id + 1, x, y);
-            addHoverButton(id++, "Interfaces/HelpTab/BUTTON", 1, 176, 28, button.getName(), -1, id, 1);
-            addHoveredButton(id++, "Interfaces/HelpTab/BUTTON", 0, 176, 28, id++);
+            addConfigButton(id, parent, 1, 0, "Interfaces/Generic/BUTTON", 176, 28, button.name, index,4, 1354);
+            RSInterface.interfaceCache[id].ignoreConfigClicking = true;
+            id++;
 
             // Text
             inter.child(childIndex++, id, x + 80, y + 5);
-            addText(id++, button.getName(), tda, 1, 0xff9040, true, true);
+            addText(id++, button.name, tda, 2, 0xff9040, true, true);
 
             // Item sprite
             inter.child(childIndex++, id, x + 140, y + 5);

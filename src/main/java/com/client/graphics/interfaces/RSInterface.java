@@ -5660,6 +5660,7 @@ public class RSInterface {
 	public int itemSearchSelectedId, itemSearchSelectedSlot = -1;
 	public static int selectedItemInterfaceId = -1;
 	public int priority;
+	public boolean ignoreConfigClicking;
 
 	public int grandExchangeSlot;
 
