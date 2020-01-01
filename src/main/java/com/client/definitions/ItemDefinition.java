@@ -22,7 +22,10 @@ import com.client.sign.Signlink;
 import com.client.utilities.FileOperations;
 
 public final class ItemDefinition {
+
 	public byte[] customSpriteLocation;
+	public byte[] customSmallSpriteLocation;
+
 	public static void unpackConfig(final StreamLoader streamLoader) {
 		// stream = new Stream(streamLoader.getDataForName("obj.dat"));
 		// Stream stream = new Stream(streamLoader.getDataForName("obj.idx"));
@@ -87,378 +90,380 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
-		case 13092: //this makes crystal halberds wieldable, weird af.
-		case 13093:
-		case 13094:
-		case 13095:
-		case 13096:
-		case 13097:
-		case 13098:
-		case 13099:
-		case 13100:
-		case 13101:
-			itemDef.inventoryOptions = new String[] { null, "Wield", null, null, null};
-			break;
-		case 23933:
-		itemDef.name = "Vote Crystal";
-		break;
-		case 19473:
-			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
-			break;
-		case 10556:
-		case 10557:
-		case 10558:
-		case 10559:
-			itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
-			break;
-		case 21898:
-			itemDef.inventoryOptions = new String[] { null, "Wear", "Teleports", "Features", null };
-			break;
-		case 12873:
-		case 12875:
-		case 12877:
-		case 12879:
-		case 12881:
-		case 12883:
-			itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-			break;
-		case 23804:
-			itemDef.name = "Imbue Dust";
-			break;
-		case 22517:
-			itemDef.name = "Crystal Shard";
-			break;
-		case 23951:
-			itemDef.name = "Crystalline Key";
-			break;
-		case 23877:
-			itemDef.name = "Crystal Shard";
-			itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
-			itemDef.stackable = true;
-			break;
-		case 23943:
-			itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", "Check", "Drop" };
-			break;
-		case 2996:
-			itemDef.name = "@red@PKP Ticket";
-			break;
-		case 23776:
-			itemDef.name = "@red@Hunllef's Key";
-			break;
-		case 13148:
-			itemDef.name = "@red@Reset Lamp";
-			break;
-		case 6792:
-			itemDef.name = "@red@Seren's Key";
-			break;
-		case 4185:
-			itemDef.name = "@red@Sotetseg's Key";
-			break;
-		case 21880:
-			itemDef.name = "Wrath Rune";
-			itemDef.value = 1930;
-			break;
-		case 12007:
-			itemDef.inventoryOptions = new String[] { null, null, "Open", null, "Drop" };
-			break;
-		case 21262:
-			itemDef.name = "Vote Genie Pet";
-			itemDef.inventoryOptions = new String[] { null, null, null, null, "Release" };
-			break;
-		case 21817:
-			itemDef.inventoryOptions = new String[] { null, "Wear", "Dismantle", null, null, };
-			break;
-		case 21259:
-			itemDef.name = "@red@Name Change Scroll";
-			itemDef.inventoryOptions = new String[] { null, null, "Read", null, null, };
-			break;
-		case 22547:
-		case 22552:
-		case 22542:
-			itemDef.inventoryOptions = new String[] { null, null, null, null, null, };
-			break;
-		case 22555:
-		case 22550:
-		case 22545:
-			itemDef.inventoryOptions = new String[] { null, "Wield", "Check", "Uncharge", null, };
-			break;
-		case 732:
-			itemDef.name = "@blu@Imbuedeifer";
-			itemDef.value = 1930;
-			break;
-		case 21881:
-			itemDef.name = "Wrath Rune";
-			itemDef.value = 1930;
-			break;
-		case 13226:
-			itemDef.name = "Herb Sack";
-			itemDef.description = "Thats a nice looking sack.";
-			break;
-		case 3456:
-			itemDef.name = "@whi@Common Raids Key";
-			itemDef.description = "Can be used on the storage unit.";
-			break;
-		case 3464:
-			itemDef.name = "@pur@Rare Raids Key";
-			itemDef.description = "Can be used on the storage unit.";
-			break;
-		case 13190:
-			itemDef.name = "@yel@3 Day Trial Donator(1 Time Use)";
-			itemDef.inventoryOptions = new String[] { "Redeem", null, null, null, "Drop" };
-			itemDef.description = "Experience benefits of donator for 3 days!";
-		break;
-		case 6121: 
-			itemDef.name = "Break Vials Instruction";
-			itemDef.description = "How does one break a vial, its impossible?";
-			break;
-		case 2528:
-			itemDef.name = "@red@Experience Lamp";
-			itemDef.description = "Should I rub it......";
-			break;
-		case 5509:
-			itemDef.name = "Small Pouch";
-            byte[] ph11 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Small_pouch.png");
-            itemDef.customSpriteLocation = ph11;
-            break;
-		case 5510:
-			itemDef.name = "Medium Pouch";
-            byte[] ph12 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Medium_pouch.png");
-            itemDef.customSpriteLocation = ph12;
-            break;
+			case 13092: //this makes crystal halberds wieldable, weird af.
+			case 13093:
+			case 13094:
+			case 13095:
+			case 13096:
+			case 13097:
+			case 13098:
+			case 13099:
+			case 13100:
+			case 13101:
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, null};
+				break;
+			case 23933:
+				itemDef.name = "Vote Crystal";
+				break;
+			case 19473:
+				itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+				break;
+			case 10556:
+			case 10557:
+			case 10558:
+			case 10559:
+				itemDef.inventoryOptions = new String[] { null, "Wear", "Feature", null, "Drop" };
+				break;
+			case 21898:
+				itemDef.inventoryOptions = new String[] { null, "Wear", "Teleports", "Features", null };
+				break;
+			case 12873:
+			case 12875:
+			case 12877:
+			case 12879:
+			case 12881:
+			case 12883:
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				break;
+			case 23804:
+				itemDef.name = "Imbue Dust";
+				break;
+			case 22517:
+				itemDef.name = "Crystal Shard";
+				break;
+			case 23951:
+				itemDef.name = "Crystalline Key";
+				break;
+			case 23877:
+				itemDef.name = "Crystal Shard";
+				itemDef.inventoryOptions = new String[] { null, null, null, null, "Drop" };
+				itemDef.stackable = true;
+				break;
+			case 23943:
+				itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", "Check", "Drop" };
+				break;
+			case 2996:
+				itemDef.name = "@red@PKP Ticket";
+				break;
+			case 23776:
+				itemDef.name = "@red@Hunllef's Key";
+				break;
+			case 13148:
+				itemDef.name = "@red@Reset Lamp";
+				break;
+			case 6792:
+				itemDef.name = "@red@Seren's Key";
+				break;
+			case 4185:
+				itemDef.name = "@red@Sotetseg's Key";
+				break;
+			case 21880:
+				itemDef.name = "Wrath Rune";
+				itemDef.value = 1930;
+				break;
+			case 12007:
+				itemDef.inventoryOptions = new String[] { null, null, "Open", null, "Drop" };
+				break;
+			case 21262:
+				itemDef.name = "Vote Genie Pet";
+				itemDef.inventoryOptions = new String[] { null, null, null, null, "Release" };
+				break;
+			case 21817:
+				itemDef.inventoryOptions = new String[] { null, "Wear", "Dismantle", null, null, };
+				break;
+			case 21259:
+				itemDef.name = "@red@Name Change Scroll";
+				itemDef.inventoryOptions = new String[] { null, null, "Read", null, null, };
+				break;
+			case 22547:
+			case 22552:
+			case 22542:
+				itemDef.inventoryOptions = new String[] { null, null, null, null, null, };
+				break;
+			case 22555:
+			case 22550:
+			case 22545:
+				itemDef.inventoryOptions = new String[] { null, "Wield", "Check", "Uncharge", null, };
+				break;
+			case 732:
+				itemDef.name = "@blu@Imbuedeifer";
+				itemDef.value = 1930;
+				break;
+			case 21881:
+				itemDef.name = "Wrath Rune";
+				itemDef.value = 1930;
+				break;
+			case 13226:
+				itemDef.name = "Herb Sack";
+				itemDef.description = "Thats a nice looking sack.";
+				break;
+			case 3456:
+				itemDef.name = "@whi@Common Raids Key";
+				itemDef.description = "Can be used on the storage unit.";
+				break;
+			case 3464:
+				itemDef.name = "@pur@Rare Raids Key";
+				itemDef.description = "Can be used on the storage unit.";
+				break;
+			case 13190:
+				itemDef.name = "@yel@3 Day Trial Donator(1 Time Use)";
+				itemDef.inventoryOptions = new String[] { "Redeem", null, null, null, "Drop" };
+				itemDef.description = "Experience benefits of donator for 3 days!";
+				break;
+			case 6121:
+				itemDef.name = "Break Vials Instruction";
+				itemDef.description = "How does one break a vial, its impossible?";
+				break;
+			case 2528:
+				itemDef.name = "@red@Experience Lamp";
+				itemDef.description = "Should I rub it......";
+				break;
+			case 5509:
+				itemDef.name = "Small Pouch";
+				byte[] ph11 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Small_pouch.png");
+				itemDef.customSpriteLocation = ph11;
+				break;
+			case 5510:
+				itemDef.name = "Medium Pouch";
+				byte[] ph12 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Medium_pouch.png");
+				itemDef.customSpriteLocation = ph12;
+				break;
 
-		case 5512:
-			itemDef.name = "Large Pouch";
-            byte[] ph13 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Large_pouch.png");
-            itemDef.customSpriteLocation = ph13;
-            break;
-		case 10724: //full skeleton
-		case 10725:
-		case 10726:
-		case 10727:
-		case 10728:
-			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-           break;
-		case 5514:
-			itemDef.name = "Giant Pouch";
-            byte[] ph14 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Giant_pouch.png");
-            itemDef.customSpriteLocation = ph14;
-            break;
-		case 22610: //vesta spear
-			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-            break;
-		case 22613: //vesta longsword
-			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-			 break;
-        	case 22504: //stat warhammer
-   			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-   			 break;
-   			 
-   			 
-   			 
-   			 
-   			 
-   			 
-        case 4224:
-        case 4225:
-        case 4226:
-        case 4227:
-        case 4228:
-        case 4229:
-        case 4230:
-        case 4231:
-        case 4232:
-        case 4233:
-        case 4234:
-        case 4235://crystal sheild
-      			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-      			 break;
-		case 4212:
-		case 4214:
-		case 4215:
-		case 4216:
-		case 4217:
-		case 4218:
-		case 4219:
-		case 4220:
-		case 4221:
-		case 4222:
-		case 4223:
-			 itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
-			 break;
-	    case 2841:
-			 itemDef.name = "@red@Bonus Exp Scroll";
+			case 5512:
+				itemDef.name = "Large Pouch";
+				byte[] ph13 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Large_pouch.png");
+				itemDef.customSpriteLocation = ph13;
+				break;
+			case 10724: //full skeleton
+			case 10725:
+			case 10726:
+			case 10727:
+			case 10728:
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+			case 5514:
+				itemDef.name = "Giant Pouch";
+				byte[] ph14 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Giant_pouch.png");
+				itemDef.customSpriteLocation = ph14;
+				break;
+			case 22610: //vesta spear
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+			case 22613: //vesta longsword
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+			case 22504: //stat warhammer
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+
+
+
+
+
+
+			case 4224:
+			case 4225:
+			case 4226:
+			case 4227:
+			case 4228:
+			case 4229:
+			case 4230:
+			case 4231:
+			case 4232:
+			case 4233:
+			case 4234:
+			case 4235://crystal sheild
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+			case 4212:
+			case 4214:
+			case 4215:
+			case 4216:
+			case 4217:
+			case 4218:
+			case 4219:
+			case 4220:
+			case 4221:
+			case 4222:
+			case 4223:
+				itemDef.inventoryOptions = new String[] { null, "Wield", null, null, "Drop" };
+				break;
+			case 2841:
+				itemDef.name = "@red@Bonus Exp Scroll";
 				itemDef.inventoryOptions = new String[] { "@yel@Activate", null, null, null, "Drop" };
 				itemDef.description = "You will get double experience using this scroll.";
-		     break;
-		case 21791:
-		case 21793:
-		case 21795:
-			 itemDef.inventoryOptions = new String[] { null, "Wear", null, null, "Drop" };
-			 break;
-		case 19841:
-			itemDef.name = "Master Casket";
-			break;
-		case 21034:
-			itemDef.inventoryOptions = new String[] { "Read", null, null, null, "Drop" };
-			break;
-		case 6830:
-			itemDef.name = "@yel@BETA @blu@BOX";
-			itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-			break;
-		case 21079:
-			itemDef.inventoryOptions = new String[] { "Read", null, null, null, "Drop" };
-			break;
-		case 22093:
-			itemDef.name = "@gre@Vote Streak Key";
-			itemDef.description = "Thanks for voting!";
-			break;
-		case 11864:
-		case 11865:
-		case 19639:
-		case 19641:
-		case 19643:
-		case 19645:
-		case 19647:
-		case 19649:
-			itemDef.equipActions[2] = "Log";
-			itemDef.equipActions[1] = "Check";
-			break;
-		case 13136:
-			itemDef.equipActions[2] = "Elidinis";
-			itemDef.equipActions[1] = "Kalphite Hive";
-			break;
-		case 2550:
-			itemDef.equipActions[2] = "Check";
-			break;
+				break;
+			case 21791:
+			case 21793:
+			case 21795:
+				itemDef.inventoryOptions = new String[] { null, "Wear", null, null, "Drop" };
+				break;
+			case 19841:
+				itemDef.name = "Master Casket";
+				break;
+			case 21034:
+				itemDef.inventoryOptions = new String[] { "Read", null, null, null, "Drop" };
+				break;
+			case 6830:
+				itemDef.name = "@yel@BETA @blu@BOX";
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				break;
+			case 21079:
+				itemDef.inventoryOptions = new String[] { "Read", null, null, null, "Drop" };
+				break;
+			case 22093:
+				itemDef.name = "@gre@Vote Streak Key";
+				itemDef.description = "Thanks for voting!";
+				break;
+			case 11864:
+			case 11865:
+			case 19639:
+			case 19641:
+			case 19643:
+			case 19645:
+			case 19647:
+			case 19649:
+				itemDef.equipActions[2] = "Log";
+				itemDef.equipActions[1] = "Check";
+				break;
+			case 13136:
+				itemDef.equipActions[2] = "Elidinis";
+				itemDef.equipActions[1] = "Kalphite Hive";
+				break;
+			case 2550:
+				itemDef.equipActions[2] = "Check";
+				break;
 
-		case 1712:
-		case 1710:
-		case 1708:
-		case 1706:
-			itemDef.equipActions[1] = "Edgeville";
-			itemDef.equipActions[2] = "Karamja";
-			itemDef.equipActions[3] = "Draynor";
-			itemDef.equipActions[4] = "Al-Kharid";
-			break;
-		case 21816:
-			 itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", null, "Drop" };
-			itemDef.equipActions[1] = "Check";
-			itemDef.equipActions[2] = "Toggle-absorption";
-			break;
-		case 2552:
-		case 2554:
-		case 2556:
-		case 2558:
-		case 2560:
-		case 2562:
-		case 2564:
-		case 2566: // Ring of duelling
-			itemDef.equipActions[2] = "Shantay Pass";
-			itemDef.equipActions[1] = "Clan wars";
-			break;
-		case 11739:
-			itemDef.name = "@gre@Vote Mystery Box";
-			itemDef.description = "Probably contains cosmetics, or maybe not...";
-			itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-			break;
-		case 6828:
-			itemDef.name = "Super Mystery Box";
-			itemDef.description = "Mystery box that contains goodies.";
-			itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-			 byte[] ph51 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Mystery_Box.png");
-	            itemDef.customSpriteLocation = ph51;
-			break;
-		case 13438:
-			itemDef.name = "@red@Wildy Box";
-			itemDef.description = ".";
-			itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
-			break;
-		case 6199:
-			itemDef.name = "Mystery Box";
-			itemDef.description = "Mystery box that contains goodies.";
-			itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-			break;
-		case 13346:
-			itemDef.name = "Ultra Mystery Box";
-			itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
-			break;
-		case 10832:
-			itemDef.name = "Small Coin Bag";
-			itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-			itemDef.description = "I can see some coins inside.";
-			break;
-		case 10833:
-			itemDef.name = "Medium Coin Bag";
-			itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-			itemDef.description = "I can see some coins inside.";
-			break;
-		case 10834:
-			itemDef.name = "Large Coin Bag";
-			itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
-			itemDef.description = "I can see some coins inside.";
-			break;
-		case 15098:
-			itemDef.name = "Dice (up to 100)";
-			itemDef.description = "A 100-sided dice.";
-			itemDef.modelId = 31223;
-			itemDef.modelZoom = 1104;
-			itemDef.modelRotation2 = 215;
-			itemDef.modelRotation1 = 94;
-			itemDef.modelOffset2 = -5;
-			itemDef.modelOffset1 = -18;
-			itemDef.inventoryOptions = new String[5];
-			itemDef.inventoryOptions[1] = "Public-roll";
-			itemDef.inventoryOptions[2] = null;
-			itemDef.name = "Dice (up to 100)";
-			itemDef.anInt196 = 15;
-			itemDef.anInt184 = 25;
-			byte[] ph59 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Dice_Bag.png");
-            itemDef.customSpriteLocation = ph59;
-			break;
-		case 11773:
-		case 11771:
-		case 11770:
-		case 11772:
-			itemDef.anInt196 += 45;
-			break;
-		case 12792:
-			itemDef.name = "Graceful Recolor Box";
-			itemDef.inventoryOptions = new String[] { null, "Use", null, null, "Drop" };
-			break;
-		case 2403:
-			itemDef.name = "@yel@$10 Scroll";
-			itemDef.description = "Claim this scroll to be rewarded with 10 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 2396:
-			itemDef.name = "@yel@$25 Scroll";
-			itemDef.description = "Claim this scroll to be rewarded with 25 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 786:
-			itemDef.name = "@yel@$50 Donator";
-			itemDef.description = "Claim this scroll to be rewarded with 50 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 761:
-			itemDef.name = "@yel@$100 Donator";
-			itemDef.description = "Claim this scroll to be rewarded with 100 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 607:
-			itemDef.name = "@red@$250 Scroll";
-			itemDef.description = "Claim this scroll to be rewarded with 250 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 608:
-			itemDef.name = "@gre@$500 Scroll";
-			itemDef.description = "Claim this scroll to be rewarded with 500 donator points.";
-			itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-			break;
-		case 1464:
-			itemDef.name = "Vote ticket";
-			itemDef.description = "Exchange this for a Vote Point.";
-			break;
+			case 1712:
+			case 1710:
+			case 1708:
+			case 1706:
+				itemDef.equipActions[1] = "Edgeville";
+				itemDef.equipActions[2] = "Karamja";
+				itemDef.equipActions[3] = "Draynor";
+				itemDef.equipActions[4] = "Al-Kharid";
+				break;
+			case 21816:
+				itemDef.inventoryOptions = new String[] { null, "Wear", "Uncharge", null, "Drop" };
+				itemDef.equipActions[1] = "Check";
+				itemDef.equipActions[2] = "Toggle-absorption";
+				break;
+			case 2552:
+			case 2554:
+			case 2556:
+			case 2558:
+			case 2560:
+			case 2562:
+			case 2564:
+			case 2566: // Ring of duelling
+				itemDef.equipActions[2] = "Shantay Pass";
+				itemDef.equipActions[1] = "Clan wars";
+				break;
+			case 11739:
+				itemDef.name = "@gre@Vote Mystery Box";
+				itemDef.description = "Probably contains cosmetics, or maybe not...";
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				break;
+			case 6828:
+				itemDef.name = "Super Mystery Box";
+				itemDef.description = "Mystery box that contains goodies.";
+				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
+				byte[] ph51 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Mystery_Box.png");
+				byte[] ph52 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Mystery_Box_Small.png");
+				itemDef.customSpriteLocation = ph51;
+				itemDef.customSmallSpriteLocation = ph52;
+				break;
+			case 13438:
+				itemDef.name = "@red@Wildy Box";
+				itemDef.description = ".";
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				break;
+			case 6199:
+				itemDef.name = "Mystery Box";
+				itemDef.description = "Mystery box that contains goodies.";
+				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
+				break;
+			case 13346:
+				itemDef.name = "Ultra Mystery Box";
+				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", "Quick-Open", "Drop" };
+				break;
+			case 10832:
+				itemDef.name = "Small Coin Bag";
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
+				itemDef.description = "I can see some coins inside.";
+				break;
+			case 10833:
+				itemDef.name = "Medium Coin Bag";
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
+				itemDef.description = "I can see some coins inside.";
+				break;
+			case 10834:
+				itemDef.name = "Large Coin Bag";
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
+				itemDef.description = "I can see some coins inside.";
+				break;
+			case 15098:
+				itemDef.name = "Dice (up to 100)";
+				itemDef.description = "A 100-sided dice.";
+				itemDef.modelId = 31223;
+				itemDef.modelZoom = 1104;
+				itemDef.modelRotation2 = 215;
+				itemDef.modelRotation1 = 94;
+				itemDef.modelOffset2 = -5;
+				itemDef.modelOffset1 = -18;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Public-roll";
+				itemDef.inventoryOptions[2] = null;
+				itemDef.name = "Dice (up to 100)";
+				itemDef.anInt196 = 15;
+				itemDef.anInt184 = 25;
+				byte[] ph59 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Dice_Bag.png");
+				itemDef.customSpriteLocation = ph59;
+				break;
+			case 11773:
+			case 11771:
+			case 11770:
+			case 11772:
+				itemDef.anInt196 += 45;
+				break;
+			case 12792:
+				itemDef.name = "Graceful Recolor Box";
+				itemDef.inventoryOptions = new String[] { null, "Use", null, null, "Drop" };
+				break;
+			case 2403:
+				itemDef.name = "@yel@$10 Scroll";
+				itemDef.description = "Claim this scroll to be rewarded with 10 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 2396:
+				itemDef.name = "@yel@$25 Scroll";
+				itemDef.description = "Claim this scroll to be rewarded with 25 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 786:
+				itemDef.name = "@yel@$50 Donator";
+				itemDef.description = "Claim this scroll to be rewarded with 50 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 761:
+				itemDef.name = "@yel@$100 Donator";
+				itemDef.description = "Claim this scroll to be rewarded with 100 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 607:
+				itemDef.name = "@red@$250 Scroll";
+				itemDef.description = "Claim this scroll to be rewarded with 250 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 608:
+				itemDef.name = "@gre@$500 Scroll";
+				itemDef.description = "Claim this scroll to be rewarded with 500 donator points.";
+				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
+				break;
+			case 1464:
+				itemDef.name = "Vote ticket";
+				itemDef.description = "Exchange this for a Vote Point.";
+				break;
 		}
 	}
 
@@ -804,6 +809,7 @@ public final class ItemDefinition {
 	private void setDefaults() {
 		// equipActions = new String[6];
 		customSpriteLocation = null;
+		customSmallSpriteLocation = null;
 		equipActions = new String[] { "Remove", null, "Operate", null, null };
 		modelId = 0;
 		name = null;

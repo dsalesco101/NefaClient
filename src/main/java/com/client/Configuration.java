@@ -24,7 +24,8 @@ public class Configuration {
 	public static boolean playerNames = false;
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
-	public static final int CLIENT_VERSION = 107;//updateversion
+
+	public static final int CLIENT_VERSION = 108;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
 
