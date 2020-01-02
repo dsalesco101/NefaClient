@@ -6,56 +6,75 @@ import com.client.graphics.interfaces.RSInterface;
 public class SlayerRewards extends RSInterface
 {
 
+    public static final int UNLOCK_INTERFACE_ID = 50_000;
+    public static final int EXTEND_INTERFACE_ID  = 50_100;
+    public static final int TASK_INTERFACE_ID  = 50_200;
+    public static final int INFO_INTERFACE_ID  = 50_300;
+
+    public static final int CLOSE_BUTTON_1 = 47_902;
+    public static final int CLOSE_BUTTON_2 = 47_903;
+
+    private static final int UNLOCK_BUTTON  = 49_998;
+    private static final int EXTEND_BUTTON  = 49_997;
+    private static final int BUY_BUTTON  = 49_996;
+    private static final int TASK_BUTTON  = 49_995;
+
+    private static final int POINTS_STRING_INTERFACE_ID  = 49_999;
+
     public static void initializeInterfaces(TextDrawingArea[] tda) {
+        // Buttons at the top
+        addHoverText(UNLOCK_BUTTON, "Unlock", "Unlock", tda, 0, 0xFF9900, true, true, 82, 16);
+        addHoverText(EXTEND_BUTTON, "Extend", "Extend", tda, 0, 0xFF9900, true, true, 82, 16);
+        addHoverText(BUY_BUTTON, "Buy", "Buy", tda, 0, 0xFF9900, true, true, 82, 16);
+        addHoverText(TASK_BUTTON, "Task", "Task", tda, 0, 0xFF9900, true, true, 82, 16);
+
+        // Slayer points string
+        addText(POINTS_STRING_INTERFACE_ID, "1300", tda, 0, 0xFF9900, false, true);
+
+        // Close button
+        addHoverButton(CLOSE_BUTTON_1, "Slayer interface/CLOSE", 1, 21, 21,
+                "Close", -1, CLOSE_BUTTON_1, 3);
+        addHoveredButton2(CLOSE_BUTTON_2, "Slayer interface/CLOSE", 2, 21, 21, CLOSE_BUTTON_2 + 1);
+
         unlockInterface(tda);
         extendInterface(tda);
-        buyInterface(tda);
         taskInterface(tda);
         infoInterface(tda);
     }
 
     public static void infoInterface(TextDrawingArea[] tda) {
-        //44842
-        RSInterface rsinterface = addInterface(47900);
-        addSprite(47901, 0, "Slayer interface/Info");
 
-        addHoverButton(47902, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47903, 3);
-        addHoveredButton2(47903, "Slayer interface/CLOSE", 2, 21, 21, 47904);
-
-        addHoverText(47905, "Back", "Back", tda, 0, 0xFF9900, true, true, 83, 18);
-        addHoverText(47906, "Confirm", "Confirm", tda, 0, 0xFF9900, true, true, 83, 18);
+        RSInterface rsinterface = addInterface(INFO_INTERFACE_ID);
+        addSprite(INFO_INTERFACE_ID + 1, 0, "Slayer interface/Info");
+        addHoverText(INFO_INTERFACE_ID + 2, "Back", "Back", tda, 0, 0xFF9900, true, true, 83, 18);
+        addHoverText(INFO_INTERFACE_ID + 3, "Confirm", "Confirm", tda, 0, 0xFF9900, true, true, 83, 18);
 
         rsinterface.totalChildren(15);
 
         int y = 104;
 
-        for (int i = 0; i < 10; i++) {
-            addText(47907 + i, "asdfas", tda, i == 0? 1 : 0, 0xFF9900, true, true);
+        int startInterfaceId = INFO_INTERFACE_ID + 4;
+        int startChild = 5;
 
-            rsinterface.child(i+5, 47907 + i, 246, y);
+        for (int i = 0; i < 10; i++) {
+            addText(startInterfaceId + i, "asdfas", tda, i == 0? 1 : 0, 0xFF9900, true, true);
+
+            rsinterface.child(i + startChild, startInterfaceId + i, 246, y);
             y += 15;
         }
 
-        rsinterface.child(0, 47901, 12, 20);
-        rsinterface.child(1, 47902, 472, 27);
-        rsinterface.child(2, 47903, 472, 27);
-
-        rsinterface.child(3, 47905, 161 - 13, 265);
-        rsinterface.child(4, 47906, 279 - 13, 265);
+        rsinterface.child(0, INFO_INTERFACE_ID + 1, 12, 20);
+        rsinterface.child(1, CLOSE_BUTTON_1, 472, 27);
+        rsinterface.child(2, CLOSE_BUTTON_2, 472, 27);
+        rsinterface.child(3, INFO_INTERFACE_ID + 2, 161 - 13, 265);
+        rsinterface.child(4, INFO_INTERFACE_ID + 3, 279 - 13, 265);
 
     }
 
-    public static void buyInterface(TextDrawingArea[] tda) {
+    // We don't use this interface so I'm commenting it out
+    /*public static void buyInterface(TextDrawingArea[] tda) {
         RSInterface rsinterface = addInterface(47700);
         addSprite(47701, 0, "Slayer interface/Buy/buy");
-
-        //addHoverButton(47702, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47703, 3);
-        //addHoveredButton2(47703, "Slayer interface/CLOSE", 2, 21, 21, 47704);
-
-        addHoverText(27405, "Unlock", "Unlock", tda, 0, 0xFF9900, true, true, 82, 16);
-        addHoverText(27406, "Extend", "Extend", tda, 0, 0xFF9900, true, true, 82, 16);
-        addHoverText(27407, "Buy", "Buy", tda, 0, 0xFF9900, true, true, 82, 16);
-        addHoverText(27408, "Task", "Task", tda, 0, 0xFF9900, true, true, 82, 16);
 
         addToItemGroup(47706, 5, 4, 60, 40, true, "Info","Buy 1","Buy 5","Buy 10");
 
@@ -63,87 +82,81 @@ public class SlayerRewards extends RSInterface
         rsinterface.child(0, 47701, 12, 20);
         rsinterface.child(1, 47902, 472, 27);
         rsinterface.child(2, 47903, 472, 27);
-        rsinterface.child(3, 48505, 455, 61);
+        rsinterface.child(3, POINTS_STRING_INTERFACE_ID, 455, 61);
         rsinterface.child(4, 47706, 58, 81);
 
-        rsinterface.child(5, 27405, 52-15-12, 61);
-        rsinterface.child(6, 27406, 134-12-12, 61);
-        rsinterface.child(7, 27407, 228-19-12, 61);
-        rsinterface.child(8, 27408, 308-14-12, 61);
-    }
+        rsinterface.child(5, UNLOCK_BUTTON, 52-15-12, 61);
+        rsinterface.child(6, EXTEND_BUTTON, 134-12-12, 61);
+        rsinterface.child(7, BUY_BUTTON, 228-19-12, 61);
+        rsinterface.child(8, TASK_BUTTON, 308-14-12, 61);
+    }*/
 
     public static void taskInterface(TextDrawingArea[] tda) {
-        RSInterface rsinterface = addInterface(47800);
-        addSprite(47801, 0, "Slayer interface/Task/task");
+        RSInterface rsinterface = addInterface(TASK_INTERFACE_ID);
+        addSprite(TASK_INTERFACE_ID + 1, 0, "Slayer interface/Task/task");
 
-        //addHoverButton(47802, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47803, 3);
-       // addHoveredButton2(47803, "Slayer interface/CLOSE", 2, 21, 21, 47804);
+        addText(TASK_INTERFACE_ID + 2, "Black Demons x230", tda, 1, 0xFFFFFF, true, true);
 
-        addText(48809, "Black Demons x230", tda, 1, 0xFFFFFF, true, true);
+        addHoverText(TASK_INTERFACE_ID + 3, "Cancel task", "Cancel", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 4, "Block task", "Block", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 5, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 6, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 7, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 8, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 9, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
+        addHoverText(TASK_INTERFACE_ID + 10, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
 
-        addHoverText(48810, "Cancel task", "Cancel", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48811, "Block task", "Block", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48812, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48813, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48814, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48815, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48816, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-        addHoverText(48817, "Unblock task", "Unblock task", tda, 0, 0xFF9900, true, true, 57);
-
-        addText(48818, "", tda, 1, 0xFFFFFF, true, true);
-        addText(48819, "", tda, 1, 0xFFFFFF, true, true);
-        addText(48820, "", tda, 1, 0xFFFFFF, true, true);
-        addText(48821, "", tda, 1, 0xFFFFFF, true, true);
-        addText(48822, "", tda, 1, 0xFFFFFF, true, true);
-        addText(48823, "", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 11, "asdf", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 12, "asdf", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 13, "asdfasdf", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 14, "asdf", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 15, "asdf", tda, 1, 0xFFFFFF, true, true);
+        addText(TASK_INTERFACE_ID + 16, "asdf", tda, 1, 0xFFFFFF, true, true);
 
 
         rsinterface.totalChildren(23);
-        rsinterface.child(0, 47801, 12, 20);
-        rsinterface.child(1, 47902, 472, 27);
-        rsinterface.child(2, 47903, 472, 27);
-        rsinterface.child(3, 48505, 455, 61);
+        rsinterface.child(0, TASK_INTERFACE_ID + 1, 12, 20);
+        rsinterface.child(1, CLOSE_BUTTON_1, 472, 27);
+        rsinterface.child(2, CLOSE_BUTTON_2, 472, 27);
+        rsinterface.child(3, POINTS_STRING_INTERFACE_ID, 455, 61);
 
-        rsinterface.child(4, 27405, 52-15-12, 61);
-        rsinterface.child(5, 27406, 134-12-12, 61);
-        rsinterface.child(6, 27407, 228-19-12, 61);
-        rsinterface.child(7, 27408, 308-14-12, 61);
+        rsinterface.child(4, UNLOCK_BUTTON, 52-15-12, 61);
+        rsinterface.child(5, EXTEND_BUTTON, 134-12-12, 61);
+        rsinterface.child(6, BUY_BUTTON, 228-19-12, 61);
+        rsinterface.child(7, TASK_BUTTON, 308-14-12, 61);
 
-        rsinterface.child(8, 48809, 149, 144);
-        rsinterface.child(9, 48810, 310, 144);
-        rsinterface.child(10, 48811, 410, 144);
-        rsinterface.child(11, 48812, 384, 186);
-        rsinterface.child(12, 48813, 384, 208);
-        rsinterface.child(13, 48814, 384, 230);
-        rsinterface.child(14, 48815, 384, 252);
-        rsinterface.child(15, 48816, 384, 274);
-        rsinterface.child(16, 48817, 384, 296);
-        rsinterface.child(17, 48818, 254, 186);
-        rsinterface.child(18, 48819, 254, 208);
-        rsinterface.child(19, 48820, 254, 230);
-        rsinterface.child(20, 48821, 254, 252);
-        rsinterface.child(21, 48822, 254, 274);
-        rsinterface.child(22, 48823, 254, 296);
+        rsinterface.child(8, TASK_INTERFACE_ID + 2, 149, 144);
+        rsinterface.child(9, TASK_INTERFACE_ID + 3, 310, 144);
+        rsinterface.child(10, TASK_INTERFACE_ID + 4, 410, 144);
+        rsinterface.child(11, TASK_INTERFACE_ID + 5, 384, 186);
+        rsinterface.child(12, TASK_INTERFACE_ID + 6, 384, 208);
+        rsinterface.child(13, TASK_INTERFACE_ID + 7, 384, 230);
+        rsinterface.child(14, TASK_INTERFACE_ID + 8, 384, 252);
+        rsinterface.child(15, TASK_INTERFACE_ID + 9, 384, 274);
+        rsinterface.child(16, TASK_INTERFACE_ID + 10, 384, 296);
+        rsinterface.child(17, TASK_INTERFACE_ID + 11, 254, 186);
+        rsinterface.child(18, TASK_INTERFACE_ID + 12, 254, 208);
+        rsinterface.child(19, TASK_INTERFACE_ID + 13, 254, 230);
+        rsinterface.child(20, TASK_INTERFACE_ID + 14, 254, 252);
+        rsinterface.child(21, TASK_INTERFACE_ID + 15, 254, 274);
+        rsinterface.child(22, TASK_INTERFACE_ID + 16, 254, 296);
     }
 
     public static void unlockInterface(TextDrawingArea[] tda) {
-        RSInterface rsinterface = addInterface(21_404);
-        addSprite(21_405, 0, "Slayer interface/Unlock/1/unlock");
-
-       // addHoverButton(21_406, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47503, 3);
-       // addHoveredButton2(21_407, "Slayer interface/CLOSE", 2, 21, 21, 47504);
+        RSInterface rsinterface = addInterface(UNLOCK_INTERFACE_ID);
+        addSprite(UNLOCK_INTERFACE_ID + 1, 0, "Slayer interface/Unlock/1/unlock");
 
         rsinterface.totalChildren(9);
-        rsinterface.child(0, 21_405, 12, 20);
-        rsinterface.child(1, 47902, 472, 27);
-        rsinterface.child(2, 47903, 472, 27);
-        rsinterface.child(3, 48505, 455, 61);
-        rsinterface.child(4, 21_408, 16, 78);
+        rsinterface.child(0, UNLOCK_INTERFACE_ID + 1, 12, 20);
+        rsinterface.child(1, CLOSE_BUTTON_1, 472, 27);
+        rsinterface.child(2, CLOSE_BUTTON_2, 472, 27);
+        rsinterface.child(3, POINTS_STRING_INTERFACE_ID, 455, 61);
+        rsinterface.child(4, UNLOCK_INTERFACE_ID + 2, 16, 78);
 
-        rsinterface.child(5, 27405, 52-15-12, 61);
-        rsinterface.child(6, 27406, 134-12-12, 61);
-        rsinterface.child(7, 27407, 228-19-12, 61);
-        rsinterface.child(8, 27408, 308-14-12, 61);
+        rsinterface.child(5, UNLOCK_BUTTON, 52-15-12, 61);
+        rsinterface.child(6, EXTEND_BUTTON, 134-12-12, 61);
+        rsinterface.child(7, BUY_BUTTON, 228-19-12, 61);
+        rsinterface.child(8, TASK_BUTTON, 308-14-12, 61);
 
         Object[][] unlocks = {
                 {20, false}, // imbue slayer helmet
@@ -151,7 +164,7 @@ public class SlayerRewards extends RSInterface
                 {17, true}, // bigger and badder
         };
 
-        RSInterface scrollInterface = addTabInterface(21_408);
+        RSInterface scrollInterface = addTabInterface(UNLOCK_INTERFACE_ID + 2);
         scrollInterface.scrollPosition = 0;
         scrollInterface.contentType = 0;
         scrollInterface.width = 280 + 182;
@@ -165,7 +178,7 @@ public class SlayerRewards extends RSInterface
         scrollInterface.totalChildren(childrenCount);
 
         int child = 0;
-        int interfaceId = 21_409;
+        int interfaceId = UNLOCK_INTERFACE_ID + 3;
 
         for (int index = 0; index < unlocks.length; index++) {
             x = index % 2 * 227;
@@ -185,25 +198,24 @@ public class SlayerRewards extends RSInterface
     }
 
     public static void extendInterface(TextDrawingArea[] tda) {
-        RSInterface rsinterface = addInterface(47600);
-        addSprite(47601, 0, "Slayer interface/Extend/1/extend");
+        RSInterface rsinterface = addInterface(EXTEND_INTERFACE_ID);
+        addSprite(EXTEND_INTERFACE_ID + 1, 0, "Slayer interface/Extend/1/extend");
 
         //addHoverButton(47602, "Slayer interface/CLOSE", 1, 21, 21, "Close", -1, 47603, 3);
         //addHoveredButton2(47603, "Slayer interface/CLOSE", 2, 21, 21, 47604);
 
-        addText(48505, "1300", tda, 0, 0xFF9900, false, true);
 
         rsinterface.totalChildren(9);
-        rsinterface.child(0, 47601, 12, 20);
-        rsinterface.child(1, 47902, 472, 27);
-        rsinterface.child(2, 47903, 472, 27);
-        rsinterface.child(3, 48505, 455, 61);
-        rsinterface.child(4, 47606, 16, 78);
+        rsinterface.child(0, EXTEND_INTERFACE_ID + 1, 12, 20);
+        rsinterface.child(1, CLOSE_BUTTON_1, 472, 27);
+        rsinterface.child(2, CLOSE_BUTTON_2, 472, 27);
+        rsinterface.child(3, POINTS_STRING_INTERFACE_ID, 455, 61);
+        rsinterface.child(4, EXTEND_INTERFACE_ID + 2, 16, 78);
 
-        rsinterface.child(5, 27405, 52-15-12, 61);
-        rsinterface.child(6, 27406, 134-12-12, 61);
-        rsinterface.child(7, 27407, 228-19-12, 61);
-        rsinterface.child(8, 27408, 308-14-12, 61);
+        rsinterface.child(5, UNLOCK_BUTTON, 52-15-12, 61);
+        rsinterface.child(6, EXTEND_BUTTON, 134-12-12, 61);
+        rsinterface.child(7, BUY_BUTTON, 228-19-12, 61);
+        rsinterface.child(8, TASK_BUTTON, 308-14-12, 61);
 
         int[] extensions = {
                 11, // blood veld
@@ -215,7 +227,7 @@ public class SlayerRewards extends RSInterface
                 10, // black demon
         };
 
-        RSInterface scrollInterface = addTabInterface(47606);
+        RSInterface scrollInterface = addTabInterface(EXTEND_INTERFACE_ID + 2);
         scrollInterface.scrollPosition = 0;
         scrollInterface.contentType = 0;
         scrollInterface.width = 280 + 182;
@@ -223,7 +235,7 @@ public class SlayerRewards extends RSInterface
         scrollInterface.scrollMax = scrollInterface.height + 1 + (((int) Math.ceil((extensions.length - 6) / 2d)) * 64);
         int x, y;
         scrollInterface.totalChildren(extensions.length * 3);
-        int interfaceId = 47607;
+        int interfaceId = EXTEND_INTERFACE_ID + 3;
         int child = 0;
 
        for (int index = 0; index < extensions.length; index++) {
