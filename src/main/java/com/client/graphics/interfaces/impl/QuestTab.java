@@ -280,7 +280,7 @@ public class QuestTab extends RSInterface {
         CoinTab[] tabs = {
                 new CoinTab("Collection Log", 4, 52, 7),
                 new CoinTab("Drop Table", 5, 42, 7),
-                new CoinTab("Loot Tables", 4, 52, 7),
+                new CoinTab("Loot Tables", 6, 46, 4),
                 new CoinTab("Presets", 1, 32, 10),
                 new CoinTab("Donator Benefits", 3, 62, 7),
                 new CoinTab("Achievements", 0, 52, 7),
