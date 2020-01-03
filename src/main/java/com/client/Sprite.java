@@ -7,6 +7,7 @@ import java.awt.Toolkit;
 import java.awt.image.ColorModel;
 import java.awt.image.MemoryImageSource;
 import java.awt.image.PixelGrabber;
+import java.io.File;
 
 import javax.swing.ImageIcon;
 
@@ -423,8 +424,13 @@ public class Sprite extends DrawingArea {
 	public Sprite(String img) {
 		try {
 			// imageName = img; // its not used?
-			image = Toolkit.getDefaultToolkit().getImage(
-					location + img + ".png");
+			File file = new File(location + img + ".png");
+			if (!file.exists() && Configuration.developerMode) {
+				System.err.println("Sprite file doesn't exist: " + file.toString());
+			}
+
+			image = Toolkit.getDefaultToolkit().getImage(file.getPath());
+
 			ImageIcon sprite = new ImageIcon(image);
 			myWidth = sprite.getIconWidth();
 			myHeight = sprite.getIconHeight();

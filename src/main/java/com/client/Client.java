@@ -60,6 +60,7 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 
 import com.client.graphics.interfaces.impl.Interfaces;
+import com.client.graphics.interfaces.impl.QuestTab;
 import org.apache.commons.lang3.SystemUtils;
 
 import com.client.definitions.AnimationDefinition;
@@ -2786,9 +2787,13 @@ public class Client extends RSApplet {
 					RSInterface.interfaceCache[invOverlayInterfaceID],
 					currentScreenMode == ScreenMode.FIXED ? 37 : currentGameHeight - 275 - y + 10);
 		} else if (Client.tabInterfaceIDs[Client.tabID] != -1) {
-			drawInterface(0, currentScreenMode == ScreenMode.FIXED ? 31 : currentGameWidth - 197,
-					RSInterface.interfaceCache[Client.tabInterfaceIDs[Client.tabID]],
-					currentScreenMode == ScreenMode.FIXED ? 37 : currentGameHeight - 275 - y + 10);
+			try {
+				drawInterface(0, currentScreenMode == ScreenMode.FIXED ? 31 : currentGameWidth - 197,
+						RSInterface.interfaceCache[Client.tabInterfaceIDs[Client.tabID]],
+						currentScreenMode == ScreenMode.FIXED ? 37 : currentGameHeight - 275 - y + 10);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
 		}
 		//if (currentScreenMode == ScreenMode.FIXED) {
 		///	mapArea[6].drawSprite(0, 178);
@@ -2885,11 +2890,12 @@ public class Client extends RSApplet {
 					if (Client.loopCycle % 20 >= 10)
 						;
 				}
-				if(getUserSettings().isOldGameframe() == false) {
-					sideIcons[index].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1]-8);
-				}else {
-					sideIcons[index].drawSprite(sideIconCoordinates1[index][0], sideIconCoordinates1[index][1]);
-
+				if (Client.tabInterfaceIDs[index] > 0) {
+					if (!getUserSettings().isOldGameframe()) {
+						sideIcons[index].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1] - 8);
+					} else {
+						sideIcons[index].drawSprite(sideIconCoordinates1[index][0], sideIconCoordinates1[index][1]);
+					}
 				}
 			}
 		} else {
@@ -2919,7 +2925,9 @@ public class Client extends RSApplet {
 					if (Client.loopCycle % 20 >= 10)
 						;
 				}
-				sideIcons[index].drawSprite(x + sideIconOffsets[index][0], y + sideIconOffsets[index][1]);
+				if (Client.tabInterfaceIDs[index] != -1) {
+					sideIcons[index].drawSprite(x + sideIconOffsets[index][0], y + sideIconOffsets[index][1]);
+				}
 				if (stackTabs()) {
 					if (index != 6) {
 						x += 33;
@@ -3757,6 +3765,7 @@ public class Client extends RSApplet {
 			for (String arg : args) {
 				switch (arg) {
 					case "--developer":
+						Configuration.developerMode = true;
 						OnDemandFetcher.IpAdress = "127.0.0.1";
 						System.out.println("Developer mode enabled, switching to local server.");
 						break;
@@ -8376,32 +8385,41 @@ public class Client extends RSApplet {
 				int y = 168;
 				int[] points = new int[] { 3, 41, 74, 107, 140, 173, 206, 244 };
 				for (int index = 0; index < points.length - 1; index++) {
-					int tabIndex = index < points.length ? points.length : points.length * 2;
-					if (Client.tabInterfaceIDs[tabIndex] != -1) {
-						if (super.saveClickX >= x + points[index] && super.saveClickX <= x + points[index + 1]) {
-							if (super.saveClickY >= y && super.saveClickY <= y + 36) {
+					if (super.saveClickX >= x + points[index] && super.saveClickX <= x + points[index + 1]) {
+						if (super.saveClickY >= y && super.saveClickY <= y + 36) {
+							if (Client.tabInterfaceIDs[index] != -1) {
 								Client.tabID = index;
-							} else if (super.saveClickY >= y + 298 && super.saveClickY <= y + 36 + 298) {
-								Client.tabID = index + 7;
+								Client.needDrawTabArea = true;
+								Client.tabAreaAltered = true;
 							}
-							Client.needDrawTabArea = true;
-							Client.tabAreaAltered = true;
+						} else if (super.saveClickY >= y + 298 && super.saveClickY <= y + 36 + 298) {
+							if (Client.tabInterfaceIDs[index + 7] != -1) {
+								Client.tabID = index + 7;
+								Client.needDrawTabArea = true;
+								Client.tabAreaAltered = true;
+							}
 						}
+						Client.needDrawTabArea = true;
+						Client.tabAreaAltered = true;
 					}
 				}
 			} else {
 				int x = Client.currentGameWidth - (stackTabs() ? 231 : 462);
 				int y = Client.currentGameHeight - (stackTabs() ? 73 : 37);
 				for (int index = 0; index < 14; index++) {
-					if (Client.tabInterfaceIDs[index] != -1) {
-						if (super.saveClickX >= x && super.saveClickX <= x + 33) {
-							if (super.saveClickY >= y && super.saveClickY <= y + 36) {
+					if (super.saveClickX >= x && super.saveClickX <= x + 33) {
+						if (super.saveClickY >= y && super.saveClickY <= y + 36) {
+							if (Client.tabInterfaceIDs[index] != -1) {
 								Client.tabID = index;
-							} else if (stackTabs() && super.saveClickY >= y + 36 && super.saveClickY <= y + 36 + 36) {
-								Client.tabID = index + 7;
+								Client.needDrawTabArea = true;
+								Client.tabAreaAltered = true;
 							}
-							Client.needDrawTabArea = true;
-							Client.tabAreaAltered = true;
+						} else if (stackTabs() && super.saveClickY >= y + 36 && super.saveClickY <= y + 36 + 36) {
+							if (Client.tabInterfaceIDs[index + 7] != -1) {
+								Client.tabID = index + 7;
+								Client.needDrawTabArea = true;
+								Client.tabAreaAltered = true;
+							}
 						}
 					}
 					x += 33;
@@ -15784,6 +15802,7 @@ public class Client extends RSApplet {
 					int l14 = inStream.method439();
 					anIntArray1045[j8] = l14;
 					if (variousSettings[j8] != l14) {
+						QuestTab.onConfigChanged(j8, l14);
 						variousSettings[j8] = l14;
 						method33(j8);
 						needDrawTabArea = true;
@@ -15798,6 +15817,7 @@ public class Client extends RSApplet {
 					byte byte0 = inStream.readSignedByte();
 					anIntArray1045[k8] = byte0;
 					if (variousSettings[k8] != byte0) {
+						QuestTab.onConfigChanged(k8, byte0);
 						variousSettings[k8] = byte0;
 						method33(k8);
 						needDrawTabArea = true;

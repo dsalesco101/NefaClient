@@ -18,11 +18,9 @@ import com.client.TextClass;
 import com.client.TextDrawingArea;
 import com.client.definitions.ItemDefinition;
 import com.client.definitions.NpcDefinition;
-import com.client.features.gameframe.ScreenMode;
 import com.client.graphics.interfaces.impl.Dropdown;
 import com.client.graphics.interfaces.impl.DropdownMenu;
 import com.client.graphics.interfaces.impl.Interfaces;
-import com.client.graphics.interfaces.impl.SlayerRewards;
 import com.client.graphics.interfaces.impl.Slider;
 
 public class RSInterface {
@@ -592,168 +590,6 @@ public class RSInterface {
 			scroll.height = 232;
 			scroll.scrollMax = 1325;
 		}
-	}
-	
-	/**
-	 * @author Grant_ | www.rune-server.ee/members/grant_ | 10/9/19
-	 * @param tda
-	 */
-    public static void infoTab(TextDrawingArea[] tda) {
-        RSInterface tab = addTabInterface(47500);
-        addText(47501, "Sovark", tda, 2, 0xff9933, true, true);
-       
-        addHoverText(47502, "Call for help", "Call help",tda, 2, 0xff9933, true, true,100);
-        addSprite(47503, 0, "Interfaces/infoTab/SPRITE");
-        addSprite(47504, 1, "Interfaces/infoTab/SPRITE");
-        
-        int childId = 19050;
-        RSInterface scroll = addInterface(childId++);
-        int scrollFrame = 0;
-        scroll.height = 196;
-        scroll.width = 174;
-        
-        String[] options = {"Collection Log", "Drop Table", "Donator Benefits", "Achievements", "Titles" ,"Community Guides", "Vote Page", "Online Store",
-                "Forums", "Sovark Rules", "Loot Tables"};
-        
-        int[] icons = {4, 5, 3, 0, 1, 2, 2, 2, 2, 2, 4};
-        int[] x = {50, 40, 60, 50, 20, 65, 40, 50, 30, 50, 50};
-        int[] y = {7, 7, 7, 7, 10, 7, 7, 7, 7, 7, 7};
-        
-        scroll.scrollMax = options.length * 28;
-        scroll.totalChildren(options.length * 4);
-        
-        int startY = 0;
-        
-        for(int i = 0; i < options.length; i++) {
-            addHoverButton(childId++, "Interfaces/HelpTab/BUTTON", 1, 176, 28, "" + options[i], -1, childId, 1);
-            addHoveredButton(childId++, "Interfaces/HelpTab/BUTTON", 0, 176, 28, childId++);
-
-            childId -= 3;
-
-            scroll.child(scrollFrame++, childId++, 0, startY);
-            scroll.child(scrollFrame++, childId++, 0, startY);
-            childId++;
-
-            addText(childId, options[i], tda, 2, 0xff9933, true, true);
-            scroll.child(scrollFrame++, childId++, 86, startY + 5);
-
-            addSprite(childId, icons[i], "Interfaces/HelpTab/ICON");
-            scroll.child(scrollFrame++, childId++, 86 + x[i], startY + y[i]);
-
-            startY += 28;
-        }
-        
-        tab.totalChildren(5);
-        tab.child(0, 47501, 92, 8);
-        tab.child(1, 47502, 43, 240);
-        tab.child(2, 47503, 1, 35);
-        tab.child(3, 47504, 0, 230);
-        tab.child(4, 19050, 0, 34);
-    }
-    
-	public static void questTab(TextDrawingArea[] tda) {
-		RSInterface tab = addTabInterface(10220);
-		addText(10221, "@or1@Control Panel", tda, 2, 16750899, false, true);
-		addText(10222, "@or1@www.sovark.com", tda, 2, 16750899, true, true);
-		addSprite(10224, 0, "Interfaces/infoTab/SPRITE");
-		addButton(10403, 2, "Interfaces/infoTab/TAB", "Refresh Tab");
-		addButton(10404, 4, "Interfaces/infoTab/TAB", "View Diaries");
-		addSprite(10223, 1, "Interfaces/infoTab/SPRITE");
-		addText(10405, "@cr10@", tda, 2, 16750899, false, true);
-		tab.totalChildren(9);
-		tab.child(0, 10221, 20, 7);
-		tab.child(1, 10222, 95, 240);
-		tab.child(2, 10224, 0, 35);
-		tab.child(3, 10223, 0, 230);
-		tab.child(4, 10403, 172, 15);
-		tab.child(5, 10223, 0, 32);
-		tab.child(6, 10280, 2, 34);
-		tab.child(7, 10404, 154, 15);
-		tab.child(8, 10405, 3, 10);
-		RSInterface infoList = addTabInterface(10280);
-		infoList.height = 196;
-		infoList.width = 172;
-		infoList.scrollMax = 360;
-		infoList.newScroller = false;
-
-		addText(10406, "@cr2@@or1@ Server Information", tda, 2, 16750899, false, true);
-        addHoverText(10407, "@or1@- Players online : @gre@0", "View Details", tda, 0, 1022259, false, true, 150);
-        addHoverText(10408, "@or1@- Wilderness count: @gre@0", "View Details", tda, 0, 1022259, false, true, 150);
-        addHoverText(10409, "@or1@- Current event : @red@None", "View Details", tda, 0, 1022259, false, true, 150);
-        addHoverText(10410, "@or1@- WOGW: @red@None ", "View Details", tda, 0, 1022259, false, true, 150);
-        addHoverText(10411, "@or1@- Current deal: @red@None", "View Details", tda, 0, 1022259, false, true, 150);
-        addText(10412, "@cr1@@or1@ Player Information", tda, 2, 16750899, false, true);
-
-		infoList.totalChildren(58);
-		infoList.child(0, 10406, 1, 3);
-        infoList.child(1, 10407, 1, 25);
-        infoList.child(2, 10408, 1, 41);
-        infoList.child(3, 10409, 1, 57);
-        infoList.child(4, 10410, 1, 73);
-        infoList.child(5, 10411, 1, 89);
-        infoList.child(6, 10412, 1, 105);
-
-		int Ypos = 125;
-		int frameID = 7;
-		for (int iD = 10225; iD <= 10275; iD++) {
-			addHoverText(iD, "", "View", tda,
-					0, 16711680, false, true, 150);
-			infoList.child(frameID, iD, 1, Ypos);
-			frameID++;
-			Ypos += 13;
-			Ypos++;
-		}
-
-
-
-		RSInterface aDiary = addTabInterface(29465);
-		try
-		{
-			addText(29466, "@cr17@@or1@ Diaries", tda, 2, 16750899, false, true);
-			addSprite(29467, 0, "Interfaces/infoTab/SPRITE");
-			addButton(29468, 0, "Interfaces/infoTab/TAB", "View Main Information");
-			addButton(29469, 1, "Interfaces/infoTab/TAB", "Quick Load Preset");//updatepreset
-			//addButton(29470, 2, "Interfaces/infoTab/TAB", "Refresh");
-			addButton(29471, 4, "Interfaces/infoTab/TAB", "Main tab");
-			addButton(29472, 2, "Interfaces/infoTab/TAB", "Refresh");
-			addSprite(29473, 1, "Interfaces/infoTab/SPRITE");
-			addText(29474, "@or1@Diaries Completed: @gre@0", tda, 2, 16750899, true, true);
-
-			RSInterface diaryList = addTabInterface(29475);
-			diaryList.height = 196;
-			diaryList.width = 172;
-			diaryList.scrollMax = 222;
-			diaryList.newScroller = false;
-
-			aDiary.totalChildren(8);
-			aDiary.child(0, 29466, 10, 10);
-			aDiary.child(1, 29467, 0, 35);
-			aDiary.child(2, 29473, 0, 230);
-			//aDiary.child(3, 29468, 95, 15);
-			//aDiary.child(4, 29469, 114, 15);
-			//aDiary.child(5, 29470, 133, 15);
-			aDiary.child(3, 29471, 154, 15);
-			aDiary.child(4, 29472, 172, 15);
-			aDiary.child(5, 29473, 0, 32);
-			aDiary.child(6, 29474, 95, 240);
-			aDiary.child(7, 29475, 2, 34);
-
-			diaryList.totalChildren(16);
-			int Ypos2 = 8;
-			int frameID2 = 0;
-			for (int iD2 = 29480; iD2 <= 29495; iD2++) {
-				addHoverText(iD2, "", "View", tda,
-						0, 16711680, false, true, 150);
-				diaryList.child(frameID2, iD2, 8, Ypos2);
-				frameID2++;
-				Ypos2 += 13;
-				Ypos2++;
-			}
-		}
-		catch (Exception e) {
-			e.printStackTrace();
-		}
-
 	}
 
 	public static RSFont rsFont;
@@ -5148,7 +4984,7 @@ public class RSInterface {
 		rsinterface.id = i;
 		rsinterface.parentID = i;
 		rsinterface.type = 5;
-		rsinterface.atActionType = 1;
+		rsinterface.atActionType = 0;
 		rsinterface.contentType = 0;
 		rsinterface.width = sprite.myWidth;
 		rsinterface.height = sprite.myHeight;

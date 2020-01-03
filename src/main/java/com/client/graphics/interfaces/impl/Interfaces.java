@@ -18,9 +18,7 @@ public class Interfaces extends RSInterface {
 		barrowsReward(defaultTextDrawingAreas);
 		keybinding(defaultTextDrawingAreas);
 		ancients(defaultTextDrawingAreas);
-		questTab(defaultTextDrawingAreas);
 		caelTournamentSupplies(defaultTextDrawingAreas);
-		infoTab(defaultTextDrawingAreas);
 		safeBox(defaultTextDrawingAreas);
 		helpDatabaseComponent(defaultTextDrawingAreas);
 		helpComponent(defaultTextDrawingAreas);
@@ -90,6 +88,7 @@ public class Interfaces extends RSInterface {
 		collectionLog(defaultTextDrawingAreas);
 		SlayerRewards.initializeInterfaces(defaultTextDrawingAreas);
 		new LootViewer().load(defaultTextDrawingAreas);
+		new QuestTab().load(defaultTextDrawingAreas);
 	}
 	public static void mysteryBox(TextDrawingArea[] tda) {
 		RSInterface iface = addInterface(47000);
