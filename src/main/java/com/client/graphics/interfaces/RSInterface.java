@@ -2064,7 +2064,7 @@ public class RSInterface {
 		RSInterface wogw = addInterface(38000);
 		addSprite(38001, 0, "Interfaces/Wogw/IMAGE");
 		addText(38002, "Well Of Goodwill", tda, 2, 0xFF981F, true, true);
-		addText(38003, "Experience (x2)", tda, 2, 0xFF981F, true, true);
+		addText(38003, "Experience (x1.5)", tda, 2, 0xFF981F, true, true);
 		addText(38004, "      PC Points (+5)", tda, 2, 0xFF981F, true, true);
 		addText(38005, "               Drops (x2 rate)", tda, 2, 0xFF981F, true, true);
 		addClickableSprites(38006, "Toggle", "Interfaces/Ironman/IMAGE", 2, 3, 4);
