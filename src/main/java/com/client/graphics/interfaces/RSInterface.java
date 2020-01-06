@@ -1799,6 +1799,7 @@ public class RSInterface {
 		// Item container
 		addToItemGroup(64016, 10, 15, 14, 14, true, "Value", "Buy 1", "Buy 5", "Buy 10", "Buy X", null);
 		setBounds(64016, 8, 8, 0, scroll);
+		interfaceCache[64016].invAlwaysInfinity = true;
 
 		// Bounty hunter widget
 		RSInterface subWidget = addInterface(64017);
@@ -5471,6 +5472,7 @@ public class RSInterface {
 	public boolean hideInvStackSizes;
 	public boolean invAutoScrollHeight;
 	public int invAutoScrollInterfaceId;
+	public boolean invAlwaysInfinity;
 	public byte aByte254;
 	private int anInt255;
 	private int anInt256;

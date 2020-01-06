@@ -9922,6 +9922,7 @@ public class Client extends RSApplet {
 
 			loadTabArea();
 
+			infinity = new Sprite("infinity");
 			chatArea = new Sprite("Gameframe/chatarea");
 			channelButtons = new Sprite("Gameframe/channelbuttons");
 
@@ -11196,20 +11197,24 @@ public class Client extends RSApplet {
 											if (class9_1.parentID < 58040 || class9_1.parentID > 58048) {
 												if (itemSprite.maxWidth == 33 || class9_1.invStackSizes[i3] != 1) {
 													if (class9_1.id != 23121 || class9_1.id == 23121 && ((class9_1.inv[i3] >> 15) & 0x1) == 0) {
-														int k10 = class9_1.invStackSizes[i3];
-														if (k10 >= 1)
-															smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
-																	k5 + k6);
-														smallText.method385(0, intToKOrMil(k10), j6 + 10 + j7, k5 + 1 + k6);
-														if (k10 > 99999 && k10 < 10000000) {
-															smallText.method385(0xFFFFFF, intToKOrMil(k10), j6 + 9 + j7,
-																	k5 + k6);
-														} else if (k10 > 9999999) {
-															smallText.method385(0x00ff80, intToKOrMil(k10), j6 + 9 + j7,
-																	k5 + k6);
+														if (class9_1.invAlwaysInfinity) {
+															infinity.drawSprite(k5 + k6, j6 + j7);
 														} else {
-															smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
-																	k5 + k6);
+															int k10 = class9_1.invStackSizes[i3];
+															if (k10 >= 1)
+																smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
+																		k5 + k6);
+															smallText.method385(0, intToKOrMil(k10), j6 + 10 + j7, k5 + 1 + k6);
+															if (k10 > 99999 && k10 < 10000000) {
+																smallText.method385(0xFFFFFF, intToKOrMil(k10), j6 + 9 + j7,
+																		k5 + k6);
+															} else if (k10 > 9999999) {
+																smallText.method385(0x00ff80, intToKOrMil(k10), j6 + 9 + j7,
+																		k5 + k6);
+															} else {
+																smallText.method385(0xFFFF00, intToKOrMil(k10), j6 + 9 + j7,
+																		k5 + k6);
+															}
 														}
 													}
 												}
@@ -16474,6 +16479,7 @@ public class Client extends RSApplet {
 	public boolean xpLock;
 
 	private Sprite chatArea;
+	private Sprite infinity;
 
 	public String name;
 	public String message;
