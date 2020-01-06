@@ -3776,6 +3776,7 @@ public class Client extends RSApplet {
 			portOff = 0;
 			setHighMem();
 			isMembers = true;
+			Sprite.init();
 			Signlink.storeid = 32;
 			Signlink.startpriv(InetAddress.getLocalHost());
 			instance = new ClientWindow(args);

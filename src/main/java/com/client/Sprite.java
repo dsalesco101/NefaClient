@@ -16,6 +16,16 @@ import com.client.utilities.FileOperations;
 
 public class Sprite extends DrawingArea {
 
+	private static String location = null;
+
+	public static void init() {
+		if (Configuration.developerMode) {
+			location = "./sprites/";
+		} else {
+			location = Signlink.getCacheDirectory() + "/Sprites/";
+		}
+	}
+
 	private Image image;
 	
 	public int xPosition, yPosition;
@@ -32,8 +42,6 @@ public class Sprite extends DrawingArea {
 		sprite.setTransparency(255, 0, 255);
 		return sprite;
 	}
-
-	public String location = Signlink.getCacheDirectory() + "/Sprites/";
 
 	public Sprite(byte abyte0[], Component component) {
 		try {
