@@ -60,6 +60,7 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 
 import com.client.graphics.interfaces.impl.Interfaces;
+import com.client.graphics.interfaces.impl.MonsterDropViewer;
 import com.client.graphics.interfaces.impl.QuestTab;
 import org.apache.commons.lang3.SystemUtils;
 
@@ -14700,11 +14701,20 @@ public class Client extends RSApplet {
 			dealtWithPacket = incomingPacket;
 			dealtWithPacketSize = packetSize;
 			switch (incomingPacket) {
+				// Reset scroll position
 				case 2:
 					int resetScrollInterfaceId = inStream.readUnsignedWord();
 					RSInterface.interfaceCache[resetScrollInterfaceId].scrollPosition = 0;
 					incomingPacket = -1;
 					return true;
+
+				case 3:
+					int setScrollMaxInterfaceId = inStream.readUnsignedWord();
+					int scrollMax = inStream.readUnsignedWord();
+					RSInterface.interfaceCache[setScrollMaxInterfaceId].scrollMax = scrollMax;
+					incomingPacket = -1;
+					return true;
+
 
 				/**
 				 * Progress Bar Update Packet
@@ -15809,6 +15819,7 @@ public class Client extends RSApplet {
 					anIntArray1045[j8] = l14;
 					if (variousSettings[j8] != l14) {
 						QuestTab.onConfigChanged(j8, l14);
+						MonsterDropViewer.onConfigChanged(j8, l14);
 						variousSettings[j8] = l14;
 						method33(j8);
 						needDrawTabArea = true;
@@ -15824,6 +15835,7 @@ public class Client extends RSApplet {
 					anIntArray1045[k8] = byte0;
 					if (variousSettings[k8] != byte0) {
 						QuestTab.onConfigChanged(k8, byte0);
+						MonsterDropViewer.onConfigChanged(k8, byte0);
 						variousSettings[k8] = byte0;
 						method33(k8);
 						needDrawTabArea = true;
