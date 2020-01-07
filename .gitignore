@@ -33,6 +33,7 @@ data/saves/starters.txt
 com/client/OnDemandFetcher.java
 /.gradle/
 /build/
+/temp/
 
 sprites.zip
 sprites.rar
