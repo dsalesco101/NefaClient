@@ -4,6 +4,7 @@ import java.applet.AppletContext;
 import java.awt.AWTException;
 import java.awt.Color;
 import java.awt.Component;
+import java.awt.Container;
 import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.Graphics;
@@ -58,11 +59,11 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import javax.swing.JFrame;
+import javax.swing.SwingUtilities;
 
 import com.client.graphics.interfaces.impl.Interfaces;
 import com.client.graphics.interfaces.impl.MonsterDropViewer;
 import com.client.graphics.interfaces.impl.QuestTab;
-import org.apache.commons.lang3.SystemUtils;
 
 import com.client.definitions.AnimationDefinition;
 import com.client.definitions.FloorOverlayDefinition;
@@ -106,16 +107,6 @@ public class Client extends RSApplet {
 			int l8 = 600 + k8 * 3;
 			int i9 = Rasterizer.anIntArray1470[k8];
 			ai[i8] = (l8 * i9 >> 16);
-		}
-		if (currentScreenMode == ScreenMode.FIXED && (currentGameWidth >= 756) && (currentGameWidth <= 1025)
-				&& (currentGameHeight >= 494) && (currentGameHeight <= 850)) {
-			WorldController.viewDistance = 9;
-			cameraZoom = 575;
-		} else if (currentScreenMode == ScreenMode.FIXED) {
-			cameraZoom = 600;
-		} else if (currentScreenMode != ScreenMode.FIXED) {
-			WorldController.viewDistance = 10;
-			cameraZoom = 600;
 		}
 		WorldController.method310(500, 800, currentScreenMode == ScreenMode.FIXED ? 516 : currentGameWidth,
 				currentScreenMode == ScreenMode.FIXED ? 335 : currentGameHeight, ai);
@@ -281,76 +272,83 @@ public class Client extends RSApplet {
 		}
 	}
 
+	private boolean updateGameMode = false;
+
+	public void updateGameMode() {
+		if (updateGameMode) {
+			gameScreenWidth = currentScreenMode == ScreenMode.FIXED ? 516 : currentGameWidth;
+			gameScreenHeight = currentScreenMode == ScreenMode.FIXED ? 338 : currentGameHeight;
+			if (currentScreenMode == ScreenMode.FIXED) {
+				cameraZoom = 600;
+				WorldController.viewDistance = 9;
+			} else if (currentScreenMode == ScreenMode.RESIZABLE) {
+				cameraZoom = 700;
+				WorldController.viewDistance = 10;
+			} else if (currentScreenMode == ScreenMode.FULLSCREEN) {
+				cameraZoom = 800;
+				WorldController.viewDistance = 10;
+			}
+			updateGameScreen();
+			updateGameMode = false;
+		}
+	}
+
 	public void setGameMode(ScreenMode mode) {
 		if (currentScreenMode == mode)
 			return;
-
-		JFrame component = ClientWindow.getFrame();
-
-		component.dispose();
-		currentScreenMode = mode;
-		if (mode.isUndecorated()) {
-			component.setUndecorated(true);
-			component.setLocation(0, 0);
-			component.setVisible(true);
-		} else {
-			if (component.isUndecorated()) {
-				component.setUndecorated(false);
-				component.setVisible(true);
-			}
-		}
-
-		component.setMinimumSize(new Dimension(765, mode == ScreenMode.FIXED ? 503 : 610));
-		//component.setMinimumSize(new Dimension(
-		// mode == ScreenMode.FIXED ? 765+30 : 850,
-		//mode == ScreenMode.FIXED ? 503+39 : 600));
-
-		component.setResizable(mode.isResizable());
-		Insets insets = ClientWindow.getInset();
-
-		int clientWidth = mode.getWidth();
-		int clientHeight = mode.getHeight();
-
-		final int xInsetOffset = insets.left + insets.right;
-		final int yInsetOffset = insets.top + insets.bottom;
-
-		int totalClientWidth = clientWidth;
-		int totalClientHeight = clientHeight;
-		if (mode == ScreenMode.FIXED) {
-			cameraZoom = 600;
-			WorldController.viewDistance = 9;
-		} else if (mode == ScreenMode.RESIZABLE) {
-			cameraZoom = 700;
-			WorldController.viewDistance = 10;
-		} else if (mode == ScreenMode.FULLSCREEN) {
-			cameraZoom = 800;
-			WorldController.viewDistance = 10;
-		}
-		if (mode == ScreenMode.FULLSCREEN) {
-			if (SystemUtils.IS_OS_MAC)
-				component.setLocation(0, insets.top);
-			totalClientWidth = (int) MAXIMUM_SCREEN_BOUNDS.getWidth();
-			totalClientHeight = (int) MAXIMUM_SCREEN_BOUNDS.getHeight();
-		} else {
-			totalClientWidth += xInsetOffset;
-			totalClientHeight += yInsetOffset;
-		}
-
-		component.setSize(totalClientWidth, totalClientHeight);
-
-		currentGameWidth = totalClientWidth;
-		currentGameHeight = totalClientHeight;
-
-		gameScreenWidth = currentScreenMode == ScreenMode.FIXED ? 516 : totalClientWidth;
-		gameScreenHeight = currentScreenMode == ScreenMode.FIXED ? 338 : totalClientHeight;
-
-		if (mode != ScreenMode.FULLSCREEN)
-			component.setLocationRelativeTo(null);
-
-		component.setVisible(true);
-		graphics = super.getGameComponent().getGraphics();
-		updateGameScreen();
+		refreshMode(mode);
 	}
+
+	public void refreshMode(ScreenMode mode) {
+		SwingUtilities.invokeLater(() ->
+		{
+			Dimension minimum = new Dimension(765, mode == ScreenMode.FIXED ? 503 : 610);
+			int clientWidth = mode.getWidth();
+			int clientHeight = mode.getHeight();
+
+			if (!runelite) {
+				appFrame.dispose();
+				if (mode.isUndecorated()) {
+					appFrame.setUndecorated(true);
+					appFrame.setLocation(0, 0);
+					appFrame.setVisible(true);
+				} else {
+					if (appFrame.isUndecorated()) {
+						appFrame.setUndecorated(false);
+						appFrame.setVisible(true);
+					}
+				}
+
+				Insets insets = ClientWindow.getInset();
+				final int xInsetOffset = insets.left + insets.right;
+				final int yInsetOffset = insets.top + insets.bottom;
+				if (mode != ScreenMode.FULLSCREEN) {
+					clientWidth += xInsetOffset;
+					clientHeight += yInsetOffset;
+				}
+				gameContainer.setMinimumSize(minimum);
+				gameContainer.setSize(clientWidth, clientHeight);
+			} else {
+
+				gameContainer.setMinimumSize(minimum);
+				gameContainer.setPreferredSize(mode == ScreenMode.FIXED ? minimum : null);
+				gameContainer.setSize(minimum);
+				appFrame.pack();
+			}
+
+			appFrame.setLocationRelativeTo(null);
+			appFrame.setResizable(mode.isResizable());
+			appFrame.setVisible(true);
+			graphics = getGraphics();
+
+			currentScreenMode = mode;
+			currentGameWidth = clientWidth;
+			currentGameHeight = clientHeight;
+			updateGameMode = true;
+		});
+	}
+
+
 
 	public static int gameScreenWidth = 516;
 	public int gameScreenHeight = 338;
@@ -948,23 +946,6 @@ public class Client extends RSApplet {
 	private String clanTitle;
 	private final String[] clanTitles;
 	private EnumSet channelRights;
-
-	@Override
-	public void init() {
-		try {
-			nodeID = 1;
-			portOff = 0;
-			setHighMem();
-			isMembers = true;
-			Signlink.storeid = 32;
-			Signlink.startpriv(InetAddress.getLocalHost());
-			initClientFrame(currentScreenMode.getWidth(), currentScreenMode.getHeight());
-			instance = this;
-			GroundItemColors.loadGroundItems();
-		} catch (Exception exception) {
-			return;
-		}
-	}
 
 	@Override
 	public void startRunnable(Runnable runnable, int i) {
@@ -3761,8 +3742,21 @@ public class Client extends RSApplet {
 		return 99;
 	}
 
+	private static String[] args = null;
+	public static Client instance;
+	public static boolean runelite;
+
 	public static void main(String args[]) {
+		getClient(false, args);
+	}
+
+	public static JFrame appFrame = null;
+	public static Container gameContainer = null;
+
+	public static Client getClient(boolean runelite, String...args) {
 		try {
+			Client.runelite = runelite;
+			Client.args = args;
 			for (String arg : args) {
 				switch (arg) {
 					case "--developer":
@@ -3779,13 +3773,32 @@ public class Client extends RSApplet {
 			isMembers = true;
 			Sprite.init();
 			Signlink.storeid = 32;
+			GroundItemColors.loadGroundItems();
 			Signlink.startpriv(InetAddress.getLocalHost());
-			instance = new ClientWindow(args);
+			if (runelite) {
+				instance = new Client();
+				gameContainer = instance;
+			} else {
+				instance = new ClientWindow(args);
+				appFrame = ClientWindow.getFrame();
+				gameContainer = ClientWindow.getFrame();
+			}
 		} catch (Exception exception) {
+			exception.printStackTrace();
 		}
+
+		return Client.instance;
 	}
 
-	public static Client instance;
+	@Override
+	public void init() {
+		try {
+			initClientFrame(currentScreenMode.getWidth(), currentScreenMode.getHeight());
+		} catch (Exception exception) {
+			exception.printStackTrace();
+			return;
+		}
+	}
 
 	public static Client getInstance() {
 		return instance;
@@ -4031,6 +4044,7 @@ public class Client extends RSApplet {
 	private GameTimer gameTimer;
 
 	private void mainGameProcessor() {
+		updateGameMode();
 		if (gameTimer != null) {
 			if (gameTimer.isCompleted()) {
 				System.out.println("Timer has finished!");
@@ -4217,7 +4231,7 @@ public class Client extends RSApplet {
 					lastActiveInvInterface = -1;
 					processRightClick();
 					if (anInt1084 == 5382) {
-						System.out.println("BANK TAB SLOT " + mouseX + ", " + mouseY);
+						//System.out.println("BANK TAB SLOT " + mouseX + ", " + mouseY);
 						Point southWest, northEast;
 						int xOffset = currentScreenMode == ScreenMode.FIXED ? 0
 								: (centerInterface() ? (currentGameWidth / 2) - 356 : 0);
@@ -4650,13 +4664,13 @@ public class Client extends RSApplet {
 				break;
 
 			case 42523:
-				if (currentScreenMode == ScreenMode.RESIZABLE) {
+				/*if (currentScreenMode == ScreenMode.RESIZABLE) {
 					setConfigButton(i, true);
 					setConfigButton(23001, false);
 					setConfigButton(23005, false);
 					setGameMode(ScreenMode.FULLSCREEN);
 					return;
-				}
+				}*/
 				if (currentScreenMode != ScreenMode.RESIZABLE) {
 					setConfigButton(i, true);
 					setConfigButton(23001, false);
@@ -5631,8 +5645,7 @@ public class Client extends RSApplet {
 							needDrawTabArea = true;
 						}
 
-						System.out.println(
-								class9_2.id + ", " + i2 + ", " + variousSettings[i2] + ", " + class9_2.anIntArray212[0]);
+						//System.out.println(class9_2.id + ", " + i2 + ", " + variousSettings[i2] + ", " + class9_2.anIntArray212[0]);
 					}
 					switch (k) {
 						// clan chat
@@ -6675,7 +6688,7 @@ public class Client extends RSApplet {
 		super.shouldDebug = true;
 	}
 
-	Component getGameComponent() {
+	public Component getGameComponent() {
 		if (Signlink.mainapp != null)
 			return Signlink.mainapp;
 		return this;
@@ -10134,6 +10147,7 @@ public class Client extends RSApplet {
 			if (Configuration.PRINT_EMPTY_INTERFACE_SECTIONS) {
 				RSInterface.printEmptyInterfaceSections();
 			}
+			System.out.println("Finished starting up!");
 			return;
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -11560,7 +11574,7 @@ public class Client extends RSApplet {
 					} else {
 						if (class9_1.inventoryhover) {
 
-							System.out.println(currentGameWidth - 648);
+							//System.out.println(currentGameWidth - 648);
 							if (xPos + boxWidth > currentGameWidth - 8 - boxWidth + 100) {
 								xPos = currentGameWidth - 8 - boxWidth;
 							}
@@ -12490,14 +12504,8 @@ public class Client extends RSApplet {
 		int mapy = mapRegionsY; // map region y
 
 		if (clientData) {
-			if (super.fps < 15) {
-
-			}
 			Runtime runtime = Runtime.getRuntime();
 			int j1 = (int) ((runtime.totalMemory() - runtime.freeMemory()) / 1024L);
-			if (j1 > 0x2000000 && lowMem) {
-
-			}
 			aTextDrawingArea_1271.method385(0x00FF00, "Players Nearby: " + playerCount, 27, 5);
 			aTextDrawingArea_1271.method385(0x00FF00, "Npcs Nearby: " + npcCount, 41, 5);
 
@@ -12527,12 +12535,9 @@ public class Client extends RSApplet {
 					"Camera Position: X: " + xCameraPos + ", Y: " + yCameraPos + ", Z: " + zCameraPos, 167, 5);
 			aTextDrawingArea_1271.method385(0xffff00, "Camera Curve: X: " + xCameraCurve + ", Y: " + yCameraCurve, 181,
 					5);
-
-			// private int xCameraPos;ds
-			// private int zCameraPos;
-			// private int yCameraPos;
-			// private int yCameraCurve;
-			// private int xCameraCurve;
+			y = 181;
+			y += 15;
+			aTextDrawingArea_1271.method385(0xffff00, "FOV: " + WorldController.viewDistance, y,5);
 		}
 		if (anInt1104 != 0) {
 			int j = anInt1104 / 50;
@@ -16483,6 +16488,7 @@ public class Client extends RSApplet {
 		backDialogID = -1;
 		bigX = new int[4000];
 		bigY = new int[4000];
+
 	}
 
 	public int xpCounter;

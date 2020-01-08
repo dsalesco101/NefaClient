@@ -16,6 +16,7 @@ data/clan/*
 .idea/*
 .idea
 .settings/*
+/out/
 
 
 data/saves/clans/*

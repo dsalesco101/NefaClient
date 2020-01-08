@@ -749,7 +749,7 @@ public class RSApplet extends Applet implements Runnable, MouseListener, MouseMo
 	void raiseWelcomeScreen() {
 	}
 
-	Component getGameComponent() {
+	public Component getGameComponent() {
 		return this;
 	}
 
