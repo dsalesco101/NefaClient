@@ -439,7 +439,7 @@ public class ClientLoader implements Supplier<Applet>
 		//String initialClass = "com.client.Client";
 		//Class<?> clientClass = rsClassLoader.loadClass(initialClass);
 
-		client = com.client.Client.getClient(true);
+		client = com.client.Client.getClient(true, RuneLite.getProgramArguments());
 		Applet rs = (Applet) client;
 		rs.setStub(new RSAppletStub(config));
 

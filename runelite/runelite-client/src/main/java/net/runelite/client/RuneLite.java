@@ -160,8 +160,11 @@ public class RuneLite
 	@Nullable
 	private Client client;
 
+	public static String[] programArguments;
+
 	public static void main(String[] args) throws Exception
 	{
+		RuneLite.programArguments = args;
 		Locale.setDefault(Locale.ENGLISH);
 
 		final OptionParser parser = new OptionParser();
@@ -355,5 +358,9 @@ public class RuneLite
 	public static void setInjector(Injector injector)
 	{
 		RuneLite.injector = injector;
+	}
+
+	public static String[] getProgramArguments() {
+		return programArguments;
 	}
 }
