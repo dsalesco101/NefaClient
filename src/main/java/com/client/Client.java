@@ -3761,12 +3761,17 @@ public class Client extends RSApplet {
 				switch (arg) {
 					case "--developer":
 						Configuration.developerMode = true;
-						OnDemandFetcher.IpAdress = "127.0.0.1";
-						System.out.println("Developer mode enabled, switching to local server.");
+						OnDemandFetcher.serverAddress = "127.0.0.1";
+						System.out.println("Developer mode enabled.");
+						break;
+					case "localhost":
+						OnDemandFetcher.serverAddress = "127.0.0.1";
+						System.out.println("Localhost client enabled.");
 						break;
 				}
 			}
 
+			server = OnDemandFetcher.serverAddress;
 			nodeID = 1;
 			portOff = 0;
 			setHighMem();
@@ -10147,7 +10152,6 @@ public class Client extends RSApplet {
 			if (Configuration.PRINT_EMPTY_INTERFACE_SECTIONS) {
 				RSInterface.printEmptyInterfaceSections();
 			}
-			System.out.println("Finished starting up!");
 			return;
 		} catch (Exception exception) {
 			exception.printStackTrace();
@@ -16138,9 +16142,7 @@ public class Client extends RSApplet {
 
 	public static int[] antialiasingPixels;
 	public static int[] antialiasingOffsets;
-		public void IpAdress(){
-			server = OnDemandFetcher.IpAdress;
-		}
+
 	public void method146() {
 		anInt1265++;
 		method47(true);
@@ -16339,7 +16341,6 @@ public class Client extends RSApplet {
 	public float LP;
 
 	Client() {
-		IpAdress();
 		firstLoginMessage = "";
 		secondLoginMessage = "";
 		xpAddedPos = expAdded = 0;
