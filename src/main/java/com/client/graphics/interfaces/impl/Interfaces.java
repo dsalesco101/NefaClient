@@ -361,8 +361,6 @@ public class Interfaces extends RSInterface {
 		addText(childId++, "Obtained: @red@10/11", tda, 0, 0xFF9300, false, true);
 		addText(childId++, "Boss Name kills: @whi@125", tda, 0, 0xFF9300, true, true);
 		
-		addToItemGroup(childId++, 6, 5, 9, 6, false, null, null, null);
-		
 		RSInterface tableView = addInterface(childId++);
 		int scrollChildId = childId;
 		int scrollFrame = 0;
@@ -387,7 +385,7 @@ public class Interfaces extends RSInterface {
 			scrollY += 15;
 		}
 		
-		widget.totalChildren(childId - 23111 - 1 + (6));
+		widget.totalChildren(childId - 23111 - 1 + (8) + 1);
 		childId = 23111;
 		int frame = 0;
 		
@@ -404,8 +402,6 @@ public class Interfaces extends RSInterface {
 		widget.child(frame++, childId++, 230, 70);
 		widget.child(frame++, childId++, 230, 94);
 		widget.child(frame++, childId++, 433, 94);
-		
-		widget.child(frame++, childId++, 232, 114);
 		
 		widget.child(frame++, childId++, 20, 68);
 		
@@ -425,6 +421,23 @@ public class Interfaces extends RSInterface {
 		widget.child(frame++, nextChildId++, 19 + 96 + 96 + 96, 47);
 		addText(nextChildId, "Minigames", tda, 1, 0xFF9300, true, true);
 		widget.child(frame++, nextChildId++, 60 + 96 + 96 + 96, 50);
+		
+		addConfigButton(nextChildId, 23111, 0, 1, "Interfaces/CollectionLog/TAB", 96, 20, "Select Clue Scroll", 1, 1, 573);
+		widget.child(frame++, nextChildId++, 19 + 96 + 96 + 96 + 96, 47);
+		addText(nextChildId, "Clue Scroll", tda, 1, 0xFF9300, true, true);
+		widget.child(frame++, nextChildId++, 60 + 96 + 96 + 96 + 96, 50);
+		
+		int itemScrollId = nextChildId;
+		RSInterface scroll = addInterface(itemScrollId);
+		widget.child(frame++, itemScrollId++, 232, 114);
+		int itemScrollFrame = 0;
+		scroll.width = 250;
+		scroll.height = 200;
+		scroll.scrollMax = 2000;
+		scroll.totalChildren(1);
+		
+		addToItemGroup(itemScrollId, 6, 33, 9, 6, false, null, null, null);
+		scroll.child(itemScrollFrame++, itemScrollId++, 0, 0);
 	}
 	
 	/**
