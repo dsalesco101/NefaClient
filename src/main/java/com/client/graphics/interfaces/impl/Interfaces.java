@@ -359,7 +359,7 @@ public class Interfaces extends RSInterface {
 		
 		addText(childId++, "Boss Name Here", tda, 2, 0xFF9300, false, true);
 		addText(childId++, "Obtained: @red@10/11", tda, 0, 0xFF9300, false, true);
-		addText(childId++, "Boss Name kills: @whi@125", tda, 0, 0xFF9300, true, true);
+		addText(childId++, "Boss Name count: @whi@125", tda, 0, 0xFF9300, true, true);
 		
 		RSInterface tableView = addInterface(childId++);
 		int scrollChildId = childId;

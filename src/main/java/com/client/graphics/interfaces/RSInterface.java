@@ -39,7 +39,7 @@ public class RSInterface {
 				count++;
 			} else {
 				if (count >= 100) {
-					System.out.println(String.format("Found empty interface range starting at [%d] length [%d]", start, count));
+					//System.out.println(String.format("Found empty interface range starting at [%d] length [%d]", start, count));
 				}
 				start = 0;
 				count = 0;
