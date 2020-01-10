@@ -3243,6 +3243,9 @@ public class Client extends RSApplet {
 	}
 
 	public void resetLogout() {
+		loggedIn = false;
+		prayClicked = false;
+		loginScreenState = 0;
 		firstLoginMessage = "";
 		secondLoginMessage = "";
 		try {
@@ -3251,14 +3254,9 @@ public class Client extends RSApplet {
 		} catch (Exception _ex) {
 		}
 		socketStream = null;
-		loggedIn = false;
-		prayClicked = false;
-		loginScreenState = 0;
 		if (entityTarget != null) {
 			entityTarget.stop();
 		}
-		GameTimerHandler.getSingleton().stopAll();
-		AccountManager.saveAccount();
 		// myUsername = "";
 		// myPassword = "";
 		unlinkMRUNodes();
@@ -3272,7 +3270,8 @@ public class Client extends RSApplet {
 		prevSong = 0;
 		experienceCounter = 0;
 		setGameMode(ScreenMode.FIXED);
-
+		GameTimerHandler.getSingleton().stopAll();
+		AccountManager.saveAccount();
 	}
 
 	public void method45() {
@@ -7293,7 +7292,7 @@ public class Client extends RSApplet {
 										inputTaken = true;
 								}
 							}
-							if (inputString.equals("clientdrop"))
+							if (inputString.equals("clientdrop") || inputString.equals("clientdrop"))
 								dropClient();
 							if (inputString.startsWith("full")) {
 								try {
@@ -8786,11 +8785,18 @@ public class Client extends RSApplet {
 	private AccountData currentAccount;
 
 	public boolean missingPassword() {
-
 		if (myPassword == null || myPassword.isEmpty()) {
 			System.out.println("Empty password detected!");
 			loginScreenCursorPos = 0;
 			firstLoginMessage = "Please enter your password.";
+			return true;
+		}
+		return false;
+	}
+
+	public boolean nameWhitespace() {
+		if (myUsername != null && myUsername.startsWith(" ") || myUsername.endsWith(" ") || myUsername.contains("  ")) {
+			firstLoginMessage = "Invalid username whitespace usage. Please try again.";
 			return true;
 		}
 		return false;
@@ -8996,6 +9002,9 @@ public class Client extends RSApplet {
 			}
 			if (k == 3) {
 				if (missingPassword()) {
+					return;
+				}
+				if (nameWhitespace()) {
 					return;
 				}
 				firstLoginMessage = "Invalid username or password.";
@@ -9488,10 +9497,13 @@ public class Client extends RSApplet {
 
 			}
 			if (entityDef.actions != null) {
-				for (int i1 = 4; i1 >= 0; i1--)
+				for (int i1 = 4; i1 >= 0; i1--) {
 					if (entityDef.actions[i1] != null && entityDef.actions[i1].equalsIgnoreCase("attack")) {
 						char c = '\0';
-						if (!leftClickAttack)
+						if (Configuration.npcAttackOptionPriority == 3)
+							continue;
+						if (Configuration.npcAttackOptionPriority == 0 && entityDef.combatLevel > myPlayer.combatLevel
+								|| Configuration.npcAttackOptionPriority == 1)
 							c = '\u07D0';
 						menuActionName[menuActionRow] = entityDef.actions[i1] + " @yel@" + s;
 						if (i1 == 0)
@@ -9509,10 +9521,15 @@ public class Client extends RSApplet {
 						menuActionCmd3[menuActionRow] = j;
 						menuActionRow++;
 					}
+				}
 
 			}
 			if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler"))
-				menuActionName[menuActionRow] = "Examine @yel@" + s + " @whi@(#" + entityDef.interfaceType + ")";
+				menuActionName[menuActionRow] = "Examine @yel@" + s
+						+ " @whi@("
+						+ "id=" + entityDef.interfaceType
+						+ ", index=" + i
+						+ ")";
 			else
 				menuActionName[menuActionRow] = "Examine @yel@" + s;
 			if (debugModels == true) {
@@ -9580,9 +9597,11 @@ public class Client extends RSApplet {
 					menuActionName[menuActionRow] = atPlayerActions[l] + " @whi@" + s;
 					char c = '\0';
 					if (atPlayerActions[l].equalsIgnoreCase("attack")) {
-						if (variousSettings[430] != 0) {
+						if (Configuration.playerAttackOptionPriority == 3)
+							continue;
+						if (Configuration.playerAttackOptionPriority == 0 && player.combatLevel > myPlayer.combatLevel
+								|| Configuration.playerAttackOptionPriority == 1)
 							c = '\u07D0';
-						}
 						if (myPlayer.team != 0 && player.team != 0)
 							if (myPlayer.team == player.team)
 								c = '\u07D0';
