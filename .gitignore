@@ -34,6 +34,7 @@ com/client/OnDemandFetcher.java
 /.gradle/
 /build/
 /temp/
+/out/
 
 sprites.zip
 sprites.rar
