@@ -7310,7 +7310,7 @@ public class Client extends RSApplet {
 										inputTaken = true;
 								}
 							}
-							if (inputString.equals("clientdrop") || inputString.equals("clientdrop"))
+							if (inputString.equals("clientdrop") || inputString.equals("::dropclient"))
 								dropClient();
 							if (inputString.startsWith("full")) {
 								try {
