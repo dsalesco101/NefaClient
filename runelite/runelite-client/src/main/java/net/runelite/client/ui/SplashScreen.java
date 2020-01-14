@@ -44,6 +44,8 @@ import javax.swing.Timer;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 import javax.swing.plaf.basic.BasicProgressBarUI;
+
+import com.client.Configuration;
 import lombok.extern.slf4j.Slf4j;
 
 @Slf4j
@@ -66,20 +68,18 @@ public class SplashScreen extends JFrame implements ActionListener
 
 	private SplashScreen() throws IOException
 	{
-		BufferedImage logo = ImageIO.read(SplashScreen.class.getResourceAsStream("runelite_transparent.png"));
-
-		setTitle("RuneLite Launcher");
+		setTitle(Configuration.CLIENT_TITLE);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);
-		setIconImage(logo);
+		setIconImage(ClientUI.ICON);
 		setLayout(null);
 		Container pane = getContentPane();
 		pane.setBackground(ColorScheme.DARKER_GRAY_COLOR);
 
 		Font font = new Font(Font.DIALOG, Font.PLAIN, 12);
 
-		JLabel logoLabel = new JLabel(new ImageIcon(logo));
+		JLabel logoLabel = new JLabel(new ImageIcon(ClientUI.ICON));
 		pane.add(logoLabel);
 		logoLabel.setBounds(0, 0, WIDTH, WIDTH);
 

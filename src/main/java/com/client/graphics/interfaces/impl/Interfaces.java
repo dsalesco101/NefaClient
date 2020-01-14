@@ -26,7 +26,7 @@ public class Interfaces extends RSInterface {
 		staffInterface(defaultTextDrawingAreas);
 		staffInterfaceBank(defaultTextDrawingAreas);
 		teleportationInterface(defaultTextDrawingAreas);
-		bank(defaultTextDrawingAreas);
+		new Bank().bank(defaultTextDrawingAreas);
 		bankPin(defaultTextDrawingAreas);
 		slayerInterface(defaultTextDrawingAreas);
 		slayerInterfaceSub1(defaultTextDrawingAreas);

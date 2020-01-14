@@ -23,6 +23,7 @@ import com.client.graphics.interfaces.impl.DropdownMenu;
 import com.client.graphics.interfaces.impl.Interfaces;
 import com.client.graphics.interfaces.impl.MonsterDropViewer;
 import com.client.graphics.interfaces.impl.Slider;
+import com.google.common.base.Preconditions;
 
 public class RSInterface {
 	public static boolean showIds = false;
@@ -39,7 +40,10 @@ public class RSInterface {
 				count++;
 			} else {
 				if (count >= 100) {
-					//System.out.println(String.format("Found empty interface range starting at [%d] length [%d]", start, count));
+					/**
+					 * To disable toggle {@link Configuration#PRINT_EMPTY_INTERFACE_SECTIONS}
+					 */
+					System.out.println(String.format("Found empty interface range starting at [%d] length [%d]", start, count));
 				}
 				start = 0;
 				count = 0;
@@ -1259,6 +1263,12 @@ public class RSInterface {
 		inter.invAutoScrollInterfaceId = invAutoScrollInterfaceId;
 	}
 
+	public static RSInterface addInventoryContainer(int childId, int width, int height, int invSpritePadX, int invSpritePadY, boolean addPlaceholderItems, String...options) {
+		RSInterface inter = addItemContainer(childId, width, height, invSpritePadX, invSpritePadY, addPlaceholderItems, options);
+		inter.aBoolean259 = true;
+		return inter;
+	}
+
 	public static RSInterface addItemContainer(int childId, int width, int height, int invSpritePadX, int invSpritePadY, boolean addPlaceholderItems, String...options) {
 		RSInterface rsi = addInterface(childId);
 		rsi.smallInvSprites = false;
@@ -2090,6 +2100,9 @@ public class RSInterface {
 		// Item container
 		addToItemGroup(35007, 5, 10, 9, 9, true, "Withdraw", null, null);
 		setBounds(35007, 50, 5, 0, scroller);
+
+
+		addToItemGroup(35007, 5, 10, 9, 9, true, "Withdraw", null, null);
 	}
 
 	public static void bankPin(TextDrawingArea[] wid) {
@@ -2113,146 +2126,6 @@ public class RSInterface {
 		setBounds(59507, 256 - 50, 220, 6, tab);
 		setBounds(59508, 374, 127, 7, tab);
 		setBounds(59509, 374, 127, 8, tab);
-	}
-
-	public static void bank(TextDrawingArea[] tda) {
-		RSInterface rs = addInterface(5292);
-		rs.message = "";
-		setChildren(41, rs);
-		addSprite(58001, 0, "BankTab/07/BANK");
-		addHoverButton(5384, "BankTab/updated/CLOSE", 97, 21, 21, "Close Window", 250, 5380, 3);
-		addHoveredButton(5380, "BankTab/updated/CLOSE", 98, 21, 21, 5379);
-		addHoverButton(5294, "BankTab/07/BANK", 7, 37, 29, "Set/Edit Your Bank-Pin", 250, 5295, 4);
-		addHoveredButton(5295, "BankTab/BANK", 4, 100, 33, 5296);
-		
-		
-		//Item Movement
-		addBankHover(58002, 4, 58003, 0, 1, "BankTab/updated/FLOW", 50, 22, 304, 1, "Swap Item Movement Mode", 58004, 7, 6,
-				"BankTab/BANK", 58005, "Switch to insert items \nmode", "Switch to swap items \nmode.", 12, 20); //7
-		
-		
-		//Noted
-		addBankHover(58010, 4, 58011, 0, 1, "BankTab/updated/FLOW", 50, 22, 116, 1, "Enable/Disable Noted Withdrawal", 58012,
-				10, 12, "BankTab/BANK", 58013, "Switch to note withdrawal \nmode", "Switch to item withdrawal \nmode",
-				12, 20); //9
-		
-
-		addBankHover1(58018, 5, 58019, 1, "BankTab/07/BANK", 37, 29, "Deposit carried items", 58020, 2,
-				"BankTab/07/BANK", 58021, "Empty your backpack into\nyour bank", 0, 20); //12
-		
-		addBankHover1(58026, 5, 58027, 3, "BankTab/07/BANK", 35, 25, "Deposit worn items", 58028, 4, "BankTab/07/BANK",
-				58029, "Empty the items your are\nwearing into your bank", 0, 20); //14
-
-		for (int i = 0; i < 9; i++) {
-			addInterface(58050 + i);
-			if (i == 0)
-				addConfigButton(58031, 5292, 0, 1, "BankTab/TAB", 48, 38, new String[] { "Price Check", "View" }, 1,
-						34);
-			else
-				addConfigButton(58031 + i, 5292, 4, 2, "BankTab/TAB", 48, 38,
-						new String[] { "Price Check", "Collapse", "View" }, 1, 34 + i);
-			addToItemGroup(58040 + i, 1, 1, 0, 0, false, "", "", "");
-		}
-
-		addText(58061, "0", tda, 0, 0xE68A00, true, true); //24
-		addText(58062, "350", tda, 0, 0xE68A00, true, true);
-
-		addInputField(58063, 50, 0xE68A00, "Search", 235, 23, false, true);
-		addText(58064, "Bank Of " + Configuration.CLIENT_TITLE, tda, 2, 0xE68A00, true, true);
-		
-		addBankHover(18929, 4, 18930, 0, 1, "BankTab/updated/FLOW", 50, 22, 305, 1, "Swap Item Movement Mode", 18931, 7, 6,
-				"BankTab/BANK", 18932, "Switch to insert items \nmode", "Switch to swap items \nmode.", 12, 20); //7
-		
-		addBankHover(18933, 4, 18934, 0, 1, "BankTab/updated/FLOW", 50, 22, 117, 1, "Enable/Disable Noted Withdrawal", 18935,
-				10, 12, "BankTab/BANK", 18936, "Switch to note withdrawal \nmode", "Switch to item withdrawal \nmode",
-				12, 20); //9
-		
-		addBankHover1(18937, 5, 18938, 0, "BankTab/updated/SEARCH", 36, 36, "Search items", 18939, 4, "BankTab/updated/SEARCH",
-				18940, "Empty the items your are\nwearing into your bank", 0, 1); //14
-		
-		addClickableSprites(58014, "Enable/Disable Always Placeholders", "BankTab/07/BANK", 5, 6, 5);
-
-		addText(18941, "Rearrange mode:", tda, 1, 0xE68A00, false, true);
-		addText(18942, "Withdraw as:", tda, 1, 0xE68A00, true, true);
-		
-		addText(18943, "Swap", tda, 1, 0xE68A00, true, true);
-		addText(18944, "Insert", tda, 1, 0xE68A00, true, true);
-		addText(18945, "Item", tda, 1, 0xE68A00, true, true);
-		addText(18946, "Note", tda, 1, 0xE68A00, true, true);
-		
-		addBankHover1(18947, 5, 18948, 0, "Presets/OPEN", 36, 36, "Open Preset Interface", 18949, 4, "Presets/OPEN",
-				18950, "Open Preset Interface", 0, 1);
-
-		//addInputField(58063, 50, 0xE68A00, "Search", 235, 23, false, true);
-		RSInterface Interface = interfaceCache[5385];
-		Interface.height = 202;
-		Interface.width = 481;
-		Interface = interfaceCache[5382];
-		Interface.width = 10;
-		Interface.invSpritePadX = 12;
-		Interface.height = 35;
-		Interface.actions = new String[] { "Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X",
-				"Withdraw All but one" };
-		setBounds(58001, 14, 3, 0, rs);
-		setBounds(5384, 474, 10, 1, rs);
-		setBounds(5380, 474, 10, 2, rs);
-		setBounds(5294, 312, 292, 3, rs); // Bank pin
-		setBounds(5295, 312, 297, 4, rs);
-		setBounds(58002, 20, 306, 5, rs); // Rearrange mode
-		setBounds(58003, 20, 306, 6, rs);
-		setBounds(58010, 120, 306, 7, rs); // Noting
-		setBounds(58011, 120, 306, 8, rs);
-
-		setBounds(58018, 423, 292, 9, rs); // Items
-		setBounds(58019, 423, 292, 10, rs);
-		
-		setBounds(58026, 460, 292, 11, rs); // Invo
-
-		setBounds(58027, 460, 292, 12, rs);
-		setBounds(5385, -3, 76, 13, rs);
-		RSInterface.interfaceCache[5385].height = 216;
-		int x = 59;
-		for (int i = 0; i < 9; i++) {
-			setBounds(58050 + i, 0, 0, 15 + i, rs);
-			RSInterface rsi = interfaceCache[58050 + i];
-			setChildren(2, rsi);
-			setBounds(58031 + i, x, 38, 0, rsi);
-			setBounds(58040 + i, x + 5, 42, 1, rsi);
-			x += 41;
-		}
-		// 0-350
-		setBounds(58061, 36, 9, 24, rs);
-		setBounds(58062, 36, 21, 25, rs);
-
-//		setBounds(58063, 25, 298, 26, rs); // Search
-		setBounds(58064, 250, 13, 26, rs);
-		
-		setBounds(18929, 70, 306, 27, rs); // Swap items
-		setBounds(18930, 70, 306, 28, rs);
-		
-		setBounds(18933, 170, 306, 29, rs); // Noting
-		setBounds(18934, 170, 306, 30, rs);
-		
-		setBounds(18937, 386, 292, 31, rs); // Search
-		setBounds(18938, 386, 292, 32, rs);
-
-//		
-		setBounds(58014, 349, 292, 33, rs); // Placeholder
-		
-		setBounds(18941, 22, 291, 34, rs); // Titles
-		setBounds(18942, 170, 291, 35, rs); // Titles
-		
-		setBounds(18943, 45, 309, 36, rs); // Titles
-		setBounds(18944, 95, 309, 37, rs); // Titles
-		setBounds(18945, 145, 309, 38, rs); // Titles
-		setBounds(18946, 195, 309, 39, rs); // Titles
-		
-		setBounds(18947, 275, 292, 40, rs); // Titles
-		
-		//setBounds(58063, 100, 200, 40, rs); // Search
-		//setBounds(58065, 36, 21, 27, rs);
-		//FIXTHIS
-
 	}
 
 	public static void addInputField(int identity, int characterLimit, int color, String text, int width, int height,
@@ -2367,7 +2240,7 @@ public class RSInterface {
 		setBounds(hoverId3, X, Y, 1, hover);
 	}
 
-	public static void addToItemGroup(int id, int w, int h, int spritePadX, int spritePadY, boolean actions, String...actionStrings) {
+	public static RSInterface addToItemGroup(int id, int w, int h, int spritePadX, int spritePadY, boolean actions, String...actionStrings) {
 		RSInterface rsi = addInterface(id);
 		rsi.width = w;
 		rsi.height = h;
@@ -2388,6 +2261,7 @@ public class RSInterface {
 			}
 		}
 		rsi.type = 2;
+		return rsi;
 	}
 
 	public static void addToItemGroup(int id, int w, int h, int x, int y, boolean actions, String action1,
@@ -4858,6 +4732,29 @@ public class RSInterface {
 		i.childY = new int[total];
 	}
 
+	public static int expandChildren(int amount, RSInterface i) {
+		int index = i.children.length;
+		int[] newChildren = new int[i.children.length + amount];
+		int[] newChildX = new int[i.childX.length + amount];
+		int[] newChildY = new int[i.childY.length + amount];
+		System.arraycopy(i.children, 0, newChildren, 0, i.children.length);
+		System.arraycopy(i.childX, 0, newChildX, 0, i.childX.length);
+		System.arraycopy(i.childY, 0, newChildY, 0, i.childY.length);
+		i.children = newChildren;
+		i.childX = newChildX;
+		i.childY = newChildY;
+		return index;
+	}
+
+	public static int getIndexOfChild(RSInterface i, int childInterfaceId) {
+		for (int index = 0; index < i.children.length; index++) {
+			if (i.children[index] == childInterfaceId) {
+				return index;
+			}
+		}
+		throw new IllegalArgumentException("No child " + childInterfaceId + " in " + i.id);
+	}
+
 	protected static Sprite CustomSpriteLoader(int id, String s) {
 		long l = (TextClass.method585(s) << 8) + id;
 		Sprite sprite = (Sprite) aMRUNodes_238.insertFromCache(l);
@@ -5761,4 +5658,31 @@ public class RSInterface {
 	 */
 	public Sprite[] backgroundSprites;
 	public boolean interfaceShown;
+
+	/**
+	 * Gets the amount of rows inside the item container that have at least one item.
+	 */
+	public int getItemContainerRows() {
+		Preconditions.checkState(type == 2, "Not a container: " + id);
+		Preconditions.checkState(inv != null, "Not a container: " + id);
+
+		int rows = 0;
+		int lastRow = -1;
+		int index = 0;
+
+		for (int height = 0; height < this.height; height++) {
+			for (int width = 0; width < this.width; width++) {
+				if (inv[index] != 0 && lastRow != height) {
+					rows++;
+					lastRow = height;
+				}
+				index++;
+			}
+		}
+		return rows;
+	}
+
+	public int getItemContainerHeight() {
+		return getItemContainerRows() * (32 + invSpritePadY);
+	}
 }

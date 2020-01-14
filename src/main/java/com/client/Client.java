@@ -61,6 +61,7 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.client.graphics.interfaces.impl.Bank;
 import com.client.graphics.interfaces.impl.Interfaces;
 import com.client.graphics.interfaces.impl.MonsterDropViewer;
 import com.client.graphics.interfaces.impl.QuestTab;
@@ -1982,6 +1983,7 @@ public class Client extends RSApplet {
 
 										if (class9_1.actions != null) {
 											if (openInterfaceID == 21553 && class9_1.parentID == 3213) {
+												// Equipment
 												String[] options = new String[] {"Place in inventory", "Use as equipment"};
 												for (int j4 = 8; j4 >= 0; j4--) {
 													if (j4 > options.length - 1)
@@ -2009,34 +2011,36 @@ public class Client extends RSApplet {
 												}
 												
 											} else {
+												// Standard containers
+												if (Bank.isBankContainer(class9_1)) {
+													if (class9_1.id == 5382 && placeHolders && class9_1.invStackSizes[k2] <= 0) {
+														class9_1.actions = new String[8];
+														class9_1.actions[1] = "Release";
+													} else {
+														if (modifiableXValue > 0) {// so issue is when x = 0
+															if (class9_1.actions.length < 9) {
+																class9_1.actions = new String[] {
+																		"Withdraw 1",
+																		"Withdraw 5",
+																		"Withdraw 10",
+																		"Withdraw All",
+																		"Withdraw X",
+																		"Withdraw " + modifiableXValue,
+																		"Withdraw All but one"
+																};
+															} else {
+																class9_1.actions[5] = "Withdraw " + modifiableXValue;
+															}
+														}
+													}
+												}
+
 												for (int j4 = 8; j4 >= 0; j4--) {
 													if (j4 > class9_1.actions.length - 1)
 														continue;
 													if (class9_1.actions[j4] != null) {
-	
-														if (class9_1.parentID == 5292) {
-															if (class9_1.id == 5382 && placeHolders
-																	&& class9_1.invStackSizes[k2] <= 0) {
-																// menuActionName[menuActionRow] = "Release " + " @lre@"
-																// +itemDef.name;
-																class9_1.actions = new String[8];
-																class9_1.actions[1] = "Release";
-															} else {
-																if (modifiableXValue > 0) {// so issue is when x = 0
-																	if (class9_1.actions.length < 9) {
-																		class9_1.actions = new String[] { "Withdraw 1",
-																				"Withdraw 5", "Withdraw 10", "Withdraw All",
-																				"Withdraw X",
-																				"Withdraw " + modifiableXValue,
-																				"Withdraw All but one", "Placeholder" };
-																	}
-																	class9_1.actions[5] = "Withdraw " + modifiableXValue;
-																}
-															}
-														}
-														menuActionName[menuActionRow] = class9_1.actions[j4] + " @lre@"
-																+ itemDef.name;
-														if (class9_1.id != 1688) {
+														menuActionName[menuActionRow] = class9_1.actions[j4] + " @lre@" + itemDef.name;
+														if (class9_1.id != 1688/*equipment*/) {
 															if (j4 == 0)
 																menuActionID[menuActionRow] = 632;
 															if (j4 == 1)
@@ -2046,9 +2050,12 @@ public class Client extends RSApplet {
 															if (j4 == 3)
 																menuActionID[menuActionRow] = 431;
 															if (j4 == 4)
-																menuActionID[menuActionRow] = 53;// can u pull up commands?
-															if (j4 == 7)
-																menuActionID[menuActionRow] = 1337;// placeholders
+																menuActionID[menuActionRow] = 53;
+															if (j4 == 5)
+																menuActionID[menuActionRow] = 300;
+															if (j4 == 6)
+																menuActionID[menuActionRow] = 291;
+
 														} else {
 															if (itemDef.equipActions[j4] == null) {
 																menuActionName[3] = "Operate @lre@" + itemDef.name;
@@ -2069,18 +2076,7 @@ public class Client extends RSApplet {
 															if (j4 == 4)
 																menuActionID[menuActionRow] = 664; // operate 4
 														}
-	
-														if (class9_1.parentID == 5292) {
-															if (class9_1.actions.length < 8) {
-																if (j4 == 5)
-																	menuActionID[menuActionRow] = 291;
-															} else {
-																if (j4 == 5)
-																	menuActionID[menuActionRow] = 300;
-																if (j4 == 6)
-																	menuActionID[menuActionRow] = 291;
-															}
-														}
+
 														menuActionCmd1[menuActionRow] = itemDef.id;
 														menuActionCmd2[menuActionRow] = k2;
 														menuActionCmd3[menuActionRow] = class9_1.id;
@@ -2090,11 +2086,13 @@ public class Client extends RSApplet {
 											}
 										}
 									}
+
 									if (class9_1.parentID >= 58040 && class9_1.parentID <= 58048
 											|| class9_1.parentID >= 32100 && class9_1.parentID <= 32156
 											|| class9_1.parentID >= 32200 && class9_1.parentID <= 32222) {
 										return;
 									}
+
 									if (class9_1.isItemSearchComponent) {
 										menuActionName[menuActionRow] = "Select @lre@" + itemDef.name;
 										menuActionID[menuActionRow] = 1130;
@@ -2103,13 +2101,7 @@ public class Client extends RSApplet {
 										menuActionCmd3[menuActionRow] = class9_1.id;
 										menuActionRow++;
 									} else {
-										if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler"))
-											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name + " @whi@("
-													+ (itemID) + ")";
-										else
-											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name;
-
-										if (debugModels == true) {
+										if (debugModels) {
 											if (System.currentTimeMillis() - debugDelay > 1000) {
 												debugDelay = System.currentTimeMillis();
 												pushMessage("<col=255>" + itemDef.name + ":</col> Male: <col=255>"
@@ -2125,6 +2117,13 @@ public class Client extends RSApplet {
 														+ Arrays.toString(itemDef.originalModelColors) + ")@gre@)(@whi@"
 														+ Arrays.toString(itemDef.modifiedModelColors) + ")@gre@)";
 											}
+										}
+
+										if (myPlayer.hasRights(PlayerRights.GAME_DEVELOPER) || myUsername.equalsIgnoreCase("tyler")) {
+											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name + " @whi@("
+													+ (itemID) + ")";
+										} else {
+											menuActionName[menuActionRow] = "Examine @lre@" + itemDef.name;
 										}
 										menuActionID[menuActionRow] = 1125;
 										menuActionCmd1[menuActionRow] = itemDef.id;
@@ -8726,9 +8725,12 @@ public class Client extends RSApplet {
 
 			rightClickChatButtons();
 			processMinimapActions();
+
+			// Reverses menu actions!
 			boolean flag = false;
 			while (!flag) {
 				flag = true;
+
 				for (int j = 0; j < menuActionRow - 1; j++) {
 					if (menuActionID[j] < 1000 && menuActionID[j + 1] > 1000) {
 						String s = menuActionName[j];
@@ -9935,6 +9937,7 @@ public class Client extends RSApplet {
 			multiOverlay = new Sprite(streamLoader_2, "overlay_multiway", 0);
 
 			eventIcon = new Sprite(streamLoader_2, "mapfunction", 72);
+			bankDivider = new Sprite("bank_divider");
 
 			File[] file = new File(Signlink.getCacheDirectory() + "/sprites/sprites/").listFiles();
 			int size = file.length;
@@ -10169,7 +10172,11 @@ public class Client extends RSApplet {
 			Class36.clientInstance = this;
 			AccountManager.loadAccount();
 			if (Configuration.PRINT_EMPTY_INTERFACE_SECTIONS) {
-				RSInterface.printEmptyInterfaceSections();
+				if (Configuration.developerMode) {
+					RSInterface.printEmptyInterfaceSections();
+				} else {
+					System.err.println("PRINT_EMPTY_INTERFACE_SECTIONS is toggled but you must be in dev mode.");
+				}
 			}
 			return;
 		} catch (Exception exception) {
@@ -11077,6 +11084,9 @@ public class Client extends RSApplet {
 				}
 			} else if (class9_1.type != 1)
 				if (class9_1.type == 2) {
+					Bank.setupMainTab(class9_1, _x, l2);
+
+					// Item container
 					if (class9_1.invAutoScrollHeight) {
 						int lastRow = -1;
 						int rowCount = 0;
@@ -13067,6 +13077,7 @@ public class Client extends RSApplet {
 	private Sprite[] mapArea = new Sprite[8];
 
 	private Sprite eventIcon;
+	public Sprite bankDivider;
 
 	private void drawMinimap() {
 		if (currentScreenMode == ScreenMode.FIXED)
@@ -15848,6 +15859,7 @@ public class Client extends RSApplet {
 					if (variousSettings[j8] != l14) {
 						QuestTab.onConfigChanged(j8, l14);
 						MonsterDropViewer.onConfigChanged(j8, l14);
+						Bank.onConfigChanged(j8, l14);
 						variousSettings[j8] = l14;
 						method33(j8);
 						needDrawTabArea = true;
@@ -15864,6 +15876,7 @@ public class Client extends RSApplet {
 					if (variousSettings[k8] != byte0) {
 						QuestTab.onConfigChanged(k8, byte0);
 						MonsterDropViewer.onConfigChanged(k8, byte0);
+						Bank.onConfigChanged(k8, byte0);
 						variousSettings[k8] = byte0;
 						method33(k8);
 						needDrawTabArea = true;

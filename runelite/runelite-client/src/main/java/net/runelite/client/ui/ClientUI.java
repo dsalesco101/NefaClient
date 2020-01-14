@@ -25,6 +25,7 @@
 package net.runelite.client.ui;
 
 import com.client.ClientWindow;
+import com.client.Configuration;
 import com.client.RSApplet;
 import com.client.features.gameframe.ScreenMode;
 import com.google.common.base.Strings;
@@ -287,7 +288,7 @@ public class ClientUI
 				return false;
 			}
 
-			frame.setTitle(RuneLiteProperties.getTitle() + " - " + name);
+			frame.setTitle(Configuration.CLIENT_TITLE);
 			return true;
 		});
 	}
@@ -316,7 +317,7 @@ public class ClientUI
 			// Try to enable fullscreen on OSX
 			//OSXUtil.tryEnableFullscreen(frame);
 
-			frame.setTitle(RuneLiteProperties.getTitle());
+			frame.setTitle(Configuration.CLIENT_TITLE);
 			frame.setIconImage(ICON);
 			frame.getLayeredPane().setCursor(Cursor.getDefaultCursor()); // Prevent substance from using a resize cursor for pointing
 			frame.setLocationRelativeTo(frame.getOwner());
@@ -848,12 +849,12 @@ public class ClientUI
 
 			if (player != null && player.getName() != null)
 			{
-				frame.setTitle(RuneLiteProperties.getTitle() + " - " + player.getName());
+				frame.setTitle(Configuration.CLIENT_TITLE);
 			}
 		}
 		else
 		{
-			frame.setTitle(RuneLiteProperties.getTitle());
+			frame.setTitle(Configuration.CLIENT_TITLE);
 		}
 
 		if (frame.isAlwaysOnTopSupported())
