@@ -76,7 +76,7 @@ public class ClientWindow extends Client implements ActionListener, WindowListen
 		
 	}
 	
-	private static JFrame frame;
+	public static JFrame frame;
 	
 	public static JFrame getFrame() {
 		return frame;
