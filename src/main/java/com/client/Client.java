@@ -52,6 +52,7 @@ import java.util.LinkedList;
 import java.util.List;
 import java.util.Locale;
 import java.util.Map;
+import java.util.OptionalInt;
 import java.util.Queue;
 import java.util.TimeZone;
 import java.util.concurrent.TimeUnit;
@@ -1048,8 +1049,8 @@ public class Client extends RSApplet {
 					if (class9.aBoolean259 || class9.aBoolean235) {
 						aBoolean1242 = false;
 						anInt989 = 0;
-						anInt1084 = j2;
-						anInt1085 = l1;
+						draggingItemInterfaceId = j2;
+						itemDraggingSlot = l1;
 						activeInterfaceType = 2;
 						anInt1087 = super.saveClickX;
 						anInt1088 = super.saveClickY;
@@ -4233,7 +4234,9 @@ public class Client extends RSApplet {
 				if (aBoolean1242 && anInt989 >= 12) {
 					lastActiveInvInterface = -1;
 					processRightClick();
-					if (anInt1084 == 5382) {
+
+					// Bank interface adding items to another tab via dragging on the tab icons at the top
+					if (Bank.isBankContainer(RSInterface.interfaceCache[draggingItemInterfaceId])) {
 						//System.out.println("BANK TAB SLOT " + mouseX + ", " + mouseY);
 						Point southWest, northEast;
 						int xOffset = currentScreenMode == ScreenMode.FIXED ? 0
@@ -4246,58 +4249,114 @@ public class Client extends RSApplet {
 						for (int i = 0; i < slots.length; i++)
 							slots[i] = (41 * i) + (int) southWest.getX();
 						for (int i = 0; i < slots.length; i++) {
-							//System.out.println(northEast.getY() + ", " + southWest.getY());
-							//System.out.println("Slot: " + slots[i] + ", " + (slots[i] + 42));
 							if (super.mouseX >= slots[i] && super.mouseX <= slots[i] + 42
 									&& super.mouseY >= northEast.getY() && super.mouseY <= southWest.getY()) {
 								RSInterface rsi = RSInterface.interfaceCache[58050 + i];
-								//System.out.println("BANK TAB SLOT " + i);
 								if (rsi.isMouseoverTriggered) {
 									continue;
-							}
-								stream.createFrame(214);
-								stream.method433(anInt1084);
-								stream.method424(0);
-								stream.method433(anInt1085);
-								stream.method431(1000 + i);
-								return;
-						}
-					}
-				}
-					if (lastActiveInvInterface == anInt1084 && mouseInvInterfaceIndex != anInt1085) {
-						RSInterface class9 = RSInterface.interfaceCache[anInt1084];
-						int j1 = 0;
-						if (anInt913 == 1 && class9.contentType == 206)
-							j1 = 1;
-						if (class9.inv[mouseInvInterfaceIndex] <= 0)
-							j1 = 0;
-						if (class9.aBoolean235) {
-							int l2 = anInt1085;
-							int l3 = mouseInvInterfaceIndex;
-							class9.inv[l3] = class9.inv[l2];
-							class9.invStackSizes[l3] = class9.invStackSizes[l2];
-							class9.inv[l2] = -1;
-							class9.invStackSizes[l2] = 0;
-						} else if (j1 == 1) {
-							int i3 = anInt1085;
-							for (int i4 = mouseInvInterfaceIndex; i3 != i4;)
-								if (i3 > i4) {
-									class9.swapInventoryItems(i3, i3 - 1);
-									i3--;
-								} else if (i3 < i4) {
-									class9.swapInventoryItems(i3, i3 + 1);
-									i3++;
 								}
 
-						} else {
-							class9.swapInventoryItems(anInt1085, mouseInvInterfaceIndex);
+								// Update client side to hide latency
+								if (Bank.getCurrentBankTab() == 0) {
+									OptionalInt fromTabOptional = Arrays.stream(Bank.MAIN_TAB_CONTAINERS).filter(id -> draggingItemInterfaceId == id).findFirst();
+									if (fromTabOptional.isPresent()) {
+										RSInterface fromTab = RSInterface.interfaceCache[fromTabOptional.getAsInt()];
+										RSInterface fromTabDisplay = RSInterface.interfaceCache[fromTabOptional.getAsInt()];
+										RSInterface toTab = RSInterface.interfaceCache[Bank.MAIN_TAB_CONTAINERS[i]];
+										RSInterface toTabDisplay = RSInterface.interfaceCache[Bank.BANK_TAB_ITEM_DISPLAYS[i]];
+										if (toTab.getInventoryContainerFreeSlots() > 0 && fromTab.id != toTab.id) {
+											/*if (fromTab.id != Bank.MAIN_TAB_CONTAINERS[0]) {
+												fromTabDisplay.inv[0] = fromTab.inv[itemDraggingSlot];
+												fromTabDisplay.invStackSizes[0] = fromTab.invStackSizes[itemDraggingSlot];
+											}*/
+											//toTabDisplay.inv[0] = fromTab.inv[itemDraggingSlot];
+											toTabDisplay.invStackSizes[0] = fromTab.invStackSizes[itemDraggingSlot];
+											RSInterface.insertInventoryItem(fromTab, itemDraggingSlot, toTab);
+										}
+									}
+								}
+
+								stream.createFrame(214);
+								stream.method433(draggingItemInterfaceId);
+								stream.method424(0);
+								stream.method433(itemDraggingSlot);
+								stream.method431(1000 + i);
+								return;
+							}
 						}
-						//System.out.println("J: " + j1);
-						stream.createFrame(214);
-						stream.method433(anInt1084);
-						stream.method424(j1);
-						stream.method433(anInt1085);
-						stream.method431(mouseInvInterfaceIndex);
+					}
+
+					RSInterface class9 = RSInterface.interfaceCache[draggingItemInterfaceId];
+					if (class9 != null) {
+						if (mouseInvInterfaceIndex != itemDraggingSlot && lastActiveInvInterface == draggingItemInterfaceId) {
+							// Dragging item inside the same container
+
+							int insertMode = 0;
+							if (anInt913 == 1 && class9.contentType == 206)
+								insertMode = 1;
+							if (class9.inv[mouseInvInterfaceIndex] <= 0)
+								insertMode = 0;
+
+							if (class9.aBoolean235) {
+								// Move to empty slot?
+								int l2 = itemDraggingSlot;
+								int l3 = mouseInvInterfaceIndex;
+								class9.inv[l3] = class9.inv[l2];
+								class9.invStackSizes[l3] = class9.invStackSizes[l2];
+								class9.inv[l2] = -1;
+								class9.invStackSizes[l2] = 0;
+							} else if (insertMode == 1) {
+								// Insert
+								int i3 = itemDraggingSlot;
+								for (int i4 = mouseInvInterfaceIndex; i3 != i4; ) {
+									if (i3 > i4) {
+										class9.swapInventoryItems(i3, i3 - 1);
+										i3--;
+									} else if (i3 < i4) {
+										class9.swapInventoryItems(i3, i3 + 1);
+										i3++;
+									}
+								}
+							} else {
+								// Swap
+								class9.swapInventoryItems(itemDraggingSlot, mouseInvInterfaceIndex);
+							}
+
+							stream.createFrame(214);
+							stream.method433(draggingItemInterfaceId);
+							stream.method424(insertMode);
+							stream.method433(itemDraggingSlot);
+							stream.method431(mouseInvInterfaceIndex);
+						} else if (class9.allowInvDraggingToOtherContainers && lastActiveInvInterface != draggingItemInterfaceId) {
+							RSInterface draggingFrom = RSInterface.interfaceCache[draggingItemInterfaceId];
+							RSInterface draggingTo = RSInterface.interfaceCache[lastActiveInvInterface];
+							int fromSlot = itemDraggingSlot;
+							int toSlot = mouseInvInterfaceIndex;
+							if (draggingTo != null && draggingFrom != null) {
+								int insertMode = 0;
+								if (anInt913 == 1 && class9.contentType == 206)
+									insertMode = 1;
+
+								if (insertMode == 1) {
+									// insert
+									if (draggingTo.getInventoryContainerFreeSlots() > 0) {
+										RSInterface.insertInventoryItem(draggingFrom, fromSlot, draggingTo, toSlot);
+									} else {
+										return;
+									}
+								} else {
+									//swap
+									RSInterface.swapInventoryItems(draggingFrom, fromSlot, draggingTo, toSlot);
+								}
+
+								stream.createFrame(242);
+								stream.writeWord(draggingTo.id);
+								stream.writeWord(draggingFrom.id);
+								stream.method424(insertMode);
+								stream.writeWord(fromSlot);
+								stream.writeWord(toSlot);
+							}
+						}
 					}
 				} else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
 					determineMenuSize();
@@ -4795,6 +4854,9 @@ public class Client extends RSApplet {
 			menu.setMenuVisible(false);
 		}
 		if (l >= 1700 && l <= 1710) {
+			// Clicking open bank tab
+			Bank.openBankTab(k - 58031);
+
 			stream.createFrame(185);
 			int offset = k + (k - 58030) * 10 + (l - 1700);
 			stream.writeWord(offset);
@@ -4808,7 +4870,7 @@ public class Client extends RSApplet {
 		}
 		if (l == 291) {
 			stream.createFrame(140);
-			stream.method433(k);
+			stream.writeWord(k);
 			stream.method433(i1);
 			stream.method431(j);
 			atInventoryLoopCycle = 0;
@@ -5318,8 +5380,8 @@ public class Client extends RSApplet {
 		}
 		if (l == 78) {
 			stream.createFrame(117);
-			stream.method433(k);
-			stream.method433(i1);
+			stream.writeWord(k);
+			stream.writeWord(i1);
 			stream.method431(j);
 			atInventoryLoopCycle = 0;
 			atInventoryInterface = k;
@@ -11131,7 +11193,7 @@ public class Client extends RSApplet {
 									j9 = (class9_1.inv[i3] & 0x7FFF) - 1;
 								}
 								if (k5 > DrawingArea.topX - 32 && k5 < DrawingArea.bottomX && j6 > DrawingArea.topY - 32
-										&& j6 < DrawingArea.bottomY || activeInterfaceType != 0 && anInt1085 == i3) {
+										&& j6 < DrawingArea.bottomY || activeInterfaceType != 0 && itemDraggingSlot == i3) {
 									int l9 = 0;
 									if (itemSelected == 1 && anInt1283 == i3 && anInt1284 == class9_1.id)
 										l9 = 0xffffff;
@@ -11188,7 +11250,7 @@ public class Client extends RSApplet {
 										}
 									}
 									if (itemSprite != null) {
-										if (activeInterfaceType != 0 && anInt1085 == i3 && anInt1084 == class9_1.id) {
+										if (activeInterfaceType != 0 && itemDraggingSlot == i3 && draggingItemInterfaceId == class9_1.id) {
 											k6 = super.mouseX - anInt1087;
 											j7 = super.mouseY - anInt1088;
 											if (k6 < 5 && k6 > -5)
@@ -15856,10 +15918,10 @@ public class Client extends RSApplet {
 					int j8 = inStream.method434();
 					int l14 = inStream.method439();
 					anIntArray1045[j8] = l14;
+					Bank.onConfigChanged(j8, l14);
 					if (variousSettings[j8] != l14) {
 						QuestTab.onConfigChanged(j8, l14);
 						MonsterDropViewer.onConfigChanged(j8, l14);
-						Bank.onConfigChanged(j8, l14);
 						variousSettings[j8] = l14;
 						method33(j8);
 						needDrawTabArea = true;
@@ -15873,10 +15935,10 @@ public class Client extends RSApplet {
 					int k8 = inStream.method434();
 					byte byte0 = inStream.readSignedByte();
 					anIntArray1045[k8] = byte0;
+					Bank.onConfigChanged(k8, byte0);
 					if (variousSettings[k8] != byte0) {
 						QuestTab.onConfigChanged(k8, byte0);
 						MonsterDropViewer.onConfigChanged(k8, byte0);
-						Bank.onConfigChanged(k8, byte0);
 						variousSettings[k8] = byte0;
 						method33(k8);
 						needDrawTabArea = true;
@@ -16781,8 +16843,8 @@ public class Client extends RSApplet {
 	private boolean aBoolean1080;
 	private String[] friendsList;
 	private Stream inStream;
-	private int anInt1084;
-	private int anInt1085;
+	private int draggingItemInterfaceId;
+	private int itemDraggingSlot;
 	private int activeInterfaceType;
 	private int anInt1087;
 	private int anInt1088;

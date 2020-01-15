@@ -1,6 +1,7 @@
 package com.client.graphics.interfaces;
 
 import java.awt.Dimension;
+import java.util.Arrays;
 import java.util.Objects;
 import com.client.features.gameframe.ScreenMode;
 import com.client.Class36;
@@ -452,6 +453,49 @@ public class RSInterface {
 		tab.anInt216 = hoveredColour;
 		tab.centerText = centerText;
 		tab.spriteOpacity = 255;
+	}
+
+	public long getInventoryContainerFreeSlots() {
+		return Arrays.stream(inv).filter(inv -> inv == 0).count();
+	}
+
+	public void removeItem(int slot) {
+		// Delete from container
+		inv[slot] = 0;
+		invStackSizes[slot] = 0;
+		for (int index = slot + 1; index < inv.length; index++) {
+			inv[index - 1] = inv[index];
+			invStackSizes[index - 1] = invStackSizes[index];
+		}
+	}
+
+	public static void insertInventoryItem(RSInterface fromContainer, int fromSlot, RSInterface toContainer) {
+		insertInventoryItem(fromContainer, fromSlot, toContainer, toContainer.inv.length - (int) toContainer.getInventoryContainerFreeSlots());
+	}
+
+	public static void insertInventoryItem(RSInterface fromContainer, int fromSlot, RSInterface toContainer, int toSlot) {
+		int itemId = fromContainer.inv[fromSlot];
+		int itemAmount = fromContainer.invStackSizes[fromSlot];
+		fromContainer.removeItem(fromSlot);
+
+		// Insert in container
+		for (int index = toContainer.inv.length - 1; index > toSlot; index--) {
+			toContainer.inv[index] = toContainer.inv[index - 1];
+			toContainer.invStackSizes[index] = toContainer.invStackSizes[index - 1];
+		}
+		toContainer.inv[toSlot] = itemId;
+		toContainer.invStackSizes[toSlot] = itemAmount;
+	}
+
+	public static void swapInventoryItems(RSInterface fromContainer, int fromSlot, RSInterface toContainer, int toSlot) {
+		int itemId1 = fromContainer.inv[fromSlot];
+		int itemAmount1 = fromContainer.invStackSizes[fromSlot];
+		int itemId2 = toContainer.inv[toSlot];
+		int itemAmount2 = toContainer.invStackSizes[toSlot];
+		fromContainer.inv[fromSlot] = itemId2;
+		fromContainer.invStackSizes[fromSlot] = itemAmount2;
+		toContainer.inv[toSlot] = itemId1;
+		toContainer.invStackSizes[toSlot] = itemAmount1;
 	}
 
 	public void swapInventoryItems(int i, int j) {
@@ -5296,6 +5340,7 @@ public class RSInterface {
 	public int id;
 	public int invStackSizes[];
 	public int inv[];
+	public boolean allowInvDraggingToOtherContainers;
 	public boolean smallInvSprites;
 	public boolean hideInvStackSizes;
 	public boolean invAutoScrollHeight;
