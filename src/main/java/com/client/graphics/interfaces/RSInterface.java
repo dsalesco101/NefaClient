@@ -459,6 +459,39 @@ public class RSInterface {
 		return Arrays.stream(inv).filter(inv -> inv == 0).count();
 	}
 
+	public static void addAllItems(RSInterface from, RSInterface to) {
+		main: for (int fromIndex = 0; fromIndex < from.inv.length; fromIndex++) {
+			if (from.inv[fromIndex] > 0) {
+				for (int toIndex = 0; toIndex < to.inv.length; toIndex++) {
+					if (to.inv[toIndex] == 0) {
+						to.inv[toIndex] = from.inv[fromIndex];
+						to.invStackSizes[toIndex] = from.invStackSizes[fromIndex];
+						from.inv[fromIndex] = 0;
+						from.invStackSizes[fromIndex] = 0;
+						continue main;
+					}
+				}
+
+				return; // No space available in to container
+			}
+		}
+	}
+
+	public void shiftItems() {
+		int[] oldItems = inv.clone();
+		int[] oldAmounts = invStackSizes.clone();
+		inv = new int[inv.length];
+		invStackSizes = new int[inv.length];
+		int currentIndex = 0;
+		for (int index = 0; index < oldItems.length; index++) {
+			if (oldItems[index] > 0) {
+				inv[currentIndex] = oldItems[index];
+				invStackSizes[currentIndex] = oldAmounts[index];
+				currentIndex++;
+			}
+		}
+	}
+
 	public void removeItem(int slot) {
 		// Delete from container
 		inv[slot] = 0;
@@ -4774,6 +4807,31 @@ public class RSInterface {
 		i.children = new int[total];
 		i.childX = new int[total];
 		i.childY = new int[total];
+	}
+
+	public static boolean deleteChild(int childInterfaceId, RSInterface i) {
+		for (int index = 0; index < i.children.length; index++) {
+			if (i.children[index] == childInterfaceId) {
+				int[] newChildren = new int[i.children.length - 1];
+				int[] newChildX = new int[i.children.length - 1];
+				int[] newChildY = new int[i.children.length - 1];
+				int newChildrenIndex = 0;
+				for (int copyIndex = 0; copyIndex < i.children.length; copyIndex++) {
+					if (copyIndex != index) {
+						newChildren[newChildrenIndex] = i.children[copyIndex];
+						newChildX[newChildrenIndex] = i.childX[copyIndex];
+						newChildY[newChildrenIndex] = i.childY[copyIndex];
+					}
+				}
+
+				i.children = newChildren;
+				i.childX = newChildX;
+				i.childY = newChildY;
+				return true;
+			}
+		}
+
+		return false;
 	}
 
 	public static int expandChildren(int amount, RSInterface i) {

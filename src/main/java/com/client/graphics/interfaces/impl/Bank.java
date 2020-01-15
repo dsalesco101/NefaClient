@@ -4,6 +4,7 @@ import java.util.Arrays;
 
 import com.client.Client;
 import com.client.Configuration;
+import com.client.Sprite;
 import com.client.TextDrawingArea;
 import com.client.graphics.interfaces.RSInterface;
 import com.google.common.base.Preconditions;
@@ -15,14 +16,14 @@ public class Bank extends RSInterface {
     public static final int BANK_INTERFACE_ID = 5292;
 
     /**
+     * The main container for each tab and the top container in the main tab.
+     */
+    public static final int OLD_CONTAINER_INTERFACE_ID = 5382;
+
+    /**
      * Displays the x/350 item count at the top of the bank.
      */
     public static final int ITEM_COUNT_INTERFACE_ID = 58061;
-
-    /**
-     * The main container for each tab and the top container in the main tab.
-     */
-    public static final int MAIN_CONTAINER = 5382;
 
     /**
      * Item containers for the items. The first one is not display but used to contain the main tab items.
@@ -30,52 +31,131 @@ public class Bank extends RSInterface {
     public static final int[] ITEM_CONTAINERS = {41573, 41574, 41575, 41576, 41577, 41578, 41579, 41580, 41581};
 
     /**
-     * Containers that display in the main tab.
-     */
-    public static final int[] MAIN_TAB_CONTAINERS = {5382, 41574, 41575, 41576, 41577, 41578, 41579, 41580, 41581};
-
-    /**
      * Item containers that display the first items in each tab.
      */
     public static final int[] BANK_TAB_ITEM_DISPLAYS = {58040, 58041, 58042, 58043, 58044, 58045, 58046, 58047, 58048};
+
+    /**
+     * The components that display the tab sprite.
+     */
+    public static final int[] TAB_INTERFACE_IDS = {58050, 58051, 58052, 58053, 58054, 58055, 58056, 58057, 58058};
+
+    /**
+     * Buttons to collapse tabs into the main tab.
+     */
+    public static final int[] COLLAPSE_BUTTONS = {-1, 58053, 58064, 58075, 58086, 58097, 58108, 58119, 58130};
+
+    /**
+     * Buttons to open the tabs.
+     */
+    public static final int[] OPEN_TAB_BUTTONS = {58042, 58054, 58065, 58076, 58087, 58098, 58109, 58120, 58131};
+
+    /**
+     * Components that display the sprite button
+     */
+    public static final int[] TAB_SPRITE_DISPLAYS = {58031, 58032, 58033, 58034, 58035, 58036, 58037, 58038, 58039, };
+
+    public static final Sprite TAB_WITH_PLUS = new Sprite("BankTab/TAB 4");
+    public static final Sprite TAB_WITHOUT_PLUS = new Sprite("BankTab/TAB 3");
 
     /**
      * The children inside the bank scrollable that are dynamically replaced with the contaienrs to
      * display the items inside other tabs. Does not include the default bank item container;
      * the main container is static so isn't tracked.
      */
-    public static int[] mainTabChildren = new int[ITEM_CONTAINERS.length - 1]; // -1 because the first container is the main tab container
+    public static int[] mainTabChildren = new int[ITEM_CONTAINERS.length];
 
     /**
      * Scrollable that contains the item containers.
      */
     public static RSInterface bankScrollable = null;
 
-    /**
-     * Default y coordinate of the {@link Bank#MAIN_CONTAINER} inside the {@link Bank#bankScrollable}
-     */
-    public static int bankContainerY = 0;
-
     public static int getCurrentBankTab() {
         return Client.instance.variousSettings[BANK_TAB_CONFIG];
     }
 
     public static boolean isBankContainer(RSInterface rsInterface) {
-        return Arrays.stream(MAIN_TAB_CONTAINERS).anyMatch(id -> rsInterface.id == id);
+        return Arrays.stream(ITEM_CONTAINERS).anyMatch(id -> rsInterface.id == id);
     }
 
     private static boolean moreTabsBelow(int index) {
-       return index + 1 < MAIN_TAB_CONTAINERS.length && interfaceCache[MAIN_TAB_CONTAINERS[index + 1]].getItemContainerRows() > 0;
+       return index + 1 < ITEM_CONTAINERS.length && interfaceCache[ITEM_CONTAINERS[index + 1]].getItemContainerRows() > 0;
+    }
+
+    public static void handleButton(int buttonId) {
+        for (int index = 1; index < COLLAPSE_BUTTONS.length; index++) {
+            if (buttonId == COLLAPSE_BUTTONS[index]) {
+                RSInterface tab = interfaceCache[ITEM_CONTAINERS[index]];
+                RSInterface main = interfaceCache[ITEM_CONTAINERS[0]];
+                if (main.getInventoryContainerFreeSlots() >= tab.inv.length - tab.getInventoryContainerFreeSlots()) {
+                    RSInterface.addAllItems(tab, main);
+                    shiftTabs();
+                    openBankTab(0);
+                }
+            }
+        }
+
+        for (int buttonIndex = 0; buttonIndex < OPEN_TAB_BUTTONS.length; buttonIndex++) {
+            if (buttonId == OPEN_TAB_BUTTONS[buttonIndex]) {
+                openBankTab(buttonIndex);
+            }
+        }
+    }
+
+    /**
+     * Shift items in each tab and shift the tabs left if needed.
+     */
+    public static void shiftTabs() {
+        for (int tabIndex = 1; tabIndex < ITEM_CONTAINERS.length; tabIndex++) {
+            RSInterface container = interfaceCache[ITEM_CONTAINERS[tabIndex]];
+            // Shift items left
+            container.shiftItems();
+
+            // Shift tabs left
+            if (container.getItemContainerRows() == 0) {
+                for (int shiftTabIndex = tabIndex; shiftTabIndex < ITEM_CONTAINERS.length; shiftTabIndex++) {
+                    // shift from shiftTabIndex + 1 to shiftTabIndex
+                    if (shiftTabIndex + 1 < ITEM_CONTAINERS.length) {
+                        container = interfaceCache[ITEM_CONTAINERS[shiftTabIndex]];
+                        RSInterface shiftLeft = interfaceCache[ITEM_CONTAINERS[shiftTabIndex + 1]];
+                        container.inv = shiftLeft.inv.clone();
+                        container.invStackSizes = shiftLeft.invStackSizes.clone();
+                    }
+                }
+            }
+        }
     }
 
     public static void setupMainTab(RSInterface rsInterface, int x, int y) {
-        if (rsInterface.id == MAIN_CONTAINER) {
+        if (rsInterface.id == ITEM_CONTAINERS[getCurrentBankTab()]) {
+            // Shift tabs and items left
+            shiftTabs();
 
+            // Update the item count
             if (getCurrentBankTab() == 0) {
-                interfaceCache[ITEM_COUNT_INTERFACE_ID].message = String.valueOf(Arrays.stream(ITEM_CONTAINERS).mapToLong(
-                        interfaceId -> interfaceCache[interfaceId].inv.length - interfaceCache[interfaceId].getInventoryContainerFreeSlots()));
+                int size = 0;
+                for (int container : ITEM_CONTAINERS) {
+                    size += interfaceCache[container].inv.length - interfaceCache[container].getInventoryContainerFreeSlots();
+                }
+                interfaceCache[ITEM_COUNT_INTERFACE_ID].message = String.valueOf(size);
             } else {
-                interfaceCache[ITEM_COUNT_INTERFACE_ID].message = String.valueOf(interfaceCache[MAIN_CONTAINER].inv.length - interfaceCache[MAIN_CONTAINER].getInventoryContainerFreeSlots());
+                interfaceCache[ITEM_COUNT_INTERFACE_ID].message = String.valueOf(rsInterface.inv.length
+                        - rsInterface.getInventoryContainerFreeSlots());
+            }
+
+            // Show/hide tabs based on whether they have items in them
+            boolean newTabDisplayed = false;
+            for (int tabIndex = 1; tabIndex < TAB_INTERFACE_IDS.length; tabIndex++) {
+                if (interfaceCache[ITEM_CONTAINERS[tabIndex]].getInventoryContainerFreeSlots() != interfaceCache[ITEM_CONTAINERS[tabIndex]].inv.length) {
+                    RSInterface.interfaceCache[TAB_INTERFACE_IDS[tabIndex]].isMouseoverTriggered = false;
+                    RSInterface.interfaceCache[TAB_SPRITE_DISPLAYS[tabIndex]].sprite1 = TAB_WITHOUT_PLUS;
+                } else if (!newTabDisplayed) {
+                    RSInterface.interfaceCache[TAB_INTERFACE_IDS[tabIndex]].isMouseoverTriggered = false;
+                    RSInterface.interfaceCache[TAB_SPRITE_DISPLAYS[tabIndex]].sprite1 = TAB_WITH_PLUS;
+                    newTabDisplayed = true;
+                } else {
+                    RSInterface.interfaceCache[TAB_INTERFACE_IDS[tabIndex]].isMouseoverTriggered = true;
+                }
             }
 
             // Update the items displayed at the top of the bank
@@ -86,48 +166,55 @@ public class Bank extends RSInterface {
 
             // Hide/display the main tab containers
             if (getCurrentBankTab() == 0) {
-                int height = bankContainerY;
-                for (int index = 0; index < MAIN_TAB_CONTAINERS.length; index++) {
-                    RSInterface container = interfaceCache[MAIN_TAB_CONTAINERS[index]];
-                    if (index != 0) {
-                        if (moreTabsBelow(index - 1)) {
-                            Client.instance.bankDivider.drawSprite(x, height + y);
-                            height += 10; // buffer for tab separator
-                        }
-                        bankScrollable.childY[mainTabChildren[index - 1]] = height;
+                int height = 4;
+                for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
+                    RSInterface container = interfaceCache[ITEM_CONTAINERS[index]];
+                    if (index != 0 && moreTabsBelow(index - 1)) {
+                        Client.instance.bankDivider.drawSprite(x, height + y);
+                        height += 10; // buffer for tab separator
                     }
+                    bankScrollable.childY[mainTabChildren[index]] = height;
                     height += container.getItemContainerHeight();
                 }
                 bankScrollable.scrollMax = height > bankScrollable.height + 1 ? height : bankScrollable.height + 1;
             } else {
-                int height = interfaceCache[MAIN_CONTAINER].getItemContainerHeight();
+                int height = rsInterface.getItemContainerHeight();
                 bankScrollable.scrollMax = height > bankScrollable.height + 1 ? height : bankScrollable.height + 1;
             }
         }
     }
 
     public static void openBankTab(int tab) {
+        // Don't open if tab is empty.
+        if (interfaceCache[ITEM_CONTAINERS[tab]].getInventoryContainerFreeSlots() == interfaceCache[ITEM_CONTAINERS[tab]].inv.length) {
+            return;
+        }
+
         Client.instance.variousSettings[BANK_TAB_CONFIG] = tab;
 
-        for(int i = 0; i < 9; i++) {
-            if (i == 0) {
-                Client.instance.variousSettings[34 + i] = 1;
+        // Reset the lines sprites that show the tab as closed
+        for (int tabIndex = 0; tabIndex < ITEM_CONTAINERS.length; tabIndex++) {
+            if (tabIndex == 0) {
+                Client.instance.variousSettings[34 + tabIndex] = 1;
             } else {
-                Client.instance.variousSettings[34 + i] = 0;
+                Client.instance.variousSettings[34 + tabIndex] = 0;
             }
         }
 
+        // Set the sprite to show the current tab as open
         if (tab == 0) {
             Client.instance.variousSettings[34 + tab] = 0;
         } else {
             Client.instance.variousSettings[34 + tab] = 1;
         }
 
+        // Reset scroll position
         bankScrollable.scrollPosition = 0;
+
         if (tab == 0) {
             // Init the main tab view
             for (int index = 0; index < mainTabChildren.length; index++) {
-                bankScrollable.children[mainTabChildren[index]] = ITEM_CONTAINERS[index + 1]; // +1 because the main container is at 0!
+                bankScrollable.children[mainTabChildren[index]] = ITEM_CONTAINERS[index]; // +1 because the main container is at 0!
             }
         } else {
             // Hide the main tab view
@@ -136,8 +223,8 @@ public class Bank extends RSInterface {
             }
         }
 
-        interfaceCache[MAIN_CONTAINER].inv = interfaceCache[ITEM_CONTAINERS[tab]].inv.clone();
-        interfaceCache[MAIN_CONTAINER].invStackSizes = interfaceCache[ITEM_CONTAINERS[tab]].invStackSizes.clone();
+        // Set the tab container
+        bankScrollable.children[mainTabChildren[0]] = ITEM_CONTAINERS[tab];
     }
 
     public static void onConfigChanged(int config, int value) {
@@ -146,18 +233,39 @@ public class Bank extends RSInterface {
         }
     }
 
-    public Bank() {
-        for (RSInterface inter : interfaceCache) {
-            if (inter != null && inter.children != null && Arrays.stream(inter.children).anyMatch(id -> id == MAIN_CONTAINER)) {
-                bankScrollable = interfaceCache[inter.id];
-                break;
+    private void editBank(TextDrawingArea[] tda) {
+        // Store the bank scrollable
+        bankScrollable = interfaceCache[5385];
+
+        // Fixing container placement on interface
+        bankScrollable.height -= 2;
+        RSInterface bank = interfaceCache[BANK_INTERFACE_ID];
+        for (int index = 0; index < bank.children.length; index++) {
+            if (bank.children[index] == bankScrollable.id) {
+                bank.childY[index] += 2;
             }
         }
 
-        Preconditions.checkState(bankScrollable != null, "No bank scrollable.");
+        // Remove old container
+        Preconditions.checkState(RSInterface.deleteChild(OLD_CONTAINER_INTERFACE_ID, bankScrollable), "Cannot delete old container.");
 
-        bankContainerY = bankScrollable.childY[getIndexOfChild(bankScrollable, MAIN_CONTAINER)];
-        Preconditions.checkState(bankContainerY != 0, "No bank scrollable container y.");
+        // Empty text to hide other containers while not in main tab
+        addText(EMPTY_CHILD, "", tda, 1, 0xE68A00, true, true);
+
+        // Adding new container for main tab
+        int newContainersStartIndex = expandChildren(ITEM_CONTAINERS.length, bankScrollable);
+        for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
+            RSInterface container = addInventoryContainer(ITEM_CONTAINERS[index], 10, 35,12, 0, true);
+            container.actions = new String[] {"Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X", "Withdraw All but one"};
+            container.contentType = 206;
+            mainTabChildren[index] = newContainersStartIndex;
+            bankScrollable.child(newContainersStartIndex++, ITEM_CONTAINERS[index], 38, 0);
+        }
+
+        // Turn on dragging to other item containers
+        for (int container : ITEM_CONTAINERS) {
+            interfaceCache[container].allowInvDraggingToOtherContainers = true;
+        }
     }
 
     public void bank(TextDrawingArea[] tda) {
@@ -235,12 +343,7 @@ public class Bank extends RSInterface {
         RSInterface Interface = interfaceCache[5385];
         Interface.height = 202;
         Interface.width = 481;
-        Interface = interfaceCache[MAIN_CONTAINER];
-        Interface.width = 10;
-        Interface.invSpritePadX = 12;
-        Interface.height = 35;
-        Interface.actions = new String[] { "Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X",
-                "Withdraw All but one" };
+
 
         setBounds(58001, 14, 3, 0, rs);
         setBounds(5384, 474, 10, 1, rs);
@@ -298,35 +401,7 @@ public class Bank extends RSInterface {
 
         setBounds(18947, 275, 292, 40, rs); // Titles
 
-        // Fixing container placement on interface
-        bankScrollable.height -= 2;
-        RSInterface bank = interfaceCache[BANK_INTERFACE_ID];
-        for (int index = 0; index < bank.children.length; index++) {
-            if (bank.children[index] == bankScrollable.id) {
-                bank.childY[index] += 2;
-            }
-        }
-
-        // Adding new container for main tab
-        addText(EMPTY_CHILD, "", tda, 1, 0xE68A00, true, true);
-        RSInterface mainContainer = interfaceCache[MAIN_CONTAINER];
-        int mainContainerIndex = getIndexOfChild(bankScrollable, mainContainer.id);
-        int newContainersStartIndex = expandChildren(ITEM_CONTAINERS.length - 1, bankScrollable); // -1 because the first container is not displayed
-        for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
-            RSInterface container = addInventoryContainer(ITEM_CONTAINERS[index], 10, 35, mainContainer.invSpritePadX, mainContainer.invSpritePadY, true);
-            container.actions = new String[] {"Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X", "Withdraw All but one"};
-            container.contentType = 206;
-
-            // We skip the first one here because it's just to hold the main tabs items
-            if (index > 0) {
-                mainTabChildren[index - 1] = newContainersStartIndex;
-                bankScrollable.child(newContainersStartIndex++, ITEM_CONTAINERS[index], bankScrollable.childX[mainContainerIndex], 0);
-            }
-
-        }
-        for (int container : MAIN_TAB_CONTAINERS) {
-            interfaceCache[container].allowInvDraggingToOtherContainers = true;
-        }
+        editBank(tda);
     }
 
 }

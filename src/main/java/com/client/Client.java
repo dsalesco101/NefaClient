@@ -4258,19 +4258,11 @@ public class Client extends RSApplet {
 
 								// Update client side to hide latency
 								if (Bank.getCurrentBankTab() == 0) {
-									OptionalInt fromTabOptional = Arrays.stream(Bank.MAIN_TAB_CONTAINERS).filter(id -> draggingItemInterfaceId == id).findFirst();
+									OptionalInt fromTabOptional = Arrays.stream(Bank.ITEM_CONTAINERS).filter(id -> draggingItemInterfaceId == id).findFirst();
 									if (fromTabOptional.isPresent()) {
 										RSInterface fromTab = RSInterface.interfaceCache[fromTabOptional.getAsInt()];
-										RSInterface fromTabDisplay = RSInterface.interfaceCache[fromTabOptional.getAsInt()];
-										RSInterface toTab = RSInterface.interfaceCache[Bank.MAIN_TAB_CONTAINERS[i]];
-										RSInterface toTabDisplay = RSInterface.interfaceCache[Bank.BANK_TAB_ITEM_DISPLAYS[i]];
+										RSInterface toTab = RSInterface.interfaceCache[Bank.ITEM_CONTAINERS[i]];
 										if (toTab.getInventoryContainerFreeSlots() > 0 && fromTab.id != toTab.id) {
-											/*if (fromTab.id != Bank.MAIN_TAB_CONTAINERS[0]) {
-												fromTabDisplay.inv[0] = fromTab.inv[itemDraggingSlot];
-												fromTabDisplay.invStackSizes[0] = fromTab.invStackSizes[itemDraggingSlot];
-											}*/
-											//toTabDisplay.inv[0] = fromTab.inv[itemDraggingSlot];
-											toTabDisplay.invStackSizes[0] = fromTab.invStackSizes[itemDraggingSlot];
 											RSInterface.insertInventoryItem(fromTab, itemDraggingSlot, toTab);
 										}
 									}
@@ -4286,78 +4278,85 @@ public class Client extends RSApplet {
 						}
 					}
 
-					RSInterface class9 = RSInterface.interfaceCache[draggingItemInterfaceId];
-					if (class9 != null) {
-						if (mouseInvInterfaceIndex != itemDraggingSlot && lastActiveInvInterface == draggingItemInterfaceId) {
-							// Dragging item inside the same container
+					try {
+						RSInterface class9 = RSInterface.interfaceCache[draggingItemInterfaceId];
+						if (class9 != null) {
+							if (mouseInvInterfaceIndex != itemDraggingSlot && lastActiveInvInterface == draggingItemInterfaceId) {
+								// Dragging item inside the same container
 
-							int insertMode = 0;
-							if (anInt913 == 1 && class9.contentType == 206)
-								insertMode = 1;
-							if (class9.inv[mouseInvInterfaceIndex] <= 0)
-								insertMode = 0;
-
-							if (class9.aBoolean235) {
-								// Move to empty slot?
-								int l2 = itemDraggingSlot;
-								int l3 = mouseInvInterfaceIndex;
-								class9.inv[l3] = class9.inv[l2];
-								class9.invStackSizes[l3] = class9.invStackSizes[l2];
-								class9.inv[l2] = -1;
-								class9.invStackSizes[l2] = 0;
-							} else if (insertMode == 1) {
-								// Insert
-								int i3 = itemDraggingSlot;
-								for (int i4 = mouseInvInterfaceIndex; i3 != i4; ) {
-									if (i3 > i4) {
-										class9.swapInventoryItems(i3, i3 - 1);
-										i3--;
-									} else if (i3 < i4) {
-										class9.swapInventoryItems(i3, i3 + 1);
-										i3++;
-									}
-								}
-							} else {
-								// Swap
-								class9.swapInventoryItems(itemDraggingSlot, mouseInvInterfaceIndex);
-							}
-
-							stream.createFrame(214);
-							stream.method433(draggingItemInterfaceId);
-							stream.method424(insertMode);
-							stream.method433(itemDraggingSlot);
-							stream.method431(mouseInvInterfaceIndex);
-						} else if (class9.allowInvDraggingToOtherContainers && lastActiveInvInterface != draggingItemInterfaceId) {
-							RSInterface draggingFrom = RSInterface.interfaceCache[draggingItemInterfaceId];
-							RSInterface draggingTo = RSInterface.interfaceCache[lastActiveInvInterface];
-							int fromSlot = itemDraggingSlot;
-							int toSlot = mouseInvInterfaceIndex;
-							if (draggingTo != null && draggingFrom != null) {
 								int insertMode = 0;
 								if (anInt913 == 1 && class9.contentType == 206)
 									insertMode = 1;
+								if (class9.inv[mouseInvInterfaceIndex] <= 0)
+									insertMode = 0;
 
-								if (insertMode == 1) {
-									// insert
-									if (draggingTo.getInventoryContainerFreeSlots() > 0) {
-										RSInterface.insertInventoryItem(draggingFrom, fromSlot, draggingTo, toSlot);
-									} else {
-										return;
+								if (class9.aBoolean235) {
+									// Move to empty slot?
+									int l2 = itemDraggingSlot;
+									int l3 = mouseInvInterfaceIndex;
+									class9.inv[l3] = class9.inv[l2];
+									class9.invStackSizes[l3] = class9.invStackSizes[l2];
+									class9.inv[l2] = -1;
+									class9.invStackSizes[l2] = 0;
+								} else if (insertMode == 1) {
+									// Insert
+									int i3 = itemDraggingSlot;
+									for (int i4 = mouseInvInterfaceIndex; i3 != i4; ) {
+										if (i3 > i4) {
+											class9.swapInventoryItems(i3, i3 - 1);
+											i3--;
+										} else if (i3 < i4) {
+											class9.swapInventoryItems(i3, i3 + 1);
+											i3++;
+										}
 									}
 								} else {
-									//swap
-									RSInterface.swapInventoryItems(draggingFrom, fromSlot, draggingTo, toSlot);
+									// Swap
+									class9.swapInventoryItems(itemDraggingSlot, mouseInvInterfaceIndex);
 								}
 
-								stream.createFrame(242);
-								stream.writeWord(draggingTo.id);
-								stream.writeWord(draggingFrom.id);
+								stream.createFrame(214);
+								stream.method433(draggingItemInterfaceId);
 								stream.method424(insertMode);
-								stream.writeWord(fromSlot);
-								stream.writeWord(toSlot);
+								stream.method433(itemDraggingSlot);
+								stream.method431(mouseInvInterfaceIndex);
+							} else if (class9.allowInvDraggingToOtherContainers && lastActiveInvInterface != draggingItemInterfaceId) {
+								if (lastActiveInvInterface != -1 && draggingItemInterfaceId != -1) {
+									RSInterface draggingFrom = RSInterface.interfaceCache[draggingItemInterfaceId];
+									RSInterface draggingTo = RSInterface.interfaceCache[lastActiveInvInterface];
+									int fromSlot = itemDraggingSlot;
+									int toSlot = mouseInvInterfaceIndex;
+									if (draggingTo != null && draggingFrom != null) {
+										int insertMode = 0;
+										if (anInt913 == 1 && class9.contentType == 206)
+											insertMode = 1;
+
+										if (insertMode == 1) {
+											// insert
+											if (draggingTo.getInventoryContainerFreeSlots() > 0) {
+												RSInterface.insertInventoryItem(draggingFrom, fromSlot, draggingTo, toSlot);
+											} else {
+												return;
+											}
+										} else {
+											//swap
+											RSInterface.swapInventoryItems(draggingFrom, fromSlot, draggingTo, toSlot);
+										}
+
+										stream.createFrame(242);
+										stream.writeWord(draggingTo.id);
+										stream.writeWord(draggingFrom.id);
+										stream.method424(insertMode);
+										stream.writeWord(fromSlot);
+										stream.writeWord(toSlot);
+									}
+								}
 							}
 						}
+					} catch (Exception e) {
+						e.printStackTrace();
 					}
+
 				} else if ((anInt1253 == 1 || menuHasAddFriend(menuActionRow - 1)) && menuActionRow > 2)
 					determineMenuSize();
 				else if (menuActionRow > 0)
@@ -4854,12 +4853,11 @@ public class Client extends RSApplet {
 			menu.setMenuVisible(false);
 		}
 		if (l >= 1700 && l <= 1710) {
-			// Clicking open bank tab
-			Bank.openBankTab(k - 58031);
-
+			// Button Click Packet
 			stream.createFrame(185);
 			int offset = k + (k - 58030) * 10 + (l - 1700);
 			stream.writeWord(offset);
+			Bank.handleButton(offset);
 		}
 		if (l == 300) {
 			stream.createFrame(141);
@@ -11146,7 +11144,11 @@ public class Client extends RSApplet {
 				}
 			} else if (class9_1.type != 1)
 				if (class9_1.type == 2) {
-					Bank.setupMainTab(class9_1, _x, l2);
+					try {
+						Bank.setupMainTab(class9_1, _x, l2);
+					} catch (Exception e) {
+						e.printStackTrace();
+					}
 
 					// Item container
 					if (class9_1.invAutoScrollHeight) {
