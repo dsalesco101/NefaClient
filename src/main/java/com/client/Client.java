@@ -627,6 +627,9 @@ public class Client extends RSApplet {
 			} else if (inputDialogState == 8) {
 				newBoldFont.drawCenteredString("Amount you want to sell:", 259, 60 + yOffset, 0, -1);
 				newBoldFont.drawCenteredString(amountOrNameInput + "*", 259, 80 + yOffset, 128, -1);
+			} else if (Bank.isSearchingBank()) {
+				newBoldFont.drawCenteredString("Enter an item to search for:", 259, 60 + yOffset, 0, -1);
+				newBoldFont.drawCenteredString(Bank.searchingBankString + "*", 259, 80 + yOffset, 128, -1);
 			} else if (inputDialogState == 3) {
 				DrawingArea.fillPixels(8, 505, 108, 0x463214, 28 + yOffset);
 				DrawingArea.drawAlphaBox(8, 28 + yOffset, 505, 108, 0x746346, 75);
@@ -5695,6 +5698,7 @@ public class Client extends RSApplet {
 				break;
 		}
 		if (l == 646) {
+			Bank.handleButton(k);
 			stream.createFrame(185);
 			stream.writeWord(k);
 			if (!clickConfigButton(k)) {
@@ -6936,6 +6940,19 @@ public class Client extends RSApplet {
 					inputDialogState = 0;
 					inputTaken = true;
 				}
+			} else if (Bank.isSearchingBank()) {
+				if (j >= 32 && j <= 122 && Bank.searchingBankString.length() < 58) {
+					Bank.searchingBankString += (char) j;
+					inputTaken = true;
+				}
+				if (j == 8 && Bank.searchingBankString.length() > 0) {
+					Bank.searchingBankString = Bank.searchingBankString.substring(0, Bank.searchingBankString.length() - 1);
+					inputTaken = true;
+				}
+				if (j == 13 || j == 10) {
+					inputDialogState = 0;
+					inputTaken = true;
+				}
 			} else if (inputDialogState == 2) {
 				if (j >= 32 && j <= 122 && amountOrNameInput.length() < 58) {
 					amountOrNameInput += (char) j;
@@ -6945,14 +6962,6 @@ public class Client extends RSApplet {
 					amountOrNameInput = amountOrNameInput.substring(0, amountOrNameInput.length() - 1);
 					inputTaken = true;
 				}
-				if (openInterfaceID == 5292) {
-					if (amountOrNameInput != "") {
-						stream.createFrame(142);
-						stream.writeWordBigEndian(4 + amountOrNameInput.length() + 1);
-						stream.writeDWord(58063);
-						stream.writeString(amountOrNameInput);
-					}
-				} 
 				if (j == 13 || j == 10) {
 					if (amountOrNameInput.length() > 0) {
 						stream.createFrame(60);
@@ -16760,7 +16769,7 @@ public class Client extends RSApplet {
 			{ 4550, 4537, 5681, 5673, 5790, 6806, 8076, 4574, 0, 12821, 100 } };
 
 	private Sprite multiOverlay;
-	private String amountOrNameInput;
+	public String amountOrNameInput;
 	private int anInt1005;
 	private int daysSinceLastLogin;
 	private int packetSize;
@@ -16959,7 +16968,7 @@ public class Client extends RSApplet {
 	public static int tabID;
 	private int anInt1222;
 	public static boolean inputTaken;
-	static int inputDialogState;
+	public static int inputDialogState;
 	private static int anInt1226;
 	private int nextSong;
 	private boolean songChanging;

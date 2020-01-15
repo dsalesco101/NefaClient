@@ -492,6 +492,21 @@ public class RSInterface {
 		}
 	}
 
+	public void resetItems() {
+		inv = new int[inv.length];
+		invStackSizes = new int[inv.length];
+	}
+
+	public void addItem(int id, int amount) {
+		for (int index = 0; index < inv.length; index++) {
+			if (inv[index] == 0) {
+				inv[index] = id;
+				invStackSizes[index] = amount;
+				break;
+			}
+		}
+	}
+
 	public void removeItem(int slot) {
 		// Delete from container
 		inv[slot] = 0;

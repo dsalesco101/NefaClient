@@ -6,6 +6,7 @@ import com.client.Client;
 import com.client.Configuration;
 import com.client.Sprite;
 import com.client.TextDrawingArea;
+import com.client.definitions.ItemDefinition;
 import com.client.graphics.interfaces.RSInterface;
 import com.google.common.base.Preconditions;
 
@@ -14,6 +15,9 @@ public class Bank extends RSInterface {
     public static final int BANK_TAB_CONFIG = 1356;
     public static final int EMPTY_CHILD = 41582;
     public static final int BANK_INTERFACE_ID = 5292;
+    public static final int SEARCH_CONTAINER = 41583;
+    public static final int SEARCH_BUTTON = 18937;
+    public static final int TITLE_INTERFACE_ID = 58064;
 
     /**
      * The main container for each tab and the top container in the main tab.
@@ -70,16 +74,38 @@ public class Bank extends RSInterface {
      */
     public static RSInterface bankScrollable = null;
 
+    /**
+     * String used to search the bank.
+     */
+    public static String searchingBankString = "";
+
     public static int getCurrentBankTab() {
         return Client.instance.variousSettings[BANK_TAB_CONFIG];
     }
 
     public static boolean isBankContainer(RSInterface rsInterface) {
-        return Arrays.stream(ITEM_CONTAINERS).anyMatch(id -> rsInterface.id == id);
+        return rsInterface.id == SEARCH_CONTAINER || Arrays.stream(ITEM_CONTAINERS).anyMatch(id -> rsInterface.id == id);
     }
 
     private static boolean moreTabsBelow(int index) {
-       return index + 1 < ITEM_CONTAINERS.length && interfaceCache[ITEM_CONTAINERS[index + 1]].getItemContainerRows() > 0;
+        return index + 1 < ITEM_CONTAINERS.length && interfaceCache[ITEM_CONTAINERS[index + 1]].getItemContainerRows() > 0;
+    }
+
+    public static boolean isSearchingBank() {
+        return Client.inputDialogState == 9;
+    }
+
+    public static void openBankSearch() {
+        bankScrollable.children[mainTabChildren[0]] = SEARCH_CONTAINER;
+        Client.inputDialogState = 9;
+        interfaceCache[SEARCH_CONTAINER].resetItems();
+    }
+
+    public static void closeBankSearch() {
+        openBankTab(getCurrentBankTab());
+        interfaceCache[SEARCH_CONTAINER].resetItems();
+        Client.inputDialogState = 0;
+        searchingBankString = "";
     }
 
     public static void handleButton(int buttonId) {
@@ -98,6 +124,14 @@ public class Bank extends RSInterface {
         for (int buttonIndex = 0; buttonIndex < OPEN_TAB_BUTTONS.length; buttonIndex++) {
             if (buttonId == OPEN_TAB_BUTTONS[buttonIndex]) {
                 openBankTab(buttonIndex);
+            }
+        }
+
+        if (buttonId == SEARCH_BUTTON) {
+            if (bankScrollable.children[mainTabChildren[0]] == SEARCH_CONTAINER) {
+                closeBankSearch();
+            } else {
+                openBankSearch();
             }
         }
     }
@@ -127,7 +161,40 @@ public class Bank extends RSInterface {
     }
 
     public static void setupMainTab(RSInterface rsInterface, int x, int y) {
-        if (rsInterface.id == ITEM_CONTAINERS[getCurrentBankTab()]) {
+        if (rsInterface.id == SEARCH_CONTAINER) {
+            // update search container
+
+            // Hide other bank container
+            for (int child : mainTabChildren) {
+                bankScrollable.children[child] = EMPTY_CHILD;
+            }
+
+            // Set the search container inside the bank
+            bankScrollable.children[mainTabChildren[0]] = SEARCH_CONTAINER;
+
+            // Update title
+            interfaceCache[TITLE_INTERFACE_ID].message = "Results for '" + searchingBankString + "'";
+
+            // Update search container items
+            RSInterface searchContainer = interfaceCache[SEARCH_CONTAINER];
+            searchContainer.resetItems();
+            if (searchingBankString.length() > 0) {
+                for (int index = 0; index < ITEM_CONTAINERS.length; index++) {
+                    RSInterface container = interfaceCache[ITEM_CONTAINERS[index]];
+                    for (int itemIndex = 0; itemIndex < container.inv.length; itemIndex++) {
+                        if (container.inv[itemIndex] > 0) {
+                            ItemDefinition definition = ItemDefinition.forID(container.inv[itemIndex]);
+                            if (definition != null && definition.name != null && definition.name.toLowerCase().contains(searchingBankString.toLowerCase())) {
+                                searchContainer.addItem(container.inv[itemIndex], container.invStackSizes[itemIndex]);
+                            }
+                        }
+                    }
+                }
+            }
+        } else if (rsInterface.id == ITEM_CONTAINERS[getCurrentBankTab()]) {
+            // Reset title
+            interfaceCache[TITLE_INTERFACE_ID].message = "The Bank of " + Configuration.CLIENT_TITLE;
+
             // Shift tabs and items left
             shiftTabs();
 
@@ -214,7 +281,7 @@ public class Bank extends RSInterface {
         if (tab == 0) {
             // Init the main tab view
             for (int index = 0; index < mainTabChildren.length; index++) {
-                bankScrollable.children[mainTabChildren[index]] = ITEM_CONTAINERS[index]; // +1 because the main container is at 0!
+                bankScrollable.children[mainTabChildren[index]] = ITEM_CONTAINERS[index];
             }
         } else {
             // Hide the main tab view
@@ -229,6 +296,7 @@ public class Bank extends RSInterface {
 
     public static void onConfigChanged(int config, int value) {
         if (config == BANK_TAB_CONFIG) {
+            closeBankSearch();
             openBankTab(value);
         }
     }
@@ -266,6 +334,9 @@ public class Bank extends RSInterface {
         for (int container : ITEM_CONTAINERS) {
             interfaceCache[container].allowInvDraggingToOtherContainers = true;
         }
+
+        RSInterface container = addInventoryContainer(SEARCH_CONTAINER, 10, 100,12, 0, true);
+        container.actions = new String[] {"Withdraw 1", "Withdraw 5", "Withdraw 10", "Withdraw All", "Withdraw X", "Withdraw All but one"};
     }
 
     public void bank(TextDrawingArea[] tda) {
