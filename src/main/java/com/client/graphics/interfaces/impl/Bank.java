@@ -198,8 +198,21 @@ public class Bank extends RSInterface {
             // Shift tabs and items left
             shiftTabs();
 
-            // Update the item count
+
             if (getCurrentBankTab() == 0) {
+
+                // Init the main tab view
+                for (int index = 0; index < mainTabChildren.length; index++)
+                    bankScrollable.children[mainTabChildren[index]] = EMPTY_CHILD;
+                int itemContainerIndex = 0;
+                for (int index = 0; index < mainTabChildren.length; index++) {
+                    RSInterface container = interfaceCache[ITEM_CONTAINERS[index]];
+                    if (index == 0 || container.getInventoryContainerFreeSlots() != container.inv.length) {
+                        bankScrollable.children[mainTabChildren[itemContainerIndex++]] = ITEM_CONTAINERS[index];
+                    }
+                }
+
+                // Update the item count
                 int size = 0;
                 for (int container : ITEM_CONTAINERS) {
                     size += interfaceCache[container].inv.length - interfaceCache[container].getInventoryContainerFreeSlots();
@@ -253,7 +266,7 @@ public class Bank extends RSInterface {
 
     public static void openBankTab(int tab) {
         // Don't open if tab is empty.
-        if (interfaceCache[ITEM_CONTAINERS[tab]].getInventoryContainerFreeSlots() == interfaceCache[ITEM_CONTAINERS[tab]].inv.length) {
+        if (interfaceCache[ITEM_CONTAINERS[tab]].getInventoryContainerFreeSlots() == interfaceCache[ITEM_CONTAINERS[tab]].inv.length && tab != 0) {
             return;
         }
 
@@ -278,12 +291,7 @@ public class Bank extends RSInterface {
         // Reset scroll position
         bankScrollable.scrollPosition = 0;
 
-        if (tab == 0) {
-            // Init the main tab view
-            for (int index = 0; index < mainTabChildren.length; index++) {
-                bankScrollable.children[mainTabChildren[index]] = ITEM_CONTAINERS[index];
-            }
-        } else {
+        if (tab != 0) {
             // Hide the main tab view
             for (int child : mainTabChildren) {
                 bankScrollable.children[child] = EMPTY_CHILD;

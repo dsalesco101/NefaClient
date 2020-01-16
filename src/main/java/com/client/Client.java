@@ -4318,6 +4318,7 @@ public class Client extends RSApplet {
 									class9.swapInventoryItems(itemDraggingSlot, mouseInvInterfaceIndex);
 								}
 
+								Bank.shiftTabs();
 								stream.createFrame(214);
 								stream.method433(draggingItemInterfaceId);
 								stream.method424(insertMode);
@@ -4327,9 +4328,11 @@ public class Client extends RSApplet {
 								if (lastActiveInvInterface != -1 && draggingItemInterfaceId != -1) {
 									RSInterface draggingFrom = RSInterface.interfaceCache[draggingItemInterfaceId];
 									RSInterface draggingTo = RSInterface.interfaceCache[lastActiveInvInterface];
-									int fromSlot = itemDraggingSlot;
-									int toSlot = mouseInvInterfaceIndex;
-									if (draggingTo != null && draggingFrom != null) {
+									if (draggingTo != null && draggingFrom != null
+											&& draggingTo.allowInvDraggingToOtherContainers
+											&& draggingFrom.allowInvDraggingToOtherContainers) {
+										int fromSlot = itemDraggingSlot;
+										int toSlot = mouseInvInterfaceIndex;
 										int insertMode = 0;
 										if (anInt913 == 1 && class9.contentType == 206)
 											insertMode = 1;
