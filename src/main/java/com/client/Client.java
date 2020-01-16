@@ -9102,6 +9102,14 @@ public class Client extends RSApplet {
 				anInt1226 = 0;
 				updateGameScreen();
 				resetImageProducers2();
+
+				if (informationFile.isUsernameRemembered()) {
+					informationFile.setStoredUsername(myUsername);
+				}
+				if (informationFile.isPasswordRemembered()) {
+					informationFile.setStoredPassword(myPassword);
+				}
+
 				informationFile.write();
 				return;
 			}
@@ -13931,40 +13939,28 @@ public class Client extends RSApplet {
 	public boolean rememberMeHover;
     long lastLogin = 0;
     long loadDelay = 0;
+	private final Sprite background = new Sprite("/loginscreen2/IMAGE 1");
+
 	public void drawLoginScreen(boolean flag) {
-		// rememberPasswordHover = mouseInRegion(416 - extraPos, 282, 433 - extraPos,
-		// 295);
 		int centerX = myWidth / 2, centerY = myHeight / 2;
 
 		resetImageProducers();
 		loginScreenGraphicsBuffer.initDrawingArea();
 
-		    if(System.currentTimeMillis() - lastLogin > 50) {
-                 
-                Sprite background = new Sprite("/loginscreen2/IMAGE 1");
-                  background.drawAdvancedSprite(0,0);
-             //   System.out.print("Drawing "+loadDelay);
-               // currentLogin++;
-            }
-		//loginBackground2.drawSprite(0,0);
-
-		// 270 && super.saveClickY <= 283 && super.saveClickX >= 286 - extraPos &&
-		// super.saveClickX <= 301 - extraPos
+		if(System.currentTimeMillis() - lastLogin > 50) {
+			background.drawAdvancedSprite(0,0);
+		}
 		int extraPos = 18;
-		// rememberPasswordHover = mouseInRegion(286 - extraPos, 270, 301 - extraPos,
-		// 283);
 		rememberMeHover = mouseInRegion(286 - extraPos, 300, 301 - extraPos, 313);
-		// rememberMeHover = mouseInRegion(286 - extraPos, 282, 301 - extraPos, 295);
 		rememberPasswordHover = mouseInRegion(416 - extraPos, 300, 433 - extraPos, 313);
 
-		// Background
-		//screenImages.get("background").drawAdvancedSprite(0, 0);
-
+		if (Configuration.developerMode) {
+			newSmallFont.drawString("FPS: " + super.fps, 4, 12, Integer.MAX_VALUE, 0, 255);
+			newSmallFont.drawString("Mouse: " + mouseX + ", " + mouseY, 4, 12 + 12, Integer.MAX_VALUE, 0, 255);
+		}
 
 		// Login Box
 		if (loginScreenState == 0 || loginScreenState == 2) {
-
-			//titleBox.drawBackground(centerX / 2 + 13, (centerY / 2 + 34));
 
 			int j = centerY - 40;
 			if (firstLoginMessage.length() > 0) {
@@ -13976,8 +13972,6 @@ public class Client extends RSApplet {
 				j += 30;
 			}
 
-			// newBoldFont.drawCenteredString("@yel@" + firstLoginMessage ,(myWidth / 2) -
-			// 4, myHeight / 2 - 48,0xffffff,0x191919, 255);
 			newBoldFont.drawString(
 					"Login: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@blu@|" : ""),
 					(myWidth / 2) - 119, myHeight / 2 - 21, 0xffffff, 0x191919, 255);
@@ -13986,15 +13980,6 @@ public class Client extends RSApplet {
 					"Password: " + TextClass.passwordAsterisks(myPassword)
 							+ ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@blu@|" : ""),
 					(myWidth / 2) - 119, myHeight / 2 + 31, 0xffffff, 0x191919, 255);
-
-			// Buttons
-			//titleButton.drawBackground((myWidth / 2 - 72) + (78) + 3, (myHeight / 2) + 50 - 11);
-			//titleButton.drawBackground((myWidth / 2 - 77) - (78) + 3, (myHeight / 2) + 50 - 11);
-
-			//newBoldFont.drawString("Login", 280 + 3, 325 - 11, 0xffffff, 0x191919, 255);
-			//newBoldFont.drawString("Cancel", 438 + 3, 325 - 11, 0xffffff, 0x191919, 255);
-			//newSmallFont.drawString("@yel@Forgotten your password? @whi@Click here.", 280, 346, 0xffffff, 0x191919,
-					//255);
 
 			newSmallFont.drawString("Remember username", 283, 308, 0xffffff, 0x191919, 255);
 			newSmallFont.drawString("Remember password", 414, 308, 0xffffff, 0x191919, 255);
@@ -14027,14 +14012,12 @@ public class Client extends RSApplet {
 				}
 			}
 
-			// if (flag) {
 			int i1 = myWidth - 80;
 			int l1 = myHeight + 50;
 			newRegularFont.drawString("Register", i1, l1 + 5, 0xffffff, 0x191919, 255);
 			i1 = myWidth / 2 + 80;
 			titleButton.drawBackground(i1 - 73, l1 - 20);
 			newRegularFont.drawString("Login", i1, l1 + 5, 0xffffff, 0x191919, 255);
-			// }
 		}
 		loginScreenGraphicsBuffer.drawGraphics(0, 0, super.graphics);
 	}
@@ -14480,16 +14463,10 @@ public class Client extends RSApplet {
 		if (super.clickMode3 == 1 && super.saveClickY >= 300 && super.saveClickY <= 313
 				&& super.saveClickX >= 286 - extraPos && super.saveClickX <= 301 - extraPos) {
 			informationFile.setUsernameRemembered(!informationFile.isUsernameRemembered());
-			if (informationFile.isUsernameRemembered()) {
-				informationFile.setStoredUsername(myUsername);
-			}
 		}
 		if (super.clickMode3 == 1 && super.saveClickY >= 300 && super.saveClickY <= 313
 				&& super.saveClickX >= 416 - extraPos && super.saveClickX <= 433 - extraPos) {
 			informationFile.setPasswordRemembered(!informationFile.isPasswordRemembered());
-			if (informationFile.isPasswordRemembered()) {
-				informationFile.setStoredPassword(myPassword);
-			}
 		}
 		int i1 = super.myWidth / 2 - 80;
 		int k1 = super.myHeight / 2 + 50;
