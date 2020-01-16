@@ -698,6 +698,6 @@ public final class NpcDefinition {
 	public int anInt92;
 	public boolean aBoolean93;
 	public int[] models;
-	public static MRUNodes mruNodes = new MRUNodes(30);
+	public static MRUNodes mruNodes = new MRUNodes(70);
 
 }
