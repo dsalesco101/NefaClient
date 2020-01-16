@@ -4859,11 +4859,17 @@ public class Client extends RSApplet {
 			menu.setMenuVisible(false);
 		}
 		if (l >= 1700 && l <= 1710) {
+			RSInterface button = RSInterface.get(k);
 			// Button Click Packet
-			stream.createFrame(185);
-			int offset = k + (k - 58030) * 10 + (l - 1700);
-			stream.writeWord(offset);
-			Bank.handleButton(offset);
+			if (button.newButtonClicking) {
+				stream.createFrame(184);
+				stream.writeWord(k);
+			} else {
+				stream.createFrame(185);
+				int offset = k + (k - 58030) * 10 + (l - 1700);
+				stream.writeWord(offset);
+				Bank.handleButton(offset);
+			}
 		}
 		if (l == 300) {
 			stream.createFrame(141);
@@ -6131,8 +6137,15 @@ public class Client extends RSApplet {
 				variousSettings[304] = 0;
 				variousSettings[305] = 1;
 			} else {
-				stream.createFrame(185);
-				stream.writeWord(k);
+				RSInterface button = RSInterface.get(k);
+				if (button.newButtonClicking) {
+					stream.createFrame(184);
+					stream.writeWord(k);
+				} else {
+					stream.createFrame(185);
+					stream.writeWord(k);
+				}
+
 				RSInterface class9_3 = RSInterface.interfaceCache[k];
 				if (!class9_3.ignoreConfigClicking) {
 					if (class9_3.valueIndexArray != null && class9_3.valueIndexArray[0][0] == 5) {

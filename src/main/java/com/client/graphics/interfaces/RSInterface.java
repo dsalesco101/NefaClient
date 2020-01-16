@@ -5366,7 +5366,26 @@ public class RSInterface {
 	public RSInterface() {
 	}
 
+	public void setNewButtonClicking() {
+		if (children != null) {
+			for (int child : children) {
+				RSInterface childInterface = interfaceCache[child];
+				if (childInterface != null) {
+					childInterface.newButtonClicking = true;
+					childInterface.setNewButtonClicking();
+				}
+			}
+		}
+	}
+
+	public static RSInterface get(int interfaceId) {
+		Preconditions.checkArgument(interfaceId >= 0 && interfaceId < interfaceCache.length);
+		Preconditions.checkArgument(interfaceCache[interfaceId] != null);
+		return interfaceCache[interfaceId];
+	}
+
 	public static StreamLoader aClass44;
+	public boolean newButtonClicking;
 	public boolean drawsTransparent;
 	public Sprite sprite1;
 	public static int anInt208;

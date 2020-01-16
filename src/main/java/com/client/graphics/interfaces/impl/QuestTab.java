@@ -79,6 +79,7 @@ public class QuestTab extends RSInterface {
         tab(tda);
         setContainer(Button.INFORMATION);
         donator(tda);
+        get(INTERFACE_ID).setNewButtonClicking();
     }
 
     public void tab(TextDrawingArea[] tda) {
