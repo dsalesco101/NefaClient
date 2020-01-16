@@ -12,7 +12,7 @@ import com.google.common.base.Preconditions;
 
 public class Bank extends RSInterface {
 
-    public static final int BANK_TAB_CONFIG = 1356;
+    public static final int BANK_TAB_CONFIG = 1357;
     public static final int EMPTY_CHILD = 41582;
     public static final int BANK_INTERFACE_ID = 5292;
     public static final int SEARCH_CONTAINER = 41583;
