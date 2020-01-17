@@ -580,7 +580,12 @@ public class Interfaces extends RSInterface {
 		addHoverButton(childId++, "Presets/EDIT", 0, 14, 12, "Edit Preset Name", -1, childId, 1);
 		addHoveredButton(childId++, "Presets/EDIT", 0, 14, 12, childId++);
 		
-		widget.totalChildren(childId - 21554 + 4 + (11));
+		int additionChildId = 251;
+		addHoverButton(additionChildId++, "Presets/BUTTON", 3, 35, 35, "Switch Spellbook", -1, additionChildId, 1);
+		addHoveredButton(additionChildId++, "Presets/BUTTON", 3, 35, 35, additionChildId++);
+		addSprites(additionChildId++, "Presets/BOOK", new int[]{0, 1, 2});
+		
+		widget.totalChildren(childId - 21554 + 4 + (11) + (3));
 		
 		overlayModificationChildId = 569;
 		childId = 21554;
@@ -652,6 +657,14 @@ public class Interfaces extends RSInterface {
 		
 		widget.child(frame++, childId++, 301, 46);
 		widget.child(frame++, childId++, 301, 46);
+		
+		additionChildId = 251;
+		//button
+		widget.child(frame++, additionChildId++, 276, 64);
+		widget.child(frame++, additionChildId++, 276, 64);
+		additionChildId++;
+		//icon
+		widget.child(frame++, additionChildId++, 281, 70);
 	}
 	
 	public static void equipmentScreen(TextDrawingArea[] wid) {
