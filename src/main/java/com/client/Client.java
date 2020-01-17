@@ -4239,7 +4239,7 @@ public class Client extends RSApplet {
 					processRightClick();
 
 					// Bank interface adding items to another tab via dragging on the tab icons at the top
-					if (Bank.isBankContainer(RSInterface.interfaceCache[draggingItemInterfaceId])) {
+					if (Bank.isBankContainer(RSInterface.interfaceCache[draggingItemInterfaceId]) || draggingItemInterfaceId == Bank.SEARCH_CONTAINER) {
 						//System.out.println("BANK TAB SLOT " + mouseX + ", " + mouseY);
 						Point southWest, northEast;
 						int xOffset = currentScreenMode == ScreenMode.FIXED ? 0
@@ -4254,9 +4254,12 @@ public class Client extends RSApplet {
 						for (int i = 0; i < slots.length; i++) {
 							if (super.mouseX >= slots[i] && super.mouseX <= slots[i] + 42
 									&& super.mouseY >= northEast.getY() && super.mouseY <= southWest.getY()) {
-								RSInterface rsi = RSInterface.interfaceCache[58050 + i];
-								if (rsi.isMouseoverTriggered) {
-									continue;
+
+								if (draggingItemInterfaceId != Bank.SEARCH_CONTAINER) {
+									RSInterface rsi = RSInterface.interfaceCache[58050 + i];
+									if (rsi.isMouseoverTriggered) {
+										continue;
+									}
 								}
 
 								// Update client side to hide latency
@@ -4271,11 +4274,17 @@ public class Client extends RSApplet {
 									}
 								}
 
-								stream.createFrame(214);
-								stream.method433(draggingItemInterfaceId);
-								stream.method424(0);
-								stream.method433(itemDraggingSlot);
-								stream.method431(1000 + i);
+								if (draggingItemInterfaceId != Bank.SEARCH_CONTAINER) {
+									stream.createFrame(214);
+									stream.method433(draggingItemInterfaceId);
+									stream.method424(0);
+									stream.method433(itemDraggingSlot);
+									stream.method431(1000 + i);
+								} else {
+									stream.createFrame(243);
+									stream.writeWord(i);
+									stream.writeWord(RSInterface.get(draggingItemInterfaceId).inv[itemDraggingSlot]);
+								}
 								return;
 							}
 						}
@@ -11998,6 +12007,9 @@ public class Client extends RSApplet {
 					}
 				}
 		}
+
+		Bank.drawOnBank(rsInterface, 0, 0);
+
 		DrawingArea.setDrawingArea(clipBottom, clipLeft, clipRight, clipTop);
 		if (rsInterface.id == 42000) {
 			cacheSprite2[76].flashSprite(24, 280, 200 + (int) (50 * Math.sin(loopCycle / 15.0)));
