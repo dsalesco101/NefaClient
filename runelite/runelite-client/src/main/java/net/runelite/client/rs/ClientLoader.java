@@ -27,6 +27,7 @@
 package net.runelite.client.rs;
 
 import com.client.ClientWindow;
+import com.client.Configuration;
 import com.google.common.base.Strings;
 import com.google.common.hash.Hashing;
 import com.google.common.hash.HashingOutputStream;
@@ -135,7 +136,7 @@ public class ClientLoader implements Supplier<Applet>
 			File jarFile = updateCheckMode == AUTO ? PATCHED_CACHE : VANILLA_CACHE;
 			URL jar = jarFile.toURI().toURL();
 
-			SplashScreen.stage(.465, "Starting", "Starting Old School RuneScape");
+			SplashScreen.stage(.465, "Starting", "Starting " + Configuration.CLIENT_TITLE);
 
 			Applet rs = loadClient(jar);
 

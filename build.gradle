@@ -81,7 +81,6 @@ task createStandardJar(type: Jar) {
             )
         }
         from configurations.compile.collect { it.isDirectory() ? it : zipTree(it).matching{ exclude{it.name.contains('MANIFEST.MF') } } }
-        //from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 
@@ -94,7 +93,6 @@ task createRuneliteJar(type: Jar) {
             )
         }
         from configurations.compile.collect { it.isDirectory() ? it : zipTree(it).matching{ exclude{it.name.contains('MANIFEST.MF') } } }
-       // from configurations.compile.collect { it.isDirectory() ? it : zipTree(it) }
     }
 }
 

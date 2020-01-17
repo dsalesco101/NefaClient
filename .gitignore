@@ -1,6 +1,7 @@
 data/saves/characters/*
 *.xml
 *.iml
+*.hprof
 .classpath
 
 *.class
