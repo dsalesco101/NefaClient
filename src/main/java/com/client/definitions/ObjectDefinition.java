@@ -336,6 +336,15 @@ public final class ObjectDefinition {
 			objectDef.thickness = 80; // Thickness
 			objectDef.height = 250; // Height
 			break;
+			
+		case 29333:
+			objectDef.name = "Trading post";
+			objectDef.actions[0] = "View";
+			objectDef.anIntArray773 = new int[] { 60884 };
+			//objectDef.animation = 4006;
+			objectDef.aBoolean769 = false;
+			objectDef.description = "Buy and sell items with players here!";
+			break;
 
 		case 11700:
 			objectDef.anIntArray773 = new int[] { 4086 };
