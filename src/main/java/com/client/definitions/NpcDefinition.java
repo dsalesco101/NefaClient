@@ -129,6 +129,10 @@ public final class NpcDefinition {
 			entityDef.name = "Vote Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
+		if(i==1933){
+			entityDef.name = "Mills";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+		}
 		if(i==8819){
 			entityDef.name = "PVM Point Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };

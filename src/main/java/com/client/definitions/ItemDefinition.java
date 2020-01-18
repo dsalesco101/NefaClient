@@ -33,7 +33,7 @@ public final class ItemDefinition {
 		final Stream stream = new Stream(streamLoader.getDataForName("obj.idx"));
 
 		totalItems = stream.readUnsignedWord();
-		streamIndices = new int[totalItems + 1000];
+		streamIndices = new int[totalItems + 20000];
 		int i = 2;
 		for (int j = 0; j < totalItems; j++) {
 			streamIndices[j] = i;
@@ -463,6 +463,460 @@ public final class ItemDefinition {
 			case 1464:
 				itemDef.name = "Vote ticket";
 				itemDef.description = "Exchange this for a Vote Point.";
+				break;
+				
+			case 33049:
+				itemDef.name = "Agility master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 677, 801, 43540, 43543, 43546, 43549, 43550, 43552, 43554, 43558,
+						43560, 43575 };
+				itemDef.modelId = 50030;
+				itemDef.maleModel = 50031;
+				itemDef.femaleModel = 50031;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33033:
+				itemDef.name = "Attack master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 7104, 9151, 911, 914, 917, 920, 921, 923, 925, 929, 931, 946 };
+				itemDef.modelId = 50032;
+				itemDef.maleModel = 50033;
+				itemDef.femaleModel = 50033;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33055:
+				itemDef.name = "Construction master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 6061, 5945, 6327, 6330, 6333, 6336, 6337, 6339, 6341, 6345, 6347,
+						6362 };
+				itemDef.modelId = 50034;
+				itemDef.maleModel = 50035;
+				itemDef.femaleModel = 50035;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33040:
+				itemDef.name = "Cooking master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 920, 920, 51856, 51859, 51862, 51865, 51866, 51868, 51870, 51874,
+						51876, 51891 };
+				itemDef.modelId = 50036;
+				itemDef.maleModel = 50037;
+				itemDef.femaleModel = 50037;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33045:
+				itemDef.name = "Crafting master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 9142, 9152, 4511, 4514, 4517, 4520, 4521, 4523, 4525, 4529, 4531,
+						4546 };
+				itemDef.modelId = 50038;
+				itemDef.maleModel = 50039;
+				itemDef.femaleModel = 50039;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33034:
+				itemDef.name = "Defence master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 10460, 10473, 41410, 41413, 41416, 41419, 41420, 41422, 41424,
+						41428, 41430, 41445 };
+				itemDef.modelId = 50040;
+				itemDef.maleModel = 50041;
+				itemDef.femaleModel = 50041;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33052:
+				itemDef.name = "Farming master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 14775, 14792, 22026, 22029, 22032, 22035, 22036, 22038, 22040,
+						22044, 22046, 22061 };
+				itemDef.modelId = 50042;
+				itemDef.maleModel = 50043;
+				itemDef.femaleModel = 50043;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33044:
+				itemDef.name = "Firemaking master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 8125, 9152, 4015, 4018, 4021, 4024, 4025, 4027, 4029, 4033, 4035,
+						4050 };
+				itemDef.modelId = 50044;
+				itemDef.maleModel = 50045;
+				itemDef.femaleModel = 50045;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33043:
+				itemDef.name = "Fishing master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 9144, 9152, 38202, 38205, 38208, 38211, 38212, 38214, 38216,
+						38220, 38222, 38237 };
+				itemDef.modelId = 50046;
+				itemDef.maleModel = 50047;
+				itemDef.femaleModel = 50047;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33042:
+				itemDef.name = "Fletching master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 6067, 9152, 33670, 33673, 33676, 33679, 33680, 33682, 33684,
+						33688, 33690, 33705 };
+				itemDef.modelId = 50048;
+				itemDef.maleModel = 50049;
+				itemDef.femaleModel = 50049;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33048:
+				itemDef.name = "Herblore master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 9145, 9156, 22414, 22417, 22420, 22423, 22424, 22426, 22428,
+						22432, 22434, 22449 };
+				itemDef.modelId = 50050;
+				itemDef.maleModel = 50051;
+				itemDef.femaleModel = 50051;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33036:
+				itemDef.name = "Hitpoints master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 818, 951, 8291, 8294, 8297, 8300, 8301, 8303, 8305, 8309, 8311,
+						8319 };
+				itemDef.modelId = 50052;
+				itemDef.maleModel = 50053;
+				itemDef.femaleModel = 50053;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				//itemDef.femaleOffset = 4;
+				break;
+			case 33054:
+				itemDef.name = "Hunter master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 5262, 6020, 8472, 8475, 8478, 8481, 8482, 8484, 8486, 8490, 8492,
+						8507 };
+				itemDef.modelId = 50054;
+				itemDef.maleModel = 50055;
+				itemDef.femaleModel = 50055;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33039:
+				itemDef.name = "Magic master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 43569, 43685, 6336, 6339, 6342, 6345, 6346, 6348, 6350, 6354,
+						6356, 6371 };
+				itemDef.modelId = 50056;
+				itemDef.maleModel = 50057;
+				itemDef.femaleModel = 50057;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33047:
+				itemDef.name = "Mining master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 36296, 36279, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
+						10404, 10406, 10421 };
+				itemDef.modelId = 50058;
+				itemDef.maleModel = 50059;
+				itemDef.femaleModel = 50059;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33038:
+				itemDef.name = "Prayer master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 9163, 9168, 117, 120, 123, 126, 127, 127, 127, 127, 127, 127 };
+				itemDef.modelId = 50060;
+				itemDef.maleModel = 50061;
+				itemDef.femaleModel = 50061;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33037:
+				itemDef.name = "Range master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 3755, 3998, 15122, 15125, 15128, 15131, 15132, 15134, 15136,
+						15140, 15142, 15157 };
+				itemDef.modelId = 50062;
+				itemDef.maleModel = 50063;
+				itemDef.femaleModel = 50063;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33053:
+				itemDef.name = "Runecrafting master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				// 4 //7 //10 //13 //14//16//18//22 //24//39
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 9152, 8128, 10318, 10321, 10324, 10327, 10328, 10330, 10332,
+						10336, 10338, 10353 };
+				itemDef.modelId = 50064;
+				itemDef.maleModel = 50065;
+				itemDef.femaleModel = 50065;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33051:
+				itemDef.name = "Slayer master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				itemDef.modifiedModelColors = new int[] { 57022, 48811 };
+				itemDef.originalModelColors = new int[] { 912, 920 };
+				itemDef.modelId = 50066;
+				itemDef.maleModel = 50067;
+				itemDef.femaleModel = 50067;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33046:
+				itemDef.name = "Smithing master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 8115, 9148, 10386, 10389, 10392, 10395, 10396, 10398, 10400,
+						10404, 10406, 10421 };
+				itemDef.modelId = 50068;
+				itemDef.maleModel = 50069;
+				itemDef.femaleModel = 50069;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33035:
+				itemDef.name = "Strength master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 935, 931, 27538, 27541, 27544, 27547, 27548, 27550, 27552, 27556,
+						27558, 27573 };
+				itemDef.modelId = 50070;
+				itemDef.maleModel = 50071;
+				itemDef.femaleModel = 50071;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33050:
+				itemDef.name = "Thieving master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 11, 0, 58779, 58782, 58785, 58788, 58789, 57891, 58793, 58797,
+						58799, 58814 };
+				itemDef.modelId = 50072;
+				itemDef.maleModel = 50073;
+				itemDef.femaleModel = 50073;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = 5;
+				break;
+			case 33041:
+				itemDef.name = "Woodcutting master cape";
+				itemDef.description = "	A cape worn by those who've overachieved.";
+				itemDef.modifiedModelColors = new int[] { 57022, 48811, 2, 1029, 1032, 11, 12, 14, 16, 20, 22, 2 };
+				itemDef.originalModelColors = new int[] { 25109, 24088, 6693, 6696, 6699, 6702, 6703, 6705, 6707, 6711,
+						6713, 6728 };
+				itemDef.modelId = 50074;
+				itemDef.maleModel = 50075;
+				itemDef.femaleModel = 50075;
+				itemDef.modelZoom = 2300;
+				itemDef.modelRotation1 = 400;
+				itemDef.modelRotation2 = 1020;
+				itemDef.modelOffset1 = 3;
+				itemDef.modelOffset2 = 30;
+				itemDef.inventoryOptions = new String[5];
+				itemDef.inventoryOptions[1] = "Wear";
+				itemDef.inventoryOptions[2] = null;
+				//itemDef.maleOffset = -2;
 				break;
 		}
 	}
