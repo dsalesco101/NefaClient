@@ -51,6 +51,11 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
 		}
+		if (i == 7954) {
+			entityDef.name = "Achievement Master";
+			entityDef.actions = new String[] { "Trade", null, "Open Achievements", null, null, };
+
+		}
 		if (i == 5870) {
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
