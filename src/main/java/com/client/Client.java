@@ -8728,20 +8728,14 @@ public class Client extends RSApplet {
 				}
 			} else {
 				if (checkMainScreenBounds()) {
+					int interfaceX = (currentGameWidth / 2) - 256 - 99;
+					int interfaceY = (currentGameHeight / 2) - 167 - 63;
 					if (openInterfaceID != -1) {
-						if (currentGameWidth > 900 && currentGameHeight > 650 && mouseX > (currentGameWidth / 2) - 356
-								&& mouseX < ((currentGameWidth / 2) + 356) && mouseY > (currentGameHeight / 2) - 230
-								&& mouseY < (currentGameHeight / 2) + 230) {
-							buildInterfaceMenu((currentGameWidth / 2) - 256 - 99,
-									RSInterface.interfaceCache[openInterfaceID], mouseX, (currentGameHeight / 2) - 167 - 63,
-									mouseY, 0);
-						} else if (centerMainScreenInterface()) {
-							if (mouseX > 0 && mouseY > 0 && mouseX < 516 && mouseY < 343) {
-								buildInterfaceMenu(0, RSInterface.interfaceCache[openInterfaceID], mouseX, 0, mouseY,
-										0);
-							}
-						}
-					} else {
+						buildInterfaceMenu(interfaceX, RSInterface.interfaceCache[openInterfaceID],
+								mouseX, interfaceY, mouseY, 0);
+					}
+
+					if (mouseX < interfaceX || mouseY < interfaceY || mouseX > interfaceX + 516 || mouseY > interfaceY + 338) {
 						build3dScreenMenu();
 					}
 				}
@@ -12595,13 +12589,7 @@ public class Client extends RSApplet {
 			if (currentScreenMode == ScreenMode.FIXED)
 				drawInterface(0, 0, rsinterface, 0);
 			else
-
-			if (currentGameWidth >= 900 && currentGameHeight >= 650) {
 				drawInterface(0, (currentGameWidth / 2) - 356, rsinterface, currentScreenMode == ScreenMode.FIXED ? 0 : (currentGameHeight / 2) - 230);
-			} else {
-				drawInterface(0, 0, rsinterface, 0);
-			}
-
 		}
 		method70();
 
