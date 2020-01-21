@@ -555,11 +555,12 @@ public class RSInterface {
 		invStackSizes[j] = k;
 	}
 
-	public static void slider(int id, double min, double max, int icon, int background, int contentType) {
+	public static Slider slider(int id, double min, double max, int icon, int background, int contentType) {
 		RSInterface widget = addInterface(id);
 		widget.slider = new Slider(Client.cacheSprite3[icon], Client.cacheSprite3[background], min, max);
 		widget.type = TYPE_SLIDER;
 		widget.contentType = contentType;
+		return widget.slider;
 	}
 
 	public static void dropdownMenu(int id, int width, int defaultOption, String[] options, Dropdown d,

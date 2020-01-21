@@ -1,6 +1,8 @@
 package com.client.features.gameframe;
 
 
+import java.awt.Dimension;
+
 import com.client.Client;
 
 public enum ScreenMode {
@@ -37,6 +39,10 @@ public enum ScreenMode {
 
 	public boolean isUndecorated() {
 		return undecorated;
+	}
+
+	public Dimension getDimensions() {
+		return new Dimension(getWidth(), getHeight());
 	}
 
 	ScreenMode(int numericalValue, int width, int height, boolean resizable, boolean undecorated) {

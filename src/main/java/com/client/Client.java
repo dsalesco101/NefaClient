@@ -62,6 +62,8 @@ import java.util.regex.Pattern;
 import javax.swing.JFrame;
 import javax.swing.SwingUtilities;
 
+import com.client.features.settings.Preferences;
+import com.client.graphics.interfaces.Configs;
 import com.client.graphics.interfaces.impl.Bank;
 import com.client.graphics.interfaces.impl.Interfaces;
 import com.client.graphics.interfaces.impl.MonsterDropViewer;
@@ -295,18 +297,35 @@ public class Client extends RSApplet {
 		}
 	}
 
-	public void setGameMode(ScreenMode mode) {
+	public void setGameMode(ScreenMode mode, boolean serialize) {
 		if (currentScreenMode == mode)
 			return;
-		refreshMode(mode);
+
+		setGameMode(mode, new Dimension(mode.getWidth(), mode.getHeight()), serialize);
 	}
 
-	public void refreshMode(ScreenMode mode) {
+	public void setGameMode(ScreenMode mode, Dimension size, boolean serialize) {
+		if (currentScreenMode == mode)
+			return;
+
+		refreshMode(mode, size);
+		if (serialize) {
+			updateScreenPreferences(mode, new Dimension(currentGameWidth, currentGameHeight));
+		}
+	}
+
+	public void updateScreenPreferences(ScreenMode mode, Dimension size) {
+		Preferences.getPreferences().mode = mode;
+		Preferences.getPreferences().screenWidth = (int) size.getWidth();
+		Preferences.getPreferences().screenHeight = (int) size.getHeight();
+	}
+
+	public void refreshMode(ScreenMode mode, Dimension size) {
 		SwingUtilities.invokeLater(() ->
 		{
 			Dimension minimum = new Dimension(765, mode == ScreenMode.FIXED ? 503 : 610);
-			int clientWidth = mode.getWidth();
-			int clientHeight = mode.getHeight();
+			int clientWidth = (int) size.getWidth();
+			int clientHeight = (int) size.getHeight();
 
 			if (!runelite) {
 				appFrame.dispose();
@@ -322,19 +341,15 @@ public class Client extends RSApplet {
 				}
 
 				Insets insets = ClientWindow.getInset();
-				final int xInsetOffset = insets.left + insets.right;
-				final int yInsetOffset = insets.top + insets.bottom;
-				if (mode != ScreenMode.FULLSCREEN) {
-					clientWidth += xInsetOffset;
-					clientHeight += yInsetOffset;
-				}
+				clientWidth += insets.left + insets.right;
+				clientHeight += insets.top + insets.bottom;
+
 				gameContainer.setMinimumSize(minimum);
 				gameContainer.setSize(clientWidth, clientHeight);
 			} else {
-
 				gameContainer.setMinimumSize(minimum);
 				gameContainer.setPreferredSize(mode == ScreenMode.FIXED ? minimum : null);
-				gameContainer.setSize(minimum);
+				gameContainer.setSize(size);
 				appFrame.pack();
 			}
 
@@ -2411,14 +2426,14 @@ public class Client extends RSApplet {
 			return;
 		int k = variousSettings[i];
 		if (j == 1) {
-			if (k == 1)
-				Rasterizer.setBrightness(0.90000000000000002D);
-			if (k == 2)
-				Rasterizer.setBrightness(0.80000000000000004D);
-			if (k == 3)
-				Rasterizer.setBrightness(0.69999999999999996D);
-			if (k == 4)
-				Rasterizer.setBrightness(0.59999999999999998D);
+//			if (k == 1)
+//				Rasterizer.setBrightness(0.90000000000000002D);
+//			if (k == 2)
+//				Rasterizer.setBrightness(0.80000000000000004D);
+//			if (k == 3)
+//				Rasterizer.setBrightness(0.69999999999999996D);
+//			if (k == 4)
+//				Rasterizer.setBrightness(0.59999999999999998D);
 			ItemDefinition.mruNodes1.unlinkAll();
 			welcomeScreenRaised = true;
 		}
@@ -3253,9 +3268,10 @@ public class Client extends RSApplet {
 		nextSong = -1;
 		prevSong = 0;
 		experienceCounter = 0;
-		setGameMode(ScreenMode.FIXED);
 		GameTimerHandler.getSingleton().stopAll();
 		AccountManager.saveAccount();
+		Preferences.save();
+		setGameMode(ScreenMode.FIXED, false);
 	}
 
 	public void method45() {
@@ -4052,6 +4068,8 @@ public class Client extends RSApplet {
 
 	private void mainGameProcessor() {
 		updateGameMode();
+		updateScreenPreferences(currentScreenMode, new Dimension(currentGameWidth, currentGameHeight));
+
 		if (gameTimer != null) {
 			if (gameTimer.isCompleted()) {
 				System.out.println("Timer has finished!");
@@ -4688,6 +4706,7 @@ public class Client extends RSApplet {
 		mainGameGraphicsBuffer.drawGraphics(0, super.graphics, 0);
 		minimapState = 0;
 		AccountManager.saveAccount();
+		Preferences.save();
 		destX = 0;
 		RSSocket rsSocket = socketStream;
 		loggedIn = false;
@@ -4734,7 +4753,7 @@ public class Client extends RSApplet {
 					setConfigButton(i, true);
 					setConfigButton(23003, false);
 					setConfigButton(23005, false);
-					setGameMode(ScreenMode.FIXED);
+					setGameMode(ScreenMode.FIXED, true);
 					
 				}
 				break;
@@ -4751,7 +4770,7 @@ public class Client extends RSApplet {
 					setConfigButton(i, true);
 					setConfigButton(23001, false);
 					setConfigButton(23005, false);
-					setGameMode(ScreenMode.RESIZABLE);
+					setGameMode(ScreenMode.RESIZABLE, true);
 				}
 				break;
 		}
@@ -6217,6 +6236,7 @@ public class Client extends RSApplet {
 	public static boolean removeRoofs = true, leftClickAttack = true, chatEffects = true, drawOrbs = true;
 
 	private void setConfigButtonsAtStartup() {
+		Preferences.getPreferences().updateClientConfiguration();
 		setConfigButton(23101, drawOrbs);
 		setConfigButton(23109, splitPrivateChat);
 		setConfigButton(23107, chatEffects);
@@ -7171,7 +7191,7 @@ public class Client extends RSApplet {
 
 								ScreenMode mode = ScreenMode.valueOf(screenMode.toUpperCase());
 
-								setGameMode(mode);
+								setGameMode(mode, true);
 							} catch (Exception e) {
 								pushMessage("Not a valid screenmode.", 0, "");
 							}
@@ -8735,7 +8755,7 @@ public class Client extends RSApplet {
 								mouseX, interfaceY, mouseY, 0);
 					}
 
-					if (mouseX < interfaceX || mouseY < interfaceY || mouseX > interfaceX + 516 || mouseY > interfaceY + 338) {
+					if (openInterfaceID == -1 || mouseX < interfaceX || mouseY < interfaceY || mouseX > interfaceX + 516 || mouseY > interfaceY + 338) {
 						build3dScreenMenu();
 					}
 				}
@@ -8998,6 +9018,7 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 2) {
+				Preferences.getPreferences().updateClientConfiguration();
 				@SuppressWarnings("unused")
 				int rights = socketStream.read();
 				flagged = socketStream.read() == 1;
@@ -9114,6 +9135,7 @@ public class Client extends RSApplet {
 				}
 
 				informationFile.write();
+				Preferences.getPreferences().updateScreenMode();
 				return;
 			}
 			if (k == 3) {
@@ -10149,7 +10171,7 @@ public class Client extends RSApplet {
 
 			drawLoadingText(83, "Unpacking textures");
 			Rasterizer.method368(streamLoader_3);
-			Rasterizer.setBrightness(0.80000000000000004D);
+			//Rasterizer.setBrightness(0.80000000000000004D);
 			Rasterizer.method367();
 			drawLoadingText(83, "Unpacking config");
 			AnimationDefinition.unpackConfig(streamLoader);
@@ -10274,6 +10296,7 @@ public class Client extends RSApplet {
 					System.err.println("PRINT_EMPTY_INTERFACE_SECTIONS is toggled but you must be in dev mode.");
 				}
 			}
+			Preferences.load();
 			return;
 		} catch (Exception exception) {
 			exception.printStackTrace();

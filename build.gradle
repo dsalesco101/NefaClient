@@ -54,6 +54,7 @@ dependencies {
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3' 
 	compile group: 'commons-io', name: 'commons-io', version: '2.6'
 	compile group: 'org.apache.commons', name: 'commons-lang3', version: '3.9'
+    compile group: 'com.fasterxml.jackson.core', name: 'jackson-databind', version: '2.0.0'
 
     // Runelite dependencies below
     compile group: 'net.runelite.pushingpixels', name: 'trident', version: '1.5.00'

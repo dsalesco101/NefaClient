@@ -8,12 +8,12 @@ import com.client.DrawingArea;
 import com.client.Sprite;
 import com.client.TextDrawingArea;
 import com.client.definitions.ItemDefinition;
+import com.client.graphics.interfaces.Configs;
 import com.client.graphics.interfaces.RSInterface;
 import com.google.common.base.Preconditions;
 
 public class Bank extends RSInterface {
 
-    public static final int BANK_TAB_CONFIG = 1357;
     public static final int EMPTY_CHILD = 41582;
     public static final int BANK_INTERFACE_ID = 5292;
     public static final int SEARCH_CONTAINER = 41583;
@@ -81,7 +81,7 @@ public class Bank extends RSInterface {
     public static String searchingBankString = "";
 
     public static int getCurrentBankTab() {
-        return Client.instance.variousSettings[BANK_TAB_CONFIG];
+        return Client.instance.variousSettings[Configs.BANK_TAB_CONFIG];
     }
 
     public static boolean isBankContainer(RSInterface rsInterface) {
@@ -281,7 +281,7 @@ public class Bank extends RSInterface {
 
         closeBankSearch();
 
-        Client.instance.variousSettings[BANK_TAB_CONFIG] = tab;
+        Client.instance.variousSettings[Configs.BANK_TAB_CONFIG] = tab;
 
         // Reset the lines sprites that show the tab as closed
         for (int tabIndex = 0; tabIndex < ITEM_CONTAINERS.length; tabIndex++) {
@@ -314,7 +314,7 @@ public class Bank extends RSInterface {
     }
 
     public static void onConfigChanged(int config, int value) {
-        if (config == BANK_TAB_CONFIG) {
+        if (config == Configs.BANK_TAB_CONFIG) {
             closeBankSearch();
             openBankTab(value);
         }

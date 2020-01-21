@@ -467,7 +467,7 @@ public class ClientUI
 		{
 			client.init();
 			client.start();
-			com.client.Client.instance.refreshMode(ScreenMode.FIXED);
+			com.client.Client.instance.refreshMode(ScreenMode.FIXED, ScreenMode.FIXED.getDimensions());
 
 			// Layout frame
 			frame.pack();

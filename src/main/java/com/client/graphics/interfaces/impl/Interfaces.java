@@ -4,6 +4,7 @@ import com.client.Client;
 import com.client.Sprite;
 import com.client.TextDrawingArea;
 import com.client.features.gameframe.ScreenMode;
+import com.client.graphics.interfaces.Configs;
 import com.client.graphics.interfaces.RSInterface;
 
 public class Interfaces extends RSInterface {
@@ -89,7 +90,22 @@ public class Interfaces extends RSInterface {
 		SlayerRewards.initializeInterfaces(defaultTextDrawingAreas);
 		new LootViewer().load(defaultTextDrawingAreas);
 		new QuestTab().load(defaultTextDrawingAreas);
+		fixDefensiveAutocast();
 	}
+
+	public static void fixDefensiveAutocast() {
+		RSInterface rsi = interfaceCache[24111];
+		rsi.anIntArray212 = new int[1];
+		rsi.anIntArray212[0] = 1;
+		rsi.anIntArray245 = new int[1];
+		rsi.anIntArray245[0] = 1;
+		rsi.valueIndexArray = new int[1][3];
+		rsi.valueIndexArray[0][0] = 5;
+		rsi.valueIndexArray[0][1] = 109;
+		rsi.valueIndexArray[0][2] = 0;
+		rsi.ignoreConfigClicking = true;
+	}
+
 	public static void mysteryBox(TextDrawingArea[] tda) {
 		RSInterface iface = addInterface(47000);
 		/* Base interface */
@@ -3646,378 +3662,378 @@ interfaceId+=5000;
 		rsinterface.childY[19] = 228;
 	}
 
-	public static void Sidebar0(TextDrawingArea[] tda) {
-		Sidebar0a(1698, 1701, 7499, "Chop", "Hack", "Smash", "Block", 42, 75, 127, 75, 39, 128, 125, 128, 122, 103, 40,
-				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
-				"Aggressive\nCrush\nStrength XP", "Defensive\nSlash\nDefence XP", 40132, 40136, 40140, 40144); // OK
-
-		Sidebar0a(2276, 2279, 7574, "Stab", "Lunge", "Slash", "Block", 43, 75, 124, 75, 41, 128, 125, 128, 122, 103, 40,
-				50, 122, 50, 40, 103, tda, "Accurate\nStab\nAttack XP", "Aggressive\nStab\nStrength XP",
-				"Aggressive\nSlash\nStrength XP", "Defensive\nStab\nDefence XP", 40020, 40024, 40028, 40032); // OK
-
-		Sidebar0a(2423, 2426, 7599, "Chop", "Slash", "Lunge", "Block", 42, 75, 125, 75, 40, 128, 125, 128, 122, 103, 40,
-				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
-				"Controlled\nStab\nShared XP", "Defensive\nSlash\nDefence XP", 40036, 40040, 40044, 40048); // OK
-
-		Sidebar0a(3796, 3799, 7624, "Pound", "Pummel", "Spike", "Block", 39, 75, 121, 75, 41, 128, 125, 128, 122, 103,
-				40, 50, 122, 50, 40, 103, tda, "", "", "", "", 40052, 40056, 40060, 40064); // WTF IS
-																							// THIS?!
-
-		Sidebar0a(4679, 4682, 7674, "Lunge", "Swipe", "Pound", "Block", 40, 75, 124, 75, 39, 128, 125, 128, 122, 103,
-				40, 50, 122, 50, 40, 103, tda, "Controlled\nStab\nShared XP", "Controlled\nSlash\nShared XP",
-				"Controlled\nCrush\nShared XP", "Defensive\nStab\nDefence XP", 40068, 40072, 40076, 40080); // OK
-
-		Sidebar0a(4705, 4708, 7699, "Chop", "Slash", "Smash", "Block", 42, 75, 125, 75, 39, 128, 125, 128, 122, 103, 40,
-				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
-				"Aggressive\nCrush\nStrength XP", "Defensive\nSlash\nDefence XP", 40084, 40088, 40092, 40096); // ???
-
-		Sidebar0a(5570, 5573, 7724, "Spike", "Impale", "Smash", "Block", 41, 75, 123, 75, 39, 128, 125, 128, 122, 103,
-				40, 50, 122, 50, 40, 103, tda, "Accurate\nStab\nAttack XP", "Aggressive\nStab\nStrength XP",
-				"Aggressive\nCrush\nStrength XP", "Defensive\nStab\nDefence XP", 40010, 40104, 40108, 40112); // OK
-
-		Sidebar0a(7762, 7765, 7800, "Chop", "Slash", "Lunge", "Block", 42, 75, 125, 75, 40, 128, 125, 128, 122, 103, 40,
-				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
-				"Controlled\nStab\nShared XP", "Defensive\nSlash\nDefence XP", 40116, 40120, 40124, 40128); // OK
-
-		Sidebar0b(776, 779, "Reap", "Chop", "Jab", "Block", 42, 75, 126, 75, 46, 128, 125, 128, 122, 103, 122, 50, 40,
-				103, 40, 50, tda, "", "", "", "", 40132, 40136, 40140, 40144); // ???
-
-		Sidebar0c(425, 428, 7474, "Pound", "Pummel", "Block", 39, 75, 121, 75, 42, 128, 40, 103, 40, 50, 122, 50, tda,
-				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nDefence XP", "Defensive\nCrush\nDefence XP", 40148,
-				40152, 40156); // OK
-
-		Sidebar0c(1749, 1752, 7524, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
-				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40160, 40164,
-				40168); // OK
-
-		Sidebar0c(1764, 1767, 7549, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
-				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40172, 40176,
-				40180); // OK
-
-		Sidebar0c(4446, 4449, 7649, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
-				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40184, 40188,
-				40192); // OK
-
-		Sidebar0c(5855, 5857, 7749, "Punch", "Kick", "Block", 40, 75, 129, 75, 42, 128, 40, 50, 122, 50, 40, 103, tda,
-				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nStrength XP", "Defensive\nCrush\nDefence XP", 40196,
-				40200, 40204); // OK
-
-		Sidebar0c(6103, 6132, 6117, "Bash", "Pound", "Block", 43, 75, 124, 75, 42, 128, 40, 103, 40, 50, 122, 50, tda,
-				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nStrength XP", "Defensive\nCrush\nDefence XP", 40208,
-				40212, 40216); // ???
-
-		Sidebar0c(8460, 8463, 8493, "Jab", "Swipe", "Fend", 46, 75, 124, 75, 43, 128, 40, 103, 40, 50, 122, 50, tda,
-				"Controlled\nStabbed\nShared XP", "Aggressive\nSlash\nStrength XP", "Defensive\nStab\nDefence XP",
-				40224, 40228, 40232); // OK
-
-		Sidebar0c(12290, 12293, 12323, "Flick", "Lash", "Deflect", 44, 75, 127, 75, 36, 128, 40, 50, 40, 103, 122, 50,
-				tda, "Accurate\nSlash\nAttack XP", "Controlled\nSlash\nShared XP", "Defensive\nSlash\nDefence XP",
-				40236, 40240, 40244); // OK
-
-		Sidebar0d(328, 331, "Bash", "Pound", "Focus", 42, 66, 39, 101, 41, 136, 40, 120, 40, 50, 40, 85, tda);
-
-		RSInterface rsi = addTabInterface(19300);
-		textSize(3983, tda, 0);
-		addAttackStyleButton2(150, 150, 172, 150, 44, "Auto Retaliate", 40000, 154, 42,
-				"When active, you will\nautomatically fight back if\nattacked.", tda);
-
-		rsi.totalChildren(3);
-		rsi.child(0, 3983, 52, 25); // combat level
-		rsi.child(1, 150, 21, 153); // auto retaliate
-		rsi.child(2, 40000, 26, 200);
-
-		rsi = interfaceCache[3983];
-		rsi.centerText = true;
-		rsi.textColor = 0xff981f;
-	}
-
-	public static void Sidebar0a(int id, int id2, int id3, String text1, String text2, String text3, String text4,
-			int str1x, int str1y, int str2x, int str2y, int str3x, int str3y, int str4x, int str4y, int img1x,
-			int img1y, int img2x, int img2y, int img3x, int img3y, int img4x, int img4y, TextDrawingArea[] tda,
-			String popupString1, String popupString2, String popupString3, String popupString4, int hoverID1,
-			int hoverID2, int hoverID3, int hoverID4) // 4button
-														// spec
-	{
-		RSInterface rsi = addTabInterface(id); // 2423
-		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
-		addAttackText(id2 + 11, text1, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 12, text2, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 13, text3, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 14, text4, tda, 0, 0xff981f, false);
-
-		rsi.specialBar(id3, tda); // 7599
-
-		addAttackHover(id2 + 3, hoverID1, popupString1, tda);
-		addAttackHover(id2 + 6, hoverID2, popupString2, tda);
-		addAttackHover(id2 + 5, hoverID3, popupString3, tda);
-		addAttackHover(id2 + 4, hoverID4, popupString4, tda);
-
-		rsi.width = 190;
-		rsi.height = 261;
-
-		int frame = 0;
-		rsi.totalChildren(20);
-
-		rsi.child(frame, id2 + 3, 21, 46);
-		frame++; // 2429
-		rsi.child(frame, id2 + 4, 104, 99);
-		frame++; // 2430
-		rsi.child(frame, id2 + 5, 21, 99);
-		frame++; // 2431
-		rsi.child(frame, id2 + 6, 105, 46);
-		frame++; // 2432
-
-		rsi.child(frame, id2 + 7, img1x, img1y);
-		frame++; // bottomright 2433
-		rsi.child(frame, id2 + 8, img2x, img2y);
-		frame++; // topleft 2434
-		rsi.child(frame, id2 + 9, img3x, img3y);
-		frame++; // bottomleft 2435
-		rsi.child(frame, id2 + 10, img4x, img4y);
-		frame++; // topright 2436
-
-		rsi.child(frame, id2 + 11, str1x, str1y);
-		frame++; // chop 2437
-		rsi.child(frame, id2 + 12, str2x, str2y);
-		frame++; // slash 2438
-		rsi.child(frame, id2 + 13, str3x, str3y);
-		frame++; // lunge 2439
-		rsi.child(frame, id2 + 14, str4x, str4y);
-		frame++; // block 2440
-
-		rsi.child(frame, id3, 21, 205);
-		frame++; // special attack 7599
-		rsi.child(frame, 19300, 0, 0);
-		frame++; // stuffs
-		rsi.child(frame, id2, 94, 4);
-		frame++; // weapon 2426
-		rsi.child(frame, hoverID1, 25, 96);
-		frame++;
-		rsi.child(frame, hoverID2, 108, 96);
-		frame++;
-		rsi.child(frame, hoverID3, 25, 149);
-		frame++;
-		rsi.child(frame, hoverID4, 108, 149);
-		frame++;
-		rsi.child(frame, 40005, 28, 149);
-		frame++; // special bar tooltip
-
-		for (int i = id2 + 3; i < id2 + 7; i++) { // 2429 - 2433
-			rsi = interfaceCache[i];
-			rsi.sprite1 = CustomSpriteLoader(19301, "");
-			rsi.sprite2 = CustomSpriteLoader(19301, "a");
-			rsi.width = 68;
-			rsi.height = 44;
-		}
-	}
-
-	public static void Sidebar0b(int id, int id2, String text1, String text2, String text3, String text4, int str1x,
-			int str1y, int str2x, int str2y, int str3x, int str3y, int str4x, int str4y, int img1x, int img1y,
-			int img2x, int img2y, int img3x, int img3y, int img4x, int img4y, TextDrawingArea[] tda,
-			String popupString1, String popupString2, String popupString3, String popupString4, int hoverID1,
-			int hoverID2, int hoverID3, int hoverID4) // 4button
-														// nospec
-	{
-		RSInterface rsi = addTabInterface(id); // 2423
-		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
-		addAttackText(id2 + 11, text1, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 12, text2, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 13, text3, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 14, text4, tda, 0, 0xff981f, false);
-
-		addAttackHover(id2 + 3, hoverID1, popupString1, tda);
-		addAttackHover(id2 + 6, hoverID2, popupString2, tda);
-		addAttackHover(id2 + 5, hoverID3, popupString3, tda);
-		addAttackHover(id2 + 4, hoverID4, popupString4, tda);
-
-		rsi.width = 190;
-		rsi.height = 261;
-
-		int frame = 0;
-		rsi.totalChildren(18);
-
-		rsi.child(frame, id2 + 3, 21, 46);
-		frame++; // 2429
-		rsi.child(frame, id2 + 4, 104, 99);
-		frame++; // 2430
-		rsi.child(frame, id2 + 5, 21, 99);
-		frame++; // 2431
-		rsi.child(frame, id2 + 6, 105, 46);
-		frame++; // 2432
-
-		rsi.child(frame, id2 + 7, img1x, img1y);
-		frame++; // bottomright 2433
-		rsi.child(frame, id2 + 8, img2x, img2y);
-		frame++; // topleft 2434
-		rsi.child(frame, id2 + 9, img3x, img3y);
-		frame++; // bottomleft 2435
-		rsi.child(frame, id2 + 10, img4x, img4y);
-		frame++; // topright 2436
-
-		rsi.child(frame, id2 + 11, str1x, str1y);
-		frame++; // chop 2437
-		rsi.child(frame, id2 + 12, str2x, str2y);
-		frame++; // slash 2438
-		rsi.child(frame, id2 + 13, str3x, str3y);
-		frame++; // lunge 2439
-		rsi.child(frame, id2 + 14, str4x, str4y);
-		frame++; // block 2440
-
-		rsi.child(frame, 19300, 0, 0);
-		frame++; // stuffs
-		rsi.child(frame, id2, 94, 4);
-		frame++; // weapon 2426
-		rsi.child(frame, hoverID1, 25, 96);
-		frame++;
-		rsi.child(frame, hoverID2, 108, 96);
-		frame++;
-		rsi.child(frame, hoverID3, 25, 149);
-		frame++;
-		rsi.child(frame, hoverID4, 108, 149);
-		frame++;
-
-		for (int i = id2 + 3; i < id2 + 7; i++) { // 2429 - 2433
-			rsi = interfaceCache[i];
-			rsi.sprite1 = CustomSpriteLoader(19301, "");
-			rsi.sprite2 = CustomSpriteLoader(19301, "a");
-			rsi.width = 68;
-			rsi.height = 44;
-		}
-	}
-
-	public static void Sidebar0c(int id, int id2, int id3, String text1, String text2, String text3, int str1x,
-			int str1y, int str2x, int str2y, int str3x, int str3y, int img1x, int img1y, int img2x, int img2y,
-			int img3x, int img3y, TextDrawingArea[] tda, String popupString1, String popupString2, String popupString3,
-			int hoverID1, int hoverID2, int hoverID3) // 3button spec
-	{
-		RSInterface rsi = addTabInterface(id); // 2423
-		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
-		addAttackText(id2 + 9, text1, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 10, text2, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 11, text3, tda, 0, 0xff981f, false);
-
-		rsi.specialBar(id3, tda); // 7599
-
-		addAttackHover(id2 + 5, hoverID1, popupString1, tda);
-		addAttackHover(id2 + 4, hoverID2, popupString2, tda);
-		addAttackHover(id2 + 3, hoverID3, popupString3, tda);
-
-		rsi.width = 190;
-		rsi.height = 261;
-
-		int frame = 0;
-		rsi.totalChildren(16);
-
-		rsi.child(frame, id2 + 3, 21, 99);
-		frame++;
-		rsi.child(frame, id2 + 4, 105, 46);
-		frame++;
-		rsi.child(frame, id2 + 5, 21, 46);
-		frame++;
-
-		rsi.child(frame, id2 + 6, img1x, img1y);
-		frame++; // topleft
-		rsi.child(frame, id2 + 7, img2x, img2y);
-		frame++; // bottomleft
-		rsi.child(frame, id2 + 8, img3x, img3y);
-		frame++; // topright
-
-		rsi.child(frame, id2 + 9, str1x, str1y);
-		frame++; // chop
-		rsi.child(frame, id2 + 10, str2x, str2y);
-		frame++; // slash
-		rsi.child(frame, id2 + 11, str3x, str3y);
-		frame++; // lunge
-
-		rsi.child(frame, id3, 21, 205);
-		frame++; // special attack 7599
-		rsi.child(frame, 19300, 0, 0);
-		frame++; // stuffs
-		rsi.child(frame, id2, 94, 4);
-		frame++; // weapon
-
-		rsi.child(frame, hoverID1, 25, 96);
-		frame++;
-		rsi.child(frame, hoverID2, 108, 96);
-		frame++;
-		rsi.child(frame, hoverID3, 25, 149);
-		frame++;
-		rsi.child(frame, 40005, 28, 149);
-		frame++; // special bar tooltip
-
-		for (int i = id2 + 3; i < id2 + 6; i++) {
-			rsi = interfaceCache[i];
-			rsi.sprite1 = CustomSpriteLoader(19301, "");
-			rsi.sprite2 = CustomSpriteLoader(19301, "a");
-			rsi.width = 68;
-			rsi.height = 44;
-		}
-	}
-
-	public static void Sidebar0d(int id, int id2, String text1, String text2, String text3, int str1x, int str1y,
-			int str2x, int str2y, int str3x, int str3y, int img1x, int img1y, int img2x, int img2y, int img3x,
-			int img3y, TextDrawingArea[] tda) // 3button nospec
-												// (magic intf)
-	{
-		RSInterface rsi = addTabInterface(id); // 2423
-		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
-		addAttackText(id2 + 9, text1, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 10, text2, tda, 0, 0xff981f, false);
-		addAttackText(id2 + 11, text3, tda, 0, 0xff981f, false);
-
-		addAttackText(353, "Spell", tda, 0, 0xff981f, false);
-		addAttackText(354, "Spell", tda, 0, 0xff981f, false);
-
-		addCacheSprite(337, 19, 0, "combaticons");
-		addCacheSprite(338, 13, 0, "combaticons2");
-		addCacheSprite(339, 14, 0, "combaticons2");
-
-		addToggleButton(349, 349, 108, 68, 44, "Select");
-		addToggleButton(350, 350, 108, 68, 44, "Select");
-
-		rsi.width = 190;
-		rsi.height = 261;
-
-		int last = 15;
-		int frame = 0;
-		rsi.totalChildren(last);
-
-		rsi.child(frame, id2 + 3, 20, 115);
-		frame++;
-		rsi.child(frame, id2 + 4, 20, 80);
-		frame++;
-		rsi.child(frame, id2 + 5, 20, 45);
-		frame++;
-
-		rsi.child(frame, id2 + 6, img1x, img1y);
-		frame++; // topleft
-		rsi.child(frame, id2 + 7, img2x, img2y);
-		frame++; // bottomleft
-		rsi.child(frame, id2 + 8, img3x, img3y);
-		frame++; // topright
-
-		rsi.child(frame, id2 + 9, str1x, str1y);
-		frame++; // bash
-		rsi.child(frame, id2 + 10, str2x, str2y);
-		frame++; // pound
-		rsi.child(frame, id2 + 11, str3x, str3y);
-		frame++; // focus
-
-		rsi.child(frame, 349, 105, 46);
-		frame++; // spell1
-		rsi.child(frame, 350, 104, 106);
-		frame++; // spell2
-
-		rsi.child(frame, 353, 125, 74);
-		frame++; // spell
-		rsi.child(frame, 354, 125, 134);
-		frame++; // spell
-
-		rsi.child(frame, 19300, 0, 0);
-		frame++; // stuffs
-		rsi.child(frame, id2, 94, 4);
-		frame++; // weapon
-	}
+//	public static void Sidebar0(TextDrawingArea[] tda) {
+//		Sidebar0a(1698, 1701, 7499, "Chop", "Hack", "Smash", "Block", 42, 75, 127, 75, 39, 128, 125, 128, 122, 103, 40,
+//				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
+//				"Aggressive\nCrush\nStrength XP", "Defensive\nSlash\nDefence XP", 40132, 40136, 40140, 40144); // OK
+//
+//		Sidebar0a(2276, 2279, 7574, "Stab", "Lunge", "Slash", "Block", 43, 75, 124, 75, 41, 128, 125, 128, 122, 103, 40,
+//				50, 122, 50, 40, 103, tda, "Accurate\nStab\nAttack XP", "Aggressive\nStab\nStrength XP",
+//				"Aggressive\nSlash\nStrength XP", "Defensive\nStab\nDefence XP", 40020, 40024, 40028, 40032); // OK
+//
+//		Sidebar0a(2423, 2426, 7599, "Chop", "Slash", "Lunge", "Block", 42, 75, 125, 75, 40, 128, 125, 128, 122, 103, 40,
+//				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
+//				"Controlled\nStab\nShared XP", "Defensive\nSlash\nDefence XP", 40036, 40040, 40044, 40048); // OK
+//
+//		Sidebar0a(3796, 3799, 7624, "Pound", "Pummel", "Spike", "Block", 39, 75, 121, 75, 41, 128, 125, 128, 122, 103,
+//				40, 50, 122, 50, 40, 103, tda, "", "", "", "", 40052, 40056, 40060, 40064); // WTF IS
+//																							// THIS?!
+//
+//		Sidebar0a(4679, 4682, 7674, "Lunge", "Swipe", "Pound", "Block", 40, 75, 124, 75, 39, 128, 125, 128, 122, 103,
+//				40, 50, 122, 50, 40, 103, tda, "Controlled\nStab\nShared XP", "Controlled\nSlash\nShared XP",
+//				"Controlled\nCrush\nShared XP", "Defensive\nStab\nDefence XP", 40068, 40072, 40076, 40080); // OK
+//
+//		Sidebar0a(4705, 4708, 7699, "Chop", "Slash", "Smash", "Block", 42, 75, 125, 75, 39, 128, 125, 128, 122, 103, 40,
+//				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
+//				"Aggressive\nCrush\nStrength XP", "Defensive\nSlash\nDefence XP", 40084, 40088, 40092, 40096); // ???
+//
+//		Sidebar0a(5570, 5573, 7724, "Spike", "Impale", "Smash", "Block", 41, 75, 123, 75, 39, 128, 125, 128, 122, 103,
+//				40, 50, 122, 50, 40, 103, tda, "Accurate\nStab\nAttack XP", "Aggressive\nStab\nStrength XP",
+//				"Aggressive\nCrush\nStrength XP", "Defensive\nStab\nDefence XP", 40010, 40104, 40108, 40112); // OK
+//
+//		Sidebar0a(7762, 7765, 7800, "Chop", "Slash", "Lunge", "Block", 42, 75, 125, 75, 40, 128, 125, 128, 122, 103, 40,
+//				50, 122, 50, 40, 103, tda, "Accurate\nSlash\nAttack XP", "Aggressive\nSlash\nStrength XP",
+//				"Controlled\nStab\nShared XP", "Defensive\nSlash\nDefence XP", 40116, 40120, 40124, 40128); // OK
+//
+//		Sidebar0b(776, 779, "Reap", "Chop", "Jab", "Block", 42, 75, 126, 75, 46, 128, 125, 128, 122, 103, 122, 50, 40,
+//				103, 40, 50, tda, "", "", "", "", 40132, 40136, 40140, 40144); // ???
+//
+//		Sidebar0c(425, 428, 7474, "Pound", "Pummel", "Block", 39, 75, 121, 75, 42, 128, 40, 103, 40, 50, 122, 50, tda,
+//				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nDefence XP", "Defensive\nCrush\nDefence XP", 40148,
+//				40152, 40156); // OK
+//
+//		Sidebar0c(1749, 1752, 7524, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
+//				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40160, 40164,
+//				40168); // OK
+//
+//		Sidebar0c(1764, 1767, 7549, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
+//				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40172, 40176,
+//				40180); // OK
+//
+//		Sidebar0c(4446, 4449, 7649, "Accurate", "Rapid", "Longrange", 33, 75, 125, 75, 29, 128, 40, 103, 40, 50, 122,
+//				50, tda, "Accurate\nRanged XP", "Rapid\nRanged XP", "Long range\nRanged XP\nDefence XP", 40184, 40188,
+//				40192); // OK
+//
+//		Sidebar0c(5855, 5857, 7749, "Punch", "Kick", "Block", 40, 75, 129, 75, 42, 128, 40, 50, 122, 50, 40, 103, tda,
+//				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nStrength XP", "Defensive\nCrush\nDefence XP", 40196,
+//				40200, 40204); // OK
+//
+//		Sidebar0c(6103, 6132, 6117, "Bash", "Pound", "Block", 43, 75, 124, 75, 42, 128, 40, 103, 40, 50, 122, 50, tda,
+//				"Accurate\nCrush\nAttack XP", "Aggressive\nCrush\nStrength XP", "Defensive\nCrush\nDefence XP", 40208,
+//				40212, 40216); // ???
+//
+//		Sidebar0c(8460, 8463, 8493, "Jab", "Swipe", "Fend", 46, 75, 124, 75, 43, 128, 40, 103, 40, 50, 122, 50, tda,
+//				"Controlled\nStabbed\nShared XP", "Aggressive\nSlash\nStrength XP", "Defensive\nStab\nDefence XP",
+//				40224, 40228, 40232); // OK
+//
+//		Sidebar0c(12290, 12293, 12323, "Flick", "Lash", "Deflect", 44, 75, 127, 75, 36, 128, 40, 50, 40, 103, 122, 50,
+//				tda, "Accurate\nSlash\nAttack XP", "Controlled\nSlash\nShared XP", "Defensive\nSlash\nDefence XP",
+//				40236, 40240, 40244); // OK
+//
+//		Sidebar0d(328, 331, "Bash", "Pound", "Focus", 42, 66, 39, 101, 41, 136, 40, 120, 40, 50, 40, 85, tda);
+//
+//		RSInterface rsi = addTabInterface(19300);
+//		textSize(3983, tda, 0);
+//		addAttackStyleButton2(150, 150, 172, 150, 44, "Auto Retaliate", 40000, 154, 42,
+//				"When active, you will\nautomatically fight back if\nattacked.", tda);
+//
+//		rsi.totalChildren(3);
+//		rsi.child(0, 3983, 52, 25); // combat level
+//		rsi.child(1, 150, 21, 153); // auto retaliate
+//		rsi.child(2, 40000, 26, 200);
+//
+//		rsi = interfaceCache[3983];
+//		rsi.centerText = true;
+//		rsi.textColor = 0xff981f;
+//	}
+//
+//	public static void Sidebar0a(int id, int id2, int id3, String text1, String text2, String text3, String text4,
+//			int str1x, int str1y, int str2x, int str2y, int str3x, int str3y, int str4x, int str4y, int img1x,
+//			int img1y, int img2x, int img2y, int img3x, int img3y, int img4x, int img4y, TextDrawingArea[] tda,
+//			String popupString1, String popupString2, String popupString3, String popupString4, int hoverID1,
+//			int hoverID2, int hoverID3, int hoverID4) // 4button
+//														// spec
+//	{
+//		RSInterface rsi = addTabInterface(id); // 2423
+//		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
+//		addAttackText(id2 + 11, text1, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 12, text2, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 13, text3, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 14, text4, tda, 0, 0xff981f, false);
+//
+//		rsi.specialBar(id3, tda); // 7599
+//
+//		addAttackHover(id2 + 3, hoverID1, popupString1, tda);
+//		addAttackHover(id2 + 6, hoverID2, popupString2, tda);
+//		addAttackHover(id2 + 5, hoverID3, popupString3, tda);
+//		addAttackHover(id2 + 4, hoverID4, popupString4, tda);
+//
+//		rsi.width = 190;
+//		rsi.height = 261;
+//
+//		int frame = 0;
+//		rsi.totalChildren(20);
+//
+//		rsi.child(frame, id2 + 3, 21, 46);
+//		frame++; // 2429
+//		rsi.child(frame, id2 + 4, 104, 99);
+//		frame++; // 2430
+//		rsi.child(frame, id2 + 5, 21, 99);
+//		frame++; // 2431
+//		rsi.child(frame, id2 + 6, 105, 46);
+//		frame++; // 2432
+//
+//		rsi.child(frame, id2 + 7, img1x, img1y);
+//		frame++; // bottomright 2433
+//		rsi.child(frame, id2 + 8, img2x, img2y);
+//		frame++; // topleft 2434
+//		rsi.child(frame, id2 + 9, img3x, img3y);
+//		frame++; // bottomleft 2435
+//		rsi.child(frame, id2 + 10, img4x, img4y);
+//		frame++; // topright 2436
+//
+//		rsi.child(frame, id2 + 11, str1x, str1y);
+//		frame++; // chop 2437
+//		rsi.child(frame, id2 + 12, str2x, str2y);
+//		frame++; // slash 2438
+//		rsi.child(frame, id2 + 13, str3x, str3y);
+//		frame++; // lunge 2439
+//		rsi.child(frame, id2 + 14, str4x, str4y);
+//		frame++; // block 2440
+//
+//		rsi.child(frame, id3, 21, 205);
+//		frame++; // special attack 7599
+//		rsi.child(frame, 19300, 0, 0);
+//		frame++; // stuffs
+//		rsi.child(frame, id2, 94, 4);
+//		frame++; // weapon 2426
+//		rsi.child(frame, hoverID1, 25, 96);
+//		frame++;
+//		rsi.child(frame, hoverID2, 108, 96);
+//		frame++;
+//		rsi.child(frame, hoverID3, 25, 149);
+//		frame++;
+//		rsi.child(frame, hoverID4, 108, 149);
+//		frame++;
+//		rsi.child(frame, 40005, 28, 149);
+//		frame++; // special bar tooltip
+//
+//		for (int i = id2 + 3; i < id2 + 7; i++) { // 2429 - 2433
+//			rsi = interfaceCache[i];
+//			rsi.sprite1 = CustomSpriteLoader(19301, "");
+//			rsi.sprite2 = CustomSpriteLoader(19301, "a");
+//			rsi.width = 68;
+//			rsi.height = 44;
+//		}
+//	}
+//
+//	public static void Sidebar0b(int id, int id2, String text1, String text2, String text3, String text4, int str1x,
+//			int str1y, int str2x, int str2y, int str3x, int str3y, int str4x, int str4y, int img1x, int img1y,
+//			int img2x, int img2y, int img3x, int img3y, int img4x, int img4y, TextDrawingArea[] tda,
+//			String popupString1, String popupString2, String popupString3, String popupString4, int hoverID1,
+//			int hoverID2, int hoverID3, int hoverID4) // 4button
+//														// nospec
+//	{
+//		RSInterface rsi = addTabInterface(id); // 2423
+//		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
+//		addAttackText(id2 + 11, text1, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 12, text2, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 13, text3, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 14, text4, tda, 0, 0xff981f, false);
+//
+//		addAttackHover(id2 + 3, hoverID1, popupString1, tda);
+//		addAttackHover(id2 + 6, hoverID2, popupString2, tda);
+//		addAttackHover(id2 + 5, hoverID3, popupString3, tda);
+//		addAttackHover(id2 + 4, hoverID4, popupString4, tda);
+//
+//		rsi.width = 190;
+//		rsi.height = 261;
+//
+//		int frame = 0;
+//		rsi.totalChildren(18);
+//
+//		rsi.child(frame, id2 + 3, 21, 46);
+//		frame++; // 2429
+//		rsi.child(frame, id2 + 4, 104, 99);
+//		frame++; // 2430
+//		rsi.child(frame, id2 + 5, 21, 99);
+//		frame++; // 2431
+//		rsi.child(frame, id2 + 6, 105, 46);
+//		frame++; // 2432
+//
+//		rsi.child(frame, id2 + 7, img1x, img1y);
+//		frame++; // bottomright 2433
+//		rsi.child(frame, id2 + 8, img2x, img2y);
+//		frame++; // topleft 2434
+//		rsi.child(frame, id2 + 9, img3x, img3y);
+//		frame++; // bottomleft 2435
+//		rsi.child(frame, id2 + 10, img4x, img4y);
+//		frame++; // topright 2436
+//
+//		rsi.child(frame, id2 + 11, str1x, str1y);
+//		frame++; // chop 2437
+//		rsi.child(frame, id2 + 12, str2x, str2y);
+//		frame++; // slash 2438
+//		rsi.child(frame, id2 + 13, str3x, str3y);
+//		frame++; // lunge 2439
+//		rsi.child(frame, id2 + 14, str4x, str4y);
+//		frame++; // block 2440
+//
+//		rsi.child(frame, 19300, 0, 0);
+//		frame++; // stuffs
+//		rsi.child(frame, id2, 94, 4);
+//		frame++; // weapon 2426
+//		rsi.child(frame, hoverID1, 25, 96);
+//		frame++;
+//		rsi.child(frame, hoverID2, 108, 96);
+//		frame++;
+//		rsi.child(frame, hoverID3, 25, 149);
+//		frame++;
+//		rsi.child(frame, hoverID4, 108, 149);
+//		frame++;
+//
+//		for (int i = id2 + 3; i < id2 + 7; i++) { // 2429 - 2433
+//			rsi = interfaceCache[i];
+//			rsi.sprite1 = CustomSpriteLoader(19301, "");
+//			rsi.sprite2 = CustomSpriteLoader(19301, "a");
+//			rsi.width = 68;
+//			rsi.height = 44;
+//		}
+//	}
+//
+//	public static void Sidebar0c(int id, int id2, int id3, String text1, String text2, String text3, int str1x,
+//			int str1y, int str2x, int str2y, int str3x, int str3y, int img1x, int img1y, int img2x, int img2y,
+//			int img3x, int img3y, TextDrawingArea[] tda, String popupString1, String popupString2, String popupString3,
+//			int hoverID1, int hoverID2, int hoverID3) // 3button spec
+//	{
+//		RSInterface rsi = addTabInterface(id); // 2423
+//		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
+//		addAttackText(id2 + 9, text1, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 10, text2, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 11, text3, tda, 0, 0xff981f, false);
+//
+//		rsi.specialBar(id3, tda); // 7599
+//
+//		addAttackHover(id2 + 5, hoverID1, popupString1, tda);
+//		addAttackHover(id2 + 4, hoverID2, popupString2, tda);
+//		addAttackHover(id2 + 3, hoverID3, popupString3, tda);
+//
+//		rsi.width = 190;
+//		rsi.height = 261;
+//
+//		int frame = 0;
+//		rsi.totalChildren(16);
+//
+//		rsi.child(frame, id2 + 3, 21, 99);
+//		frame++;
+//		rsi.child(frame, id2 + 4, 105, 46);
+//		frame++;
+//		rsi.child(frame, id2 + 5, 21, 46);
+//		frame++;
+//
+//		rsi.child(frame, id2 + 6, img1x, img1y);
+//		frame++; // topleft
+//		rsi.child(frame, id2 + 7, img2x, img2y);
+//		frame++; // bottomleft
+//		rsi.child(frame, id2 + 8, img3x, img3y);
+//		frame++; // topright
+//
+//		rsi.child(frame, id2 + 9, str1x, str1y);
+//		frame++; // chop
+//		rsi.child(frame, id2 + 10, str2x, str2y);
+//		frame++; // slash
+//		rsi.child(frame, id2 + 11, str3x, str3y);
+//		frame++; // lunge
+//
+//		rsi.child(frame, id3, 21, 205);
+//		frame++; // special attack 7599
+//		rsi.child(frame, 19300, 0, 0);
+//		frame++; // stuffs
+//		rsi.child(frame, id2, 94, 4);
+//		frame++; // weapon
+//
+//		rsi.child(frame, hoverID1, 25, 96);
+//		frame++;
+//		rsi.child(frame, hoverID2, 108, 96);
+//		frame++;
+//		rsi.child(frame, hoverID3, 25, 149);
+//		frame++;
+//		rsi.child(frame, 40005, 28, 149);
+//		frame++; // special bar tooltip
+//
+//		for (int i = id2 + 3; i < id2 + 6; i++) {
+//			rsi = interfaceCache[i];
+//			rsi.sprite1 = CustomSpriteLoader(19301, "");
+//			rsi.sprite2 = CustomSpriteLoader(19301, "a");
+//			rsi.width = 68;
+//			rsi.height = 44;
+//		}
+//	}
+//
+//	public static void Sidebar0d(int id, int id2, String text1, String text2, String text3, int str1x, int str1y,
+//			int str2x, int str2y, int str3x, int str3y, int img1x, int img1y, int img2x, int img2y, int img3x,
+//			int img3y, TextDrawingArea[] tda) // 3button nospec
+//												// (magic intf)
+//	{
+//		RSInterface rsi = addTabInterface(id); // 2423
+//		addAttackText(id2, "-2", tda, 3, 0xff981f, true); // 2426
+//		addAttackText(id2 + 9, text1, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 10, text2, tda, 0, 0xff981f, false);
+//		addAttackText(id2 + 11, text3, tda, 0, 0xff981f, false);
+//
+//		addAttackText(353, "Spell", tda, 0, 0xff981f, false);
+//		addAttackText(354, "Spell", tda, 0, 0xff981f, false);
+//
+//		addCacheSprite(337, 19, 0, "combaticons");
+//		addCacheSprite(338, 13, 0, "combaticons2");
+//		addCacheSprite(339, 14, 0, "combaticons2");
+//
+//		addToggleButton(349, 349, Configs.AUTOCAST_DEFENCE_CONFIG, 68, 44, "Select defensive autocast"); // defensive
+//		addToggleButton(350, 350, 108, 68, 44, "Select autocast"); // offsensive
+//
+//		rsi.width = 190;
+//		rsi.height = 261;
+//
+//		int last = 15;
+//		int frame = 0;
+//		rsi.totalChildren(last);
+//
+//		rsi.child(frame, id2 + 3, 20, 115);
+//		frame++;
+//		rsi.child(frame, id2 + 4, 20, 80);
+//		frame++;
+//		rsi.child(frame, id2 + 5, 20, 45);
+//		frame++;
+//
+//		rsi.child(frame, id2 + 6, img1x, img1y);
+//		frame++; // topleft
+//		rsi.child(frame, id2 + 7, img2x, img2y);
+//		frame++; // bottomleft
+//		rsi.child(frame, id2 + 8, img3x, img3y);
+//		frame++; // topright
+//
+//		rsi.child(frame, id2 + 9, str1x, str1y);
+//		frame++; // bash
+//		rsi.child(frame, id2 + 10, str2x, str2y);
+//		frame++; // pound
+//		rsi.child(frame, id2 + 11, str3x, str3y);
+//		frame++; // focus
+//
+//		rsi.child(frame, 349, 105, 46);
+//		frame++; // spell1
+//		rsi.child(frame, 350, 104, 106);
+//		frame++; // spell2
+//
+//		rsi.child(frame, 353, 125, 74);
+//		frame++; // spell
+//		rsi.child(frame, 354, 125, 134);
+//		frame++; // spell
+//
+//		rsi.child(frame, 19300, 0, 0);
+//		frame++; // stuffs
+//		rsi.child(frame, id2, 94, 4);
+//		frame++; // weapon
+//	}
 
 	public static void clanChatTab(TextDrawingArea[] tda) {
 		RSInterface tab = addTabInterface(18128);

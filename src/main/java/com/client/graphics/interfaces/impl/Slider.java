@@ -5,6 +5,7 @@ import com.client.RSApplet;
 import com.client.Rasterizer;
 import com.client.Sprite;
 import com.client.features.gameframe.ScreenMode;
+import com.client.features.settings.Preferences;
 import com.client.graphics.interfaces.RSInterface;
 
 public class Slider {
@@ -55,13 +56,12 @@ public class Slider {
 			if (value > maxValue) {
 				value = maxValue;
 			}
-			System.out.println("handleclick");
 			int xxx = 525;
 			if ((mouseX - xxx) <= images[0].xPosition + 5 && (mouseX - xxx) >= images[0].xPosition - 5) {
 				RSApplet.sliderShowAlpha = true;
 			}
-			System.out.println("mX: " + (mouseX - xxx));
-			System.out.println("spriteX: " + images[0].xPosition);
+			//System.out.println("mX: " + (mouseX - xxx));
+			//System.out.println("spriteX: " + images[0].xPosition);
 			handleContent(contentType);
 		}
 	}
@@ -104,8 +104,8 @@ public class Slider {
 				Client.cameraZoom = (int) (minValue + maxValue - value);
 				break;
 			case BRIGHTNESS:
-				//Client.brightnessState = minValue + maxValue - value;
-				Rasterizer.setBrightness(minValue + maxValue - value);
+				Preferences.getPreferences().brightness = minValue + maxValue - value;
+				Rasterizer.setBrightness(Preferences.getPreferences().brightness);
 				break;
 			case MUSIC:
 				//Client.instance.changeMusicVolume((int) (minValue + maxValue - value));
