@@ -339,7 +339,7 @@ public final class ObjectDefinition {
 			
 		case 29333:
 			objectDef.name = "Trading post";
-			objectDef.actions[0] = "View";
+			objectDef.actions = new String[] { "Open", null, "Collect", null, null };
 			objectDef.anIntArray773 = new int[] { 60884 };
 			//objectDef.animation = 4006;
 			objectDef.aBoolean769 = false;
