@@ -47,6 +47,10 @@ public final class NpcDefinition {
 			entityDef.description = "Use a seed on me to get a Crystal Bow.";
 					
 		}
+		if (i == 6970) {
+			entityDef.name = "Theif";
+			entityDef.actions = new String[] { null, null, "Pickpocket",  null,  null };
+		}
 		if (i == 8761) {
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
