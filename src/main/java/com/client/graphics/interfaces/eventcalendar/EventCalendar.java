@@ -145,6 +145,7 @@ public class EventCalendar extends RSInterface {
         inter.child(childId++, interfaceId++, textCenterX, rewardOptionsY + 18);
 
         addButton(interfaceId, buttonSprite, "Open Rules", 1);
+        int button = interfaceId;
         inter.child(childId++, interfaceId++, 21, 296);
         addText(interfaceId, "Rules", tda, 2, 0xff981f, true);
         inter.child(childId++, interfaceId++, textCenterX, 302);
@@ -156,6 +157,8 @@ public class EventCalendar extends RSInterface {
         interfaceId = getStringContainer(interfaceId, 1);
 
         onConfigReceived(Configs.EVENT_CALENDAR_CONFIG, 1);
+        get(INTERFACE_ID).setNewButtonClicking();
+        Preconditions.checkState(get(button).newButtonClicking);
     }
 
     public int getStringContainer(int interfaceId, int containerIndex) {

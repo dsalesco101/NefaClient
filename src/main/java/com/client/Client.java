@@ -5117,8 +5117,13 @@ public class Client extends RSApplet {
 						inputTaken = true;
 						break;
 					default:
-						stream.createFrame(185);
-						stream.writeWord(k);
+						if (RSInterface.get(k) != null && RSInterface.get(k).newButtonClicking) {
+							stream.createFrame(184);
+							stream.writeWord(k);
+						} else {
+							stream.createFrame(185);
+							stream.writeWord(k);
+						}
 
 						if (k >= 61101 && k <= 61200) {
 							int selected = k - 61101;
@@ -7470,22 +7475,22 @@ public class Client extends RSApplet {
 							fpsOn = false;
 						if (inputString.equals("::data"))
 							clientData = !clientData;
-						if (inputString.startsWith("::calday")) {
-							try {
-								EventCalendar.getCalendar().onConfigReceived(Configs.EVENT_CALENDAR_CONFIG,
-										Integer.parseInt(inputString.replace("::calday", "").trim()));
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
-						if (inputString.equals("::cal")) {
-							try {
-								EventCalendar.getCalendar().load(RSInterface.defaultTextDrawingAreas);
-								openInterfaceID = EventCalendar.INTERFACE_ID;
-							} catch (Exception e) {
-								e.printStackTrace();
-							}
-						}
+//						if (inputString.startsWith("::calday")) {
+//							try {
+//								EventCalendar.getCalendar().onConfigReceived(Configs.EVENT_CALENDAR_CONFIG,
+//										Integer.parseInt(inputString.replace("::calday", "").trim()));
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//							}
+//						}
+//						if (inputString.equals("::cal")) {
+//							try {
+//								EventCalendar.getCalendar().load(RSInterface.defaultTextDrawingAreas);
+//								openInterfaceID = EventCalendar.INTERFACE_ID;
+//							} catch (Exception e) {
+//								e.printStackTrace();
+//							}
+//						}
 						if (inputString.equals("::inter")) {
 							try {
 								Interfaces.loadInterfaces();
