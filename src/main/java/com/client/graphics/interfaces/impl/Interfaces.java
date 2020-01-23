@@ -6,8 +6,12 @@ import com.client.TextDrawingArea;
 import com.client.features.gameframe.ScreenMode;
 import com.client.graphics.interfaces.Configs;
 import com.client.graphics.interfaces.RSInterface;
+import com.client.graphics.interfaces.eventcalendar.EventCalendar;
 
 public class Interfaces extends RSInterface {
+
+	public static final int CLOSE_BUTTON_SMALL = 37302;
+	public static final int CLOSE_BUTTON_SMALL_HOVER = 37303;
 
 	public static void loadInterfaces() {
 		wrathRune();
@@ -91,6 +95,7 @@ public class Interfaces extends RSInterface {
 		new LootViewer().load(defaultTextDrawingAreas);
 		new QuestTab().load(defaultTextDrawingAreas);
 		fixDefensiveAutocast();
+		EventCalendar.getCalendar().load(defaultTextDrawingAreas);
 	}
 
 	public static void fixDefensiveAutocast() {
@@ -101,7 +106,7 @@ public class Interfaces extends RSInterface {
 		rsi.anIntArray245[0] = 1;
 		rsi.valueIndexArray = new int[1][3];
 		rsi.valueIndexArray[0][0] = 5;
-		rsi.valueIndexArray[0][1] = 109;
+		rsi.valueIndexArray[0][1] = Configs.AUTOCAST_DEFENCE_CONFIG;
 		rsi.valueIndexArray[0][2] = 0;
 		rsi.ignoreConfigClicking = true;
 	}
@@ -889,9 +894,6 @@ public class Interfaces extends RSInterface {
 		setBounds(39026,199,225,8,scroll);
 		setBounds(39027,199,250,7,scroll);
 	}
-
-
-
 
 	public static void prestigeInterface(TextDrawingArea[] tda) {
 		RSInterface tab = addInterface(37300);

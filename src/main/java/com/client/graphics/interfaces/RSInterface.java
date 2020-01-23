@@ -1,7 +1,9 @@
 package com.client.graphics.interfaces;
 
 import java.awt.Dimension;
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 import java.util.Objects;
 import com.client.features.gameframe.ScreenMode;
 import com.client.Class36;
@@ -2466,6 +2468,22 @@ public class RSInterface {
 		addTooltipBox(id + 1, text);
 		rsinterface.totalChildren(1);
 		rsinterface.child(0, id + 1, 0, 0);
+	}
+
+	public static void addButton(int interfaceId, Sprite sprite, String tooltip, int atActionType) {
+		RSInterface RSInterface = addInterface(interfaceId);
+		RSInterface.id = interfaceId;
+		RSInterface.parentID = interfaceId;
+		RSInterface.type = 5;
+		RSInterface.atActionType = atActionType;
+		RSInterface.contentType = 0;
+		RSInterface.opacity = 0;
+		RSInterface.hoverType = 52;
+		RSInterface.sprite1 = sprite;
+		RSInterface.sprite2 = sprite;
+		RSInterface.width = sprite.myWidth;
+		RSInterface.height = sprite.myHeight;
+		RSInterface.tooltip = tooltip;
 	}
 
 	public static void addButton(int i, int j, String name, int W, int H, String S, int AT) {
@@ -5021,6 +5039,37 @@ public class RSInterface {
 		tab.anInt239 = 0;
 	}
 
+	public int scrollableContainerInterfaceId;
+	public RSFont font;
+	public int stringPadY;
+	public int maxStrings;
+	public List<String> stringContainer;
+
+	public static RSInterface addStringContainer(int interfaceId, int scrollableContainerInterfaceId, RSFont font,
+										  boolean centerText, int textColor, int maxStrings, int stringPadY, String defaultMessage) {
+		RSInterface tab = addTabInterface(interfaceId);
+		tab.type = TYPE_STRING_CONTAINER;
+		tab.parentID = interfaceId;
+		tab.id = interfaceId;
+		tab.scrollableContainerInterfaceId = scrollableContainerInterfaceId;
+		tab.font = font;
+		tab.centerText = centerText;
+		tab.stringPadY = stringPadY;
+		tab.anInt216 = 0;
+		tab.anInt239 = 0;
+		tab.mOverInterToTrigger = -1;
+		tab.aString228 = "";
+		tab.maxStrings = maxStrings;
+		tab.textColor = textColor;
+		tab.stringContainer = new ArrayList<>();
+		if (defaultMessage != null && defaultMessage.length() > 0) {
+			for (int index = 0; index < maxStrings; index++) {
+				tab.stringContainer.add(defaultMessage);
+			}
+		}
+		return tab;
+	}
+
 	public String hoverText;
 	public int opacity;
 	public int hoverType;
@@ -5489,6 +5538,7 @@ public class RSInterface {
 	public static final int TYPE_ADJUSTABLE_CONFIG = 17;
 	public static final int TYPE_BOX = 18;
 	public static final int TYPE_MAP = 19;
+	public static final int TYPE_STRING_CONTAINER = 20;
 	public static final int OPTION_DROPDOWN = 7;
 
 	public static void addProgressBar(int identity, int width, int height, int[] colorTypes) {

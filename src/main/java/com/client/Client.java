@@ -64,6 +64,7 @@ import javax.swing.SwingUtilities;
 
 import com.client.features.settings.Preferences;
 import com.client.graphics.interfaces.Configs;
+import com.client.graphics.interfaces.eventcalendar.EventCalendar;
 import com.client.graphics.interfaces.impl.Bank;
 import com.client.graphics.interfaces.impl.Interfaces;
 import com.client.graphics.interfaces.impl.MonsterDropViewer;
@@ -100,6 +101,7 @@ import com.client.sign.Signlink;
 import com.client.utilities.ObjectKey;
 import com.client.utilities.settings.Settings;
 import com.client.utilities.settings.SettingsManager;
+import com.google.common.base.Preconditions;
 import org.apache.commons.lang3.tuple.Pair;
 
 public class Client extends RSApplet {
@@ -7468,6 +7470,22 @@ public class Client extends RSApplet {
 							fpsOn = false;
 						if (inputString.equals("::data"))
 							clientData = !clientData;
+						if (inputString.startsWith("::calday")) {
+							try {
+								EventCalendar.getCalendar().onConfigReceived(Configs.EVENT_CALENDAR_CONFIG,
+										Integer.parseInt(inputString.replace("::calday", "").trim()));
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
+						if (inputString.equals("::cal")) {
+							try {
+								EventCalendar.getCalendar().load(RSInterface.defaultTextDrawingAreas);
+								openInterfaceID = EventCalendar.INTERFACE_ID;
+							} catch (Exception e) {
+								e.printStackTrace();
+							}
+						}
 						if (inputString.equals("::inter")) {
 							try {
 								Interfaces.loadInterfaces();
@@ -11095,8 +11113,28 @@ public class Client extends RSApplet {
 			grandExchangeSprite4 = new Sprite("Grand Exchange/4");
 
 	private int interfaceDrawY;
-
 	public boolean strings = false;
+
+	public static final int[] runeChildren = { 1202, 1203, 1209, 1210, 1211, 1218, 1219, 1220, 1227, 1228, 1234, 1235, 1236, 1243,
+			1244, 1245, 1252, 1253, 1254, 1261, 1262, 1263, 1270, 1271, 1277, 1278, 1279, 1286, 1287, 1293,
+			1294, 1295, 1302, 1303, 1304, 1311, 1312, 1318, 1319, 1320, 1327, 1328, 1329, 1336, 1337, 1343,
+			1344, 1345, 1352, 1353, 1354, 1361, 1362, 1363, 1370, 1371, 1377, 1378, 1384, 1385, 1391, 1392,
+			1393, 1400, 1401, 1407, 1408, 1410, 1417, 1418, 1424, 1425, 1426, 1433, 1434, 1440, 1441, 1442,
+			1449, 1450, 1456, 1457, 1463, 1464, 1465, 1472, 1473, 1474, 1481, 1482, 1488, 1489, 1490, 1497,
+			1498, 1499, 1506, 1507, 1508, 1515, 1516, 1517, 1524, 1525, 1526, 1533, 1534, 1535, 1547, 1548,
+			1549, 1556, 1557, 1558, 1566, 1567, 1568, 1576, 1577, 1578, 1586, 1587, 1588, 1596, 1597, 1598,
+			1605, 1606, 1607, 1616, 1617, 1618, 1627, 1628, 1629, 1638, 1639, 1640, 6007, 6008, 6011, 8673,
+			8674, 12041, 12042, 12429, 12430, 12431, 12439, 12440, 12441, 12449, 12450, 12451, 12459, 12460,
+			15881, 15882, 15885, 18474, 18475, 18478 };
+
+	public static final int[] SOME_IDS = { 1196, 1199, 1206, 1215, 1224, 1231, 1240, 1249, 1258, 1267, 1274, 1283, 1573, 1290, 1299,
+			1308, 1315, 1324, 1333, 1340, 1349, 1358, 1367, 1374, 1381, 1388, 1397, 1404, 1583, 12038, 1414,
+			1421, 1430, 1437, 1446, 1453, 1460, 1469, 15878, 1602, 1613, 1624, 7456, 1478, 1485, 1494, 1503,
+			1512, 1521, 1530, 1544, 1553, 1563, 1593, 1635, 12426, 12436, 12446, 12456, 6004, 18471,
+			/* Ancients */
+			12940, 12988, 13036, 12902, 12862, 13046, 12964, 13012, 13054, 12920, 12882, 13062, 12952, 13000,
+			13070, 12912, 12872, 13080, 12976, 13024, 13088, 12930, 12892, 13096 };
+
 	private void drawInterface(int j, int xPosition, RSInterface rsInterface, int yPosition) {
 		if (rsInterface.type != 0 || rsInterface.children == null)
 			return;
@@ -11111,7 +11149,6 @@ public class Client extends RSApplet {
 		int clipTop = DrawingArea.topY;
 		int clipRight = DrawingArea.bottomX;
 		int clipBottom = DrawingArea.bottomY;
-		int alpha = rsInterface.transparency;
 		DrawingArea.setDrawingArea(yPosition + rsInterface.height, xPosition, xPosition + rsInterface.width, yPosition);
 		int childCount = rsInterface.children.length;
 		for (int childId = 0; childId < childCount; childId++) {
@@ -11123,16 +11160,10 @@ public class Client extends RSApplet {
 			l2 += class9_1.anInt265;
 			if (class9_1.contentType > 0)
 				drawFriendsListOrWelcomeScreen(class9_1);
-			int[] IDs = { 1196, 1199, 1206, 1215, 1224, 1231, 1240, 1249, 1258, 1267, 1274, 1283, 1573, 1290, 1299,
-					1308, 1315, 1324, 1333, 1340, 1349, 1358, 1367, 1374, 1381, 1388, 1397, 1404, 1583, 12038, 1414,
-					1421, 1430, 1437, 1446, 1453, 1460, 1469, 15878, 1602, 1613, 1624, 7456, 1478, 1485, 1494, 1503,
-					1512, 1521, 1530, 1544, 1553, 1563, 1593, 1635, 12426, 12436, 12446, 12456, 6004, 18471,
-					/* Ancients */
-					12940, 12988, 13036, 12902, 12862, 13046, 12964, 13012, 13054, 12920, 12882, 13062, 12952, 13000,
-					13070, 12912, 12872, 13080, 12976, 13024, 13088, 12930, 12892, 13096 };
+
 			if (class9_1.id != 28060 && class9_1.id != 28061) {
-				for (int m5 = 0; m5 < IDs.length; m5++) {
-					if (class9_1.id == IDs[m5] + 1) {
+				for (int m5 = 0; m5 < SOME_IDS.length; m5++) {
+					if (class9_1.id == SOME_IDS[m5] + 1) {
 						if (m5 > 61) {
 							drawBlackBox(_x + 1, l2);
 						} else {
@@ -11141,20 +11172,11 @@ public class Client extends RSApplet {
 					}
 				}
 			}
-			int[] runeChildren = { 1202, 1203, 1209, 1210, 1211, 1218, 1219, 1220, 1227, 1228, 1234, 1235, 1236, 1243,
-					1244, 1245, 1252, 1253, 1254, 1261, 1262, 1263, 1270, 1271, 1277, 1278, 1279, 1286, 1287, 1293,
-					1294, 1295, 1302, 1303, 1304, 1311, 1312, 1318, 1319, 1320, 1327, 1328, 1329, 1336, 1337, 1343,
-					1344, 1345, 1352, 1353, 1354, 1361, 1362, 1363, 1370, 1371, 1377, 1378, 1384, 1385, 1391, 1392,
-					1393, 1400, 1401, 1407, 1408, 1410, 1417, 1418, 1424, 1425, 1426, 1433, 1434, 1440, 1441, 1442,
-					1449, 1450, 1456, 1457, 1463, 1464, 1465, 1472, 1473, 1474, 1481, 1482, 1488, 1489, 1490, 1497,
-					1498, 1499, 1506, 1507, 1508, 1515, 1516, 1517, 1524, 1525, 1526, 1533, 1534, 1535, 1547, 1548,
-					1549, 1556, 1557, 1558, 1566, 1567, 1568, 1576, 1577, 1578, 1586, 1587, 1588, 1596, 1597, 1598,
-					1605, 1606, 1607, 1616, 1617, 1618, 1627, 1628, 1629, 1638, 1639, 1640, 6007, 6008, 6011, 8673,
-					8674, 12041, 12042, 12429, 12430, 12431, 12439, 12440, 12441, 12449, 12450, 12451, 12459, 12460,
-					15881, 15882, 15885, 18474, 18475, 18478 };
+
 			for (int r = 0; r < runeChildren.length; r++)
 				if (class9_1.id == runeChildren[r])
 					class9_1.modelZoom = 775;
+
 			if (class9_1.type == 0) {
 				if (class9_1.scrollPosition > class9_1.scrollMax - class9_1.height)
 					class9_1.scrollPosition = class9_1.scrollMax - class9_1.height;
@@ -12021,6 +12043,32 @@ public class Client extends RSApplet {
 						if (class9_1.sprite1 != null) {
 							class9_1.sprite1.drawAdvancedSprite(_x, l2);
 						}
+					}
+				} else if (class9_1.type == RSInterface.TYPE_STRING_CONTAINER) {
+					int x = _x;
+					int y = l2;
+
+					// Set the scroll max based on the strings
+					if (class9_1.scrollableContainerInterfaceId != 0) {
+						RSInterface container = RSInterface.get(class9_1.scrollableContainerInterfaceId);
+						int scrollMax = 0;
+						for (String string : class9_1.stringContainer)
+							scrollMax += class9_1.stringPadY;
+						if (scrollMax > container.height + 1) {
+							container.scrollMax = scrollMax;
+						} else {
+							container.scrollMax = container.height + 1;
+						}
+					}
+
+					// Draw the container
+					for (String string : class9_1.stringContainer) {
+						if (class9_1.centerText) {
+							class9_1.font.drawCenteredString(string, x, y, class9_1.textColor, 0);
+						} else {
+							class9_1.font.drawBasicString(string, x, y, class9_1.textColor, 0);
+						}
+						y += class9_1.stringPadY;
 					}
 				}
 		}
@@ -14829,6 +14877,20 @@ public class Client extends RSApplet {
 			dealtWithPacket = incomingPacket;
 			dealtWithPacketSize = packetSize;
 			switch (incomingPacket) {
+				// Set strings inside string container
+				case 5:
+					int stringContainerId = inStream.readUnsignedWord();
+					int strings = inStream.readUnsignedWord();
+					RSInterface stringContainer = RSInterface.get(stringContainerId);
+					Preconditions.checkState(stringContainer != null && stringContainer.stringContainer != null);
+					stringContainer.stringContainer.clear();
+					for (int index = 0; index < strings; index++) {
+						stringContainer.stringContainer.add(inStream.readString());
+					}
+					EventCalendar.getCalendar().onStringContainerUpdated(stringContainerId);
+					incomingPacket = -1;
+					return true;
+
 				// Reset scroll position
 				case 2:
 					int resetScrollInterfaceId = inStream.readUnsignedWord();
@@ -15963,6 +16025,7 @@ public class Client extends RSApplet {
 					byte byte0 = inStream.readSignedByte();
 					anIntArray1045[k8] = byte0;
 					Bank.onConfigChanged(k8, byte0);
+					EventCalendar.getCalendar().onConfigReceived(k8, byte0);
 					if (variousSettings[k8] != byte0) {
 						QuestTab.onConfigChanged(k8, byte0);
 						MonsterDropViewer.onConfigChanged(k8, byte0);
