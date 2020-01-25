@@ -902,6 +902,9 @@ public class Interfaces extends RSInterface {
 		addSprite(37301, 0, dir);
 		addHoverButton(37302, dir, 1, 16, 16, "Close", -1, 37303, 1);
 		addHoveredButton(37303, dir, 2, 16, 16, 37304);
+		get(37302).atActionType = 3;
+		get(37303).atActionType = 3;
+
 		addText(37305, "Prestige Manager", tda, 2, 0xFFA500, true, true);
 		addSprite(37306, 6, dir);
 		addText(37307, "Attack:", tda, 2, 0xFFA500, true, true);
