@@ -114,6 +114,7 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i == 2662){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Tournament Manager";
 			entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
 		}
