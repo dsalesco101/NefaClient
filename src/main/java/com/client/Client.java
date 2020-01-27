@@ -9945,10 +9945,11 @@ public class Client extends RSApplet {
 		objectFill(24101, 2851, 2952, 2853, 2952, 10, 0, 0); // Bank
 
 		// Vet
-		addObject(0, 3189, 3784, 0, 10, 0);
-		addObject(0, 3189, 3782, 0, 10, 0);
-		addObject(0, 3188, 3783, 0, 10, 0);
-		addObject(0, 3191, 3784, 0, 10, 0);
+		//addObject(0, 3189, 3784, 0, 10, 0);
+		//addObject(0, 3189, 3782, 0, 10, 0);
+		//addObject(0, 3188, 3783, 0, 10, 0);
+		//addObject(0, 3191, 3784, 0, 10, 0);
+		//addObject(-1, 3189, 3783, 0, 10, 0);
 		/**
 		 * @link objectFill objectId, SWX, SWY, NEX, NEY, type, face, height
 		 */
