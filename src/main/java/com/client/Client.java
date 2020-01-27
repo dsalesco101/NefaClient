@@ -9291,6 +9291,11 @@ public class Client extends RSApplet {
 
 				return;
 			}
+			if (k == 26) {
+				firstLoginMessage = "An error occured while loading your account.";
+				secondLoginMessage = "Please contact support.";
+				return;
+			}
 			if (k == -1) {
 				if (i1 == 0) {
 					if (loginFailures < 2) {
@@ -9313,6 +9318,7 @@ public class Client extends RSApplet {
 				return;
 			}
 		} catch (IOException _ex) {
+			_ex.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Error while generating uid. Skipping step.");
 			e.printStackTrace();
@@ -16527,7 +16533,6 @@ public class Client extends RSApplet {
 	}
 
 	private Sprite[] chatButtons;
-	public String server1;
 	public float LP;
 
 	Client() {
@@ -16545,7 +16550,6 @@ public class Client extends RSApplet {
 		clanChatMode = 0;
 		channelButtonHoverPosition = -1;
 		channelButtonClickPosition = 0;
-		server1 = Configuration.LIVE_SERVER ? "0.0.0.07" : "0.0.0.0";
 		anIntArrayArray825 = new int[104][104];
 		friendsNodeIDs = new int[200];
 		groundArray = new NodeList[4][104][104];
