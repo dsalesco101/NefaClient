@@ -46,9 +46,17 @@ sourceSets {
             srcDir 'runelite/runelite-client/src/main/resources'
         }
     }
+    test {
+        java {
+            srcDir 'src/test/java'
+        }
+    }
 }
 
 dependencies {
+    testImplementation 'org.junit.jupiter:junit-jupiter-api:5.3.1'
+    testRuntimeOnly 'org.junit.jupiter:junit-jupiter-engine:5.3.1'
+
     compile group: 'org.slf4j', name:'slf4j-api', version: '1.7.25'
     compile group: 'com.google.guava', name: 'guava', version: '19.0'
     compile group: 'ch.qos.logback', name: 'logback-classic', version: '1.2.3' 

@@ -34,6 +34,8 @@ public class Configuration {
 	public static int dumpID = 149;
 	public static Boolean DUMP_OTHER = false;
 
+	public static String ERROR_LOG_FILE = "error_log.txt";
+
 	/**
 	 * Used to repack indexes Index 1 = Models Index 2 = Animations Index 3 =
 	 * Sounds/Music Index 4 = Maps You can only do up to 300 files at a time

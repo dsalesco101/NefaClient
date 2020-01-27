@@ -32,6 +32,7 @@ import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStreamReader;
+import java.io.PrintStream;
 import java.lang.reflect.Method;
 import java.net.InetAddress;
 import java.net.MalformedURLException;
@@ -99,6 +100,7 @@ import com.client.graphics.loaders.SpriteLoader3;
 import com.client.graphics.loaders.SpriteLoader4;
 import com.client.sign.Signlink;
 import com.client.utilities.ObjectKey;
+import com.client.utilities.TeeOutputStream;
 import com.client.utilities.settings.Settings;
 import com.client.utilities.settings.SettingsManager;
 import com.google.common.base.Preconditions;
@@ -3766,6 +3768,19 @@ public class Client extends RSApplet {
 	public static Client instance;
 	public static boolean runelite;
 
+	public static String getExceptionLogLocation() {
+		return Signlink.getCacheDirectory() + Configuration.ERROR_LOG_FILE;
+	}
+
+	public static void enableExceptionLogging() {
+		try {
+			TeeOutputStream outputStream = new TeeOutputStream(System.err, new FileOutputStream(getExceptionLogLocation()));
+			System.setErr(new PrintStream(outputStream));
+		} catch (FileNotFoundException e) {
+			e.printStackTrace();
+		}
+	}
+
 	public static void main(String args[]) {
 		getClient(false, args);
 	}
@@ -3791,6 +3806,7 @@ public class Client extends RSApplet {
 				}
 			}
 
+			enableExceptionLogging();
 			server = OnDemandFetcher.serverAddress;
 			nodeID = 1;
 			portOff = 0;
