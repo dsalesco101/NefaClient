@@ -42,12 +42,18 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.EnumSet;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -574,12 +580,11 @@ public class Client extends RSApplet {
 					break;
 			}
 		}
-		// Date date = new Date();
-		// DateFormat dateNow = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
-		DateFormat time = new SimpleDateFormat("h:mm a", Locale.ENGLISH);
-		time.setTimeZone(TimeZone.getTimeZone("GMT+5"));
-		smallText.method389(false, 442, 0xffffff, "Report", 157 + yOffset);
-		// smallText.method389(false, 424, 0xffffff, "Abuse" , 152 + yOffset);
+
+		SimpleDateFormat isoFormat = new SimpleDateFormat("hh:mm:ss a");
+		isoFormat.setTimeZone(timeZone);
+		newSmallFont.drawCenteredString(isoFormat.format(new Date()), 459, 157 + yOffset, 0xffffff, 0);
+
 		smallText.method389(true, 26, 0xffffff, "All", 157 + yOffset);
 		smallText.method389(true, 86, 0xffffff, "Game", 152 + yOffset);
 		smallText.method389(true, 150, 0xffffff, "Public", 152 + yOffset);
@@ -14904,6 +14909,17 @@ public class Client extends RSApplet {
 			dealtWithPacket = incomingPacket;
 			dealtWithPacketSize = packetSize;
 			switch (incomingPacket) {
+				case 6:
+					String timeZoneId = inStream.readString();
+					try {
+						timeZone = TimeZone.getTimeZone(timeZoneId);
+					} catch (Exception e) {
+						e.printStackTrace();
+						timeZone = new GregorianCalendar().getTimeZone();
+					}
+					incomingPacket = -1;
+					return true;
+
 				// Set strings inside string container
 				case 5:
 					int stringContainerId = inStream.readUnsignedWord();
@@ -16700,6 +16716,8 @@ public class Client extends RSApplet {
 		bigY = new int[4000];
 
 	}
+
+	private static TimeZone timeZone = new GregorianCalendar().getTimeZone();
 
 	public int xpCounter;
 	public int expAdded;
