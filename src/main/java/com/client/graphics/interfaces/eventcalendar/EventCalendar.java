@@ -42,12 +42,7 @@ public class EventCalendar extends RSInterface {
     private EventCalendar() {}
 
     public void onStringContainerUpdated(int containerId) {
-        if (containerId == winnerNamesContainerInterfaceId) {
-            get(winnerNumbersContainerInterfaceId).stringContainer.clear();
-            for (int index = 0; index < get(containerId).stringContainer.size(); index++) {
-                get(winnerNumbersContainerInterfaceId).stringContainer.add((index + 1) + ".");
-            }
-        } else if (containerId == participantsNamesContainerInterfaceId) {
+        if (containerId == participantsNamesContainerInterfaceId) {
             get(participantsNumbersContainerInterfaceId).stringContainer.clear();
             for (int index = 0; index < get(containerId).stringContainer.size(); index++) {
                 get(participantsNumbersContainerInterfaceId).stringContainer.add((index + 1) + ".");
