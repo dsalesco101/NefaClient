@@ -9334,7 +9334,6 @@ public class Client extends RSApplet {
 				return;
 			}
 		} catch (IOException _ex) {
-			_ex.printStackTrace();
 		} catch (Exception e) {
 			System.out.println("Error while generating uid. Skipping step.");
 			e.printStackTrace();
