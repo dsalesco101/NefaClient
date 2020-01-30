@@ -1272,39 +1272,18 @@ public class RSInterface {
 
 		addHoverButton(39446, "/Interfaces/Lootingbag/CLOSE", 0, 128, 35, "Close", 0, 36484, 1);
 		addHoveredButton(39447, "/Interfaces/Lootingbag/CLOSE", 1, 128, 35, 36485);
-		rsi.totalChildren(32);
 
+		addItemContainer(39448, 4, 7, 6, 0, false,
+				"Deposit 1", "Deposit 5", "Deposit 10", "Deposit All", "Deposit X");
+
+		rsi.totalChildren(5);
 		int child = 0;
 
 		rsi.child(child++, 39444, 7, 30);// bg
 		rsi.child(child++, 39445, 90, 10);// title
 		rsi.child(child++, 39446, 160, 9); // close button
 		rsi.child(child++, 39447, 160, 9); // close hover
-
-		/**
-		 * Inventory
-		 */
-		final int START_X = 20;
-		int x = START_X;
-		int y = 35;
-		final int X_DIFF = 38;
-		final int Y_DIFF = 30;
-		int id = 39448;
-
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 4; j++) {
-				addItem(id, new String[] { "Deposit 1", "Deposit 5", "Deposit 10", "Deposit All", "Deposit X" });
-				rsi.child(child++, id, x, y);
-				id++;
-				// System.out.println(child);
-				x += X_DIFF;
-			}
-
-			x = START_X;
-			y += Y_DIFF;
-
-		}
-		// System.out.println("Total children " + child);
+		rsi.child(child++, 39448, 16, 24); // close hover
 	}
 
 	public static void lootingBag(TextDrawingArea[] tda) {
@@ -1316,8 +1295,11 @@ public class RSInterface {
 		addHoveredButton(39346, "/Interfaces/Lootingbag/CLOSE", 1, 128, 35, 36485);
 		addHoverText(39347, "Bank All", "Bank all items", tda, 0, 0xff9040, false, true, 40);
 		addText(39348, "Value: 0 coins", tda, 0, 0xFF9900, true, true);
-		rsi.totalChildren(34);
 
+		addItemContainer(39349, 4, 7, 6, 0, false,
+				"Remove 1", "Remove 5", "Remove 10", "Remove All", "Remove X");
+
+		rsi.totalChildren(7);
 		int child = 0;
 
 		rsi.child(child++, 39343, 7, 19);// bg
@@ -1326,30 +1308,8 @@ public class RSInterface {
 		rsi.child(child++, 39346, 160, 1); // close hover
 		rsi.child(child++, 39347, 10, 4); // Bank All
 		rsi.child(child++, 39348, 92, 250); // Total Value
+		rsi.child(child++, 39349, 16, 24); // Total Value
 
-		/**
-		 * Inventory
-		 */
-		final int START_X = 15;
-		int x = START_X;
-		int y = 21;
-		final int X_DIFF = 1;
-		final int Y_DIFF = 2;
-		int id = 39349;
-
-		for (int i = 0; i < 7; i++) {
-			for (int j = 0; j < 4; j++) {
-				addItem(id, new String[] { "Remove 1", "Remove 5", "Remove 10", "Remove All", "Remove X" });
-				rsi.child(child++, id, x, y);
-				id++;
-				// System.out.println(child);
-				x += X_DIFF;
-			}
-
-			x = START_X;
-			y += Y_DIFF;
-
-		}
 	}
 
 	public static void addItemContainerAutoScrollable(int childId, int width, int height, int invSpritePadX, int invSpritePadY, boolean addPlaceholderItems, int invAutoScrollInterfaceId, String...options) {

@@ -15759,8 +15759,10 @@ public class Client extends RSApplet {
 					return true;
 
 				case 142:
-					int j6 = inStream.method434();
-					method60(j6);
+					int j6 = inStream.readUnsignedWord();
+					if (j6 != 0) {
+						method60(j6);
+					}
 					if (backDialogID != -1) {
 						backDialogID = -1;
 						inputTaken = true;
