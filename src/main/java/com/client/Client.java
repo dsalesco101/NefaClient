@@ -42,12 +42,18 @@ import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
+import java.time.LocalDate;
+import java.time.LocalDateTime;
+import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
+import java.util.Date;
 import java.util.EnumSet;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
@@ -276,6 +282,7 @@ public class Client extends RSApplet {
 			}
 			return true;
 		} catch (Exception e) {
+			e.printStackTrace();
 			return true;
 		}
 	}
@@ -574,12 +581,11 @@ public class Client extends RSApplet {
 					break;
 			}
 		}
-		// Date date = new Date();
-		// DateFormat dateNow = new SimpleDateFormat("dd MMMM yyyy", Locale.ENGLISH);
-		DateFormat time = new SimpleDateFormat("h:mm a", Locale.ENGLISH);
-		time.setTimeZone(TimeZone.getTimeZone("GMT+5"));
-		smallText.method389(false, 442, 0xffffff, "Report", 157 + yOffset);
-		// smallText.method389(false, 424, 0xffffff, "Abuse" , 152 + yOffset);
+
+		SimpleDateFormat isoFormat = new SimpleDateFormat("hh:mm:ss a");
+		isoFormat.setTimeZone(timeZone);
+		newSmallFont.drawCenteredString(isoFormat.format(new Date()), 459, 157 + yOffset, 0xffffff, 0);
+
 		smallText.method389(true, 26, 0xffffff, "All", 157 + yOffset);
 		smallText.method389(true, 86, 0xffffff, "Game", 152 + yOffset);
 		smallText.method389(true, 150, 0xffffff, "Public", 152 + yOffset);
@@ -2771,7 +2777,7 @@ public class Client extends RSApplet {
 		Rasterizer.anIntArray1472 = anIntArray1181;
 		if (currentScreenMode == ScreenMode.FIXED) {
 			tabAreaFixed.drawSprite(0, 0);
-			if (invOverlayInterfaceID == -1)
+			if (invOverlayInterfaceID == 0)
 				drawTabs();
 
 		} else {
@@ -2782,11 +2788,11 @@ public class Client extends RSApplet {
 			tabAreaResizable[0].drawSpriteWithOpacity(Client.currentGameWidth - 204,
 					Client.currentGameHeight - 275 - (stackTabs() ? 73 : 37), 220);
 
-			if (invOverlayInterfaceID == -1)
+			if (invOverlayInterfaceID == 0)
 				drawTabs();
 		}
 		int y = stackTabs() ? 73 : 37;
-		if (invOverlayInterfaceID != -1) {
+		if (invOverlayInterfaceID != 0) {
 			drawInterface(0, currentScreenMode == ScreenMode.FIXED ? 31 : currentGameWidth - 197,
 					RSInterface.interfaceCache[invOverlayInterfaceID],
 					currentScreenMode == ScreenMode.FIXED ? 37 : currentGameHeight - 275 - y + 10);
@@ -8807,7 +8813,7 @@ public class Client extends RSApplet {
 			anInt1315 = 0;
 			if (currentScreenMode == ScreenMode.FIXED) {
 				if (mouseX > 516 && mouseY > 205 && mouseX < 765 && mouseY < 466) {
-					if (invOverlayInterfaceID != -1) {
+					if (invOverlayInterfaceID != 0) {
 						buildInterfaceMenu(547, RSInterface.interfaceCache[invOverlayInterfaceID], mouseX, 205, mouseY,
 								0);
 					} else if (tabInterfaceIDs[tabID] != -1) {
@@ -8819,7 +8825,7 @@ public class Client extends RSApplet {
 				int y = stackTabs() ? 73 : 37;
 				if (mouseX > currentGameWidth - 197 && mouseY > currentGameHeight - 275 - y + 10
 						&& mouseX < currentGameWidth - 7 && mouseY < currentGameHeight - y - 5) {
-					if (invOverlayInterfaceID != -1) {
+					if (invOverlayInterfaceID != 0) {
 						buildInterfaceMenu(currentGameWidth - 197, RSInterface.interfaceCache[invOverlayInterfaceID],
 								mouseX, currentGameHeight - 275 - y + 10, mouseY, 0);
 					} else if (tabInterfaceIDs[tabID] != -1) {
@@ -9135,7 +9141,7 @@ public class Client extends RSApplet {
 				dialogID = -1;
 				backDialogID = -1;
 				openInterfaceID = -1;
-				invOverlayInterfaceID = -1;
+				invOverlayInterfaceID = 0;
 				openWalkableWidgetID = -1;
 				aBoolean1149 = false;
 				tabID = 3;
@@ -10913,7 +10919,7 @@ public class Client extends RSApplet {
 
 		if (menuOpen && menuScreenArea == 1)
 			needDrawTabArea = true;
-		if (invOverlayInterfaceID != -1) {
+		if (invOverlayInterfaceID != 0) {
 			boolean flag1 = method119(tickDelta, invOverlayInterfaceID);
 			if (flag1)
 				needDrawTabArea = true;
@@ -14817,8 +14823,8 @@ public class Client extends RSApplet {
 	}
 
 	public void sendFrame219() {
-		if (invOverlayInterfaceID != -1) {
-			invOverlayInterfaceID = -1;
+		if (invOverlayInterfaceID != 0) {
+			invOverlayInterfaceID = 0;
 			needDrawTabArea = true;
 			tabAreaAltered = true;
 		}
@@ -14904,6 +14910,17 @@ public class Client extends RSApplet {
 			dealtWithPacket = incomingPacket;
 			dealtWithPacketSize = packetSize;
 			switch (incomingPacket) {
+				case 6:
+					String timeZoneId = inStream.readString();
+					try {
+						timeZone = TimeZone.getTimeZone(timeZoneId);
+					} catch (Exception e) {
+						e.printStackTrace();
+						timeZone = new GregorianCalendar().getTimeZone();
+					}
+					incomingPacket = -1;
+					return true;
+
 				// Set strings inside string container
 				case 5:
 					int stringContainerId = inStream.readUnsignedWord();
@@ -15781,8 +15798,10 @@ public class Client extends RSApplet {
 					return true;
 
 				case 142:
-					int j6 = inStream.method434();
-					method60(j6);
+					int j6 = inStream.readUnsignedWord();
+					if (j6 != 0) {
+						method60(j6);
+					}
 					if (backDialogID != -1) {
 						backDialogID = -1;
 						inputTaken = true;
@@ -15988,8 +16007,8 @@ public class Client extends RSApplet {
 				case 97:
 					int l7 = inStream.readUnsignedWord();
 					method60(l7);
-					if (invOverlayInterfaceID != -1) {
-						invOverlayInterfaceID = -1;
+					if (invOverlayInterfaceID != 0) {
+						invOverlayInterfaceID = 0;
 						needDrawTabArea = true;
 						tabAreaAltered = true;
 					}
@@ -16086,8 +16105,8 @@ public class Client extends RSApplet {
 					return true;
 
 				case 219:
-					if (invOverlayInterfaceID != -1) {
-						invOverlayInterfaceID = -1;
+					if (invOverlayInterfaceID != 0) {
+						invOverlayInterfaceID = 0;
 						needDrawTabArea = true;
 						tabAreaAltered = true;
 					}
@@ -16155,8 +16174,8 @@ public class Client extends RSApplet {
 				case 164:
 					int j9 = inStream.method434();
 					method60(j9);
-					if (invOverlayInterfaceID != -1) {
-						invOverlayInterfaceID = -1;
+					if (invOverlayInterfaceID != 0) {
+						invOverlayInterfaceID = 0;
 						needDrawTabArea = true;
 						tabAreaAltered = true;
 					}
@@ -16519,8 +16538,8 @@ public class Client extends RSApplet {
 
 	public void clearTopInterfaces() {
 		stream.createFrame(130);
-		if (invOverlayInterfaceID != -1) {
-			invOverlayInterfaceID = -1;
+		if (invOverlayInterfaceID != 0) {
+			invOverlayInterfaceID = 0;
 			needDrawTabArea = true;
 			aBoolean1149 = false;
 			tabAreaAltered = true;
@@ -16679,7 +16698,7 @@ public class Client extends RSApplet {
 		reportAbuseInterfaceID = -1;
 		aClass19_1179 = new NodeList();
 		anInt1184 = 128;
-		invOverlayInterfaceID = -1;
+		invOverlayInterfaceID = 0;
 		stream = Stream.create();
 		menuActionName = new String[500];
 		anIntArray1203 = new int[5];
@@ -16700,6 +16719,8 @@ public class Client extends RSApplet {
 		bigY = new int[4000];
 
 	}
+
+	private static TimeZone timeZone = new GregorianCalendar().getTimeZone();
 
 	public int xpCounter;
 	public int expAdded;
