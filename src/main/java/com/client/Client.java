@@ -3801,7 +3801,6 @@ public class Client extends RSApplet {
 				switch (arg) {
 					case "--developer":
 						Configuration.developerMode = true;
-						OnDemandFetcher.serverAddress = "127.0.0.1";
 						System.out.println("Developer mode enabled.");
 						break;
 					case "localhost":
