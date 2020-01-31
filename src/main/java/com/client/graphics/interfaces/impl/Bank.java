@@ -334,7 +334,10 @@ public class Bank extends RSInterface {
         }
 
         // Remove old container
-        Preconditions.checkState(RSInterface.deleteChild(OLD_CONTAINER_INTERFACE_ID, bankScrollable), "Cannot delete old container.");
+        if (!RSInterface.deleteChild(OLD_CONTAINER_INTERFACE_ID, bankScrollable)) {
+            System.out.println("Skipping bank reload.");
+            return;
+        }
 
         // Empty text to hide other containers while not in main tab
         addText(EMPTY_CHILD, "", tda, 1, 0xE68A00, true, true);

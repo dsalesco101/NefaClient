@@ -1268,47 +1268,47 @@ public class RSInterface {
 	public static void lootingBagAdd(TextDrawingArea[] tda) {
 		RSInterface rsi = addTabInterface(39443);
 		addSprite(39444, 0, "/Interfaces/Lootingbag/SPRITE");
-		addText(39445, "Add items", tda, 2, 16750623, true, true);
+		addText(39445, "Deposit Items", tda, 2, 16750623, true, true);
 
 		addHoverButton(39446, "/Interfaces/Lootingbag/CLOSE", 0, 128, 35, "Close", 0, 36484, 1);
 		addHoveredButton(39447, "/Interfaces/Lootingbag/CLOSE", 1, 128, 35, 36485);
 
-		addItemContainer(39448, 4, 7, 6, 0, false,
+		addItemContainer(39448, 4, 7, 8, 0, true,
 				"Deposit 1", "Deposit 5", "Deposit 10", "Deposit All", "Deposit X");
 
 		rsi.totalChildren(5);
 		int child = 0;
 
-		rsi.child(child++, 39444, 7, 30);// bg
-		rsi.child(child++, 39445, 90, 10);// title
-		rsi.child(child++, 39446, 160, 9); // close button
-		rsi.child(child++, 39447, 160, 9); // close hover
-		rsi.child(child++, 39448, 16, 24); // close hover
+		rsi.child(child++, 39444, 7, 24);// bg
+		rsi.child(child++, 39445, 90, 4);// title
+		rsi.child(child++, 39446, 167, 4); // close button
+		rsi.child(child++, 39447, 167, 4); // close hover
+		rsi.child(child++, 39448, 16, 27); // item container
 	}
 
 	public static void lootingBag(TextDrawingArea[] tda) {
 		RSInterface rsi = addTabInterface(39342);
 		addSprite(39343, 0, "/Interfaces/Lootingbag/SPRITE");
-		addText(39344, "Looting bag", tda, 2, 16750623, true, true);
+		addText(39344, "Looting Bag", tda, 2, 16750623, true, true);
 
 		addHoverButton(39345, "/Interfaces/Lootingbag/CLOSE", 0, 128, 35, "Close", 0, 36484, 1);
 		addHoveredButton(39346, "/Interfaces/Lootingbag/CLOSE", 1, 128, 35, 36485);
 		addHoverText(39347, "Bank All", "Bank all items", tda, 0, 0xff9040, false, true, 40);
 		addText(39348, "Value: 0 coins", tda, 0, 0xFF9900, true, true);
 
-		addItemContainer(39349, 4, 7, 6, 0, false,
+		addItemContainer(39349, 4, 7, 8, 0, true,
 				"Remove 1", "Remove 5", "Remove 10", "Remove All", "Remove X");
 
 		rsi.totalChildren(7);
 		int child = 0;
 
-		rsi.child(child++, 39343, 7, 19);// bg
-		rsi.child(child++, 39344, 107, 1);// title
-		rsi.child(child++, 39345, 160, 1); // close button
-		rsi.child(child++, 39346, 160, 1); // close hover
-		rsi.child(child++, 39347, 10, 4); // Bank All
-		rsi.child(child++, 39348, 92, 250); // Total Value
-		rsi.child(child++, 39349, 16, 24); // Total Value
+		rsi.child(child++, 39343, 7, 18);// bg
+		rsi.child(child++, 39344, 90, 0);// title
+		rsi.child(child++, 39345, 167, 0); // close button
+		rsi.child(child++, 39346, 167, 0); // close hover
+		rsi.child(child++, 39347, 20, 250); // Bank All
+		rsi.child(child++, 39348, 124, 250); // Total Value
+		rsi.child(child++, 39349, 16, 24); // item container
 
 	}
 

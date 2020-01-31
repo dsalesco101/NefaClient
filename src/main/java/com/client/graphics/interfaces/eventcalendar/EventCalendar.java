@@ -173,9 +173,6 @@ public class EventCalendar extends RSInterface {
 
         container.child(100, names.id, 76, 12);
         container.child(101, numbers.id, 10, 12);
-        if (Configuration.developerMode) {
-            System.out.println("Name container: " + names.id);
-        }
 
         for (int index = 0; index < 100; index++) {
             numbers.stringContainer.add((index + 1) + ".");
