@@ -4,6 +4,7 @@ public class Configuration {
 
 	public static boolean developerMode = false;
 	public static boolean newFonts = false;
+	public static String clientTitle = "";
 
 	/**
 	 * Attack option priorities 0 -> Depends on combat level 1 -> Always right-click

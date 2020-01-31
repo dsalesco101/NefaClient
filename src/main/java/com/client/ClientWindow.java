@@ -17,7 +17,7 @@ public class ClientWindow extends Client implements ActionListener, WindowListen
 			//icon = new ImageIcon(new URL("https://i.stack.imgur.com/KSnus.gif")).getImage();
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
-			frame = new JFrame(Configuration.CLIENT_TITLE);
+			frame = new JFrame(Configuration.clientTitle);
 			frame.setLayout(new BorderLayout());
 			setFocusTraversalKeysEnabled(false);
 			frame.setResizable(false);

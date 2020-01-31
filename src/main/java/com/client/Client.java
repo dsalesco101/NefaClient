@@ -3797,23 +3797,40 @@ public class Client extends RSApplet {
 		try {
 			Client.runelite = runelite;
 			Client.args = args;
-			for (String arg : args) {
-				switch (arg) {
-					case "--developer":
-						Configuration.developerMode = true;
-						System.out.println("Developer mode enabled.");
-						break;
-					case "localhost":
-						OnDemandFetcher.serverAddress = "127.0.0.1";
-						System.out.println("Localhost client enabled.");
-						break;
-					case "test_server":
-						port = Configuration.TEST_PORT;
-						System.out.println("Test server enabled.");
-						break;
+			StringBuilder windowTitleBuilder = new StringBuilder();
+			windowTitleBuilder.append(Configuration.CLIENT_TITLE);
+
+			if (args.length > 0) {
+				StringBuilder configurationBuilder = new StringBuilder();
+				configurationBuilder.append("[");
+
+				for (int index = 0; index < args.length; index++) {
+					configurationBuilder.append(args[index].replace("--", ""));
+					if (index != args.length - 1)
+						configurationBuilder.append(" ");
+					switch (args[index]) {
+						case "--developer":
+							Configuration.developerMode = true;
+							System.out.println("Developer mode enabled.");
+							break;
+						case "localhost":
+							OnDemandFetcher.serverAddress = "127.0.0.1";
+							System.out.println("Localhost client enabled.");
+							break;
+						case "test_server":
+							port = Configuration.TEST_PORT;
+							System.out.println("Test server enabled.");
+							break;
+					}
 				}
+
+				// Build the client title with configuration arguments
+				configurationBuilder.append("]");
+				windowTitleBuilder.append(" ");
+				windowTitleBuilder.append(configurationBuilder.toString().trim());
 			}
 
+			Configuration.clientTitle = windowTitleBuilder.toString();
 			enableExceptionLogging();
 			server = OnDemandFetcher.serverAddress;
 			nodeID = 1;
