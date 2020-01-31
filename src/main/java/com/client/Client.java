@@ -436,7 +436,6 @@ public class Client extends RSApplet {
 	private int modifiableXValue = 1; // u dont care if it starts at 1? Can't see a real problem with it :P kk
 	private int achievementCutoff = 100;
 	private Sprite[] minimapIcons = new Sprite[2];
-	public int port = Configuration.PORT; // ? 5555 : worldSelect == true ? 5555 : 43594;
 	private String macAddress;
 
 	public static void dumpModels() {
@@ -3808,6 +3807,10 @@ public class Client extends RSApplet {
 					case "localhost":
 						OnDemandFetcher.serverAddress = "127.0.0.1";
 						System.out.println("Localhost client enabled.");
+						break;
+					case "test_server":
+						port = Configuration.TEST_PORT;
+						System.out.println("Test server enabled.");
 						break;
 				}
 			}
@@ -17144,7 +17147,7 @@ public class Client extends RSApplet {
 	private static int anInt1288;
 	public static int anInt1290;
 	public static String server = "162.252.8.137";
-	//public static String server = "0.0.0.0";
+	public static int port = Configuration.PORT;
 	public static boolean controlIsDown;
 	public int drawCount;
 	public int fullscreenInterfaceID;
