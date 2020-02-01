@@ -34,61 +34,76 @@ public final class NpcDefinition {
 		entityDef.readValues(stream);
 
 		if (i == 7913) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Iron man shop keeper";
 			entityDef.description = "A shop specifically for iron men.";
 		}
 		if (i == 8906) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Santa's little elf";
 			entityDef.description = "A helper sent from santa himself.";
 			entityDef.actions = new String[] { "Talk-To", null, "Christmas Shop", "Return-Items", null };
 		}
 		if (i == 954) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Crystal Seed Trader";
 			entityDef.description = "Use a seed on me to get a Crystal Bow.";
 					
 		}
 		if (i == 6970) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Theif";
 			entityDef.actions = new String[] { null, null, "Pickpocket",  null,  null };
 		}
 		if (i == 8761) {
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
 		}
 		if (i == 7954) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Achievement Master";
 			entityDef.actions = new String[] { "Trade", null, "Open Achievements", null, null, };
 
 		}
 		if (i == 5870) {
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
 		}
 		if (i == 1013) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Gambler Shop";
 			entityDef.description = "A shop specifically for gamblers.";
 		}
 		if (i == 315) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "PKP Manager";
 		}
 		if (i == 13) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Referral Tutor";
 			entityDef.description = "He Manages all the sovark referrals.";
 		}
 		if (i == 5293) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Elven Keeper";
 		}
 		if(i==3218 || i ==3217){
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==2897){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Trading Post Manager";
 			entityDef.actions = new String[] { "Open", null, "Collect", null, null };
 		}
 		if(i==1306){
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Make-over", null, null, null, null };
 		}
 		if(i==3257){
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==1011){
@@ -97,19 +112,23 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Info", null, "Gamble", null, null };
 		}
 		if(i==3248){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Sovarks Wizard";
 			entityDef.actions = new String[] { "Teleport", null, "Previous Location", null, null };
 		}
 		if(i==1520){
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Small Net", null, "Harpoon", null, null };
 		}
 		if(i==8920){
+			
 			entityDef.actions = new String[] { null, "Attack", null, null, null };
 		}
 		if(i==8921){
 			entityDef.name = "Crystal Whirlwind";
 		}
 		if(i==9120){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Donator Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
@@ -119,14 +138,17 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Open-Shop", null, null, null, null };
 		}
 		if(i==603){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Captain Kraken";
 			entityDef.actions = new String[] { "Talk-to", null, null, null, null };
 		}
 		if(i==7041){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Ticket Exchange";
 			entityDef.actions = new String[] { "Exchange", null, null, null, null };
 		}
 		if(i==3894){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Sigmund The Merchant";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
@@ -136,65 +158,80 @@ public final class NpcDefinition {
 		    entityDef.actions[0] = null;
 		}
 		if(i==9011){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Vote Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==1933){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Mills";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==8819){
+			entityDef.combatLevel = 0;
 			entityDef.name = "PVM Point Shop";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==8635){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Melee Shop";
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==8636){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Range Shop";
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==8637){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Mage Shop";
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==8688){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Fat Tony";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==7769){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Shop Keeper";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==1501){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Hunter Store";
 			entityDef.actions = new String[] { null, null, null, null, "Trade" };
 		}
 		if(i==2913){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Fishing Store";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==5809){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Crafting and Tanner";
 			entityDef.actions = new String[] { "Tan", null, "Trade", null, null };
 		}
 		if(i==555){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Sell Me Store";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==9168){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Flex";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if(i==4921){
+			entityDef.combatLevel = 0;
 			entityDef.name = "Supplies";
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
 		if (i == 5314) {
+			entityDef.combatLevel = 0;
 			entityDef.name = "Mystical Wizard";
 			entityDef.actions = new String[] { "Teleport", "Previous Location", null, null, null };
 			entityDef.description = "This wizard has the power to teleport you to many locations.";
@@ -218,18 +255,23 @@ public final class NpcDefinition {
 			entityDef.anInt91 = 100;
 		}
 		if (i == 8203 && i == 6637 && i == 6638) {
+
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, null, "Pick-Up", "Metamorphosis" };
 		}
 		if (i == 8492 || i == 8493 || i == 8494 || i == 8495) {
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
 		if (i == 8737 || i == 8738) {
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
 		if (i == 326 || i == 327) {
+			entityDef.combatLevel = 0;
 			entityDef.anInt86 = 85;
 			entityDef.anInt91 = 85;
 			entityDef.name = "Vote Pet";
@@ -237,6 +279,7 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
 		if (i >= 7354 && i <=7367) {
+			entityDef.combatLevel = 0;
 			entityDef.actions = new String[5];
 			entityDef.actions = new String[] { "Talk-to", null, "Pick-Up", "Metamorphosis", null };
 		}
