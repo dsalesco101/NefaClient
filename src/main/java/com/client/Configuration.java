@@ -4,6 +4,7 @@ public class Configuration {
 
 	public static boolean developerMode = false;
 	public static boolean newFonts = false;
+	public static String clientTitle = "";
 
 	/**
 	 * Attack option priorities 0 -> Depends on combat level 1 -> Always right-click
@@ -29,6 +30,7 @@ public class Configuration {
 	public static final int CLIENT_VERSION = 131;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
+	public static final int TEST_PORT = 43595;
 
 	public static Boolean DUMP_DATA = false;
 	public static int dumpID = 149;

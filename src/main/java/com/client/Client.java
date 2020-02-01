@@ -436,7 +436,6 @@ public class Client extends RSApplet {
 	private int modifiableXValue = 1; // u dont care if it starts at 1? Can't see a real problem with it :P kk
 	private int achievementCutoff = 100;
 	private Sprite[] minimapIcons = new Sprite[2];
-	public int port = Configuration.PORT; // ? 5555 : worldSelect == true ? 5555 : 43594;
 	private String macAddress;
 
 	public static void dumpModels() {
@@ -3798,20 +3797,40 @@ public class Client extends RSApplet {
 		try {
 			Client.runelite = runelite;
 			Client.args = args;
-			for (String arg : args) {
-				switch (arg) {
-					case "--developer":
-						Configuration.developerMode = true;
-						OnDemandFetcher.serverAddress = "127.0.0.1";
-						System.out.println("Developer mode enabled.");
-						break;
-					case "localhost":
-						OnDemandFetcher.serverAddress = "127.0.0.1";
-						System.out.println("Localhost client enabled.");
-						break;
+			StringBuilder windowTitleBuilder = new StringBuilder();
+			windowTitleBuilder.append(Configuration.CLIENT_TITLE);
+
+			if (args.length > 0) {
+				StringBuilder configurationBuilder = new StringBuilder();
+				configurationBuilder.append("[");
+
+				for (int index = 0; index < args.length; index++) {
+					configurationBuilder.append(args[index].replace("--", ""));
+					if (index != args.length - 1)
+						configurationBuilder.append(" ");
+					switch (args[index]) {
+						case "--developer":
+							Configuration.developerMode = true;
+							System.out.println("Developer mode enabled.");
+							break;
+						case "localhost":
+							OnDemandFetcher.serverAddress = "127.0.0.1";
+							System.out.println("Localhost client enabled.");
+							break;
+						case "test_server":
+							port = Configuration.TEST_PORT;
+							System.out.println("Test server enabled.");
+							break;
+					}
 				}
+
+				// Build the client title with configuration arguments
+				configurationBuilder.append("]");
+				windowTitleBuilder.append(" ");
+				windowTitleBuilder.append(configurationBuilder.toString().trim());
 			}
 
+			Configuration.clientTitle = windowTitleBuilder.toString();
 			enableExceptionLogging();
 			server = OnDemandFetcher.serverAddress;
 			nodeID = 1;
@@ -17144,7 +17163,7 @@ public class Client extends RSApplet {
 	private static int anInt1288;
 	public static int anInt1290;
 	public static String server = "162.252.8.137";
-	//public static String server = "0.0.0.0";
+	public static int port = Configuration.PORT;
 	public static boolean controlIsDown;
 	public int drawCount;
 	public int fullscreenInterfaceID;

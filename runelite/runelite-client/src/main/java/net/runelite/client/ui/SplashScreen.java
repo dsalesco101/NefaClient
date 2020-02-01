@@ -68,7 +68,7 @@ public class SplashScreen extends JFrame implements ActionListener
 
 	private SplashScreen() throws IOException
 	{
-		setTitle(Configuration.CLIENT_TITLE);
+		setTitle(Configuration.clientTitle);
 
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setUndecorated(true);

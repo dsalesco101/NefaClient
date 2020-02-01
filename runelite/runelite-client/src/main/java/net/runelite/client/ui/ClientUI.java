@@ -288,7 +288,7 @@ public class ClientUI
 				return false;
 			}
 
-			frame.setTitle(Configuration.CLIENT_TITLE);
+			frame.setTitle(Configuration.clientTitle);
 			return true;
 		});
 	}
@@ -317,7 +317,7 @@ public class ClientUI
 			// Try to enable fullscreen on OSX
 			//OSXUtil.tryEnableFullscreen(frame);
 
-			frame.setTitle(Configuration.CLIENT_TITLE);
+			frame.setTitle(Configuration.clientTitle);
 			frame.setIconImage(ICON);
 			frame.getLayeredPane().setCursor(Cursor.getDefaultCursor()); // Prevent substance from using a resize cursor for pointing
 			frame.setLocationRelativeTo(frame.getOwner());
@@ -849,12 +849,12 @@ public class ClientUI
 
 			if (player != null && player.getName() != null)
 			{
-				frame.setTitle(Configuration.CLIENT_TITLE);
+				frame.setTitle(Configuration.clientTitle);
 			}
 		}
 		else
 		{
-			frame.setTitle(Configuration.CLIENT_TITLE);
+			frame.setTitle(Configuration.clientTitle);
 		}
 
 		if (frame.isAlwaysOnTopSupported())
