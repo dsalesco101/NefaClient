@@ -9673,7 +9673,7 @@ public class Client extends RSApplet {
 			return;
 		}
 		if (spellSelected == 1) {
-			if ((spellUsableOn & 2) == 2) {
+			if ((spellUsableOn & 2) == 2 && entityDef.combatLevel != 0) {
 				menuActionName[menuActionRow] = spellTooltip + " @yel@" + s;
 				menuActionID[menuActionRow] = 413;
 				menuActionCmd1[menuActionRow] = i;
