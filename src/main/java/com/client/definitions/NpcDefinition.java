@@ -71,6 +71,12 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
 
 		}
+		if (i == 3400) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Giveaway Manager";
+			entityDef.actions = new String[] { "Open-manager", null, null, null, null };
+
+		}
 		if (i == 1013) {
 			entityDef.combatLevel = 0;
 			entityDef.name = "Gambler Shop";
