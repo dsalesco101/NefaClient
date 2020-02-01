@@ -55,6 +55,7 @@ final class ClientPanel extends JPanel
 		//client.start();
 
 		add(client, BorderLayout.CENTER);
+		client.setFocusTraversalKeysEnabled(false);
 
 		// This causes the whole game frame to be redrawn each frame instead
 		// of only the viewport, so we can hook to MainBufferProvider#draw
