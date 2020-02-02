@@ -27,7 +27,7 @@ public class Configuration {
 	public static long fogDelay = 500;
 	public static final String CLIENT_TITLE = "Sovark";
 
-	public static final int CLIENT_VERSION = 133;//updateversion
+	public static final int CLIENT_VERSION = 134;//updateversion
 	public static Boolean LIVE_SERVER = true;
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
@@ -48,7 +48,7 @@ public class Configuration {
 	public static boolean repackIndexOne = false, repackIndexTwo = false, repackIndexThree = false,
 			repackIndexFour = false;
 
-	public static final String CACHE_LINK = "https://www.dropbox.com/s/boupnr8r1dgrbwb/cache.zip?dl=1";
+	public static final String CACHE_LINK = "https://www.dropbox.com/s/8npjify2ecgck83/cache.zip?dl=1";
 	
 	public static final String VERSION_URL = "https://www.dropbox.com/s/gnjt0cpth9un6vk/version.txt?dl=1";
 	
