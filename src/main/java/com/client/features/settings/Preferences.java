@@ -59,6 +59,7 @@ public class Preferences {
     public ScreenMode mode = ScreenMode.FIXED;
     public int screenWidth;
     public int screenHeight;
+    public int dragTime = 5;
 
     public Preferences() { }
 
