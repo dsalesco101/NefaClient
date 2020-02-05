@@ -402,6 +402,11 @@ public final class ItemDefinition {
 				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
 				itemDef.description = "I can see some coins inside.";
 				break;
+			case 10835:
+				itemDef.name = "Buldging Coin Bag";
+				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
+				itemDef.description = "I can see some coins inside.";
+				break;
 			case 15098:
 				itemDef.name = "Dice (up to 100)";
 				itemDef.description = "A 100-sided dice.";
