@@ -114,6 +114,10 @@ import org.apache.commons.lang3.tuple.Pair;
 
 public class Client extends RSApplet {
 
+    public int getDragSetting(int interfaceId) {
+        return interfaceId == 3214 ? Preferences.getPreferences().dragTime : 5;
+    }
+
 	public void method456() {
 		int[] ai = new int[9];
 		for (int i8 = 0; i8 < 9; i8++) {
@@ -4295,7 +4299,7 @@ public class Client extends RSApplet {
 				if (activeInterfaceType == 3)
 					inputTaken = true;
 				activeInterfaceType = 0;
-				if (aBoolean1242 && anInt989 >= 12) {
+				if (aBoolean1242 && anInt989 >= getDragSetting(draggingItemInterfaceId)) {
 					lastActiveInvInterface = -1;
 					processRightClick();
 
@@ -7459,6 +7463,23 @@ public class Client extends RSApplet {
 							}
 						}
 
+						if (inputString.toLowerCase().startsWith("::drag")) {
+                            try {
+                                int amount = Integer.parseInt(inputString.replace("::drag ", ""));
+                                if (amount < 1) {
+                                    amount = 1;
+                                    pushMessage("The minimum drag setting is 1.");
+                                } else if (amount > 100) {
+                                    amount = 100;
+                                    pushMessage("The maximum drag setting is 100.");
+                                }
+                                Preferences.getPreferences().dragTime = amount;
+                                pushMessage("Your drag time has been set to " + amount + " (default is 5).");
+                            } catch (Exception e) {
+                                pushMessage("Invalid format, here's an example: [::drag 5]");
+                            }
+                        }
+
 						if (myPlayer.hasRightsOtherThan(PlayerRights.PLAYER)) {
 							if (inputString.startsWith("//setspecto")) {
 								int amt = Integer.parseInt(inputString.substring(12));
@@ -8545,6 +8566,10 @@ public class Client extends RSApplet {
 			}
 		}
 	}
+
+    public void pushMessage(String s) {
+        pushMessage(s, 0, "");
+    }
 
 	public void pushMessage(String s, int i, String s1) {
 		if (i == 0 && dialogID != -1) {
@@ -11392,7 +11417,7 @@ public class Client extends RSApplet {
 												k6 = 0;
 											if (j7 < 5 && j7 > -5)
 												j7 = 0;
-											if (anInt989 < 12) {
+											if (anInt989 < getDragSetting(class9_1.id)) {
 												k6 = 0;
 												j7 = 0;
 											}

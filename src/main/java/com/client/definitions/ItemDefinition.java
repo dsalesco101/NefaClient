@@ -162,6 +162,8 @@ public final class ItemDefinition {
 				itemDef.value = 1930;
 				break;
 			case 12007:
+			case 22106:
+			case 12936:
 				itemDef.inventoryOptions = new String[] { null, null, "Open", null, "Drop" };
 				break;
 			case 21262:
