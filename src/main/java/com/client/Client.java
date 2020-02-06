@@ -6773,6 +6773,7 @@ public class Client extends RSApplet {
 		chatButtons = null;
 		mapArea = null;
 		channelButtons = null;
+		venomOrb = null;
 		/**/
 
 		magicAuto = null;
@@ -10179,6 +10180,7 @@ public class Client extends RSApplet {
 			infinity = new Sprite("infinity");
 			chatArea = new Sprite("Gameframe/chatarea");
 			channelButtons = new Sprite("Gameframe/channelbuttons");
+			venomOrb = new Sprite("orbs/venom");
 
 			for (int index = 0; index < smallXpSprites.length; index++) {
 				smallXpSprites[index] = new Sprite("expdrop/" + index);
@@ -13534,8 +13536,6 @@ public class Client extends RSApplet {
 		mainGameGraphicsBuffer.setCanvas();
 	}
 
-	private int poisonType = 0;
-
 	private boolean hpHover = false;
 
 	private void loadHpOrb(int xOffset) {
@@ -13548,27 +13548,19 @@ public class Client extends RSApplet {
 		int currentHP = Integer.parseInt(cHP);
 		int maxHP = Integer.parseInt(mHP);
 		int health = (int) (((double) currentHP / (double) maxHP) * 100D);
+		int poisonType = variousSettings[Configs.POISON_CONFIG];
 		int hover = poisonType == 0 ? 173 : 173;
 		Sprite bg = cacheSprite3[hpHover ? hover : 172];
-		int id = 0;
 		Sprite fg = null;
 		if (poisonType == 0) {
-			id = 161;
-			fg = cacheSprite3[id];
+			fg = cacheSprite3[161];
 		}
 		if (poisonType == 1) {
-			id = 162;
-			fg = cacheSprite3[id];
+			fg = cacheSprite3[162];
 		}
 		if (poisonType == 2) {
-			id = 172;
-			fg = cacheSprite3[id];
+			fg = venomOrb;
 		}
-		id = 0;
-		if (poisonType == 1)
-			id = 177;
-		if (poisonType == 2)
-			id = 5;
 		bg.drawSprite(0 + xOffset - xOff, 41 - yOff);
 		fg.drawSprite(27 + xOffset - xOff, 45 - yOff);
 		if (getOrbFill(health) <= 26) {
@@ -13655,6 +13647,8 @@ public class Client extends RSApplet {
 		smallText.method382(getOrbTextColor((int) (percent * 100)), 25 + xOffset - xMinus, level + "", 135 - yOff,
 				true);
 	}
+
+	private Sprite venomOrb;
 
 	private void loadAllOrbs(int xOffset) {
 		loadHpOrb(xOffset);
