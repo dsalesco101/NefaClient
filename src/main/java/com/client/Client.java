@@ -38,16 +38,11 @@ import java.net.InetAddress;
 import java.net.MalformedURLException;
 import java.net.Socket;
 import java.net.URL;
-import java.text.DateFormat;
 import java.text.NumberFormat;
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
-import java.time.LocalDate;
-import java.time.LocalDateTime;
-import java.time.ZonedDateTime;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Calendar;
 import java.util.Collection;
 import java.util.Collections;
 import java.util.Comparator;
@@ -12371,20 +12366,20 @@ public class Client extends RSApplet {
 		}
 		if ((i & 0x80) != 0) {
 			int i1 = stream.method434();
-			int j2 = stream.readUnsignedByte();
+			int rightsPrimaryValue = stream.readUnsignedByte();
 			int j3 = stream.method427();
 			int k3 = stream.currentOffset;
+			PlayerRights rights = PlayerRights.forRightsValue(rightsPrimaryValue);
 			if (player.name != null && player.visible) {
 				long l3 = TextClass.longForName(player.name);
 				boolean flag = false;
-				if (j2 <= 1) {
+				if (!rights.isStaffPosition()) {
 					for (int i4 = 0; i4 < ignoreCount; i4++) {
 						if (ignoreListAsLongs[i4] != l3)
 							continue;
 						flag = true;
 						break;
 					}
-
 				}
 				if (!flag && anInt1251 == 0)
 					try {
@@ -12394,7 +12389,7 @@ public class Client extends RSApplet {
 						String s = TextInput.method525(j3, aStream_834);
 						player.textSpoken = s;
 						player.anInt1513 = i1 >> 8;
-						player.privelage = j2; // TODO remove privilege sending in send text player update flag
+						player.privelage = rightsPrimaryValue; // TODO remove privilege sending in send text player update flag
 						player.anInt1531 = i1 & 0xff;
 						player.textCycle = 150;
 						String crown = PlayerRights.buildCrownString(player.getDisplayedRights());

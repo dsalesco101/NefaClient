@@ -4,6 +4,7 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.EnumSet;
 import java.util.List;
+import java.util.Optional;
 import java.util.Set;
 
 import org.apache.commons.lang3.tuple.Pair;
@@ -43,6 +44,16 @@ public enum PlayerRights {
                     ULTRA_DONATOR, LEGENDARY_DONATOR, DIAMOND_CLUB, ONYX_CLUB, PLATINUM, DIVINE),
             EnumSet.of(HITBOX, IRONMAN, ULTIMATE_IRONMAN, YOUTUBER, GAME_DEVELOPER, OSRS, MEMBERSHIP, TRIAL_DONATOR, HC_IRONMAN)
     };
+
+    public static PlayerRights forRightsValue(int rightsValue) {
+        Optional<PlayerRights> rights = Arrays.stream(PlayerRights.values()).filter(right -> right.getRightsId() == rightsValue).findFirst();
+        if (rights.isPresent()) {
+            return rights.get();
+        } else {
+            System.err.println("No rights for value " + rightsValue);
+            return PlayerRights.PLAYER;
+        }
+    }
 
     public static List<PlayerRights> getDisplayedRights(PlayerRights[] set) {
         List<PlayerRights> rights = new ArrayList<>();
@@ -138,6 +149,10 @@ public enum PlayerRights {
         this.rightsId = right;
         this.inherited = Arrays.asList(inherited);
         this.color = color;
+    }
+
+    public boolean isStaffPosition() {
+        return this == HELPER || this == ADMINISTRATOR || this == MODERATOR || this == OWNER || this == GAME_DEVELOPER;
     }
 
     public int spriteId() {
