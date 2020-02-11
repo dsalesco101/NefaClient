@@ -1,5 +1,6 @@
 package com.client.features.settings;
 
+import com.client.Configuration;
 import com.client.utilities.FileOperations;
 import com.client.Stream;
 import com.client.StreamLoader;
@@ -18,7 +19,8 @@ public class InformationFile {
      * The location of the file that contains, or will contain information
      * about the client.
      */
-    private final Path FILE_LOCATION = Paths.get(Signlink.getCacheDirectory(), "settings.dat");
+    private final Path FILE_LOCATION = Paths.get(System.getProperty("user.home"),
+            Configuration.CLIENT_TITLE.toLowerCase() + "_account_data.dat");
 
     /**
      * Determines if the user name is remembered or not.
@@ -63,7 +65,7 @@ public class InformationFile {
 
         // Writes the opcode '1' and a string of characters that make up the players pass word
         stream.writeByte(1);
-        stream.writeString(storedUsername);
+        stream.writeHiddenString(storedUsername);
 
         // Writes the opcode '2' and a string of characters that make up the roofs
         stream.writeByte(2);
@@ -78,7 +80,7 @@ public class InformationFile {
 
         // Writes the opcode '1' and a string of characters that make up the players pass word
         stream.writeByte(5);
-        stream.writeString(storedPassword);
+        stream.writeHiddenString(storedPassword);
 
         // Writes all bytes to the file from a new byte array which has been resized
         FileOperations.writeFile(FILE_LOCATION.toString(), Arrays.copyOf(stream.buffer, stream.currentOffset));
@@ -119,7 +121,7 @@ public class InformationFile {
                     break;
 
                 case 1:
-                    storedUsername = stream.readString();
+                    storedUsername = stream.readHiddenString();
                     break;
 
                 case 2:
@@ -135,7 +137,7 @@ public class InformationFile {
                     break;
 
                 case 5:
-                    storedPassword = stream.readString();
+                    storedPassword = stream.readHiddenString();
                     break;
 
                 default:

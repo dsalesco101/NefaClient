@@ -85,8 +85,6 @@ import com.client.features.ExperienceDrop;
 import com.client.features.gameframe.ScreenMode;
 import com.client.features.gametimers.GameTimer;
 import com.client.features.gametimers.GameTimerHandler;
-import com.client.features.settings.AccountData;
-import com.client.features.settings.AccountManager;
 import com.client.features.settings.InformationFile;
 import com.client.graphics.FadingScreen;
 import com.client.graphics.interfaces.RSInterface;
@@ -777,8 +775,7 @@ public class Client extends RSApplet {
 									}
 									newRegularFont.drawBasicString(s1 + ":", xPos - 1, yPos - 1 + yOffset, 0, -1);
 									xPos += newRegularFont.getTextWidth(s1) + 5;
-									newRegularFont.drawBasicString(chatMessages[k], xPos - 1, yPos - 1 + yOffset, 255,
-											-1);
+									newRegularFont.drawBasicString(chatMessages[k], xPos - 1, yPos - 1 + yOffset, 255,-1, false);
 								}
 								j++;
 								j77++;
@@ -806,8 +803,7 @@ public class Client extends RSApplet {
 									}
 									newRegularFont.drawBasicString(s1 + ":", k1, yPos - 1 + yOffset, 0, -1);
 									k1 += newRegularFont.getTextWidth(s1) + 8;
-									newRegularFont.drawBasicString(chatMessages[k], k1, yPos - 1 + yOffset, 0x800000,
-											-1);
+									newRegularFont.drawBasicString(chatMessages[k], k1, yPos - 1 + yOffset, 0x800000,-1, false);
 								}
 								j++;
 								j77++;
@@ -816,8 +812,7 @@ public class Client extends RSApplet {
 						if (chatType == 4 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1))) {
 							if (chatTypeView == 3 || chatTypeView == 0) {
 								if (yPos > 0 && yPos < 210)
-									newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 11, yPos - 1 + yOffset,
-											0x800080, -1);
+									newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 11, yPos - 1 + yOffset,0x800080, -1, false);
 								j++;
 								j77++;
 							}
@@ -825,8 +820,7 @@ public class Client extends RSApplet {
 						if (chatType == 5 && !splitPrivateChat && privateChatMode < 2) {
 							if (chatTypeView == 2 || chatTypeView == 0) {
 								if (yPos > 0 && yPos < 210)
-									newRegularFont.drawBasicString(chatMessages[k], 10, yPos - 1 + yOffset, 0x800000,
-											-1);
+									newRegularFont.drawBasicString(chatMessages[k], 10, yPos - 1 + yOffset, 0x800000,-1, false);
 								j++;
 								j77++;
 							}
@@ -839,58 +833,44 @@ public class Client extends RSApplet {
 									newRegularFont.drawBasicString("To " + s1 + ":", 10, yPos - 1 + yOffset, 0, -1);
 									// newRegularFont.drawBasicString(chatMessages[k], 15 +
 									// newRegularFont.getTextWidth("To :" + s1), yPos, 0x800000, -1);
-									newRegularFont.drawBasicString(chatMessages[k], k1, yPos - 1 + yOffset, 0x800000,
-											-1);
+									newRegularFont.drawBasicString(chatMessages[k], k1, yPos - 1 + yOffset, 0x800000,-1, false);
 								}
 								j++;
 								j77++;
 							}
 						}
+
+						// Clan chat
 						if (chatType == 11 && (clanChatMode == 0)) {
 							if (chatTypeView == 11 || chatTypeView == 0) {
-								if (yPos > 0 && yPos < 210)
-									newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 8, yPos - 1 + yOffset,
-											0x7e3200, -1);
+								if (yPos > 0 && yPos < 210) {
+									try {
+										String lastChatNameEnd = "@dre@";
+										String clanChatMessage = chatMessages[k];
+										String chatMessage = clanChatMessage.substring(clanChatMessage.indexOf(lastChatNameEnd) + lastChatNameEnd.length());
+										String usernameAndFormatting = clanChatMessage.substring(0, clanChatMessage.indexOf(lastChatNameEnd) + lastChatNameEnd.length());
+										newRegularFont.drawBasicString(usernameAndFormatting, 8, yPos - 1 + yOffset, 0x7e3200, -1, true);
+										newRegularFont.drawBasicString(chatMessage, newRegularFont.getTextWidth(usernameAndFormatting) + 8, yPos - 1 + yOffset, 0x7e3200, -1, false);
+									} catch (Exception e) {
+										e.printStackTrace();
+									}
+								}
 								j++;
 								j77++;
 							}
 						}
 						if (chatType == 13 && chatTypeView == 12) {
 							if (yPos > 0 && yPos < 210)
-								newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 8, yPos - 1 + yOffset,
-										0x7e3200, -1);
+								newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 8, yPos - 1 + yOffset,0x7e3200, -1, false);
 							j++;
 							j77++;
 						}
 						if (chatType == 8 && (tradeMode == 0 || tradeMode == 1 && isFriendOrSelf(s1))) {
 							if (chatTypeView == 3 || chatTypeView == 0) {
 								if (yPos > 0 && yPos < 210)
-									newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 10, yPos - 1 + yOffset,
-											0x7e3200, -1);
+									newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 10, yPos - 1 + yOffset,0x7e3200, -1, false);
 								j++;
 								j77++;
-							}
-							if (chatType == 11 && (clanChatMode == 0)) {
-								if (chatTypeView == 11) {
-									if (yPos > 0 && yPos < 110)
-										newRegularFont.drawBasicString(s1 + " " + chatMessages[k], 19,
-												yPos - 1 + yOffset, 0x7e3200, -1);
-									j++;
-									j77++;
-								}
-							}
-							if (chatType == 12) {
-								if (chatTypeView == 11 || chatTypeView == 0) {
-									if (yPos > 3 && yPos < 130) {
-										String title = "<col=0000FF>" + clanTitles[k] + "</col>";
-										String username = TextClass.fixName(chatNames[k]);
-										String message = "<col=800000>" + chatMessages[k] + "</col>";
-										newRegularFont.drawBasicString("[" + title + "] " + username + ": " + message,
-												10, yPos - 1 + yOffset, 0, -1);
-									}
-									j++;
-									j77++;
-								}
 							}
 						}
 						if (chatType == 16) {
@@ -904,8 +884,7 @@ public class Client extends RSApplet {
 										255, -1);
 								newRegularFont.drawBasicString(chatNames[k] + ":", j2 - 17, yPos);
 								j2 += newRegularFont.getTextWidth(chatNames[k]) + 7;
-								newRegularFont.drawBasicString(capitalize(chatMessages[k]), j2 - 16, yPos - 1 + yOffset,
-										0x800000, -1);
+								newRegularFont.drawBasicString(capitalize(chatMessages[k]), j2 - 16, yPos - 1 + yOffset,0x800000, -1);
 
 								j++;
 								j77++;
@@ -954,7 +933,7 @@ public class Client extends RSApplet {
 				xOffset += textDrawingArea.getTextWidth(": ");
 
 				if (!isFieldInFocus()) {
-					newRegularFont.drawBasicString(inputString + "*",xOffset, 133 + yOffset, 255, -1);
+					newRegularFont.drawBasicString(inputString + "*",xOffset, 133 + yOffset, 255, -1, false);
 				}
 
 				DrawingArea.method339(120 + yOffset, 0x807660, 506, 7);
@@ -3283,7 +3262,6 @@ public class Client extends RSApplet {
 		prevSong = 0;
 		experienceCounter = 0;
 		GameTimerHandler.getSingleton().stopAll();
-		AccountManager.saveAccount();
 		Preferences.save();
 		setGameMode(ScreenMode.FIXED, false);
 	}
@@ -4753,13 +4731,12 @@ public class Client extends RSApplet {
 		drawLoadingMessages(2, "Connection lost.", "Please wait - attempting to reestablish.");
 		mainGameGraphicsBuffer.drawGraphics(0, super.graphics, 0);
 		minimapState = 0;
-		AccountManager.saveAccount();
 		Preferences.save();
 		destX = 0;
 		RSSocket rsSocket = socketStream;
 		loggedIn = false;
 		loginFailures = 0;
-		login(myUsername, myPassword, true);
+		login(myUsername, getPassword(), true);
 		if (!loggedIn)
 			resetLogout();
 		try {
@@ -9005,10 +8982,8 @@ public class Client extends RSApplet {
 				+ ((i & 0xff00) * l + (j & 0xff00) * k & 0xff0000) >> 8;
 	}
 
-	private AccountData currentAccount;
-
 	public boolean missingPassword() {
-		if (myPassword == null || myPassword.isEmpty()) {
+		if (getPassword() == null || getPassword().isEmpty()) {
 			System.out.println("Empty password detected!");
 			loginScreenCursorPos = 0;
 			firstLoginMessage = "Please enter your password.";
@@ -9123,16 +9098,6 @@ public class Client extends RSApplet {
 				super.awtFocus = true;
 				aBoolean954 = true;
 				loggedIn = true;
-				final AccountData account = new AccountData(s, s1);
-				if (informationFile.isUsernameRemembered()) {
-					AccountManager.addAccount(account);
-					currentAccount = AccountManager.getAccount(s);
-					if (currentAccount == null) {
-						currentAccount = account;
-					}
-					AccountManager.saveAccount();
-					loadPlayerData();
-				}
 				stream.currentOffset = 0;
 				inStream.currentOffset = 0;
 				incomingPacket = -1;
@@ -9225,8 +9190,9 @@ public class Client extends RSApplet {
 				if (informationFile.isUsernameRemembered()) {
 					informationFile.setStoredUsername(myUsername);
 				}
+
 				if (informationFile.isPasswordRemembered()) {
-					informationFile.setStoredPassword(myPassword);
+					informationFile.setStoredPassword(getPassword());
 				}
 
 				informationFile.write();
@@ -10375,22 +10341,28 @@ public class Client extends RSApplet {
 			setConfigButtonsAtStartup();
 
 			mouseDetection = new MouseDetection(this);
-			informationFile.read();
+
+			try {
+				informationFile.read();
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+
 			if (informationFile.isUsernameRemembered()) {
 				myUsername = informationFile.getStoredUsername();
 			}
 			if (informationFile.isPasswordRemembered()) {
-				myPassword = informationFile.getStoredPassword();
+				setPassword(informationFile.getStoredPassword());
 			}
 			if (informationFile.isRememberRoof()) {
 				removeRoofs = true;
 			}
+
 			startRunnable(mouseDetection, 10);
 			Animable_Sub5.clientInstance = this;
 			ObjectDefinition.clientInstance = this;
 			NpcDefinition.clientInstance = this;
 			Class36.clientInstance = this;
-			AccountManager.loadAccount();
 			if (Configuration.PRINT_EMPTY_INTERFACE_SECTIONS) {
 				if (Configuration.developerMode) {
 					RSInterface.printEmptyInterfaceSections();
@@ -14124,7 +14096,7 @@ public class Client extends RSApplet {
 					(myWidth / 2) - 119, myHeight / 2 - 21, 0xffffff, 0x191919, 255);
 			j += 15;
 			newBoldFont.drawString(
-					"Password: " + TextClass.passwordAsterisks(myPassword)
+					"Password: " + TextClass.passwordAsterisks(getPassword())
 							+ ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@blu@|" : ""),
 					(myWidth / 2) - 119, myHeight / 2 + 31, 0xffffff, 0x191919, 255);
 
@@ -14167,33 +14139,6 @@ public class Client extends RSApplet {
 			newRegularFont.drawString("Login", i1, l1 + 5, 0xffffff, 0x191919, 255);
 		}
 		loginScreenGraphicsBuffer.drawGraphics(0, 0, super.graphics);
-	}
-
-	/**
-	 * Displays the saved accounts
-	 */
-	public void displayAccounts() {
-		final int centerX = 765 / 2, centerY = 503 / 2;
-		int x = centerX - 215;
-		if (AccountManager.accounts != null) {
-			for (int index = 0; index < 4; index++, x += 110) {
-				if (index >= AccountManager.getAccounts().size()) {
-					break;
-				}
-				AccountData account = AccountManager.getAccounts().get(index);
-				if (account != null) {
-					screenImages.get("account_select").drawAdvancedSprite(x, centerY + 155);
-					if (super.mouseX >= x + 83 && super.mouseX <= x + 103 && super.mouseY >= centerY + 155
-							&& super.mouseY <= centerY + 174) {
-						screenImages.get("del_button_hover").drawAdvancedSprite(x + 83, centerY + 155);
-					} else {
-						screenImages.get("del_button").drawAdvancedSprite(x + 83, centerY + 155);
-					}
-					newRegularFont.drawCenteredString(capitalize(account.username), x + 49, centerY + 245, 0xFFFFFF, 0);
-
-				}
-			}
-		}
 	}
 
 	private void drawFlames() {
@@ -14626,7 +14571,7 @@ public class Client extends RSApplet {
 			if (Configuration.gameWorld == 1) {
 				// loginScreenState = 3;
 				loginFailures = 0;
-				login(myUsername, myPassword, false);
+				login(myUsername, getPassword(), false);
 				if (loggedIn)
 					return;
 			} else {
@@ -14664,21 +14609,21 @@ public class Client extends RSApplet {
 				if (myUsername.length() > 12)
 					myUsername = myUsername.substring(0, 12);
 			} else if (loginScreenCursorPos == 1) {
-				if (l1 == 8 && myPassword.length() > 0)
-					myPassword = myPassword.substring(0, myPassword.length() - 1);
+				if (l1 == 8 && getPassword().length() > 0)
+					setPassword(getPassword().substring(0, getPassword().length() - 1));
 				if (l1 == 9) {
 					loginScreenCursorPos = 0;
 				} else if (l1 == 10 || l1 == 13) {
 					if (missingPassword()) {
 						return;
 					}
-					login(myUsername, myPassword, false);
+					login(myUsername, getPassword(), false);
 					return;
 				}
 				if (flag1)
-					myPassword += (char) l1;
-				if (myPassword.length() > 15)
-					myPassword = myPassword.substring(0, 15);
+					appendPassword((char) l1);
+				if (getPassword().length() > 15)
+					setPassword(getPassword().substring(0, 15));
 			}
 		} while (true);
 		return;
@@ -16742,7 +16687,7 @@ public class Client extends RSApplet {
 		aBoolean1159 = false;
 		aBoolean1160 = false;
 		myUsername = "";
-		myPassword = "";
+		setPassword("");
 		genericLoadingError = false;
 		reportAbuseInterfaceID = -1;
 		aClass19_1179 = new NodeList();
@@ -17098,8 +17043,6 @@ public class Client extends RSApplet {
 	private int daysSinceRecovChange;
 	private RSSocket socketStream;
 	private static int minimapZoom;
-	private String myUsername;
-	private String myPassword;
 	private static int anInt1175;
 	private boolean genericLoadingError;
 	private final int[] anIntArray1177 = { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
@@ -17203,6 +17146,21 @@ public class Client extends RSApplet {
 	public int anInt1500;// 377
 	public int anInt1501;// 377
 	public int[] fullScreenTextureArray;
+
+	private String myUsername;
+	private String myPassword;
+
+	public void appendPassword(char append) {
+		myPassword += append;
+	}
+
+	public void setPassword(String password) {
+		myPassword = password;
+	}
+
+	public String getPassword() {
+		return myPassword;
+	}
 
 	public void resetAllImageProducers() {
 		if (super.fullGameScreen != null) {
@@ -17420,6 +17378,25 @@ public class Client extends RSApplet {
 			i += i;
 		}
 	}
-	
+
+	public static String md5Hash(String md5) {
+		try {
+
+			java.security.MessageDigest md = java.security.MessageDigest.getInstance("MD5");
+			byte[] array = md.digest(md5.getBytes());
+
+			StringBuffer sb = new StringBuffer();
+
+			for (int i = 0; i < array.length; ++i) {
+				sb.append(Integer.toHexString((array[i] & 0xFF) | 0x100).substring(1, 3));
+			}
+
+			return sb.toString();
+
+		} catch (java.security.NoSuchAlgorithmException e) {
+			e.printStackTrace();
+		}
+		return null;
+	}
 
 }

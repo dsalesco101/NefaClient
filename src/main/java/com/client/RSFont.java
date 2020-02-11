@@ -273,6 +273,10 @@ public class RSFont extends DrawingArea {
 	}
 
 	public void drawBasicString(String string, int drawX, int drawY) {
+		drawBasicString(string, drawX, drawY, true);
+	}
+
+	public void drawBasicString(String string, int drawX, int drawY, boolean textEffects) {
 		drawY -= baseCharacterHeight;
 		int startIndex = -1;
 		string = handleOldSyntax(string);
@@ -281,101 +285,108 @@ public class RSFont extends DrawingArea {
 			if (character > 255) {
 				character = 32;
 			}
-			if (character == 60) {
-				startIndex = currentCharacter;
-			} else {
-				if (character == 62 && startIndex != -1) {
-					String effectString = string.substring(startIndex + 1, currentCharacter);
-					startIndex = -1;
-					if (effectString.equals(startEffect)) {
-						character = 60;
-					} else if (effectString.equals(endEffect)) {
-						character = 62;
-					} else if (effectString.equals(aRSString_4135)) {
-						character = 160;
-					} else if (effectString.equals(aRSString_4162)) {
-						character = 173;
-					} else if (effectString.equals(aRSString_4165)) {
-						character = 215;
-					} else if (effectString.equals(aRSString_4147)) {
-						character = 128;
-					} else if (effectString.equals(aRSString_4163)) {
-						character = 169;
-					} else if (effectString.equals(aRSString_4169)) {
-						character = 174;
-					} else {
-						if (effectString.startsWith(startImage)) {
-							try {
-								int imageId = Integer.valueOf(effectString.substring(4));
-								Sprite icon = chatImages[imageId];
-								int iconModY = icon.myHeight;
-								if (transparency == 256) {
-									icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY));
-								} else {
-									icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY), transparency);
-								}
-								drawX += icon.myWidth;
-							} catch (Exception exception) {
-								/* empty */
-							}
-						} else if (effectString.startsWith(startClanImage)) {
-							try {
-								int imageId = Integer.valueOf(effectString.substring(5));
-								Sprite icon = clanImages[imageId];
-								int iconModY = icon.myHeight + icon.anInt1443 + 1;
-								if (transparency == 256) {
-									icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY));
-								} else {
-									icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY), transparency);
-								}
-								drawX += 11;
-							} catch (Exception exception) {
-							}
-						} else {
-							setTextEffects(effectString);
-						}
-						continue;
-					}
-				}
-				if (startIndex == -1) {
-					int width = characterWidths[character];
-					int height = characterHeights[character];
-					if (character != 32) {
-						if (transparency == 256) {
-							if (textShadowColor != -1) {
-								drawCharacter(character, drawX + characterDrawXOffsets[character] + 1,
-										drawY + characterDrawYOffsets[character] + 1, width, height, textShadowColor,
-										true);
-							}
-							drawCharacter(character, drawX + characterDrawXOffsets[character],
-									drawY + characterDrawYOffsets[character], width, height, textColor, false);
-						} else {
-							if (textShadowColor != -1) {
-								drawTransparentCharacter(character, drawX + characterDrawXOffsets[character] + 1,
-										drawY + characterDrawYOffsets[character] + 1, width, height, textShadowColor,
-										transparency, true);
-							}
-							drawTransparentCharacter(character, drawX + characterDrawXOffsets[character],
-									drawY + characterDrawYOffsets[character], width, height, textColor, transparency,
-									false);
-						}
-					} else if (anInt4178 > 0) {
-						anInt4175 += anInt4178;
-						drawX += anInt4175 >> 8;
-						anInt4175 &= 0xff;
-					}
-					int lineWidth = characterScreenWidths[character];
-					if (strikethroughColor != -1) {
-						drawHorizontalLine(drawY + (int) ((double) baseCharacterHeight * 0.6999999999),
-								strikethroughColor, lineWidth, drawX);
-					}
-					if (underlineColor != -1) {
 
-						drawHorizontalLine(drawX, drawY + baseCharacterHeight, lineWidth, underlineColor);
+			// Effect
+			if (textEffects) {
+				if (character == 60) {
+					startIndex = currentCharacter;
+				} else {
+					if (character == 62 && startIndex != -1) {
+						String effectString = string.substring(startIndex + 1, currentCharacter);
+						startIndex = -1;
+						if (effectString.equals(startEffect)) {
+							character = 60;
+						} else if (effectString.equals(endEffect)) {
+							character = 62;
+						} else if (effectString.equals(aRSString_4135)) {
+							character = 160;
+						} else if (effectString.equals(aRSString_4162)) {
+							character = 173;
+						} else if (effectString.equals(aRSString_4165)) {
+							character = 215;
+						} else if (effectString.equals(aRSString_4147)) {
+							character = 128;
+						} else if (effectString.equals(aRSString_4163)) {
+							character = 169;
+						} else if (effectString.equals(aRSString_4169)) {
+							character = 174;
+						} else {
+							if (effectString.startsWith(startImage)) {
+								try {
+									int imageId = Integer.valueOf(effectString.substring(4));
+									Sprite icon = chatImages[imageId];
+									int iconModY = icon.myHeight;
+									if (transparency == 256) {
+										icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY));
+									} else {
+										icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY), transparency);
+									}
+									drawX += icon.myWidth;
+								} catch (Exception exception) {
+									/* empty */
+								}
+							} else if (effectString.startsWith(startClanImage)) {
+								try {
+									int imageId = Integer.valueOf(effectString.substring(5));
+									Sprite icon = clanImages[imageId];
+									int iconModY = icon.myHeight + icon.anInt1443 + 1;
+									if (transparency == 256) {
+										icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY));
+									} else {
+										icon.drawSprite(drawX, (drawY + baseCharacterHeight - iconModY), transparency);
+									}
+									drawX += 11;
+								} catch (Exception exception) {
+								}
+							} else {
+								setTextEffects(effectString);
+							}
+							continue;
+						}
 					}
-					drawX += lineWidth;
 				}
 			}
+
+			// Draw character
+			if (startIndex == -1) {
+				int width = characterWidths[character];
+				int height = characterHeights[character];
+				if (character != 32) {
+					if (transparency == 256) {
+						if (textShadowColor != -1) {
+							drawCharacter(character, drawX + characterDrawXOffsets[character] + 1,
+									drawY + characterDrawYOffsets[character] + 1, width, height, textShadowColor,
+									true);
+						}
+						drawCharacter(character, drawX + characterDrawXOffsets[character],
+								drawY + characterDrawYOffsets[character], width, height, textColor, false);
+					} else {
+						if (textShadowColor != -1) {
+							drawTransparentCharacter(character, drawX + characterDrawXOffsets[character] + 1,
+									drawY + characterDrawYOffsets[character] + 1, width, height, textShadowColor,
+									transparency, true);
+						}
+						drawTransparentCharacter(character, drawX + characterDrawXOffsets[character],
+								drawY + characterDrawYOffsets[character], width, height, textColor, transparency,
+								false);
+					}
+				} else if (anInt4178 > 0) {
+					anInt4175 += anInt4178;
+					drawX += anInt4175 >> 8;
+					anInt4175 &= 0xff;
+				}
+				int lineWidth = characterScreenWidths[character];
+				if (strikethroughColor != -1) {
+					drawHorizontalLine(drawY + (int) ((double) baseCharacterHeight * 0.6999999999),
+							strikethroughColor, lineWidth, drawX);
+				}
+				if (underlineColor != -1) {
+
+					drawHorizontalLine(drawX, drawY + baseCharacterHeight, lineWidth, underlineColor);
+				}
+				drawX += lineWidth;
+			}
+
 		}
 	}
 
@@ -573,6 +584,7 @@ public class RSFont extends DrawingArea {
 		if (string == null) {
 			return 0;
 		}
+		string = handleOldSyntax(string);
 		int startIndex = -1;
 		int finalWidth = 0;
 		for (int currentCharacter = 0; currentCharacter < string.length(); currentCharacter++) {
@@ -623,9 +635,13 @@ public class RSFont extends DrawingArea {
 	}
 
 	public void drawBasicString(String string, int drawX, int drawY, int color, int shadow) {
+		drawBasicString(string, drawX, drawY, color, shadow, true);
+	}
+
+	public void drawBasicString(String string, int drawX, int drawY, int color, int shadow, boolean textEffects) {
 		if (string != null) {
 			setColorAndShadow(color, shadow);
-			drawBasicString(string, drawX, drawY);
+			drawBasicString(string, drawX, drawY, textEffects);
 		}
 	}
 

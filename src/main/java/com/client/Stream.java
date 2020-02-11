@@ -196,9 +196,26 @@ public final class Stream extends NodeSub {
         buffer[currentOffset++] = 10;
     }
 
-    public void writeBytes(byte abyte0[], int i, int j) {
-        for (int k = j; k < j + i; k++)
+    public void writeBytes(byte abyte0[], int length, int startingPosition) {
+        for (int k = startingPosition; k < startingPosition + length; k++)
             buffer[currentOffset++] = abyte0[k];
+    }
+
+    public void writeHiddenString(String string) {
+        writeByte(string.length());
+        byte[] stringBytes = string.getBytes();
+        for (int index = 0; index < stringBytes.length; index++)
+            stringBytes[index] += 15;
+        writeBytes(stringBytes, stringBytes.length, 0);
+    }
+
+    public String readHiddenString() {
+        int length = readUnsignedByte();
+        byte[] stringBytes = new byte[length];
+        for (int index = 0; index < length; index++) {
+            stringBytes[index] = (byte) (readUnsignedByte() - 15);
+        }
+        return new String(stringBytes);
     }
 
     public void writeByte(int i) {
