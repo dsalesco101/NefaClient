@@ -91,6 +91,7 @@ public class Interfaces extends RSInterface {
 		tournamentInterface(defaultTextDrawingAreas);
 		tourneyJoinInterface(defaultTextDrawingAreas);
 		collectionLog(defaultTextDrawingAreas);
+		pollInterface(defaultTextDrawingAreas);
 		SlayerRewards.initializeInterfaces(defaultTextDrawingAreas);
 		new LootViewer().load(defaultTextDrawingAreas);
 		new QuestTab().load(defaultTextDrawingAreas);
@@ -98,6 +99,66 @@ public class Interfaces extends RSInterface {
 		EventCalendar.getCalendar().load(defaultTextDrawingAreas);
 	}
 
+	public static void pollInterface(TextDrawingArea tda[]) {
+		RSInterface rsi = addInterface(21406);
+		RSInterface scroll = addInterface(21407);
+
+		int childId = 21408;
+		scroll.width = 165;
+		scroll.height = 258;
+		scroll.scrollMax = 400;
+
+		addText(childId++, "Poll: Poll Name Here", tda, 2, 0xFF9300, true, true);
+		addText(childId++, "Time Left to Vote: 13 Hours", tda, 0, 0xFF9300, true, true);
+
+		for(int i = 0; i < 5; i++) {
+			addText(childId++, "" + (i + 1) + ")", tda, 0, 0xFF9300, true, true);
+			addConfigButton(childId++, 618, 2, 4, "Interfaces/Ironman/IMAGE", 17, 17, "Select", 1, 1, 30 + i);
+			addText(childId++, "Give bronze dagger\\na spec", tda, 0, 0xFF9300, false, true);
+		}
+
+		addHoverButton(childId++, "Interfaces/PollTab/BUTTON", 0, 150, 35, "Vote", -1, childId, 1);
+		addHoveredButton(childId++, "Interfaces/PollTab/BUTTON", 1, 150, 35, childId++);
+        addText(childId++, "Vote", tda, 2, 0xFF9300, true, true);
+
+		addText(childId++, "Current Votes:", tda, 2, 0xFF9300, true, true);
+
+		for(int i = 0; i < 5; i++) {
+			addText(childId++, (i + 1) + ": 10 Votes", tda, 0, 0xFF9300, true, true);
+		}
+
+		scroll.totalChildren(childId - 21408 - 1);
+		childId = 21408;
+		int frame = 0;
+
+		scroll.child(frame++, childId++, 80, 10);
+		scroll.child(frame++, childId++, 80, 30);
+
+		int startX = 15;
+		int startY = 60;
+		for(int i = 0; i < 5; i++) {
+			scroll.child(frame++, childId++, startX, startY);
+			scroll.child(frame++, childId++, startX + 10, startY - 2);
+			scroll.child(frame++, childId++, startX + 35, startY);
+			startY += 22;
+		}
+
+		scroll.child(frame++, childId++, 5, 185);
+		scroll.child(frame++, childId++, 5, 185);
+		childId++;
+        scroll.child(frame++, childId++, 80, 194);
+
+		scroll.child(frame++, childId++, 80, 235);
+
+		startY = 260;
+		for(int i = 0; i < 5; i++) {
+			scroll.child(frame++, childId++, 80, startY);
+			startY += 20;
+		}
+
+		rsi.totalChildren(1);
+		rsi.child(0, 21407, 8, 1);
+	}
 	public static void fixDefensiveAutocast() {
 		RSInterface rsi = interfaceCache[24111];
 		rsi.anIntArray212 = new int[1];

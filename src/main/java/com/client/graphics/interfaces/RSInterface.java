@@ -288,8 +288,8 @@ public class RSInterface {
 		new MonsterDropViewer().OsDropViewer(textDrawingAreas);
 		dropTable(textDrawingAreas);
 		achievementPopup2(textDrawingAreas);
-		//System.out.println(findAvailableInterfaceID(1));
-//		System.out.println(findOpenConfigFrame(11));
+		//System.out.println(findAvailableInterfaceID(100));
+		//System.out.println(findOpenConfigFrame(5));
 		// aMRUNodes_238 = null;
 	}
 	
@@ -2567,10 +2567,10 @@ public class RSInterface {
 		addClickableText(33929, "27. Twisted Banshee", "Teleport", tda, 1, 0xff9933, false, true, 130);
 		addClickableText(33930, "28. Warped Jelly", "Teleport", tda, 1, 0xff9933, false, true, 130);
 		addClickableText(33931, "29. Dark Beast", "Teleport", tda, 1, 0xff9933, false, true, 130);
-		addHoverButton(33931, "Interfaces/HelpInterface/IMAGE", 2, 16, 16, "Close", -1, 33932, 3);
-		addHoveredButton(33932, "Interfaces/HelpInterface/IMAGE", 3, 16, 16, 33933);
+		addHoverButton(33932, "Interfaces/HelpInterface/IMAGE", 2, 16, 16, "Close", -1, 33932, 3);
+		addHoveredButton(33933, "Interfaces/HelpInterface/IMAGE", 3, 16, 16, 33933);
 	
-		inter.totalChildren(33);
+		inter.totalChildren(34);
 		setBounds(33901, 15, 15, 0, inter);
 		setBounds(33902, 250, 19, 1, inter);
 		setBounds(33903, 50, 50, 2, inter);
@@ -2601,8 +2601,9 @@ public class RSInterface {
 		setBounds(33928, 350, 150, 27, inter);
 		setBounds(33929, 350, 170, 28, inter);
 		setBounds(33930, 350, 190, 29, inter);
-		setBounds(33931, 479, 18, 31, inter);
-		setBounds(33932, 479, 18, 32, inter);
+		setBounds(33931, 350, 210, 30, inter);
+		setBounds(33932, 479, 18, 31, inter);
+		setBounds(33933, 479, 18, 32, inter);
 		
 		
 

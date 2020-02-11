@@ -135,6 +135,8 @@ public class Client extends RSApplet {
 	public String hintName;
 	public int hintId;
 
+	private boolean pollActive;
+
 	private Pattern pattern;
 
 	private Matcher matcher;
@@ -2820,17 +2822,17 @@ public class Client extends RSApplet {
 
 	}
 
-	Sprite[] sideIcons = new Sprite[14];
+	Sprite[] sideIcons = new Sprite[15];
 	Sprite[] redStones = new Sprite[6];
 
 	private void drawTabs() {
 		if (currentScreenMode == ScreenMode.FIXED) {
 			final int[][] sideIconCoordinates = new int[][] { { 17, 17 }, { 49, 15 }, { 83, 15 }, { 113, 13 },
 					{ 146, 10 }, { 180, 11 }, { 214, 15 }, { 14, 311 }, { 49, 314 }, { 82, 314 }, { 116, 310 },
-					{ 148, 312 }, { 184, 311 }, { 216, 311 } };
+					{ 148, 312 }, { 184, 311 }, { 216, 311 }, { 216, 311 } };
 			final int[][] sideIconCoordinates1 = new int[][] { { 24, 8 }, { 49, 5}, { 79, 5 }, { 108, 3}, { 147, 5 },
 					{ 176, 5 }, { 205, 8 }, { 22, 300 }, { 49, 304 }, { 77, 304 }, { 111, 303 }, { 147, 301 },
-					{ 180, 303 }, { 204, 303 } };
+					{ 180, 303 }, { 204, 303 }, { 204, 303 } };
 			if (Client.tabInterfaceIDs[Client.tabID] != -1) {
 				if(getUserSettings().isOldGameframe() == false) {
 					if (Client.tabID == 0)
@@ -2893,14 +2895,18 @@ public class Client extends RSApplet {
 				}
 
 			}
-			for (int index = 0; index <= 13; index++) {
+			for (int index = 0; index <= 14; index++) {
 				if (Client.tabInterfaceIDs[index] != -1 && anInt1054 == index) {
 					if (Client.loopCycle % 20 >= 10)
 						;
 				}
 				if (Client.tabInterfaceIDs[index] > 0) {
 					if (!getUserSettings().isOldGameframe()) {
-						sideIcons[index].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1] - 8);
+					    if (index != 13 || (index == 13 && pollActive)) {
+                            sideIcons[index].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1] - 8);
+                        } else {
+                            sideIcons[index + 1].drawSprite(sideIconCoordinates[index][0], sideIconCoordinates[index][1] - 8);
+                        }
 					} else {
 						sideIcons[index].drawSprite(sideIconCoordinates1[index][0], sideIconCoordinates1[index][1]);
 					}
@@ -8611,6 +8617,10 @@ public class Client extends RSApplet {
 							}
 						} else if (super.saveClickY >= y + 298 && super.saveClickY <= y + 36 + 298) {
 							if (Client.tabInterfaceIDs[index + 7] != -1) {
+							    if (index + 7 == 13) {
+                                    stream.createFrame(185);
+                                    stream.writeWord(21406);
+                                }
 								Client.tabID = index + 7;
 								Client.needDrawTabArea = true;
 								Client.tabAreaAltered = true;
@@ -15864,6 +15874,12 @@ public class Client extends RSApplet {
 							incomingPacket = -1;
 							return true;
 						}
+						if (text.startsWith(":poll")) {
+						    String option[] = text.split("-");
+						    pollActive = Boolean.parseBoolean(option[1]);
+						    incomingPacket = -1;
+						    return true;
+                        }
 						updateStrings(text, frame);
 						sendFrame126(text, frame);
 						if (frame >= 18144 && frame <= 18244) {
