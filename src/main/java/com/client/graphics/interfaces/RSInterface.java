@@ -288,8 +288,8 @@ public class RSInterface {
 		new MonsterDropViewer().OsDropViewer(textDrawingAreas);
 		dropTable(textDrawingAreas);
 		achievementPopup2(textDrawingAreas);
-		//System.out.println(findAvailableInterfaceID(1));
-//		System.out.println(findOpenConfigFrame(11));
+		//System.out.println(findAvailableInterfaceID(100));
+		//System.out.println(findOpenConfigFrame(5));
 		// aMRUNodes_238 = null;
 	}
 	
