@@ -252,7 +252,7 @@ public final class Signlink implements Runnable {
 	}
 
 	public static void reporterror(String s) {
-		System.out.println("Error: " + s);
+		System.err.println("Error: " + s);
 	}
 
 	public Signlink() {
