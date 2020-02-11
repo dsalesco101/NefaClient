@@ -369,6 +369,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 			}
 		} catch (Exception exception) {
 			Signlink.reporterror("od_ex " + exception.getMessage());
+			exception.printStackTrace();
 		}
 	}
 
@@ -465,8 +466,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 				.reverseGetFirst(); onDemandData != null; onDemandData = (OnDemandData) requested.reverseGetNext())
 			if (onDemandData.incomplete) {
 				uncompletedCount++;
-				System.out.println("Error: model is incomplete or missing  [ type = " + onDemandData.dataType
-						+ "]  [id = " + onDemandData.ID + "]");
+				reportMissing(onDemandData);
 			} else
 				completedCount++;
 
@@ -482,11 +482,14 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 				uncompletedCount++;
 				closeRequest(onDemandData_1);
 				waiting = true;
-				System.out.println("Error: file is missing  [ type = " + onDemandData_1.dataType + "]  [id = "
-						+ onDemandData_1.ID + "]");
+				reportMissing(onDemandData_1);
 			} catch (Exception _ex) {
 			}
 		}
+	}
+
+	private void reportMissing(OnDemandData data) {
+		Signlink.reporterror("Error: file is missing  [ type = " + data.dataType + "]  [id = " + data.ID + "]");
 	}
 
 	public void method566() {
