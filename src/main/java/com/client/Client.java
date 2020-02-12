@@ -15874,7 +15874,14 @@ public class Client extends RSApplet {
 							incomingPacket = -1;
 							return true;
 						}
-						if (text.startsWith(":poll")) {
+						if (text.startsWith(":pollHeight")) {
+						    int rows = Integer.parseInt(text.split("-")[1]);
+						    RSInterface rsi = RSInterface.interfaceCache[21406];
+						    rsi.childY[0] = (rows * 14);
+                            incomingPacket = -1;
+                            return true;
+                        }
+						if (text.startsWith(":pollOn")) {
 						    String option[] = text.split("-");
 						    pollActive = Boolean.parseBoolean(option[1]);
 						    incomingPacket = -1;
