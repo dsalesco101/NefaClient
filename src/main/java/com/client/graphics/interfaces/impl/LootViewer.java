@@ -23,6 +23,9 @@ public class LootViewer extends RSInterface {
         SUPER_MYSTERY_BOX("Super m. box", 6828),
         ULTRA_MYSTERY_BOX("Ultra m. box", 13346),
         XERIC_CHESTS("Xeric chests", 3464),
+        VOTE_MYSTERY_BOX("Vote Mystery Box", 11739),
+        CRYSTAL_CHEST("Crystal Chest", 989),
+        PVM_CASKET("PvM Casket", 405)
         ;
 
         private final String name;
@@ -121,7 +124,7 @@ public class LootViewer extends RSInterface {
         }
 
         scrollable.child(0, id, 4, 4);
-        addItemContainerAutoScrollable(id++, 5, 24, 22, 4, true, scrollInterface);
+        addItemContainerAutoScrollable(id++, 5, 36, 22, 4, true, scrollInterface);
 
         return id;
     }
@@ -131,7 +134,7 @@ public class LootViewer extends RSInterface {
         RSInterface inter = addInterface(id++);
         inter.height = 263;
         inter.width = 176;
-        inter.scrollMax = inter.height + 1;
+        inter.scrollMax = inter.height + 44;
 
         setChildren(Button.values().length * 3, inter);
         int childIndex = 0;
