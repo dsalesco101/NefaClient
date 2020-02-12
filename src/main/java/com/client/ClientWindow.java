@@ -1,5 +1,6 @@
 package com.client;
 
+import java.io.IOException;
 import java.net.*;
 import java.awt.*;
 import java.awt.event.ActionListener;
@@ -14,14 +15,17 @@ public class ClientWindow extends Client implements ActionListener, WindowListen
 
 	public void initUI() {
 		try {
-			//icon = new ImageIcon(new URL("https://i.stack.imgur.com/KSnus.gif")).getImage();
 			UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
 			JPopupMenu.setDefaultLightWeightPopupEnabled(false);
 			frame = new JFrame(Configuration.clientTitle);
 			frame.setLayout(new BorderLayout());
 			setFocusTraversalKeysEnabled(false);
 			frame.setResizable(false);
-			frame.setIconImage(ImageIO.read(new URL ("https://i.imgur.com/1FS8t8X.png")));
+			try {
+				frame.setIconImage(ImageIO.read(new URL ("https://i.imgur.com/1FS8t8X.png")));
+			} catch (IOException e) {
+				System.err.println("Cannot get icon image from url.");
+			}
 			frame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 			JPanel gamePanel = new JPanel();
 			gamePanel.setLayout(new BorderLayout());
