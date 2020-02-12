@@ -13547,7 +13547,11 @@ public class Client extends RSApplet {
 		}
 		cacheSprite3[160].drawSprite(27 + xOffset - xOff, 45 - yOff);
 		cacheSprite3[168].drawSprite(27 + xOffset - xOff, 45 - yOff);
-		smallText.method382(getOrbTextColor(health), 15 + xOffset - xOff, "" + cHP, 67 - yOff, true);
+		if (health > 1_000_000_000) {
+			infinity.drawSprite(10 + xOffset - xOff, 59 - yOff);
+		} else {
+			smallText.method382(getOrbTextColor(health), 15 + xOffset - xOff, "" + cHP, 67 - yOff, true);
+		}
 	}
 
 	public double fillHP;
@@ -13598,7 +13602,13 @@ public class Client extends RSApplet {
 		} else {
 			cacheSprite1[10].drawSprite(30 + xOffset - xOff, 82 - yOff);
 		}
-		smallText.method382(getOrbTextColor((int) (percent * 100)), 14 + xOffset - xOff, level + "", 101 - yOff, true);
+		if (level > 1_000_000_000) {
+			infinity.drawSprite(11 + xOffset - xOff, 94 - yOff);
+		} else {
+			smallText.method382(getOrbTextColor((int) (percent * 100)), 14 + xOffset - xOff, level + "", 101 - yOff, true);
+		}
+
+
 	}
 
 	private void loadRunOrb(int xOffset) {
