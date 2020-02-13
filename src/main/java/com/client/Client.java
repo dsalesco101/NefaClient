@@ -3762,7 +3762,7 @@ public class Client extends RSApplet {
 
 	public static void enableExceptionLogging() {
 		try {
-			TeeOutputStream outputStream = new TeeOutputStream(System.err, new FileOutputStream(getExceptionLogLocation()));
+			TeeOutputStream outputStream = new TeeOutputStream(System.err, new FileOutputStream(getExceptionLogLocation(), true));
 			System.setErr(new PrintStream(outputStream));
 		} catch (FileNotFoundException e) {
 			e.printStackTrace();
