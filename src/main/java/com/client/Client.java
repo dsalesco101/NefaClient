@@ -9887,7 +9887,7 @@ public class Client extends RSApplet {
 		int x2 = x - (mX * 8);
 		int y2 = y - (mY * 8);
 		int i15 = 40 >> 2;
-		int l17 = anIntArray1177[i15];
+		int l17 = objectTypes[i15];
 		if (y2 > 0 && y2 < 103 && x2 > 0 && x2 < 103) {
 			method130(-1, objectId, face, l17, y2, type, height, x2, 0);
 		}
@@ -14271,49 +14271,50 @@ public class Client extends RSApplet {
 			int j4 = anInt1268 + (k1 >> 4 & 7);
 			int i7 = anInt1269 + (k1 & 7);
 			int l9 = stream.method428();
-			int j12 = l9 >> 2;
-			int k14 = l9 & 3;
-			int j16 = anIntArray1177[j12];
-			int j17 = stream.method435();
+			int objectType = l9 >> 2;
+			int orientation = l9 & 3;
+			int objectTypeGroup = objectTypes[objectType];
+			int animationId = stream.method435();
 			if (j4 >= 0 && i7 >= 0 && j4 < 103 && i7 < 103) {
 				int j18 = intGroundArray[plane][j4][i7];
 				int i19 = intGroundArray[plane][j4 + 1][i7];
 				int l19 = intGroundArray[plane][j4 + 1][i7 + 1];
 				int k20 = intGroundArray[plane][j4][i7 + 1];
-				if (j16 == 0) {
+				if (objectTypeGroup == 0) {
 					Object1 class10 = worldController.method296(plane, j4, i7);
 					if (class10 != null) {
 						int k21 = ObjectKey.getObjectId(class10.uid);
-						if (j12 == 2) {
-							class10.aClass30_Sub2_Sub4_278 = new Animable_Sub5(k21, 4 + k14, 2, i19, l19, j18, k20, j17,
+						if (objectType == 2) {
+							class10.aClass30_Sub2_Sub4_278 = new Animable_Sub5(k21, 4 + orientation, 2, i19, l19, j18, k20, animationId,
 									false);
-							class10.aClass30_Sub2_Sub4_279 = new Animable_Sub5(k21, k14 + 1 & 3, 2, i19, l19, j18, k20,
-									j17, false);
+							class10.aClass30_Sub2_Sub4_279 = new Animable_Sub5(k21, orientation + 1 & 3, 2, i19, l19, j18, k20,
+									animationId, false);
 						} else {
-							class10.aClass30_Sub2_Sub4_278 = new Animable_Sub5(k21, k14, j12, i19, l19, j18, k20, j17,
+							class10.aClass30_Sub2_Sub4_278 = new Animable_Sub5(k21, orientation, objectType, i19, l19, j18, k20, animationId,
 									false);
 						}
 					}
 				}
-				if (j16 == 1) {
+				if (objectTypeGroup == 1) {
 					Object2 class26 = worldController.method297(j4, i7, plane);
 					if (class26 != null)
 						class26.aClass30_Sub2_Sub4_504 = new Animable_Sub5(ObjectKey.getObjectId(class26.uid), 0, 4, i19, l19,
-								j18, k20, j17, false);
+								j18, k20, animationId, false);
 				}
-				if (j16 == 2) {
+				if (objectTypeGroup == 2) {
 					StaticObject class28 = worldController.method298(j4, i7, plane);
-					if (j12 == 11)
-						j12 = 10;
-					if (class28 != null)
-						class28.aClass30_Sub2_Sub4_521 = new Animable_Sub5(ObjectKey.getObjectId(class28.uid), k14, j12, i19,
-								l19, j18, k20, j17, false);
+					if (objectType == 11)
+						objectType = 10;
+					if (class28 != null) {
+						class28.aClass30_Sub2_Sub4_521 = new Animable_Sub5(ObjectKey.getObjectId(class28.uid), orientation, objectType, i19,
+								l19, j18, k20, animationId, false);
+					}
 				}
-				if (j16 == 3) {
+				if (objectTypeGroup == 3) {
 					Object3 class49 = worldController.method299(i7, j4, plane);
 					if (class49 != null)
-						class49.aClass30_Sub2_Sub4_814 = new Animable_Sub5(ObjectKey.getObjectId(class49.uid), k14, 22, i19,
-								l19, j18, k20, j17, false);
+						class49.aClass30_Sub2_Sub4_814 = new Animable_Sub5(ObjectKey.getObjectId(class49.uid), orientation, 22, i19,
+								l19, j18, k20, animationId, false);
 				}
 			}
 			return;
@@ -14330,7 +14331,7 @@ public class Client extends RSApplet {
 			int k18 = stream.method428();
 			int j19 = k18 >> 2;
 			int i20 = k18 & 3;
-			int l20 = anIntArray1177[j19];
+			int l20 = objectTypes[j19];
 			byte byte2 = stream.readSignedByte();
 			int l21 = stream.readUnsignedWord();
 			byte byte3 = stream.method429();
@@ -14385,7 +14386,7 @@ public class Client extends RSApplet {
 			int k12 = stream.method428();
 			int i15 = k12 >> 2;
 			int k16 = k12 & 3;
-			int l17 = anIntArray1177[i15];
+			int l17 = objectTypes[i15];
 			if (l4 >= 0 && k7 >= 0 && l4 < 104 && k7 < 104)
 				method130(-1, j10, k16, l17, k7, i15, plane, l4, 0);
 			return;
@@ -14427,7 +14428,7 @@ public class Client extends RSApplet {
 			int l2 = stream.method427();
 			int k5 = l2 >> 2;
 			int j8 = l2 & 3;
-			int i11 = anIntArray1177[k5];
+			int i11 = objectTypes[k5];
 			int j13 = stream.readUnsignedByte();
 			int k15 = anInt1268 + (j13 >> 4 & 7);
 			int l16 = anInt1269 + (j13 & 7);
@@ -17062,7 +17063,7 @@ public class Client extends RSApplet {
 	private static int minimapZoom;
 	private static int anInt1175;
 	private boolean genericLoadingError;
-	private final int[] anIntArray1177 = { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
+	private final int[] objectTypes = { 0, 0, 0, 0, 1, 1, 1, 1, 1, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 2, 3 };
 	private int reportAbuseInterfaceID;
 	private NodeList aClass19_1179;
 	private int[] anIntArray1180;
