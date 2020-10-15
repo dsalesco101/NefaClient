@@ -146,10 +146,10 @@ public class CacheDownloader {
 				float speedInBytes = 1000f * numWritten / elapsedTime;
 				int timeRemaining =  (int) ((fileSize - numWritten) / speedInBytes);
 				
-				drawLoadingText(percentage, "Sovark - Downloading Cache " + percentage + "%", downloadSpeed, timeRemaining);
+				drawLoadingText(percentage, "NefariousPkz - Downloading Cache " + percentage + "%", downloadSpeed, timeRemaining);
 			}
 			System.out.println(localFileName + "\t" + numWritten);
-			drawLoadingText("Sovark - Unzipping...");
+			drawLoadingText("NefariousPkz - Unzipping...");
 		} catch (Exception exception) {
 			exception.printStackTrace();
 		} finally {

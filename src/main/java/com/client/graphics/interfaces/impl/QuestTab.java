@@ -142,7 +142,7 @@ public class QuestTab extends RSInterface {
     public static void questTab(TextDrawingArea[] tda) {
         RSInterface tab = addTabInterface(10220);
         addText(10221, "@or1@Control Panel", tda, 2, 16750899, false, true);
-        addText(10222, "@or1@www.sovark.com", tda, 2, 16750899, true, true);
+        addText(10222, "@or1@www.NefariousPkz.com", tda, 2, 16750899, true, true);
         addSprite(10224, 0, "Interfaces/infoTab/SPRITE");
         addButton(10403, 2, "Interfaces/infoTab/TAB", "Refresh Tab");
         addButton(10404, 4, "Interfaces/infoTab/TAB", "View Diaries");
@@ -266,7 +266,7 @@ public class QuestTab extends RSInterface {
      */
     public static void infoTab(TextDrawingArea[] tda) {
         RSInterface tab = addTabInterface(47500);
-        addText(47501, "Sovark", tda, 2, 0xff9933, true, true);
+        addText(47501, "NefariousPkz", tda, 2, 0xff9933, true, true);
 
         addHoverText(47502, "Call for help", "Call help",tda, 2, 0xff9933, true, true,100);
         addSprite(47503, 0, "Interfaces/infoTab/SPRITE");
@@ -290,7 +290,7 @@ public class QuestTab extends RSInterface {
                 new CoinTab("Vote Page", 2, 40, 7),
                 new CoinTab("Online Store", 2, 46, 7),
                 new CoinTab("Forums", 2, 30, 7),
-                new CoinTab("Sovark Rules", 2, 50, 7),
+                new CoinTab("NF-PKZ Rules", 2, 50, 7),
                 new CoinTab("Call For Help", 2, 50, 7),
         };
 

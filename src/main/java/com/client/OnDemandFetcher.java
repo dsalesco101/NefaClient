@@ -99,7 +99,7 @@ public final class OnDemandFetcher extends OnDemandFetcherParent implements Runn
 
 	// Do not change this, add "localhost" the the program arguments to
 	// access a local server.
-	public static String serverAddress = "162.252.8.137";
+	public static String serverAddress = "127.0.0.1";
 
 	public void start(StreamLoader streamLoader, Client client) {
 		byte[] fileData = streamLoader.getDataForName("map_index");

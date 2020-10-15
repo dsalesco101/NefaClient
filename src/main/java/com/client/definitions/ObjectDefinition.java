@@ -76,10 +76,8 @@ public final class ObjectDefinition {
 			
 			break;
 		case 32508:
-
 			objectDef.name = "Hunllef's Chest";
-			objectDef.actions = new String[] { "Unlock", null, null, null, null };
-			
+			objectDef.actions = new String[] { "Unlock", "View-Loots", null, null, null };
 			break;
 		case 6097:
 			objectDef.actions = new String[] { "Donate", null, null, null, null };
@@ -96,19 +94,29 @@ public final class ObjectDefinition {
 		    objectDef.actions = new String[] { null, null, null, null, null };
 			break;
 		case 34838:
-			objectDef.name = "@red@Corrupt Chest";
-			objectDef.actions = new String[] { "Open", null, null, null, null };
+			objectDef.name = "@red@Wildy Chest";
+			objectDef.actions = new String[] { "Open", "View-Loots", null, null, null };
 			break;
+
+
+		case 8377:
+			objectDef.anIntArray773 = new int[] { 8375};
+			break;
+		case 8378: //table
+			objectDef.anIntArray773 = new int[] { 8374};
+			objectDef.name = "Combat Table";
+			objectDef.actions = new String[] { "Melee Shop","Range Shop", "Magic Shop", "Combat Supplies", null };
+			break;
+
 		case 12202:
 			objectDef.actions = new String[] { "Dig", null, null, null, null };
 			break;
 		case 30107:
 		    objectDef.name = "Raids Reward Chest";
-		    objectDef.actions = new String[] { "Open", null, null, null, null };
+		    objectDef.actions = new String[] { "Open", "View-Loots", null, null, null };
 			break;
 		case 36197:
 		    objectDef.name = "Home Teleport";
-		   
 			break;
 		case 10562:
 			objectDef.actions = new String[] { "Open", null, null, null, null };
@@ -152,6 +160,7 @@ public final class ObjectDefinition {
 			break;
 		case 172:
 			objectDef.name = "Ckey chest";
+		    objectDef.actions = new String[] { "Open", "View-Loots", null, null, null };
 		break;
 		case 10060:
 			objectDef.name = "Trading Post Booth";
@@ -163,7 +172,7 @@ public final class ObjectDefinition {
 			break;
 		case 2996:
 		    objectDef.name = "Vote Chest";
-		    objectDef.actions = new String[] { "Unlock", null, null, null, null };
+		    objectDef.actions = new String[] { "Unlock", "View-Loots", null, null, null };
 			break;
 
 		case 12309:
@@ -381,7 +390,7 @@ public final class ObjectDefinition {
 
 	public static void dumpList() {
 		try {
-			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark.32/object_data.json");
+			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/NexCache/object_data.json");
 			fw.write("[\n");
 			for (int i = 0; i < totalObjects; i++) {
 				ObjectDefinition def = ObjectDefinition.forID(i);

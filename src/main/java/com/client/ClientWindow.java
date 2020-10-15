@@ -22,7 +22,7 @@ public class ClientWindow extends Client implements ActionListener, WindowListen
 			setFocusTraversalKeysEnabled(false);
 			frame.setResizable(false);
 			try {
-				frame.setIconImage(ImageIO.read(new URL ("https://i.imgur.com/1FS8t8X.png")));
+				frame.setIconImage(ImageIO.read(new URL ("https://ibb.co/f97hp0M")));
 			} catch (IOException e) {
 				System.err.println("Cannot get icon image from url.");
 			}

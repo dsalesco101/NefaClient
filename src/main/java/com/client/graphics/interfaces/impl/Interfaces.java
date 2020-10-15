@@ -71,6 +71,7 @@ public class Interfaces extends RSInterface {
 		addGodwarsWidget(defaultTextDrawingAreas);
 		barrowsKillcount(defaultTextDrawingAreas);
 		lootingBag(defaultTextDrawingAreas);
+		dailyReward(defaultTextDrawingAreas);
 		lootingBagAdd(defaultTextDrawingAreas);
 		runePouch(defaultTextDrawingAreas);
 		quickPrayers(defaultTextDrawingAreas);
@@ -104,7 +105,7 @@ public class Interfaces extends RSInterface {
 		RSInterface rsi = addInterface(21406);
 		RSInterface scroll = addInterface(21407);
 
-        addText(21408, "Poll:\\nPoll Name Here", tda, 2, 0xFF9300, true, true);
+        addText(21408, "Giveaway", tda, 2, 0xFF9300, true, true);
 
 		int childId = 21409;
 		scroll.width = 165;
@@ -638,7 +639,7 @@ public class Interfaces extends RSInterface {
 		addText(childId++, "Load", tda, 2, 0xFF9300, true, true);
 		addText(childId++, "Save", tda, 2, 0xFF9300, true, true);
 		
-		addText(childId++, "Sovark Presets", tda, 2, 0xFF9300, true, true);
+		addText(childId++, "NefariousPkz's Presets", tda, 2, 0xFF9300, true, true);
 		
 		addHoverButton(childId++, "/Interfaces/Exp Lock/SPRITE", 1, 16, 16, "Close", -1, childId, 1);
 		addHoveredButton(childId++, "/Interfaces/Exp Lock/SPRITE", 2, 16, 16, childId++);

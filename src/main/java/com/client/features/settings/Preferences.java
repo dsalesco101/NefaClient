@@ -66,7 +66,7 @@ public class Preferences {
     public void updateClientConfiguration() {
         // Brightness
         Rasterizer.setBrightness(brightness);
-        SettingsWidget.brightnessSlider.setValue(brightness);
+        //SettingsWidget.brightnessSlider.setValue(brightness);
 
         log.info("Updated client configuration for preferences.");
     }

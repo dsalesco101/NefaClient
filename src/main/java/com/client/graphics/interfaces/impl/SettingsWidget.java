@@ -43,9 +43,6 @@ public class SettingsWidget extends Interfaces {
 		controlsSettings(controls, tda);
 		// Run: 19158, 19159, 19177
 	}
-
-	public static Slider brightnessSlider;
-
 	public static void displaySettings(RSInterface display, TextDrawingArea[] tda) {
 		/* Mouse zoom */
 		hoverButton(42521, "Restore Default Zoom", 20, 21);
@@ -57,8 +54,8 @@ public class SettingsWidget extends Interfaces {
 		hoverButton(42524, "Configure @lre@Advanced options", 26, 26, "Advanced options", RSInterface.newFonts[1], 0xff981f, 0xffffff, true);
 		
 		/* Sliders */
-		slider(ZOOM_SLIDER, -400, 2500, 27, 36, 1);
-		brightnessSlider = slider(BRIGHTNESS_SLIDER, 0.6, 1.0, 37, 36, 2);
+		slider(ZOOM_SLIDER, 0, 1200, 27, 36, 1);
+		slider(BRIGHTNESS_SLIDER, 0.6, 1.0, 37, 36, 2);
 		/* Brightness */
 		addSprite3(42527, 38);
 

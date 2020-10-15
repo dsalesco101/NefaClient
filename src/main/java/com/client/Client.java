@@ -4596,39 +4596,15 @@ public class Client extends RSApplet {
 		new DrawingArea().drawAlphaGradient(x + ((int) Math.round(percentage * offset) / 2), y,
 				width - ((int) Math.round(percentage * offset) / 2), height, 0x000000, 0x000000, 200);
 		if (percentage >= 198) {
-			newBoldFont.drawCenteredString("Finished loading Sovark", (765 / 2), y + height / 2, 0xffffff, 1);
+			newBoldFont.drawCenteredString("Finished loading NefariousPkz", (765 / 2), y + height / 2, 0xffffff, 1);
 		} else {
-			newBoldFont.drawCenteredString("Loading Sovark - Please wait - " + (percentage / 2) + "%", (765 / 2),
+			newBoldFont.drawCenteredString("Loading NefariousPkz - Please wait - " + (percentage / 2) + "%", (765 / 2),
 					y + height / 2, 0xffffff, 1);
 		}
 		loginScreenGraphicsBuffer.drawGraphics(0, 0, super.graphics);
 	}
 
-	/*
-	 * void drawLoadingScreen(int percentage, String s, int downloadSpeed, int
-	 * secondsRemaining) { while (graphics == null) { graphics =
-	 * getGameComponent().getGraphics(); try { getGameComponent().repaint(); } catch
-	 * (Exception _ex) { } try { Thread.sleep(1000L); } catch (Exception _ex) { } }
-	 *
-	 * int j = myHeight / 2 - 18;
-	 *
-	 * Font font = new Font("Helvetica", 1, 13); FontMetrics fontmetrics =
-	 * getGameComponent().getFontMetrics(font); Font font1 = new Font("Helvetica",
-	 * 0, 13); getGameComponent().getFontMetrics(font1);
-	 *
-	 * // Draw Background drawBackground();
-	 *
-	 * Color color = new Color(140, 17, 17); graphics.setColor(color);
-	 * graphics.drawRect(myWidth / 2 - 152, j, 304, 34);
-	 *
-	 * // Red_Bar_Percentage graphics.fillRect(myWidth / 2 - 150, j + 2, percentage
-	 * + 15, 31); graphics.setColor(Color.black); graphics.fillRect((myWidth / 2 -
-	 * 150) + percentage * 3, j + 2, 300 - percentage * 3, 30);
-	 * graphics.setFont(font); graphics.setColor(Color.white);
-	 * graphics.drawString(s, (myWidth - fontmetrics.stringWidth(s)) / 2, j + 22);
-	 *
-	 * graphics.drawString("OSPS is loading - please wait...", 278, j - 9); }
-	 */
+
 
 	public void method65(int i, int j, int k, int l, RSInterface class9, int i1, boolean flag, int j1) {
 		int anInt992;
@@ -9221,7 +9197,7 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 6) {
-				firstLoginMessage = "Sovark has been updated - relaunch client!";
+				firstLoginMessage = "NefariousPkz has been updated - relaunch client!";
 				secondLoginMessage = "Please restart the client.";
 				return;
 			}
@@ -9247,7 +9223,7 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 11) {
-
+				firstLoginMessage = "Restart your client.";
 				return;
 			}
 			if (k == 12) {
@@ -9255,11 +9231,12 @@ public class Client extends RSApplet {
 				return;
 			}
 			if (k == 13) {
-
+				firstLoginMessage = "You cant login to a staff members account";
+				secondLoginMessage = "";
 				return;
 			}
 			if (k == 14) {
-				firstLoginMessage = "Sovark is currently being updated.";
+				firstLoginMessage = "NefariousPkz is currently being updated.";
 				secondLoginMessage = "Please wait one minute and try again.";
 				return;
 			}
@@ -9362,7 +9339,7 @@ public class Client extends RSApplet {
 		}
 		if (missingPassword())
 			return;
-		firstLoginMessage = "Updates are incoming... Check our discord!";
+		firstLoginMessage = "Please check back another time";
 		secondLoginMessage = "";
 	}
 
@@ -14068,33 +14045,35 @@ public class Client extends RSApplet {
 	public boolean rememberMeHover;
     long lastLogin = 0;
     long loadDelay = 0;
-	private final Sprite background = new Sprite("/loginscreen2/IMAGE 1");
-
 	public void drawLoginScreen(boolean flag) {
 		int centerX = myWidth / 2, centerY = myHeight / 2;
 
 		resetImageProducers();
 		loginScreenGraphicsBuffer.initDrawingArea();
 
-		if(System.currentTimeMillis() - lastLogin > 50) {
-			background.drawAdvancedSprite(0,0);
-		}
+		    if(System.currentTimeMillis() - lastLogin > 1) {
+		    	Sprite background = new Sprite("/loginscreen2/IMAGE 1");
+                  background.drawAdvancedSprite(0,0);
+                lastLogin = System.currentTimeMillis();
+            }
 		int extraPos = 18;
-		rememberMeHover = mouseInRegion(286 - extraPos, 300, 301 - extraPos, 313);
-		rememberPasswordHover = mouseInRegion(416 - extraPos, 300, 433 - extraPos, 313);
+
+		
+		rememberMeHover = mouseInRegion(248 - extraPos, 310, 263, 323);
+		rememberPasswordHover = mouseInRegion(416 - extraPos, 310, 433 - extraPos, 323);
+		int j = centerY - 40;
 
 		if (Configuration.developerMode) {
-			newSmallFont.drawString("FPS: " + super.fps, 4, 12, Integer.MAX_VALUE, 0, 255);
-			newSmallFont.drawString("Mouse: " + mouseX + ", " + mouseY, 4, 12 + 12, Integer.MAX_VALUE, 0, 255);
+			newBoldFont.drawCenteredString(firstLoginMessage, centerX - 3, j - 30, 0xffffff, 0x191919, 255);
+			newBoldFont.drawCenteredString(secondLoginMessage, centerX - 3, j + 250, 0xffffff, 0x191919, 255);
 		}
 
 		// Login Box
 		if (loginScreenState == 0 || loginScreenState == 2) {
 
-			int j = centerY - 40;
 			if (firstLoginMessage.length() > 0) {
-				newBoldFont.drawCenteredString(firstLoginMessage, centerX - 3, j - 11, 0xffffff, 0x191919, 255);
-				newBoldFont.drawCenteredString(secondLoginMessage, centerX - 3, j + 300, 0xffffff, 0x191919, 255);
+				newBoldFont.drawCenteredString(firstLoginMessage, centerX - 3, j - 30, 0xffffff, 0x191919, 255);
+				newBoldFont.drawCenteredString(secondLoginMessage, centerX - 3, j + 250, 0xffffff, 0x191919, 255);
 				j += 30;
 			} else {
 				newBoldFont.drawString(secondLoginMessage, myWidth / 2 - 3, j - 7, 0xffff00, 0x191919, 255);
@@ -14102,45 +14081,46 @@ public class Client extends RSApplet {
 			}
 
 			newBoldFont.drawString(
-					"Login: " + myUsername + ((loginScreenCursorPos == 0) & (loopCycle % 40 < 20) ? "@blu@|" : ""),
-					(myWidth / 2) - 119, myHeight / 2 - 21, 0xffffff, 0x191919, 255);
+					myUsername + ((loginScreenCursorPos == 0) ? "@blu@|" : ""),
+					(myWidth / 2) - 96, myHeight / 2 - 40, 0xffffff, 0x191919, 255);
 			j += 15;
 			newBoldFont.drawString(
-					"Password: " + TextClass.passwordAsterisks(getPassword())
-							+ ((loginScreenCursorPos == 1) & (loopCycle % 40 < 20) ? "@blu@|" : ""),
-					(myWidth / 2) - 119, myHeight / 2 + 31, 0xffffff, 0x191919, 255);
+					TextClass.passwordAsterisks(myPassword)
+							+ ((loginScreenCursorPos == 1) ? "@blu@|" : ""),
+					(myWidth / 2) - 96, myHeight / 2 - 2, 0xffffff, 0x191919, 255);
 
-			newSmallFont.drawString("Remember username", 283, 308, 0xffffff, 0x191919, 255);
-			newSmallFont.drawString("Remember password", 414, 308, 0xffffff, 0x191919, 255);
+			newSmallFont.drawString("Remember username", 268, 323, 0xffffff, 0x191919, 255);
+			newSmallFont.drawString("Remember password", 414, 323, 0xffffff, 0x191919, 255);
 
 			if (!informationFile.isUsernameRemembered()) {
 				if (!rememberMeHover) {
-					loginAsset0.drawSprite(264, 295);
+					loginAsset0.drawSprite(249, 310);
 				} else {
-					loginAsset1.drawSprite(264, 295);
+					loginAsset1.drawSprite(249, 310);
 				}
 			} else {
 				if (!rememberMeHover) {
-					loginAsset2.drawSprite(264, 295);
+					loginAsset2.drawSprite(249, 310);
 				} else {
-					loginAsset3.drawSprite(264, 295);
+					loginAsset3.drawSprite(249, 310);
 				}
 			}
 			loginAsset4.drawARGBSprite2(currentGameWidth / 2 - (336 / 2), 25);
 			if (!informationFile.isPasswordRemembered()) {
 				if (!rememberPasswordHover) {
-					loginAsset0.drawSprite(395, 295);
+					loginAsset0.drawSprite(395, 310);
 				} else {
-					loginAsset1.drawSprite(395, 295);
+					loginAsset1.drawSprite(395, 310);
 				}
 			} else {
 				if (!rememberPasswordHover) {
-					loginAsset2.drawSprite(395, 295);
+					loginAsset2.drawSprite(395, 310);
 				} else {
-					loginAsset3.drawSprite(395, 295);
+					loginAsset3.drawSprite(395, 310);
 				}
 			}
 
+			// if (flag) {
 			int i1 = myWidth - 80;
 			int l1 = myHeight + 50;
 			newRegularFont.drawString("Register", i1, l1 + 5, 0xffffff, 0x191919, 255);
@@ -14536,17 +14516,21 @@ public class Client extends RSApplet {
 
 	@SuppressWarnings("static-access")
 	private void processLoginScreenInput() {
-		// System.out.println("saveClickX = " + super.saveClickX + ", saveClickY = " +
-		// super.saveClickY);
+
 		int j = super.myHeight / 2 - 40;
 		j += 30;
 		j += 25;
-		if (super.clickMode3 == 1 && super.saveClickX >= 272 && super.saveClickX <= 525 && super.saveClickY >= 210
-				&& super.saveClickY <= 234)
+		
+		/*
+		 * newBoldFont.drawCenteredString(firstLoginMessage, centerX - 3, j - 30, 0xffffff, 0x191919, 255);
+				newBoldFont.drawCenteredString(secondLoginMessage, centerX - 3, j + 250, 0xffffff, 0x191919, 255);
+		 */
+		if (super.clickMode3 == 1 && super.saveClickX >= 272 && super.saveClickX <= 519 && super.saveClickY >= 189
+				&& super.saveClickY <= 218)
 			loginScreenCursorPos = 0;
 		j += 15;
-		if (super.clickMode3 == 1 && super.saveClickX >= 272 && super.saveClickX <= 525 && super.saveClickY >= 264
-				&& super.saveClickY <= 294)
+		if (super.clickMode3 == 1 && super.saveClickX >= 272 && super.saveClickX <= 519 && super.saveClickY >= 225
+				&& super.saveClickY <= 254)
 			loginScreenCursorPos = 1;
 		j += 15;
 		int extraPos = 18;
@@ -14562,27 +14546,34 @@ public class Client extends RSApplet {
 				e.printStackTrace();
 			}
 		}
-
-		if (super.clickMode3 == 1 && super.saveClickY >= 300 && super.saveClickY <= 313
-				&& super.saveClickX >= 286 - extraPos && super.saveClickX <= 301 - extraPos) {
+		//remember pw and user clicks
+		if (super.clickMode3 == 1 && super.saveClickY >= 310 && super.saveClickY <= 323
+				&& super.saveClickX >= 248 && super.saveClickX <= 263) {
 			informationFile.setUsernameRemembered(!informationFile.isUsernameRemembered());
+			if (informationFile.isUsernameRemembered()) {
+				informationFile.setStoredUsername(myUsername);
+			}
 		}
-		if (super.clickMode3 == 1 && super.saveClickY >= 300 && super.saveClickY <= 313
+		if (super.clickMode3 == 1 && super.saveClickY >= 310 && super.saveClickY <= 323
 				&& super.saveClickX >= 416 - extraPos && super.saveClickX <= 433 - extraPos) {
 			informationFile.setPasswordRemembered(!informationFile.isPasswordRemembered());
+			if (informationFile.isPasswordRemembered()) {
+				informationFile.setStoredPassword(myPassword);
+			}
 		}
 		int i1 = super.myWidth / 2 - 80;
 		int k1 = super.myHeight / 2 + 50;
 		k1 += 20;
 		// System.out.println("saveClickX = " + super.saveClickX + ", saveClickY = " +
 		// super.saveClickY);
-		if (super.clickMode3 == 1 && super.saveClickX >= 231 && super.saveClickX <= 376 && super.saveClickY >= 323
-				&& super.saveClickY <= 353) {
+		//241, 268 --  (246, 268, 525, 298);
+		if (super.clickMode3 == 1 && super.saveClickX >= 244 && super.saveClickX <= 520 && super.saveClickY >= 268
+				&& super.saveClickY <= 298) {
 
 			if (Configuration.gameWorld == 1) {
 				// loginScreenState = 3;
 				loginFailures = 0;
-				login(myUsername, getPassword(), false);
+				login(myUsername, myPassword, false);
 				if (loggedIn)
 					return;
 			} else {
@@ -14593,6 +14584,7 @@ public class Client extends RSApplet {
 			// loginScreenState = 2;
 		}
 		i1 = super.myWidth / 2 + 80;
+		//JUMP BACK HERE
 		if (super.clickMode3 == 1 && super.saveClickX >= i1 - 75 && super.saveClickX <= i1 + 75
 				&& super.saveClickY >= k1 - 20 && super.saveClickY <= k1 + 20) {
 			loginScreenState = 0;
@@ -14620,24 +14612,25 @@ public class Client extends RSApplet {
 				if (myUsername.length() > 12)
 					myUsername = myUsername.substring(0, 12);
 			} else if (loginScreenCursorPos == 1) {
-				if (l1 == 8 && getPassword().length() > 0)
-					setPassword(getPassword().substring(0, getPassword().length() - 1));
+				if (l1 == 8 && myPassword.length() > 0)
+					myPassword = myPassword.substring(0, myPassword.length() - 1);
 				if (l1 == 9) {
 					loginScreenCursorPos = 0;
 				} else if (l1 == 10 || l1 == 13) {
 					if (missingPassword()) {
 						return;
 					}
-					login(myUsername, getPassword(), false);
+					login(myUsername, myPassword, false);
 					return;
 				}
 				if (flag1)
-					appendPassword((char) l1);
-				if (getPassword().length() > 15)
-					setPassword(getPassword().substring(0, 15));
+					myPassword += (char) l1;
+				if (myPassword.length() > 15)
+					myPassword = myPassword.substring(0, 15);
 			}
 		} while (true);
 		return;
+
 
 	}
 
@@ -17153,7 +17146,7 @@ public class Client extends RSApplet {
 	private int publicChatMode;
 	private static int anInt1288;
 	public static int anInt1290;
-	public static String server = "162.252.8.137";
+	public static String server = "131.153.6.163";
 	public static int port = Configuration.PORT;
 	public static boolean controlIsDown;
 	public int drawCount;

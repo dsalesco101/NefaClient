@@ -1439,6 +1439,106 @@ public class RSInterface {
 		rsi.type = 2;
 	}
 
+	public static void dailyReward(TextDrawingArea[] tda) {
+		RSInterface tab = addTabInterface(58000); // can u take me to the cache
+		int child = 58001;
+
+		addSprite(child++, 0, "Interfaces/DailyReward/SPRITE");
+
+		addText(child++, "Daily Login Reward", tda, 2, 0xff7000, true, true); // Main header
+		addText(child++, "Available Rewards", tda, 2, 0xff7000, false); // Available rewards header
+
+		addText(child++, "Today", tda, 2, 0xff7000, false);
+		addText(child++, "Tomorrow", tda, 2, 0xff7000, false);
+
+		addText(child++, "31 Days of Nefarious", tda, 2, 0xff7000, false); // Right side header
+
+		addText(child++, "", tda, 0, 0xff7000, false);
+		addText(child++, "", tda, 0, 0xff7000, false);
+		addText(child++, "", tda, 0, 0xff7000, false);
+
+		addButton(child++, 4, "Interfaces/DailyReward/SPRITE", "Claim");
+		addText(child++, "Claim Reward", tda, 0, 0xff7000, false);
+
+		addButton(child++, 9, "Interfaces/DailyReward/SPRITE", "Close");
+
+		addToItemGroup(58200, 1, 1, 0, 0, false, null, null, null);
+
+		addToItemGroup(58300, 1, 1, 0, 0, false, null, null, null);
+
+		addToItemGroup(58100, 4, 8, 10, 10, false, null, null, null);
+
+		for (int i = 0; i < 31; i++) {
+			addSprite(58101 + i, 1, "Interfaces/DailyReward/SPRITE");
+		}
+
+		RSInterface scroll = addTabInterface(58132);
+		scroll.width = 170;
+		scroll.height = 250;
+		scroll.scrollMax = 340;
+		int child1 = 0;
+		int id1 = 58101;
+		scroll.totalChildren(32);
+		scroll.child(child1++, id1++, 0, 3);
+		scroll.child(child1++, id1++, 42, 3);
+		scroll.child(child1++, id1++, 84, 3);
+		scroll.child(child1++, id1++, 126, 3);
+		scroll.child(child1++, id1++, 0, 45);
+		scroll.child(child1++, id1++, 42, 45);
+		scroll.child(child1++, id1++, 84, 45);
+		scroll.child(child1++, id1++, 126, 45);
+		scroll.child(child1++, id1++, 0, 87);
+		scroll.child(child1++, id1++, 42, 87);
+		scroll.child(child1++, id1++, 84, 87);
+		scroll.child(child1++, id1++, 126, 87);
+		scroll.child(child1++, id1++, 0, 129);
+		scroll.child(child1++, id1++, 42, 129);
+		scroll.child(child1++, id1++, 84, 129);
+		scroll.child(child1++, id1++, 126, 129);
+		scroll.child(child1++, id1++, 0, 171);
+		scroll.child(child1++, id1++, 42, 171);
+		scroll.child(child1++, id1++, 84, 171);
+		scroll.child(child1++, id1++, 126, 171);
+		scroll.child(child1++, id1++, 0, 213);
+		scroll.child(child1++, id1++, 42, 213);
+		scroll.child(child1++, id1++, 84, 213);
+		scroll.child(child1++, id1++, 126, 213);
+		scroll.child(child1++, id1++, 0, 255);
+		scroll.child(child1++, id1++, 42, 255);
+		scroll.child(child1++, id1++, 84, 255);
+		scroll.child(child1++, id1++, 126, 255);
+		scroll.child(child1++, id1++, 0, 297); // cache pls
+		scroll.child(child1++, id1++, 42, 297);
+		scroll.child(child1++, id1++, 84, 297);
+		scroll.child(child1++, 58100, 4, 8);
+
+		tab.totalChildren(15);
+		child = 58001;
+		int frame = 0;
+		tab.child(frame++, child++, 6, 10); // Main interface sprite
+
+		tab.child(frame++, child++, 252, 21); // Main headers
+		tab.child(frame++, child++, 35, 48);
+
+		tab.child(frame++, child++, 277, 193); // Today, tomorrow
+		tab.child(frame++, child++, 373, 193);
+
+		tab.child(frame++, child++, 232, 48); // Main header
+
+		tab.child(frame++, child++, 220, 74);
+		tab.child(frame++, child++, 13, 13);
+		tab.child(frame++, child++, 13, 13);
+
+		tab.child(frame++, child++, 308, 285);
+		tab.child(frame++, child++, 318, 292);
+
+		tab.child(frame++, 58132, 19, 67);
+
+		tab.child(frame++, 58200, 278, 228);
+		tab.child(frame++, 58300, 388, 228);
+		tab.child(frame++, 58012, 477, 21);
+	}
+
     public static void initializeTitleWidget(TextDrawingArea[] tda) {
         RSInterface widget = addInterface(53501);
         addSprite(53502, 0, "Interfaces/Titles/IMAGE");

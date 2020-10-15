@@ -90,6 +90,33 @@ public final class ItemDefinition {
 		ItemDefinition itemDef = forID(itemId);
 
 		switch (itemId) {
+			case 1464:
+				itemDef.name = "Vote ticket";
+				itemDef.description = "Exchange this for a Vote Point.";
+				itemDef.inventoryOptions = new String[] { "Exchange", null, null, null, null };
+				break;
+			case 683:
+				itemDef.inventoryOptions = new String[] { "Exchange", null, null, null, null };
+				itemDef.description = "Exchange this for bounty hunter points.";
+				itemDef.name = "Bounty Hunter Ticket";
+				break;
+			case 13307:
+				itemDef.description = "Exchange this for blood money points.";
+				itemDef.inventoryOptions = new String[] { null, null, null, null, null };
+				break;
+			case 2413:
+				itemDef.inventoryOptions = new String[] { null, "Wear", null, null, null };
+				break;
+			case 2400:
+				itemDef.name = "@red@Donator Key";
+				itemDef.description = "Used at the end of the month for rewards.";
+				break;
+			case 405:
+				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", null, null };
+				break;
+			case 7509:
+				itemDef.inventoryOptions = new String[] { "Eat", null, "Guzzle", "DH-Effect", null };
+				break;
 			case 13092: //this makes crystal halberds wieldable, weird af.
 			case 13093:
 			case 13094:
@@ -230,7 +257,10 @@ public final class ItemDefinition {
 				byte[] ph12 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Medium_pouch.png");
 				itemDef.customSpriteLocation = ph12;
 				break;
-
+			case 6855:
+				itemDef.name = "@yel@Pvp Starter Kit";
+				itemDef.inventoryOptions = new String[] { "Open", null, null, null, null };
+				break;
 			case 5512:
 				itemDef.name = "Large Pouch";
 				byte[] ph13 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Large_pouch.png");
@@ -364,7 +394,7 @@ public final class ItemDefinition {
 			case 11739:
 				itemDef.name = "@gre@Vote Mystery Box";
 				itemDef.description = "Probably contains cosmetics, or maybe not...";
-				itemDef.inventoryOptions = new String[] { "Open", null, null, null, "Drop" };
+				itemDef.inventoryOptions = new String[] { "Open", null, "View-Loots", null, "drop" };
 				break;
 			case 6828:
 				itemDef.name = "Super Mystery Box";
@@ -409,6 +439,12 @@ public final class ItemDefinition {
 				itemDef.inventoryOptions = new String[] { "Open", null, "Open-All", null, "Drop" };
 				itemDef.description = "I can see some coins inside.";
 				break;
+			case 4209:
+				itemDef.name = "@yel@Pvm Log";
+				break;
+			case 10998:
+				itemDef.name = "Pet Goblin";
+				break;
 			case 15098:
 				itemDef.name = "Dice (up to 100)";
 				itemDef.description = "A 100-sided dice.";
@@ -426,6 +462,17 @@ public final class ItemDefinition {
 				itemDef.anInt184 = 25;
 				byte[] ph59 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/Dice_Bag.png");
 				itemDef.customSpriteLocation = ph59;
+				break;
+			case 977:
+				itemDef.name = "Alchemy Pouch";
+				itemDef.description = "it's a Alchemy Pouch";
+				itemDef.inventoryOptions = new String[] { "Add-Charge", null, "Check-Charge", null, "Drop" };
+				byte[] ph60 = FileOperations.readFile(Signlink.getCacheDirectory() + "/Customs/alch_pouch.png");
+				itemDef.customSpriteLocation = ph60;
+				break;
+			case 13454:
+				itemDef.name = "Pet Imp";
+				itemDef.description = "it's a Pet Imp";
 				break;
 			case 11773:
 			case 11771:
@@ -466,10 +513,6 @@ public final class ItemDefinition {
 				itemDef.name = "@gre@$500 Scroll";
 				itemDef.description = "Claim this scroll to be rewarded with 500 donator points.";
 				itemDef.inventoryOptions = new String[] { "Claim", null, null, null, "Drop" };
-				break;
-			case 1464:
-				itemDef.name = "Vote ticket";
-				itemDef.description = "Exchange this for a Vote Point.";
 				break;
 				
 			case 33049:
@@ -1583,7 +1626,7 @@ public final class ItemDefinition {
 
 	public static void dumpList() {
 		try {
-			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/Sovark.32/item_data.json");
+			FileWriter fw = new FileWriter(System.getProperty("user.home") + "/NexCache/item_data.json");
 			for (int i = 0; i < totalItems; i++) {
 				ItemDefinition itemDefinition = ItemDefinition.forID(i);
 				fw.write("id: " + itemDefinition.id + " - " + itemDefinition.name + "\n");

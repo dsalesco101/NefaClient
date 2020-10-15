@@ -25,9 +25,9 @@ public class Configuration {
 
 	public static boolean playerNames = false;
 	public static long fogDelay = 500;
-	public static final String CLIENT_TITLE = "Sovark";
+	public static final String CLIENT_TITLE = "NefariousPkz";
 
-	public static final int CLIENT_VERSION = 141;
+	public static final int CLIENT_VERSION = 143;
 	public static final int PORT = 43594;
 	public static final int TEST_PORT = 43595;
 
@@ -42,15 +42,19 @@ public class Configuration {
 	 * Sounds/Music Index 4 = Maps You can only do up to 300 files at a time
 	 */
 
-	public static final String CACHE_NAME = "Sovark.32";
+	public static final String CACHE_NAME = "NexCache";
 
 	public static boolean repackIndexOne = false, repackIndexTwo = false, repackIndexThree = false,
 			repackIndexFour = false;
 
-	public static final String CACHE_LINK = "https://www.dropbox.com/s/8npjify2ecgck83/cache.zip?dl=1";
+	public static final String CACHE_LINK = "https://www.dropbox.com/s/cjntszrb0tg234j/NexCache.zip?dl=1";
 	
-	public static final String VERSION_URL = "https://www.dropbox.com/s/gnjt0cpth9un6vk/version.txt?dl=1";
-	
+	public static final String VERSION_URL;
+
+	static {
+		VERSION_URL = "https://www.dropbox.com/s/smcuop5ch4qzykm/version.txt?dl=1";
+	}
+
 	/**
 	 * Seasonal Events
 	 */

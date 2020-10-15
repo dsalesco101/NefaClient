@@ -99,7 +99,7 @@ public class EventCalendar extends RSInterface {
         inter.child(childId++, Interfaces.CLOSE_BUTTON_SMALL, x + 462, y + 10);
         inter.child(childId++, Interfaces.CLOSE_BUTTON_SMALL_HOVER, x + 462, y + 10);
 
-        addText(interfaceId, "Sovark's $1500 Cash Giveaway", tda, 2, 0xff981f, true);
+        addText(interfaceId, "NefariousPkz's $1500 Cash Giveaway", tda, 2, 0xff981f, true);
         inter.child(childId++, interfaceId++, 247, 36);
 
         // active challenge, past winners, current participants

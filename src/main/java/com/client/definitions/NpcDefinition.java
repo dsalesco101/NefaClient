@@ -32,7 +32,197 @@ public final class NpcDefinition {
 		stream.currentOffset = streamIndices[i];
 		entityDef.interfaceType = i;
 		entityDef.readValues(stream);
-
+		switch (i) {
+		case 5293:
+		case 5294:
+		case 5295:
+		case 5296:
+		case 8781:
+		case 1672:
+		case 1673:
+		case 1674:
+		case 1675:
+		case 1676:
+		case 1677:
+		case 100:
+		case 1173:
+		case 1047:
+		case 2790:
+		case 2026:
+		case 1680:
+		case 2241:
+		case 2098:
+		case 2084:
+		case 891:
+		case 690:
+		case 970:
+		case 975:
+		case 5938:
+		case 5944:
+		case 2919:
+		case 448:
+		case 414:
+		case 406:
+		case 481:
+		case 419:
+		case 421:
+		case 3209:
+		case 435:
+		case 417:
+		case 437:
+		case 427:
+		case 411:
+		case 795:
+		case 4922:
+		case 5129:
+		case 3023:
+		case 70:
+		case 85:
+		case 2834:
+		case 1545:
+		case 2006:
+		case 241:
+		case 268:
+		case 291:
+		case 484:
+		case 135:
+		case 6:
+		case 2514:
+		case 498:
+		case 499:
+		case 2841:
+		case 2085:
+		case 465:
+		case 1432:
+		case 270:
+		case 274:
+		case 273:
+		case 247:
+		case 8030:
+		case 8031:
+		case 264:
+		case 1610:
+		case 1611:
+		case 1612:
+		case 6606: 
+		case 6611:
+		case 6609:
+		case 6615:
+		case 6610:
+		case 2054:
+		case 6619:
+		case 6618:
+		case 7931:
+		case 7932:
+		case 7933:
+		case 7934:
+		case 7935:
+		case 7936:
+		case 7937:
+		case 7938:
+		case 7939:
+		case 7940:
+		case 6593:
+		case 6607:
+		case 8609:
+		case 6342:
+		case 2265:
+		case 2266:
+		case 2267:
+		case 3021:
+		case 239:
+		case 5779:
+		case 959:
+		case 957:
+		case 955:
+		case 3162:
+		case 3163:
+		case 3164:
+		case 3165:
+		case 3129:
+		case 3130:
+		case 3131:
+		case 3132:
+		case 2205:
+		case 2206:
+		case 2207:
+		case 2208:
+		case 2215:
+		case 2216:
+		case 2217:
+		case 2218:
+		case 319:
+		case 415:
+		case 7244:
+		case 7276:
+		case 7278:
+		case 7277:
+		case 7275:
+		case 7274:
+		case 7273:
+		case 4005:
+		case 7268:
+		case 2235:
+		case 7258:
+		case 7279:
+		case 7272:
+		case 492:
+		case 423:
+		case 494:
+		case 2042:
+		case 2043:
+		case 2044:
+		case 5862:
+		case 5890:
+		case 7144:
+		case 6918:
+		case 6914:
+		case 6766:
+		case 1543:
+		case 11:
+		case 446:
+		case 2844:
+		case 2887:
+		case 259:
+		case 2212:
+		case 3139:
+		case 2213:
+		case 3140:
+		case 2211:
+		case 2209:
+		case 3138:
+		case 3160:
+		case 2245:
+		case 2233:
+		case 2234:
+		case 2237:
+		case 3133:
+		case 3137:
+		case 2243:
+		case 3135:
+		case 2244:
+		case 2242:
+		case 3161:
+		case 3134:
+		case 3141:
+		case 2210:
+		case 3166:
+		case 5842:
+		case 2805:
+		case 3167:
+		case 3168:
+		case 3169:
+        entityDef.actions[4] = "Drop-Table";
+		}
+		if (i == 402) {
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Talk-To", null, "Trade-with", null, null };
+		}
+		if (i == 315) {
+			entityDef.name = "BM Manager";
+			entityDef.combatLevel = 0;
+			entityDef.actions = new String[] { "Trade-items", null, "Trade-emblems", "Skull", null };
+		}
 		if (i == 7913) {
 			entityDef.combatLevel = 0;
 			entityDef.name = "Iron man shop keeper";
@@ -48,6 +238,27 @@ public final class NpcDefinition {
 			entityDef.combatLevel = 0;
 			entityDef.name = "Crystal Seed Trader";
 			entityDef.description = "Use a seed on me to get a Crystal Bow.";
+					
+		}
+		if (i == 1017) {
+			entityDef.combatLevel = 0;
+			entityDef.name = "Gamble Manager";
+			entityDef.description = "I can manage your gamble addictions.";
+					
+		}
+		if (i == 3215) {
+			entityDef.name = "F2P Shop";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+					
+		}
+		if (i == 1789) {
+			entityDef.name = "Amulet & Rings Shop";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
+					
+		}
+		if (i == 4065) {
+			entityDef.name = "Food & Pots";
+			entityDef.actions = new String[] { "Trade", null, null, null, null };
 					
 		}
 		if (i == 6970) {
@@ -66,6 +277,9 @@ public final class NpcDefinition {
 			entityDef.actions = new String[] { "Trade", null, "Open Achievements", null, null, };
 
 		}
+		if (i == 2911 || i == 2912) {
+			entityDef.combatLevel = 0;
+		}
 		if (i == 5870) {
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Talk-to", null, "Assignment", "Trade", "Rewards" };
@@ -82,14 +296,10 @@ public final class NpcDefinition {
 			entityDef.name = "Gambler Shop";
 			entityDef.description = "A shop specifically for gamblers.";
 		}
-		if (i == 315) {
-			entityDef.combatLevel = 0;
-			entityDef.name = "PKP Manager";
-		}
 		if (i == 13) {
 			entityDef.combatLevel = 0;
 			entityDef.name = "Referral Tutor";
-			entityDef.description = "He Manages all the sovark referrals.";
+			entityDef.description = "He Manages all the Wisdom referrals.";
 		}
 		if (i == 5293) {
 			entityDef.combatLevel = 0;
@@ -108,10 +318,22 @@ public final class NpcDefinition {
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Make-over", null, null, null, null };
 		}
+		if(i==2269){
+			entityDef.combatLevel = 0;
+			entityDef.anInt86 = 100; //WIDTH
+			entityDef.anInt91 = 100; // HEIGH
+			entityDef.name = "Pet Goblin";
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-up", "Filter", null };
+		}
 		if(i==3257){
 			entityDef.combatLevel = 0;
 			entityDef.actions = new String[] { "Trade", null, null, null, null };
 		}
+		if(i==7020 || i == 5008){
+			entityDef.combatLevel = 0;
+			entityDef.name = "Pet Imp";
+			entityDef.actions = new String[] { "Talk-to", null, "Pick-up", "Metamorphosis", "Check-Slots" };	
+			}
 		if(i==1011){
 			entityDef.combatLevel = 0;
 			entityDef.name = "Item Gambler";
@@ -119,7 +341,7 @@ public final class NpcDefinition {
 		}
 		if(i==3248){
 			entityDef.combatLevel = 0;
-			entityDef.name = "Sovarks Wizard";
+			entityDef.name = "NefariousPkz's Wizard";
 			entityDef.actions = new String[] { "Teleport", null, "Previous Location", null, null };
 		}
 		if(i==1520){
@@ -129,6 +351,9 @@ public final class NpcDefinition {
 		if(i==8920){
 			
 			entityDef.actions = new String[] { null, "Attack", null, null, null };
+		}
+	if(i==2580){
+		entityDef.actions = new String[] { "Talk-to", null, "Teleport", null, null };
 		}
 		if(i==8921){
 			entityDef.name = "Crystal Whirlwind";
